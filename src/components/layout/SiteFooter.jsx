@@ -1,4 +1,4 @@
-import PillButton from "../ui/PillButton";
+import CtaPill from "../ui/CtaPill";
 import ctaAura from "../../assets/about/cta-aura.svg";
 import logoA from "../../assets/about/foot-logo-a.svg";
 import logoB from "../../assets/about/foot-logo-b.svg";
@@ -17,44 +17,46 @@ const SOCIALS = [
   { src: socialIn, label: "Instagram" },
 ];
 
-export default function AboutFooter() {
+/**
+ * Responsive version of the site footer (CTA + link columns) for the fluid
+ * pages; the legacy canvas pages keep AboutFooter.
+ */
+export default function SiteFooter() {
   return (
-    <section className="relative h-[963px] w-[1440px] overflow-hidden bg-white">
+    <footer className="relative overflow-hidden bg-white">
       {/* CTA */}
-      <img
-        src={ctaAura}
-        alt=""
-        className="pointer-events-none absolute top-[144px] left-[685px] h-[277px] w-[755px]"
-      />
-      <h2 className="absolute top-[153px] left-[116px] w-[492px] text-[35px] font-bold text-navy">
-        Ready to Work Together?
-      </h2>
-      <p className="absolute top-[236px] left-[116px] w-[566px] text-[24px] leading-normal font-light text-black">
-        We work with those ready to think deeper, move cleaner, and lead with
-        presence, not pressure.
-      </p>
-      <p className="absolute top-[312px] left-[119px] text-[30px] font-medium text-gold">
-        Apply to work with us!
-      </p>
-      <PillButton
-        as="a"
-        href="#book"
-        variant="goldOutline"
-        icon="sparkle"
-        className="absolute top-[397px] left-[116px]"
-      >
-        Book a Strategic Conversation
-      </PillButton>
+      <div className="relative mx-auto w-full max-w-[1440px] px-5 pt-14 sm:px-8 lg:pt-[153px] xl:px-[116px]">
+        <img
+          src={ctaAura}
+          alt=""
+          className="pointer-events-none absolute top-12 right-0 hidden w-[52%] max-w-[755px] md:block lg:top-[144px]"
+        />
+        <div className="relative">
+          <h2 className="text-[clamp(1.625rem,2.5vw,2.1875rem)] leading-[1.2] font-bold text-navy">
+            Ready to Work Together?
+          </h2>
+          <p className="mt-4 max-w-[566px] text-[clamp(1.125rem,1.7vw,1.5rem)] leading-normal font-light text-black lg:mt-7">
+            We work with those ready to think deeper, move cleaner, and lead
+            with presence, not pressure.
+          </p>
+          <p className="mt-5 text-[clamp(1.25rem,2.1vw,1.875rem)] font-medium text-gold lg:mt-10">
+            Apply to work with us!
+          </p>
+          <CtaPill as="a" href="#book" variant="goldOutline" className="mt-6 lg:mt-[20px]">
+            Book a Strategic Conversation
+          </CtaPill>
+        </div>
+      </div>
 
-      {/* Footer */}
-      <div className="absolute top-[532px] left-[82px] w-[1277px]">
-        <div className="border-t border-black/10 pt-[66px]">
-          <div className="flex justify-between">
+      {/* Link columns */}
+      <div className="mx-auto w-full max-w-[1440px] px-5 sm:px-8 xl:px-[82px]">
+        <div className="mt-12 border-t border-black/10 pt-10 lg:mt-[135px] lg:pt-[66px]">
+          <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
             {/* logo + address */}
             <div>
               {/* Each SVG stretches (preserveAspectRatio="none"), so it needs a
                   positioned wrapper box to fill. */}
-              <div className="relative h-[125px] w-[188px] overflow-hidden">
+              <div className="relative h-[100px] w-[150px] overflow-hidden lg:h-[125px] lg:w-[188px]">
                 <span className="absolute inset-[0_28.74%_38.85%_28.37%]">
                   <img src={logoA} alt="StrateAura" className="size-full" />
                 </span>
@@ -65,13 +67,13 @@ export default function AboutFooter() {
                   <img src={logoC} alt="" className="size-full" />
                 </span>
               </div>
-              <p className="mt-3 w-[214px] text-[16px] leading-normal font-light text-[#525252]">
+              <p className="mt-3 max-w-[214px] text-[16px] leading-normal font-light text-[#525252]">
                 StrateAura Management Development Training LLC, Iris Bay - 2205 -
                 D90, Business Bay Dubai, U.A.E
               </p>
             </div>
 
-            <div className="flex gap-[64px] pr-[36px]">
+            <div className="flex flex-wrap gap-x-12 gap-y-8 lg:gap-[64px] lg:pr-[36px]">
               <FooterColumn heading="COMPANY">
                 <ul className="mt-2 text-[14px] leading-[35px] font-medium tracking-[0.2px] text-ink">
                   {COMPANY.map((item) => (
@@ -82,7 +84,7 @@ export default function AboutFooter() {
                 </ul>
               </FooterColumn>
               <FooterColumn heading="FRAMEWORKS">
-                <ul className="mt-2 w-[175px] text-[14px] leading-[35px] font-medium tracking-[0.2px] text-ink">
+                <ul className="mt-2 max-w-[175px] text-[14px] leading-[35px] font-medium tracking-[0.2px] text-ink">
                   {FRAMEWORKS.map((item) => (
                     <li key={item}>
                       <a href="#" className="transition-colors hover:text-gold">{item}</a>
@@ -106,7 +108,7 @@ export default function AboutFooter() {
           </div>
         </div>
 
-        <div className="mt-[64px] flex items-center justify-between border-t border-black/10 pt-[30px]">
+        <div className="mt-10 flex flex-col gap-2 border-t border-black/10 py-[30px] sm:flex-row sm:items-center sm:justify-between lg:mt-[64px]">
           <p className="text-[14px] font-medium tracking-[0.2px] text-ink">
             StrateAura © 2024-2026 / All Rights Reserved
           </p>
@@ -115,7 +117,7 @@ export default function AboutFooter() {
           </a>
         </div>
       </div>
-    </section>
+    </footer>
   );
 }
 

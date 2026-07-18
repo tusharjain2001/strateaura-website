@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git rev-parse --abbrev-ref @{upstream} >/dev/null 2>&1 && { git pull --ff-only 2>&1 || echo \"PULL NEEDS ATTENTION: could not fast-forward. Resolve carefully (merge or rebase) before starting work - do not discard local changes.\"; } || echo \"NOTE: no upstream configured for this branch; skipped auto-pull.\"",
+            "timeout": 30,
+            "statusMessage": "Pulling latest code from origin"
+          }
+        ]
+      }
+    ]
+  }
+}

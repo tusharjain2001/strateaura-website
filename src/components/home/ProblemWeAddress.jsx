@@ -83,12 +83,12 @@ export default function ProblemWeAddress() {
   const [active, setActive] = useState(CARDS.length - 1); // last card open by default
 
   // Stack the cards: each collapsed card advances by PEEK, the open one by EXPANDED_H.
-  let y = 0;
-  const tops = CARDS.map((_, i) => {
-    const top = y;
-    y += i === active ? EXPANDED_H : PEEK;
-    return top;
-  });
+  const tops = CARDS.map((_, i) =>
+    CARDS.slice(0, i).reduce(
+      (top, _card, j) => top + (j === active ? EXPANDED_H : PEEK),
+      0,
+    ),
+  );
 
   return (
     <section className="relative h-[959px] w-[1440px] overflow-hidden">

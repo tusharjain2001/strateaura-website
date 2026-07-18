@@ -50,6 +50,32 @@ export function ChevronDown({ className = "" }) {
   );
 }
 
+export function MenuIcon({ className = "" }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" aria-hidden>
+      <path
+        d="M3 6H21M3 12H21M3 18H21"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+export function CloseIcon({ className = "" }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" aria-hidden>
+      <path
+        d="M5 5L19 19M19 5L5 19"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 export function SearchIcon({ className = "" }) {
   return (
     <svg viewBox="0 0 22 22" className={className} fill="none" aria-hidden>

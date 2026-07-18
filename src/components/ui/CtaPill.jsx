@@ -1,0 +1,61 @@
+import { Sparkle } from "./Icons";
+
+/**
+ * Responsive counterpart of PillButton for the fluid (non-canvas) pages.
+ * Matches the Figma pill at desktop sizes and scales down on smaller screens,
+ * so legacy fixed-canvas pages can keep using PillButton untouched.
+ */
+const VARIANTS = {
+  creamFilled: {
+    pill: "bg-cream text-gold",
+    circle: "bg-gold text-cream",
+  },
+  goldFilled: {
+    pill: "bg-gold text-white",
+    circle: "bg-white text-gold",
+  },
+  goldOutline: {
+    pill: "border border-gold text-gold",
+    circle: "bg-gold text-cream",
+  },
+};
+
+const SIZES = {
+  lg: {
+    pill: "h-[54px] gap-4 pr-2 pl-6 text-[20px] lg:h-[65px] lg:gap-5 lg:pl-8 lg:text-[24px]",
+    circle: "size-[42px] lg:size-[50px]",
+    glyph: "size-[18px] lg:size-[22px]",
+  },
+  md: {
+    pill: "h-[46px] gap-3 pr-[6px] pl-6 text-[20px] lg:h-[50px] lg:gap-[19px] lg:pl-[29px] lg:text-[24px]",
+    circle: "size-[32px] lg:size-[36px]",
+    glyph: "size-[14px] lg:size-[16px]",
+  },
+};
+
+export default function CtaPill({
+  children,
+  variant = "goldOutline",
+  size = "lg",
+  className = "",
+  as = "button",
+  ...props
+}) {
+  const v = VARIANTS[variant] ?? VARIANTS.goldOutline;
+  const s = SIZES[size] ?? SIZES.lg;
+  const Tag = as;
+
+  return (
+    <Tag
+      className={`group inline-flex items-center justify-between rounded-full font-bold whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${s.pill} ${v.pill} ${className}`}
+      {...props}
+    >
+      <span className="leading-none">{children}</span>
+      <span
+        className={`flex shrink-0 items-center justify-center rounded-full transition-transform motion-safe:group-hover:scale-105 ${s.circle} ${v.circle}`}
+      >
+        <Sparkle className={s.glyph} />
+      </span>
+    </Tag>
+  );
+}
