@@ -1,7 +1,7 @@
 import CtaPill from "../ui/CtaPill";
 import heroPhoto from "../../assets/webinar/hero-photo.jpg";
 
-export default function WebinarHero() {
+export default function WebinarHero({ onReserve }) {
   return (
     <section className="relative overflow-hidden bg-gold-dark">
       {/* Photo sits on the right 62% at desktop; full-bleed behind the
@@ -24,7 +24,7 @@ export default function WebinarHero() {
           A free live webinar for women in leadership and high-demand
           professional roles. Hosted by Dr. Suhair Hamouri — Founder, VEIL™
         </p>
-        <CtaPill as="a" href="#register" variant="creamFilled" className="mt-8 lg:mt-12">
+        <CtaPill onClick={onReserve} variant="creamFilled" className="mt-8 lg:mt-12">
           Reserve My Spot
         </CtaPill>
       </div>
