@@ -52,18 +52,10 @@ export default function AboutFooter() {
           <div className="flex justify-between">
             {/* logo + address */}
             <div>
-              {/* Each SVG stretches (preserveAspectRatio="none"), so it needs a
-                  positioned wrapper box to fill. */}
               <div className="relative h-[125px] w-[188px] overflow-hidden">
-                <span className="absolute inset-[0_28.74%_38.85%_28.37%]">
-                  <img src={logoA} alt="StrateAura" className="size-full" />
-                </span>
-                <span className="absolute inset-[70.87%_0_11.27%_0]">
-                  <img src={logoB} alt="" className="size-full" />
-                </span>
-                <span className="absolute inset-[94.52%_0.23%_0_0]">
-                  <img src={logoC} alt="" className="size-full" />
-                </span>
+                <img src={logoA} alt="StrateAura" className="absolute inset-[0_28.74%_38.85%_28.37%]" />
+                <img src={logoB} alt="" className="absolute inset-[70.87%_0_11.27%_0]" />
+                <img src={logoC} alt="" className="absolute inset-[94.52%_0.23%_0_0]" />
               </div>
               <p className="mt-3 w-[214px] text-[16px] leading-normal font-light text-[#525252]">
                 StrateAura Management Development Training LLC, Iris Bay - 2205 -
