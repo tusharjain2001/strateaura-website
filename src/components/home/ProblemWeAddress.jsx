@@ -103,9 +103,10 @@ export default function ProblemWeAddress() {
         <br />
         We Address
       </div>
-      <p className="absolute top-[316px] left-[222px] w-[379px] text-[24px] leading-normal font-light text-black">
-        We live in a world of constant doing, chasing visibility, metrics, and
-        motion. But too many leaders feel
+      <p className="absolute top-[316px] left-[222px] w-[470px] text-[24px] leading-normal font-light text-black [&>span]:block">
+        <span className="whitespace-nowrap">We live in a world of constant doing,</span>
+        <span className="whitespace-nowrap">chasing visibility, metrics, and</span>
+        <span>motion. But too many leaders feel</span>
       </p>
 
       {/* Stacked accordion — click a card to expand/collapse it */}
@@ -164,7 +165,7 @@ export default function ProblemWeAddress() {
         href="#solutions"
         variant="goldOutlineWhite"
         icon="sparkle"
-        className="absolute top-[463px] left-[222px]"
+        className="absolute top-[500px] left-[222px]"
       >
         Our Solutions
       </PillButton>

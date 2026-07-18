@@ -20,7 +20,7 @@ function Thumb() {
 export default function Insights() {
   return (
     <section className="relative h-[1067px] w-[1440px] overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#ffbb00]/15 to-[#fffefa]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#fffefa] to-[#ffbb00]/15" />
 
       {/* Header row */}
       <div className="absolute top-[129px] left-[95px] flex w-[1250px] items-center justify-between">
@@ -36,7 +36,7 @@ export default function Insights() {
           These Aren't Productivity Problems. They're Patterns of Misalignment.
         </h3>
         <p className="mt-4 text-[16px] text-black/60">Published December 15, 2025</p>
-        <div className="mt-6 space-y-5 text-[23px] leading-normal text-black/60">
+        <div className="mt-5 space-y-4 text-[21px] leading-[1.3] text-black/60">
           <p>
             We believe insight should serve, not overwhelm. Access thought pieces,
             tools, and your first look into our book: These Aren't Productivity
@@ -59,8 +59,8 @@ export default function Insights() {
         </div>
       </div>
 
-      {/* Article list */}
-      <ul className="absolute top-[281px] left-[720px] w-[728px]">
+      {/* Article list — right-anchored with a margin so thumbnails don't touch the edge */}
+      <ul className="absolute top-[281px] left-[700px] right-[92px]">
         {ARTICLES.map((a, i) => (
           <li
             key={a.title}
