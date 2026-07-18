@@ -1,29 +1,4 @@
-import { ArrowRight } from "../ui/Icons";
-import mktWave from "../../assets/mkt-wave.svg";
-
-const CARDS = [
-  "Wellness-Centric Leadership",
-  "Strategic Marketing in Higher Education",
-  "Integrated Marketing Strategy masterclass",
-  "Digital Marketing with Purpose",
-  "Marketing in the Age of Digital Transformation",
-];
-
-function ProgramCard({ title }) {
-  return (
-    <div className="relative h-[193px] flex-1 overflow-hidden rounded-[3px] bg-gradient-to-b from-navy to-blue p-[18px]">
-      <h4 className="w-[170px] pt-[7px] text-[21px] leading-tight font-bold text-white">
-        {title}
-      </h4>
-      <img
-        src={mktWave}
-        alt=""
-        className="pointer-events-none absolute right-0 bottom-0 w-[110px] opacity-40"
-      />
-      <ArrowRight className="absolute bottom-[26px] left-[10px] w-5 text-white" />
-    </div>
-  );
-}
+import leadershipCards from "../../assets/leadership-cards.svg";
 
 export default function MarketingPrograms() {
   return (
@@ -33,17 +8,22 @@ export default function MarketingPrograms() {
         <br />
         Leadership Programs.
       </h2>
-      <p className="absolute top-[49px] left-[793px] w-[515px] text-[20px] leading-normal text-navy">
+
+      {/* Constrained to the Figma box (left 793 → right 1308) so the right edge
+          lines up with the cards/flagship above; font sized to wrap in 3 lines. */}
+      <p className="absolute top-[50px] left-[793px] w-[515px] text-[17.5px] leading-[1.5] text-navy">
         We also offer a suite of practical marketing and leadership programs for
         professionals, teams, and institutions. All programs carry KHDA Attested
         Attendance Certificate.
       </p>
 
-      <div className="absolute top-[183px] left-[132px] flex w-[1177px] gap-[16px]">
-        {CARDS.map((title) => (
-          <ProgramCard key={title} title={title} />
-        ))}
-      </div>
+      {/* All five program cards as one exported graphic — left edge aligns with
+          the heading (matches Figma). */}
+      <img
+        src={leadershipCards}
+        alt="Marketing & leadership programs: Wellness-Centric Leadership, Strategic Marketing in Higher Education, Integrated Marketing Strategy masterclass, Digital Marketing with Purpose, Marketing in the Age of Digital Transformation"
+        className="absolute top-[183px] left-[131px] w-[1219px]"
+      />
     </section>
   );
 }
