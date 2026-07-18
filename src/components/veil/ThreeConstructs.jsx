@@ -33,12 +33,21 @@ export default function ThreeConstructs() {
           {CONSTRUCTS.map((card) => (
             <div
               key={card.title}
-              className="relative min-h-[190px] overflow-hidden rounded-[4px] bg-gradient-to-b from-gold to-gold-dark p-6 lg:min-h-[198px]"
+              className="relative min-h-[190px] rounded-[4px] bg-gradient-to-b from-gold to-gold-dark p-6 lg:min-h-[198px]"
             >
+              {/* Clips the aura to the rounded card without clipping the
+                  corner sparkle, which must straddle the corner. */}
+              <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[4px]">
+                <img
+                  src={card.aura}
+                  alt=""
+                  className="absolute right-0 bottom-1 w-[62%]"
+                />
+              </div>
               <img
                 src={cardSparkle}
                 alt=""
-                className="pointer-events-none absolute -top-[15px] -right-[15px] size-[30px]"
+                className="pointer-events-none absolute -top-[15px] -right-[15px] z-10 size-[30px]"
               />
               <p className="relative z-10 text-[clamp(1.25rem,1.8vw,1.75rem)] font-bold text-white">
                 {card.title}
@@ -46,11 +55,6 @@ export default function ThreeConstructs() {
               <p className="relative z-10 mt-4 max-w-[85%] text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-white">
                 {card.body}
               </p>
-              <img
-                src={card.aura}
-                alt=""
-                className="pointer-events-none absolute right-0 bottom-1 w-[62%]"
-              />
             </div>
           ))}
         </div>

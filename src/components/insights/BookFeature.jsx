@@ -15,7 +15,7 @@ export default function BookFeature() {
         <img
           src={bookLaurel}
           alt=""
-          className="pointer-events-none absolute top-1/2 left-[42%] z-0 hidden w-[59%] max-w-[847px] -translate-y-1/2 opacity-95 lg:left-[600px] lg:block lg:w-[847px]"
+          className="pointer-events-none absolute top-1/2 left-[42%] z-0 hidden aspect-[847/695] w-[59%] max-w-[847px] -translate-y-1/2 opacity-95 lg:left-[600px] lg:block lg:w-[847px]"
         />
 
         {/* Explicit stacking context above the (absolutely-positioned) laurel

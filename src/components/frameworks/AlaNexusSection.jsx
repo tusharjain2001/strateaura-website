@@ -1,6 +1,7 @@
 import FrameworkTag from "./FrameworkTag";
 import CtaPill from "../ui/CtaPill";
-import { Sparkle, ArrowRight } from "../ui/Icons";
+import { ArrowRight } from "../ui/Icons";
+import seamSparkle from "../../assets/webinar/seam-sparkle.svg";
 import assessPattern from "../../assets/frameworks/ala-assess-pattern.svg";
 import leveragePattern from "../../assets/frameworks/ala-leverage-pattern.svg";
 import actuatePattern from "../../assets/frameworks/ala-actuate-pattern.svg";
@@ -79,8 +80,15 @@ export default function AlaNexusSection() {
                 />
               </div>
               {/* Straddles the top-right corner (centered on the corner
-                  point, half outside the card) — see LeaveWith.jsx. */}
-              <Sparkle className="pointer-events-none absolute -top-[11px] -right-[11px] z-10 size-[22px] text-white lg:-top-[14px] lg:-right-[14px] lg:size-[28px]" />
+                  point, half outside the card). The OUTLINED sparkle asset
+                  (white fill + navy stroke) stays visible on both the navy
+                  card and the white page — a solid white glyph vanishes on
+                  the half that hangs over the white background. */}
+              <img
+                src={seamSparkle}
+                alt=""
+                className="pointer-events-none absolute -top-[11px] -right-[11px] z-10 size-[22px] lg:-top-[14px] lg:-right-[14px] lg:size-[28px]"
+              />
               <div className="relative p-6 lg:p-[38px]">
                 <p className="text-[clamp(1.25rem,1.7vw,1.5rem)] font-bold text-white">
                   {card.title}
