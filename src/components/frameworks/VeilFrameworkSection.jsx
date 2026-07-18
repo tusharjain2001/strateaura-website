@@ -1,3 +1,4 @@
+import { useState } from "react";
 import FrameworkTag from "./FrameworkTag";
 import CtaPill from "../ui/CtaPill";
 import { Sparkle } from "../ui/Icons";
@@ -5,7 +6,7 @@ import card1Pattern from "../../assets/frameworks/veil-card1-pattern.svg";
 import card23Pattern from "../../assets/frameworks/veil-card23-pattern.svg";
 import legacyPattern from "../../assets/frameworks/veil-legacy-pattern.svg";
 
-const PROBLEM_CARDS = [
+const CARDS = [
   {
     key: "misaligned",
     text: "Misaligned with the work they once loved.",
@@ -21,7 +22,24 @@ const PROBLEM_CARDS = [
     text: "Accomplished on paper, but disconnected inside.",
     pattern: card23Pattern,
   },
+  {
+    key: "legacy",
+    legacy: true,
+    pattern: legacyPattern,
+  },
 ];
+
+// Deck geometry pulled from Figma node 1434:3021 ("Group 112"): four 480px
+// wide cards, each 501px tall, stacked at y = 126, 210, 294, 378 — an 84px
+// step between each. Figma only depicts one state (Legacy open, the other
+// three peeking); COLLAPSED_H is sized so a peek of each card's heading
+// stays readable, following the interactive accordion pattern from
+// src/components/home/ProblemWeAddress.jsx (absolute cards, tops advancing
+// by a peek step, expanded card taller, click to toggle with a transition).
+const PEEK_STEP = 84;
+const COLLAPSED_H = 132;
+const EXPANDED_H = 501;
+const CARD_W = 480;
 
 function CircleSparkle({ className = "" }) {
   return (
@@ -33,13 +51,29 @@ function CircleSparkle({ className = "" }) {
   );
 }
 
-function ProblemCard({ card, className = "", style }) {
+function CardBody({ card }) {
+  if (card.legacy) {
+    return (
+      <div className="relative flex h-full flex-col items-center justify-center px-7 pt-10 pb-8 text-center lg:px-9">
+        <p className="text-[clamp(1.5rem,2.5vw,1.9375rem)] leading-[1.1] font-bold text-white">
+          Sustainable Legacy
+        </p>
+        <p className="mt-3 max-w-[363px] text-[clamp(1.5rem,2.5vw,1.9375rem)] leading-[1.1] text-white">
+          A presence <span className="font-bold">that outlasts titles and</span>{" "}
+          keeps you whole
+        </p>
+        <CircleSparkle className="mt-8 size-[44px] lg:mt-10 lg:size-[50px]" />
+        <img
+          src={card.pattern}
+          alt=""
+          className="pointer-events-none absolute -bottom-6 left-1/2 h-[48%] w-auto -translate-x-1/2 rotate-90 opacity-70"
+        />
+      </div>
+    );
+  }
+
   return (
-    <div
-      className={`relative overflow-hidden rounded-[8px] bg-gradient-to-b from-navy to-blue p-7 lg:p-9 ${className}`}
-      style={style}
-    >
-      <Sparkle className="pointer-events-none absolute top-4 right-4 size-[22px] text-white/70 lg:size-[28px]" />
+    <div className="relative h-full px-7 pt-7 pb-7 lg:px-9 lg:pt-9">
       <img
         src={card.pattern}
         alt=""
@@ -53,24 +87,66 @@ function ProblemCard({ card, className = "", style }) {
   );
 }
 
-function LegacyCard({ className = "" }) {
+/** Plain, always-expanded card used in the stacked list below lg. */
+function StaticCard({ card }) {
   return (
-    <div
-      className={`relative flex flex-col items-center justify-center overflow-hidden rounded-[8px] bg-gradient-to-b from-navy to-blue px-7 py-10 text-center lg:p-9 ${className}`}
-    >
-      <p className="relative text-[clamp(1.5rem,2.5vw,1.9375rem)] leading-[1.1] font-bold text-white">
-        Sustainable Legacy
-      </p>
-      <p className="relative mt-3 max-w-[363px] text-[clamp(1.5rem,2.5vw,1.9375rem)] leading-[1.1] text-white">
-        A presence <span className="font-bold">that outlasts titles and</span>{" "}
-        keeps you whole
-      </p>
-      <CircleSparkle className="relative mt-8 size-[44px] lg:mt-10 lg:size-[50px]" />
-      <img
-        src={legacyPattern}
-        alt=""
-        className="pointer-events-none absolute -bottom-6 left-1/2 h-[48%] w-auto -translate-x-1/2 rotate-90 opacity-70"
-      />
+    <div className="relative min-h-[240px] overflow-hidden rounded-[8px] bg-gradient-to-b from-navy to-blue">
+      <Sparkle className="pointer-events-none absolute top-4 right-4 size-[22px] text-white/70" />
+      <CardBody card={card} />
+    </div>
+  );
+}
+
+// Each card's *top* advances by its own step (PEEK_STEP if collapsed,
+// EXPANDED_H if open); the deck's total height is the last card's top plus
+// its own *rendered* height (COLLAPSED_H or EXPANDED_H). Kept as a plain
+// function (not inline in the component) so the running total is a local
+// variable inside its own call frame, not a render-scoped mutation.
+function computeDeckLayout(active) {
+  const tops = [];
+  let y = 0;
+  for (let i = 0; i < CARDS.length; i++) {
+    tops.push(y);
+    y += i === active ? EXPANDED_H : PEEK_STEP;
+  }
+  const lastIsOpen = active === CARDS.length - 1;
+  const deckHeight = tops[CARDS.length - 1] + (lastIsOpen ? EXPANDED_H : COLLAPSED_H);
+  return { tops, deckHeight };
+}
+
+/**
+ * Interactive stacked deck (desktop, lg+): the open card sits at full
+ * height, the rest collapse to a peeking band. Mirrors ProblemWeAddress:
+ * each collapsed card advances the running offset by PEEK_STEP, the open
+ * one by EXPANDED_H; height/position animate on toggle.
+ */
+function StackDeck() {
+  const [active, setActive] = useState(CARDS.length - 1); // Legacy open by default
+  const { tops, deckHeight } = computeDeckLayout(active);
+
+  return (
+    <div className="relative" style={{ width: CARD_W, height: deckHeight }}>
+      {CARDS.map((card, i) => {
+        const isOpen = active === i;
+        return (
+          <button
+            key={card.key}
+            type="button"
+            aria-expanded={isOpen}
+            onClick={() => setActive(isOpen ? null : i)}
+            style={{
+              top: tops[i],
+              height: isOpen ? EXPANDED_H : COLLAPSED_H,
+              width: CARD_W,
+              zIndex: i,
+            }}
+            className="absolute left-0 overflow-hidden rounded-[8px] bg-gradient-to-b from-navy to-blue text-left shadow-[0_-6px_16px_rgba(0,0,0,0.18)] transition-all duration-500 ease-in-out"
+          >
+            <Sparkle className="pointer-events-none absolute top-4 right-4 size-[22px] text-white/70 lg:size-[28px]" />
+            <CardBody card={card} />
+          </button>
+        );
+      })}
     </div>
   );
 }
@@ -135,26 +211,16 @@ export default function VeilFrameworkSection() {
             </CtaPill>
           </div>
 
-          {/* Stacked problem/legacy cards */}
-          <div className="mt-10 flex flex-col gap-5 lg:mt-0 lg:hidden">
-            {PROBLEM_CARDS.map((card) => (
-              <ProblemCard key={card.key} card={card} className="min-h-[220px]" />
+          {/* Plain stacked list below lg */}
+          <div className="mt-10 flex flex-col gap-5 lg:hidden">
+            {CARDS.map((card) => (
+              <StaticCard key={card.key} card={card} />
             ))}
-            <LegacyCard className="min-h-[260px]" />
           </div>
 
-          {/* Desktop peek-stack: each card overlaps the next, only its top
-              edge showing, until the fully-visible Legacy card on top. */}
-          <div className="relative hidden lg:block lg:aspect-[480/753]">
-            {PROBLEM_CARDS.map((card, i) => (
-              <ProblemCard
-                key={card.key}
-                card={card}
-                className="absolute inset-x-0 h-[66.5%]"
-                style={{ top: `${(i * 84 * 100) / 753}%` }}
-              />
-            ))}
-            <LegacyCard className="absolute inset-x-0 top-[33.47%] h-[66.5%]" />
+          {/* Interactive peek-stack, desktop only */}
+          <div className="hidden lg:block">
+            <StackDeck />
           </div>
         </div>
       </div>

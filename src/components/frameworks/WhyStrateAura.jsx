@@ -18,11 +18,13 @@ export default function WhyStrateAura() {
     <section className="bg-white">
       <div className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:px-[65px] lg:py-[69px]">
         <div className="relative overflow-hidden rounded-[4px] lg:h-[810px]">
-          {/* Photo, full-bleed within the card */}
+          {/* Photo, full-bleed within the card. Figma's crop already frames
+              her right-of-centre (source is 924x810); bias object-position
+              right so narrower/taller containers don't crop her out. */}
           <img
             src={portraitPhoto}
             alt="A StrateAura leadership executive"
-            className="h-[320px] w-full object-cover sm:h-[420px] lg:absolute lg:inset-0 lg:h-full"
+            className="h-[320px] w-full object-cover object-[75%_center] sm:h-[420px] lg:absolute lg:inset-0 lg:h-full"
           />
           <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-t from-black/40 to-transparent lg:block" />
 
@@ -51,18 +53,7 @@ export default function WhyStrateAura() {
                   {POINTS.map((point, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <Sparkle className="mt-2 size-[10px] shrink-0 text-white" />
-                      <span>
-                        {point.bold === "lead" ? (
-                          <strong className="font-bold">{point.lead}</strong>
-                        ) : (
-                          point.lead
-                        )}
-                        {point.bold === "rest" ? (
-                          <strong className="font-bold">{point.rest}</strong>
-                        ) : (
-                          point.rest
-                        )}
-                      </span>
+                      <span>{point}</span>
                     </li>
                   ))}
                 </ul>
