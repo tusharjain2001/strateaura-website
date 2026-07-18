@@ -13,9 +13,7 @@ const LINKS = [
 
 export default function Navbar() {
   return (
-    // The box-shadow + clip-path pair bleeds the gold band across the full
-    // viewport when the 1440px canvas is centred on wider screens.
-    <header className="sticky top-0 z-50 w-full bg-gold [box-shadow:0_0_0_100vmax_var(--color-gold)] [clip-path:inset(0_-100vmax)]">
+    <header className="sticky top-0 z-50 w-full bg-gold">
       <nav className="mx-auto flex h-[120px] w-[1440px] items-center justify-between px-[72px]">
         <Link to="/" aria-label="StrateAura home">
           <Logo variant="nav" />

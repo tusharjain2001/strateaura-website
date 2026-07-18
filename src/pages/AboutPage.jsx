@@ -14,12 +14,10 @@ export default function AboutPage() {
   return (
     <div
       style={{ zoom: scale }}
-      className="mx-auto w-[1440px] bg-white text-black"
+      className="w-[1440px] overflow-x-clip bg-white text-black"
     >
       <Navbar />
-      {/* overflow clip lives on main (not the wrapper) so the navbar's
-          full-bleed band can escape the 1440px canvas */}
-      <main className="overflow-x-clip">
+      <main>
         <AboutHero />
         <Stance />
         <CoreValues />
