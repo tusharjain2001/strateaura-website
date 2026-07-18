@@ -1,0 +1,43 @@
+import edgePortrait from "../../assets/edge-portrait.png";
+import quoteMark from "../../assets/quote-mark.svg";
+import auraEdge from "../../assets/aura-left-edge.svg";
+
+export default function OurEdge() {
+  return (
+    <section className="relative h-[735px] w-[1440px] overflow-hidden bg-navy">
+      <img
+        src={auraEdge}
+        alt=""
+        className="pointer-events-none absolute top-[384px] left-[-352px] size-[705px] opacity-30"
+      />
+
+      {/* Right gradient panel */}
+      <div className="absolute top-[114px] left-[541px] h-[564px] w-[796px] rounded-[4px] bg-gradient-to-b from-navy to-blue" />
+
+      {/* Arched portrait */}
+      <div className="absolute top-[107px] left-[130px] h-[601px] w-[467px] overflow-hidden rounded-t-[220px]">
+        <img src={edgePortrait} alt="StrateAura faculty" className="size-full object-cover" />
+      </div>
+
+      <img
+        src={quoteMark}
+        alt=""
+        className="absolute top-[104px] left-[524px] h-[64px] w-[70px]"
+      />
+
+      <h2 className="absolute top-[202px] left-[623px] text-[50px] font-bold text-white">
+        Our Edge
+      </h2>
+      <p className="absolute top-[286px] left-[623px] w-[637px] text-[24px] leading-[32px] text-white">
+        StrateAura™ brings together academic rigor, industry expertise, and
+        regional relevance. With a deep understanding of both global trends and
+        local business dynamics, we design programs that resonate with the cultural
+        and professional aspirations of our clients in the UAE and beyond.
+        <br />
+        <br />
+        Each course is developed and led by experienced faculty and practitioners
+        with advanced degrees and years of corporate and academic experience.
+      </p>
+    </section>
+  );
+}

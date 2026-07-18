@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+/* ---- StrateAura design tokens (from Figma) ---- */
+@theme {
+  --color-gold: #b3902f;
+  --color-gold-dark: #725300;
+  --color-gold-light: #ffdf85;
+  --color-cream: #fff9e8;
+  --color-navy: #1f3a58;
+  --color-navy-2: #233a58;
+  --color-blue: #437dbe;
+  --color-ink: #737373;
+  --color-ink-2: #949494;
+
+  --font-sans: "Acumin Pro", "Inter", system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+}
+
+/* Acumin Pro is a licensed Adobe font; Inter (loaded in index.html) is used as
+   the closest free fallback so the layout stays faithful to the design. */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: #ffffff;
+  color: #000000;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
