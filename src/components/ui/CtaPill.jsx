@@ -26,6 +26,10 @@ const VARIANTS = {
     pill: "border border-navy-2 text-navy-2",
     circle: "bg-navy-2 text-white",
   },
+  navyFilled: {
+    pill: "bg-navy-2 text-white",
+    circle: "bg-white text-navy-2",
+  },
 };
 
 const SIZES = {

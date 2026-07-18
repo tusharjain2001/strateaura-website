@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CtaPill from "../ui/CtaPill";
 import { ChevronDown } from "../ui/Icons";
 import COUNTRIES from "../../data/countries";
@@ -19,7 +19,7 @@ function Field({ label, children }) {
 }
 
 export default function RegisterSection() {
-  const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -27,7 +27,7 @@ export default function RegisterSection() {
     // StrateAura (Mailchimp / ConvertKit), into a list tagged
     // "VEIL Webinar Pre-Registration". Wire that call here when the
     // platform credentials are available.
-    setSubmitted(true);
+    navigate("/webinar/confirmation");
   }
 
   return (
@@ -60,17 +60,7 @@ export default function RegisterSection() {
             Book a Strategic Conversation
           </p>
 
-          {submitted ? (
-            <div className="mt-11">
-              <p className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-navy-2">
-                You're on the list.
-              </p>
-              <p className="mt-3 text-[17px] leading-normal text-ink">
-                We will email you as soon as the next session is scheduled.
-              </p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="mt-8 lg:mt-11">
+          <form onSubmit={handleSubmit} className="mt-8 lg:mt-11">
               <div className="flex flex-col gap-5 lg:gap-6">
                 <div className="flex flex-col gap-5 sm:flex-row sm:gap-[29px]">
                   <Field label="First Name">
@@ -117,8 +107,7 @@ export default function RegisterSection() {
                   your email.
                 </p>
               </div>
-            </form>
-          )}
+          </form>
         </div>
       </div>
     </section>

@@ -1,0 +1,16 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 124.001 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Mask group">
+<circle id="Ellipse 15" cx="62" cy="62" r="62" fill="var(--fill-0, white)"/>
+<mask id="mask0_0_72" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="125" height="125">
+<g id="Group">
+<g id="Group_2">
+<path id="Vector" d="M5.63694 62.0001C5.63694 30.8749 30.8753 5.63647 62.0006 5.63647C93.1258 5.63647 118.364 30.8749 118.364 62.0001C118.364 93.1254 93.1258 118.364 62.0006 118.364C30.8753 118.364 5.63694 93.1254 5.63694 62.0001Z" fill="var(--fill-0, white)" stroke="var(--stroke-0, white)" stroke-width="11.2727" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M36.9512 61.9998L55.739 80.7876L87.0522 49.4745" stroke="var(--stroke-0, black)" stroke-width="11.2727" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</mask>
+<g mask="url(#mask0_0_72)">
+<path id="Vector_3" d="M-13.1523 -13.1523H137.151V137.151H-13.1523V-13.1523Z" fill="var(--fill-0, #B3902F)"/>
+</g>
+</g>
+</svg>
