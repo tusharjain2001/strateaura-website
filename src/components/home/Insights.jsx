@@ -20,7 +20,7 @@ function Thumb() {
 export default function Insights() {
   return (
     <section className="relative h-[1067px] w-[1440px] overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#ffbb00]/15 to-[#fffefa]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#fffefa] to-[#ffbb00]/15" />
 
       {/* Header row */}
       <div className="absolute top-[129px] left-[95px] flex w-[1250px] items-center justify-between">
@@ -59,8 +59,8 @@ export default function Insights() {
         </div>
       </div>
 
-      {/* Article list */}
-      <ul className="absolute top-[281px] left-[720px] w-[728px]">
+      {/* Article list — right-anchored with a margin so thumbnails don't touch the edge */}
+      <ul className="absolute top-[281px] left-[700px] right-[92px]">
         {ARTICLES.map((a, i) => (
           <li
             key={a.title}
