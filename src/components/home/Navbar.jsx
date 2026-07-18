@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom";
 import Logo from "../ui/Logo";
 import { ChevronDown, SearchIcon } from "../ui/Icons";
 
 const LINKS = [
-  { label: "Home", href: "#" },
-  { label: "About Us", href: "#about" },
+  { label: "Home", to: "/" },
+  { label: "About Us", to: "/about" },
   { label: "VEIL™", href: "#veil" },
   { label: "Our Programs", href: "#programs", dropdown: true },
   { label: "Insights & Resources", href: "#insights" },
@@ -14,23 +15,30 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full bg-gold">
       <nav className="mx-auto flex h-[120px] w-[1440px] items-center justify-between px-[72px]">
-        <a href="#" aria-label="StrateAura home">
+        <Link to="/" aria-label="StrateAura home">
           <Logo variant="nav" />
-        </a>
+        </Link>
 
         <div className="flex items-center gap-[60px]">
           <ul className="flex items-center gap-[60px] text-[17px] font-bold text-white">
-            {LINKS.map((link) => (
-              <li key={link.label}>
-                <a
-                  href={link.href}
-                  className="flex items-center gap-2 whitespace-nowrap transition-opacity hover:opacity-80"
-                >
-                  {link.label}
-                  {link.dropdown && <ChevronDown className="w-3" />}
-                </a>
-              </li>
-            ))}
+            {LINKS.map((link) => {
+              const className =
+                "flex items-center gap-2 whitespace-nowrap transition-opacity hover:opacity-80";
+              return (
+                <li key={link.label}>
+                  {link.to ? (
+                    <Link to={link.to} className={className}>
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <a href={link.href} className={className}>
+                      {link.label}
+                      {link.dropdown && <ChevronDown className="w-3" />}
+                    </a>
+                  )}
+                </li>
+              );
+            })}
           </ul>
 
           <div className="flex items-center gap-7">
