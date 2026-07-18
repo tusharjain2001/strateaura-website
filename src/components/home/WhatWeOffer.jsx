@@ -1,7 +1,7 @@
 import PillButton from "../ui/PillButton";
 import { Sparkle } from "../ui/Icons";
 import offerWoman from "../../assets/offer-woman.png";
-import auraLeft from "../../assets/aura-left-frameworks.svg";
+import leftSparkle from "../../assets/whatweoffervector.png";
 
 const BENEFITS = [
   "Reconnect with your energy and purpose",
@@ -12,13 +12,14 @@ const BENEFITS = [
 
 export default function WhatWeOffer() {
   return (
-    <section className="relative h-[859px] w-[1440px] overflow-hidden">
-      {/* soft golden wash + left aura */}
+    <section className="relative h-[859px] w-[1440px]">
+      {/* soft golden wash */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#c99400]/25 to-[#fffdf7]" />
+      {/* golden sparkle on the left edge (only the right half is on-screen) */}
       <img
-        src={auraLeft}
+        src={leftSparkle}
         alt=""
-        className="pointer-events-none absolute top-[-318px] left-[-316px] size-[636px] opacity-60"
+        className="pointer-events-none absolute top-[-318px] left-0 h-[636px] w-[320px]"
       />
 
       {/* Arched portrait */}
