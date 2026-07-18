@@ -5,10 +5,10 @@ import { ChevronDown, SearchIcon } from "../ui/Icons";
 const LINKS = [
   { label: "Home", to: "/" },
   { label: "About Us", to: "/about" },
-  { label: "VEIL™", href: "#veil" },
-  { label: "Our Programs", href: "#programs", dropdown: true },
-  { label: "Insights & Resources", href: "#insights" },
-  { label: "Contact", href: "#contact" },
+  { label: "VEIL™", to: "/veil" },
+  { label: "Our Programs", to: "/programs", dropdown: true },
+  { label: "Insights & Resources", to: "/insights" },
+  { label: "Contact", to: "/contact" },
 ];
 
 export default function Navbar() {
@@ -29,6 +29,7 @@ export default function Navbar() {
                   {link.to ? (
                     <Link to={link.to} className={className}>
                       {link.label}
+                      {link.dropdown && <ChevronDown className="w-3" />}
                     </Link>
                   ) : (
                     <a href={link.href} className={className}>
