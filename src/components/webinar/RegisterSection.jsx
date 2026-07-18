@@ -31,17 +31,23 @@ export default function RegisterSection() {
   }
 
   return (
-    <section id="register" className="bg-[rgba(249,222,146,0.6)]">
-      <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 items-end gap-x-10 px-5 sm:px-8 lg:min-h-[923px] lg:grid-cols-[1fr_644px] lg:px-[40px] xl:gap-x-[83px] xl:pr-[76px]">
+    // The vertical rhythm compresses on shorter viewports (100svh-based
+    // margins/heights) so the whole form fits in ONE viewport on a
+    // 1920x1080 screen; tall screens still get the exact Figma spacing.
+    <section
+      id="register"
+      className="scroll-mt-[80px] bg-[rgba(249,222,146,0.6)] lg:scroll-mt-[120px]"
+    >
+      <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 items-end gap-x-10 px-5 sm:px-8 lg:min-h-[min(923px,calc(100svh-120px))] lg:grid-cols-[1fr_644px] lg:px-[40px] xl:gap-x-[83px] xl:pr-[76px]">
         {/* Arch-shaped photo, flush with the section's bottom edge */}
         <img
           src={archPhoto}
           alt="Dr. Suhair Hamouri with the VEIL book"
-          className="order-2 mx-auto mt-10 w-[260px] max-w-full rounded-t-full object-cover sm:w-[320px] lg:order-1 lg:mt-[91px] lg:h-[832px] lg:w-full lg:max-w-[597px]"
+          className="order-2 mx-auto mt-10 w-[260px] max-w-full rounded-t-full object-cover sm:w-[320px] lg:order-1 lg:mt-[91px] lg:h-[min(832px,calc(100svh-208px))] lg:w-full lg:max-w-[597px]"
         />
 
         {/* Registration card */}
-        <div className="order-1 my-10 w-full rounded-[8px] bg-white px-6 py-8 sm:px-10 lg:order-2 lg:my-[107px] lg:px-[42px] lg:py-[47px]">
+        <div className="order-1 my-10 w-full rounded-[8px] bg-white px-6 py-8 sm:px-10 lg:order-2 lg:my-[clamp(24px,calc((100svh-830px)/2),107px)] lg:px-[42px] lg:py-[47px]">
           <h2 className="text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.2] font-bold text-gold">
             Contact Us
           </h2>
