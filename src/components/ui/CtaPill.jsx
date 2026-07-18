@@ -18,6 +18,14 @@ const VARIANTS = {
     pill: "border border-gold text-gold",
     circle: "bg-gold text-cream",
   },
+  whiteOutline: {
+    pill: "border border-white text-white",
+    circle: "bg-white text-gold",
+  },
+  navyOutline: {
+    pill: "border border-navy-2 text-navy-2",
+    circle: "bg-navy-2 text-white",
+  },
 };
 
 const SIZES = {
@@ -39,6 +47,7 @@ export default function CtaPill({
   size = "lg",
   className = "",
   as = "button",
+  icon: Icon = Sparkle,
   ...props
 }) {
   const v = VARIANTS[variant] ?? VARIANTS.goldOutline;
@@ -54,7 +63,7 @@ export default function CtaPill({
       <span
         className={`flex shrink-0 items-center justify-center rounded-full transition-transform motion-safe:group-hover:scale-105 ${s.circle} ${v.circle}`}
       >
-        <Sparkle className={s.glyph} />
+        <Icon className={s.glyph} />
       </span>
     </Tag>
   );
