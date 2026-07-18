@@ -36,7 +36,7 @@ export default function Insights() {
           These Aren't Productivity Problems. They're Patterns of Misalignment.
         </h3>
         <p className="mt-4 text-[16px] text-black/60">Published December 15, 2025</p>
-        <div className="mt-6 space-y-5 text-[23px] leading-normal text-black/60">
+        <div className="mt-5 space-y-4 text-[21px] leading-[1.3] text-black/60">
           <p>
             We believe insight should serve, not overwhelm. Access thought pieces,
             tools, and your first look into our book: These Aren't Productivity
