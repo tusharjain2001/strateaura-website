@@ -3,8 +3,8 @@ import beliefLaurel from "../../assets/belief-laurel-right.svg";
 export default function Belief() {
   return (
     <section className="relative h-[276px] w-[1440px]">
-      {/* faint golden band */}
-      <div className="absolute inset-0 bg-gradient-to-l from-[#ffedbd] to-[#cd9700] opacity-40" />
+      {/* golden band — linear-gradient(270deg, #CD9700, #FFEDBD) at 40% (Figma) */}
+      <div className="absolute inset-0 opacity-40 bg-[linear-gradient(270deg,#CD9700_0%,#FFEDBD_100%)]" />
 
       <img
         src={beliefLaurel}

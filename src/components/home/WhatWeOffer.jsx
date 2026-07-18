@@ -50,7 +50,7 @@ export default function WhatWeOffer() {
 
       {/* Golden CTA band */}
       <div className="absolute top-[561px] left-[418px] flex h-[233px] w-[948px] flex-col justify-center gap-6 rounded-[4px] bg-gold px-[58px]">
-        <Sparkle className="absolute top-[-18px] left-[-18px] size-[36px] text-gold" />
+        <Sparkle className="absolute top-[-18px] left-[-18px] size-[36px] text-white" />
         <p className="w-[813px] text-[24px] leading-normal text-white">
           Whether you're navigating leadership fatigue, career transitions, or
           team dissonance, StrateAura™ equips you to rise from within.
