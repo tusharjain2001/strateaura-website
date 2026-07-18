@@ -34,12 +34,12 @@ const VARIANTS = {
 
 const SIZES = {
   lg: {
-    pill: "h-[54px] gap-4 pr-2 pl-6 text-[20px] lg:h-[65px] lg:gap-5 lg:pl-8 lg:text-[24px]",
+    pill: "h-[54px] gap-4 pr-2 pl-6 text-[17px] sm:text-[20px] lg:h-[65px] lg:gap-5 lg:pl-8 lg:text-[24px]",
     circle: "size-[42px] lg:size-[50px]",
     glyph: "size-[18px] lg:size-[22px]",
   },
   md: {
-    pill: "h-[46px] gap-3 pr-[6px] pl-6 text-[20px] lg:h-[50px] lg:gap-[19px] lg:pl-[29px] lg:text-[24px]",
+    pill: "h-[46px] gap-3 pr-[6px] pl-6 text-[17px] sm:text-[20px] lg:h-[50px] lg:gap-[19px] lg:pl-[29px] lg:text-[24px]",
     circle: "size-[32px] lg:size-[36px]",
     glyph: "size-[14px] lg:size-[16px]",
   },
