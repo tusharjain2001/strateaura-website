@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CtaPill from "../ui/CtaPill";
 import ctaAura from "../../assets/about/cta-aura.svg";
 import logoA from "../../assets/about/foot-logo-a.svg";
@@ -8,8 +9,19 @@ import socialFb from "../../assets/about/social-fb.svg";
 import socialLi from "../../assets/about/social-li.svg";
 import socialIn from "../../assets/about/social-in.svg";
 
-const COMPANY = ["Home", "VEIL™ Program", "About Us", "Our Programs", "Frameworks", "Insights & Resources"];
-const FRAMEWORKS = ["ALA-Nexus™", "The 5Cs of Brand Health", "VEIL™ Leadership System"];
+const COMPANY = [
+  { label: "Home", to: "/" },
+  { label: "VEIL™ Program", to: "/veil" },
+  { label: "About Us", to: "/about" },
+  { label: "Our Programs", to: "/programs" },
+  { label: "Frameworks", to: "/frameworks" },
+  { label: "Insights & Resources", to: "/insights" },
+];
+const FRAMEWORKS = [
+  { label: "ALA-Nexus™", to: "/frameworks" },
+  { label: "The 5Cs of Brand Health", to: "/frameworks" },
+  { label: "VEIL™ Leadership System", to: "/frameworks" },
+];
 const SOCIALS = [
   { src: socialTw, label: "Twitter" },
   { src: socialFb, label: "Facebook" },
@@ -20,8 +32,11 @@ const SOCIALS = [
 /**
  * Responsive version of the site footer (CTA + link columns) for the fluid
  * pages; the legacy canvas pages keep AboutFooter.
+ *
+ * The CTA block accepts per-page overrides (the Figma VEIL page ships its own
+ * footer copy/buttons); defaults reproduce the shared design.
  */
-export default function SiteFooter() {
+export default function SiteFooter({ body, tagline, buttons, aside }) {
   return (
     <footer className="relative overflow-hidden bg-white">
       {/* CTA */}
@@ -31,20 +46,27 @@ export default function SiteFooter() {
           alt=""
           className="pointer-events-none absolute top-12 right-0 hidden w-[52%] max-w-[755px] md:block lg:top-[144px]"
         />
-        <div className="relative">
-          <h2 className="text-[clamp(1.625rem,2.5vw,2.1875rem)] leading-[1.2] font-bold text-navy">
-            Ready to Work Together?
-          </h2>
-          <p className="mt-4 max-w-[566px] text-[clamp(1.125rem,1.7vw,1.5rem)] leading-normal font-light text-black lg:mt-7">
-            We work with those ready to think deeper, move cleaner, and lead
-            with presence, not pressure.
-          </p>
-          <p className="mt-5 text-[clamp(1.25rem,2.1vw,1.875rem)] font-medium text-gold lg:mt-10">
-            Apply to work with us!
-          </p>
-          <CtaPill as="a" href="#book" variant="goldOutline" className="mt-6 lg:mt-[20px]">
-            Book a Strategic Conversation
-          </CtaPill>
+        <div className="relative lg:flex lg:items-start lg:justify-between lg:gap-10">
+          <div>
+            <h2 className="text-[clamp(1.625rem,2.5vw,2.1875rem)] leading-[1.2] font-bold text-navy">
+              Ready to Work Together?
+            </h2>
+            <p className="mt-4 max-w-[566px] text-[clamp(1.125rem,1.7vw,1.5rem)] leading-normal font-light text-black lg:mt-7">
+              {body ??
+                "We work with those ready to think deeper, move cleaner, and lead with presence, not pressure."}
+            </p>
+            {tagline !== null && (
+              <p className="mt-5 text-[clamp(1.25rem,2.1vw,1.875rem)] font-medium text-gold lg:mt-10">
+                {tagline ?? "Apply to work with us!"}
+              </p>
+            )}
+            {buttons ?? (
+              <CtaPill as="a" href="#book" variant="goldOutline" className="mt-6 lg:mt-[20px]">
+                Book a Strategic Conversation
+              </CtaPill>
+            )}
+          </div>
+          {aside && <div className="mt-8 lg:mt-2 lg:shrink-0">{aside}</div>}
         </div>
       </div>
 
@@ -77,8 +99,8 @@ export default function SiteFooter() {
               <FooterColumn heading="COMPANY">
                 <ul className="mt-2 text-[14px] leading-[35px] font-medium tracking-[0.2px] text-ink">
                   {COMPANY.map((item) => (
-                    <li key={item}>
-                      <a href="#" className="transition-colors hover:text-gold">{item}</a>
+                    <li key={item.label}>
+                      <Link to={item.to} className="transition-colors hover:text-gold">{item.label}</Link>
                     </li>
                   ))}
                 </ul>
@@ -86,8 +108,8 @@ export default function SiteFooter() {
               <FooterColumn heading="FRAMEWORKS">
                 <ul className="mt-2 max-w-[175px] text-[14px] leading-[35px] font-medium tracking-[0.2px] text-ink">
                   {FRAMEWORKS.map((item) => (
-                    <li key={item}>
-                      <a href="#" className="transition-colors hover:text-gold">{item}</a>
+                    <li key={item.label}>
+                      <Link to={item.to} className="transition-colors hover:text-gold">{item.label}</Link>
                     </li>
                   ))}
                 </ul>
@@ -101,7 +123,7 @@ export default function SiteFooter() {
                   ))}
                 </div>
                 <p className="mt-[18px] text-[14px] leading-[35px] font-medium tracking-[0.2px] text-ink">
-                  Contact
+                  <Link to="/contact" className="transition-colors hover:text-gold">Contact</Link>
                 </p>
               </FooterColumn>
             </div>

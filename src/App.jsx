@@ -6,6 +6,8 @@ import WebinarConfirmationPage from "./pages/WebinarConfirmationPage";
 import ContactPage from "./pages/ContactPage";
 import FrameworksPage from "./pages/FrameworksPage";
 import ProgramsPage from "./pages/ProgramsPage";
+import VeilPage from "./pages/VeilPage";
+import InsightsPage from "./pages/InsightsPage";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/frameworks" element={<FrameworksPage />} />
         <Route path="/programs" element={<ProgramsPage />} />
+        <Route path="/veil" element={<VeilPage />} />
+        <Route path="/insights" element={<InsightsPage />} />
       </Routes>
     </BrowserRouter>
   );
