@@ -66,21 +66,30 @@ export default function AlaNexusSection() {
           {CARDS.map((card) => (
             <div
               key={card.key}
-              className="relative min-h-[240px] overflow-hidden rounded-[4px] bg-gradient-to-b from-navy to-blue p-6 lg:min-h-[280px] lg:p-[38px]"
+              className="relative min-h-[240px] rounded-[4px] bg-gradient-to-b from-navy to-blue lg:min-h-[280px]"
             >
-              <img
-                src={card.pattern}
-                alt=""
-                className={`pointer-events-none absolute h-auto ${card.patternClass}`}
-              />
-              <Sparkle className="pointer-events-none absolute top-4 right-4 size-[22px] text-white/70 lg:size-[28px]" />
-              <p className="relative text-[clamp(1.25rem,1.7vw,1.5rem)] font-bold text-white">
-                {card.title}
-              </p>
-              <p className="relative mt-3 max-w-[258px] text-[clamp(1.0625rem,1.4vw,1.3125rem)] leading-normal text-white">
-                {card.body}
-              </p>
-              <ArrowRight className="relative mt-8 w-[40px] text-white lg:mt-11" />
+              {/* Clips the decorative pattern to the card's rounded corners
+                  without clipping the corner sparkle below, which must
+                  bleed outside the card. */}
+              <div className="absolute inset-0 overflow-hidden rounded-[4px]">
+                <img
+                  src={card.pattern}
+                  alt=""
+                  className={`pointer-events-none absolute h-auto ${card.patternClass}`}
+                />
+              </div>
+              {/* Straddles the top-right corner (centered on the corner
+                  point, half outside the card) — see LeaveWith.jsx. */}
+              <Sparkle className="pointer-events-none absolute -top-[11px] -right-[11px] z-10 size-[22px] text-white lg:-top-[14px] lg:-right-[14px] lg:size-[28px]" />
+              <div className="relative p-6 lg:p-[38px]">
+                <p className="text-[clamp(1.25rem,1.7vw,1.5rem)] font-bold text-white">
+                  {card.title}
+                </p>
+                <p className="mt-3 max-w-[258px] text-[clamp(1.0625rem,1.4vw,1.3125rem)] leading-normal text-white">
+                  {card.body}
+                </p>
+                <ArrowRight className="mt-8 w-[40px] text-white lg:mt-11" />
+              </div>
             </div>
           ))}
         </div>
