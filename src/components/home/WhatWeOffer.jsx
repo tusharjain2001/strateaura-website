@@ -13,8 +13,8 @@ const BENEFITS = [
 export default function WhatWeOffer() {
   return (
     <section className="relative h-[859px] w-[1440px]">
-      {/* soft golden wash */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#c99400]/25 to-[#fffdf7]" />
+      {/* golden wash — white at top fading to golden at the bottom, 30% (Figma) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#fffdf7] to-[#c99400] opacity-30" />
       {/* golden sparkle on the left edge (only the right half is on-screen) */}
       <img
         src={leftSparkle}
