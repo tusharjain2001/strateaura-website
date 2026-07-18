@@ -51,7 +51,7 @@ export default function ProgramDetailSection({
         {/* Copy column */}
         <div
           className={`relative z-10 flex flex-col justify-center ${
-            imageOnRight ? "lg:order-1 lg:pr-12" : "lg:order-2 lg:pl-12"
+            imageOnRight ? "lg:order-1 lg:pr-16" : "lg:order-2 lg:pl-16"
           } lg:max-w-[520px]`}
         >
           <h2
@@ -97,8 +97,10 @@ export default function ProgramDetailSection({
           </div>
 
           <div
-            className={`relative mt-6 rounded-[4px] p-6 sm:p-8 lg:absolute lg:bottom-0 lg:mt-0 lg:w-[88%] ${
-              imageOnRight ? "lg:-left-[16%]" : "lg:-right-[16%]"
+            className={`relative mt-6 rounded-[4px] p-6 sm:p-8 lg:absolute lg:top-[56%] lg:bottom-[10%] lg:mt-0 ${
+              imageOnRight
+                ? "lg:-left-10 lg:right-[25%]"
+                : "lg:-right-10 lg:left-[25%]"
             } ${t.overlay}`}
           >
             <p className="text-[clamp(1.125rem,1.6vw,1.375rem)] font-bold text-white">
