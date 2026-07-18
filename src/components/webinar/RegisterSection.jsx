@@ -39,15 +39,20 @@ export default function RegisterSection() {
       className="scroll-mt-[80px] bg-[rgba(249,222,146,0.6)] lg:scroll-mt-[120px]"
     >
       <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 items-end gap-x-10 px-5 sm:px-8 lg:min-h-[min(923px,calc(100svh-120px))] lg:grid-cols-[1fr_644px] lg:px-[40px] xl:gap-x-[83px] xl:pr-[76px]">
-        {/* Arch-shaped photo, flush with the section's bottom edge */}
-        <img
-          src={archPhoto}
-          alt="Dr. Suhair Hamouri with the VEIL book"
-          className="order-2 mx-auto mt-10 w-[260px] max-w-full rounded-t-full object-cover sm:w-[320px] lg:order-1 lg:mt-[91px] lg:h-[min(832px,calc(100svh-208px))] lg:w-full lg:max-w-[597px]"
-        />
+        {/* Arch-shaped photo. Same anchoring as Figma at any section height:
+            top edge 91px into the section, bottom flush. The absolute img
+            inside a stretched wrapper keeps the photo's intrinsic size from
+            inflating the grid row. */}
+        <div className="order-2 lg:order-1 lg:relative lg:w-full lg:max-w-[597px] lg:self-stretch">
+          <img
+            src={archPhoto}
+            alt="Dr. Suhair Hamouri with the VEIL book"
+            className="mx-auto mt-10 w-[260px] max-w-full rounded-t-full object-cover sm:w-[320px] lg:absolute lg:inset-x-0 lg:top-[91px] lg:mt-0 lg:h-[calc(100%-91px)] lg:w-full"
+          />
+        </div>
 
         {/* Registration card */}
-        <div className="order-1 my-10 w-full rounded-[8px] bg-white px-6 py-8 sm:px-10 lg:order-2 lg:my-[clamp(24px,calc((100svh-830px)/2),107px)] lg:px-[42px] lg:py-[47px]">
+        <div className="order-1 my-10 w-full rounded-[8px] bg-white px-6 py-8 sm:px-10 lg:order-2 lg:my-[clamp(24px,calc((100svh-850px)/2),107px)] lg:px-[42px] lg:py-[47px] [@media(max-height:920px)]:lg:py-8">
           <h2 className="text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.2] font-bold text-gold">
             Contact Us
           </h2>
