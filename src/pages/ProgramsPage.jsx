@@ -8,13 +8,14 @@ import SiteFooter from "../components/layout/SiteFooter";
 import wellnessPhoto from "../assets/programs/wellness-photo.jpg";
 import higheredPhoto from "../assets/programs/highered-photo.jpg";
 import integratedMarketingPhoto from "../assets/programs/integrated-marketing-photo.png";
-import digitalMarketingPhoto from "../assets/programs/digital-marketing-photo.jpg";
+import digitalMarketingPhoto from "../assets/programs/digital-marketing-photo.png";
 import digitalTransformationPhoto from "../assets/programs/digital-transformation-photo.jpg";
 import wellnessBox from "../assets/programs/wellnesscentricyellowbox.svg";
 import wellnessMaskedPhoto from "../assets/programs/wellnesscentricmaskedimagerightside.png";
 import higheredMaskedPhoto from "../assets/programs/highered-photo.png";
 import higheredBox from "../assets/programs/strategicmarketingbluebox.svg";
 import integratedBox from "../assets/programs/integratedyellowbox.svg";
+import digitalMarketingBox from "../assets/programs/digitalbuebox.svg";
 
 const PROGRAM_DETAILS = [
   {
@@ -106,7 +107,12 @@ const PROGRAM_DETAILS = [
     photo: digitalMarketingPhoto,
     photoAlt: "Dr. Suhair Hamouri presenting on digital marketing strategy",
     photoPosition: "center 20%",
-    heading: "Digital Marketing with Purpose: Navigating AI, Data, and Strategy for Impact",
+    maskedPhoto: digitalMarketingPhoto,
+    heading: [
+      "Digital Marketing with",
+      "Purpose: Navigating AI, Data,",
+      "and Strategy for Impact",
+    ],
     eyebrow: "Don't just go digital — go intentional.",
     paragraph:
       "This course bridges the gap between marketing technology and strategic thinking. You'll learn how to appreciate AI, analytics, and digital platforms with clarity, purpose, and ethical precision to create marketing that moves people, and results.",
@@ -116,6 +122,7 @@ const PROGRAM_DETAILS = [
       "Build digital campaigns that reflect your values and purpose",
       "Measure what matters - not just what's easy to track",
     ],
+    boxImage: digitalMarketingBox,
     suitedFor:
       "Marketers, digital teams, and business owners who want smarter, sharper, and more human-centered digital strategies.",
     ctaLabel: "Join The Next Cohort",
