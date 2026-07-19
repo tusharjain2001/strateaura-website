@@ -1,12 +1,28 @@
 import CtaPill from "../ui/CtaPill";
-import speakerPhoto from "../../assets/frameworks/mean-speaker-photo.jpg";
+import useCanvasScale from "../../hooks/useCanvasScale";
+import speakerPhoto from "../../assets/frameworks/mean-speaker-photo.png";
 
 export default function WhatFrameworksMean() {
+  // The section is designed at Figma's 1440px width. Up to 1440 it reflows
+  // responsively; beyond 1440 we zoom the whole 1440 layout up so it fills the
+  // viewport exactly like Figma (instead of sitting centred with side gaps).
+  const scale = Math.max(1, useCanvasScale());
+  const zoomed = scale > 1;
+
   return (
-    <section className="relative overflow-hidden bg-[linear-gradient(77deg,rgba(247,244,238,0)_6%,#e8d9ae_94%)]">
-      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col lg:min-h-[776px] lg:flex-row">
-        {/* Arch photo — anchored to this column's box, not the viewport */}
+    <section className="relative overflow-hidden bg-[linear-gradient(180deg,rgba(247,244,238,0)_0%,#e8d9ae_100%)]">
+      <div
+        style={zoomed ? { zoom: scale } : undefined}
+        className={`relative flex flex-col lg:min-h-[776px] lg:flex-row ${
+          zoomed ? "w-[1440px]" : "mx-auto w-full max-w-[1440px]"
+        }`}
+      >
+        {/* Arch photo — sits flush to the container's left edge (which is the
+            screen edge, since the section fills the width at every size). */}
         <div className="relative h-[280px] shrink-0 sm:h-[380px] lg:h-auto lg:w-[44.1%] lg:self-stretch">
+          {/* Gold panel behind the photo (Figma "Vector 15"): shows through the
+              arch's rounded top-left corner as a gold arc/crescent. */}
+          <div className="pointer-events-none absolute left-0 top-0 h-[45%] w-1/2 bg-gold" />
           <img
             src={speakerPhoto}
             alt="A StrateAura facilitator leading a live workshop session"
@@ -30,14 +46,9 @@ export default function WhatFrameworksMean() {
           </p>
         </div>
 
-        {/* Gold quote card — in Figma (node 1434:2902, x:554 w:757 within the
-            1440-wide/776-tall section) it overlaps the photo column, whose
-            right edge sits at x:635. Below lg it stays in normal stacked
-            flow; at lg+ it's pulled out of the copy column's padding and
-            positioned by percentage of the row so the ~81px overlap holds
-            at any width up to 1440. */}
-        {/* top nudged from Figma's 53.09% to clear the intro paragraph's last
-            line — Inter wraps ~18px taller than the design's Acumin Pro. */}
+        {/* Gold quote card — Figma node 1434:2902 (x:554 w:757 within the
+            1440-wide/776-tall section): overlaps the photo column (right edge
+            x:635) and ends at 91% (x:1311). Below lg it stacks in normal flow. */}
         <div className="mx-5 mb-10 rounded-[4px] bg-gold px-6 py-7 sm:mx-8 sm:px-8 sm:py-8 lg:absolute lg:top-[56.6%] lg:left-[38.47%] lg:z-10 lg:mx-0 lg:mb-0 lg:w-[52.57%] lg:px-[56px] lg:py-[52px]">
           <p className="text-[clamp(1.0625rem,1.6vw,1.4375rem)] leading-normal text-white">
             These models weren&rsquo;t created to &ldquo;fix&rdquo; your
