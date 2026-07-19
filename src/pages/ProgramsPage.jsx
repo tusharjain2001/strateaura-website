@@ -9,13 +9,14 @@ import wellnessPhoto from "../assets/programs/wellness-photo.jpg";
 import higheredPhoto from "../assets/programs/highered-photo.jpg";
 import integratedMarketingPhoto from "../assets/programs/integrated-marketing-photo.png";
 import digitalMarketingPhoto from "../assets/programs/digital-marketing-photo.png";
-import digitalTransformationPhoto from "../assets/programs/digital-transformation-photo.jpg";
+import digitalTransformationPhoto from "../assets/programs/digital-transformation-photo.png";
 import wellnessBox from "../assets/programs/wellnesscentricyellowbox.svg";
 import wellnessMaskedPhoto from "../assets/programs/wellnesscentricmaskedimagerightside.png";
 import higheredMaskedPhoto from "../assets/programs/highered-photo.png";
 import higheredBox from "../assets/programs/strategicmarketingbluebox.svg";
 import integratedBox from "../assets/programs/integratedyellowbox.svg";
 import digitalMarketingBox from "../assets/programs/digitalbuebox.svg";
+import digitalTransformationBox from "../assets/programs/marketingyellowbox.svg";
 
 const PROGRAM_DETAILS = [
   {
@@ -134,8 +135,13 @@ const PROGRAM_DETAILS = [
     photo: digitalTransformationPhoto,
     photoAlt: "Dr. Suhair Hamouri with colleagues at a marketing conference",
     photoPosition: "center 15%",
-    heading:
-      "Marketing in the Age of Digital Transformation: Agility, Innovation, and Customer-Centricity",
+    maskedPhoto: digitalTransformationPhoto,
+    heading: [
+      "Marketing in the Age of Digital",
+      "Transformation: Agility,",
+      "Innovation, and Customer-",
+      "Centricity",
+    ],
     eyebrow: "The market is evolving – your strategy should too.",
     paragraph:
       "Designed for forward-thinking leaders, this course helps you apply agility, innovation, and customer-centric thinking to your marketing strategy. Learn how to adapt faster, think creatively, and lead with insight in an era defined by change.",
@@ -145,6 +151,7 @@ const PROGRAM_DETAILS = [
       "Lead digital transformation with clarity and intention",
       "Use emerging tech as a tool for strategy, not distraction",
     ],
+    boxImage: digitalTransformationBox,
     suitedFor:
       "Executives, innovation teams, and marketing heads navigating transformation in competitive environments.",
     ctaLabel: "Book Your Seat",
