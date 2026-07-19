@@ -48,7 +48,7 @@ const PHASES = [
 
 function SubcardList({ items }) {
   return (
-    <ul className="relative z-10 mt-4 list-disc space-y-1 pl-5 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-white">
+    <ul className="relative z-10 mt-4 list-[square] space-y-1 pl-5 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-white">
       {items.map((item) => (
         <li key={item}>{item}</li>
       ))}
@@ -74,9 +74,13 @@ export default function TwoPathways() {
           {/* UNVEIL Institutional */}
           <div className="rounded-xl bg-white p-6 shadow-[0_0_27px_-11px_#b3902f] sm:p-8 lg:p-12">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
-              <div>
-                <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold">
-                  UNVEIL - The Institutional Cohort Program
+              {/* Heading wraps on Figma's 3 lines; the CTA sits at the card's
+                  bottom (justify-between against the stretched row). */}
+              <div className="lg:flex lg:flex-col lg:justify-between lg:self-stretch">
+                <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold lg:[&>span]:block lg:[&>span]:whitespace-nowrap">
+                  <span>UNVEIL - </span>
+                  <span>The Institutional </span>
+                  <span>Cohort Program</span>
                 </h3>
                 <div className="mt-6">
                   <CtaPill as="a" href="/contact" variant="navyOutline" size="md">
@@ -100,7 +104,7 @@ export default function TwoPathways() {
                   <p className="text-[clamp(1.125rem,1.6vw,1.5rem)] font-bold text-navy-2">
                     KHDA Attested Certificate of Completion.
                   </p>
-                  <ul className="mt-2 list-disc space-y-1 pl-5 text-[clamp(1rem,1.4vw,1.25rem)] text-navy-2">
+                  <ul className="mt-2 list-[square] space-y-1 pl-5 text-[clamp(1rem,1.4vw,1.25rem)] text-navy-2">
                     <li>Institutions sponsoring women in leadership roles</li>
                     <li>Director level and above</li>
                   </ul>
@@ -112,11 +116,13 @@ export default function TwoPathways() {
           {/* Online Pathway */}
           <div className="rounded-xl border border-gold-light bg-white p-6 shadow-[0_0_27px_-11px_#b3902f] sm:p-8 lg:p-12">
             <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
-              <div>
-                <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold">
-                  The Online Pathway - MAP, DECODE, and UNVEIL
+              <div className="lg:flex lg:flex-col lg:justify-between lg:self-stretch">
+                <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold lg:[&>span]:block lg:[&>span]:whitespace-nowrap">
+                  <span>The Online Pathway - </span>
+                  <span>MAP, DECODE, and </span>
+                  <span>UNVEIL</span>
                 </h3>
-                <div className="mt-6">
+                <div className="mt-6 lg:mt-10">
                   <CtaPill as="a" href="/webinar" variant="navyOutline" size="md">
                     Register for the Free Webinar
                   </CtaPill>
@@ -138,22 +144,27 @@ export default function TwoPathways() {
               {PHASES.map((phase, i) => (
                 <div
                   key={i}
-                  className="relative min-h-[190px] overflow-hidden rounded-[4px] bg-gradient-to-b from-navy to-blue p-6"
+                  className="relative min-h-[190px] rounded-[4px] bg-gradient-to-b from-navy to-blue p-6"
                 >
+                  {/* Clip wrapper keeps the deco inside the rounded card
+                      without clipping the corner sparkle, which straddles
+                      the corner half-outside. */}
+                  <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[4px]">
+                    <img
+                      src={phase.deco}
+                      alt=""
+                      className="absolute right-0 bottom-2 w-[62%] opacity-80"
+                    />
+                  </div>
                   <img
                     src={subcardSparkle}
                     alt=""
-                    className="pointer-events-none absolute -top-[14px] -right-[14px] size-[28px]"
+                    className="pointer-events-none absolute -top-[14px] -right-[14px] z-10 size-[28px]"
                   />
                   <p className="relative z-10 text-[clamp(1.25rem,1.8vw,1.5rem)] font-bold text-white">
                     {phase.title}
                   </p>
                   <SubcardList items={phase.items} />
-                  <img
-                    src={phase.deco}
-                    alt=""
-                    className="pointer-events-none absolute right-0 bottom-2 w-[62%] opacity-80"
-                  />
                 </div>
               ))}
             </div>

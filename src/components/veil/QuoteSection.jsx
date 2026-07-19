@@ -47,8 +47,10 @@ export default function QuoteSection() {
       {/* Desktop: photo large and dominant on the right (~64% width, full
           section height); the quote bubble overlaps its left portion,
           stacked above it, tail pointing right into the photo. Percentages
-          are the exact Figma node geometry (section 1440x816) converted to
-          fractions so the composition scales with the section. */}
+          are the exact Figma node geometry (section 1440x816). The copy uses
+          FORCED line breaks matching the Figma reference word-for-word, with
+          the font scaled to the container (23px at the 1440 cap) so the
+          wraps never drift at other widths. */}
       <div className="relative mx-auto hidden w-full max-w-[1440px] lg:block lg:h-[816px]">
         <div className="absolute top-[9.56%] left-[32.36%] h-[80.88%] w-[63.96%] overflow-hidden rounded-[4px]">
           {/* Source JPG is baked in mirrored — flip it back so the venue
@@ -61,6 +63,9 @@ export default function QuoteSection() {
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-black/70 to-transparent" />
         </div>
 
+        {/* Bubble box: the svg includes the tail — panel is its left 81.4%
+            once flipped (Figma panel 105->845, tail poking right beyond).
+            Text is confined to the panel: Figma text spans x148->800. */}
         <div className="absolute top-[23.04%] left-[7.29%] z-10 h-[59.56%] w-[63.89%]">
           {/* Stretchable bubble panel; its tail sits on the shape's left
               side in the source asset, so flip it horizontally to point
@@ -70,8 +75,28 @@ export default function QuoteSection() {
             alt=""
             className="pointer-events-none absolute inset-0 size-full -scale-x-100"
           />
-          <div className="relative flex h-full items-center py-[9%] pr-[25%] pl-[5%]">
-            <QuoteText />
+          <div className="relative flex h-full items-center pr-[23.5%] pl-[4.7%]">
+            <p className="text-[min(1.6vw,23px)] leading-[1.48] text-white [&>span]:block [&>span]:whitespace-nowrap">
+              <span>You are good at what you do. Possibly excellent.</span>
+              <span>The people around you rely on you - and you deliver,</span>
+              <span>consistently, in ways that most of them do not fully see</span>
+              <span>
+                or understand. <strong className="font-bold">But your body noticed.</strong>{" "}
+                The tiredness
+              </span>
+              <span>that sleep does not fully fix. The sharpness in your</span>
+              <span>thinking that used to be effortless. The moment at the</span>
+              <span>end of a long day when someone asks how you are -</span>
+              <span>and you genuinely do not know what to say. You have</span>
+              <span>told yourself this is temporary. That you will slow down</span>
+              <span>
+                when things settle.{" "}
+                <strong className="font-bold">VEIL was built for this moment.</strong>
+              </span>
+              <span>
+                <strong className="font-bold">Before a crisis forces your hand.</strong>
+              </span>
+            </p>
           </div>
         </div>
       </div>

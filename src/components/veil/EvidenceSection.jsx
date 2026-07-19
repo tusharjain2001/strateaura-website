@@ -96,6 +96,10 @@ export default function EvidenceSection() {
             />
           </div>
           <img src={scallopBorder} alt="" className="pointer-events-none absolute inset-0 size-full" />
+          {/* Solid gold quarter-disc filling the scallop notch at the
+              photo's visible top-right corner (flat top+left edges, curve
+              sweeping bottom-right), per the Figma reference. */}
+          <div className="pointer-events-none absolute top-0 left-[78.5%] h-[31.9%] w-[21.8%] rounded-br-full bg-gold" />
         </div>
 
         <EvidenceCard className="absolute top-[50.05%] left-[38.68%] w-[49.58%] max-w-[560px] p-10" />

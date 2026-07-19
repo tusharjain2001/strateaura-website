@@ -41,8 +41,12 @@ export default function SiteFooter({ body, tagline, buttons, aside }) {
     <footer className="relative overflow-hidden bg-white">
       {/* CTA */}
       <div className="relative mx-auto w-full max-w-[1440px] px-5 pt-14 sm:px-8 lg:pt-[153px] xl:px-[116px]">
-        {/* Landscape aura fan (753x278) anchored to the right of the CTA. */}
-        <div className="pointer-events-none absolute top-12 right-0 hidden aspect-[755/277] w-[52%] max-w-[755px] md:block lg:top-[144px]">
+        {/* Landscape aura fan (753x278) anchored to the right of the CTA.
+            When a contact aside is shown (VEIL page), the fan sits lower so
+            the contact block reads clear above the dots, per Figma. */}
+        <div
+          className={`pointer-events-none absolute top-12 right-0 hidden aspect-[755/277] w-[52%] max-w-[755px] md:block ${aside ? "lg:top-[230px]" : "lg:top-[144px]"}`}
+        >
           <img
             src={ctaAura}
             alt=""
