@@ -10,6 +10,8 @@ import higheredPhoto from "../assets/programs/highered-photo.jpg";
 import integratedMarketingPhoto from "../assets/programs/integrated-marketing-photo.jpg";
 import digitalMarketingPhoto from "../assets/programs/digital-marketing-photo.jpg";
 import digitalTransformationPhoto from "../assets/programs/digital-transformation-photo.jpg";
+import wellnessBox from "../assets/programs/wellnesscentricyellowbox.svg";
+import wellnessMaskedPhoto from "../assets/programs/wellnesscentricmaskedimagerightside.png";
 
 const PROGRAM_DETAILS = [
   {
@@ -19,7 +21,12 @@ const PROGRAM_DETAILS = [
     photo: wellnessPhoto,
     photoAlt: "StrateAura team at a Wellness-Centric Leadership workshop",
     photoPosition: "center 20%",
-    heading: "Wellness-Centric Leadership: The Integrative Approach to Sustainable Performance",
+    maskedPhoto: wellnessMaskedPhoto,
+    heading: [
+      "Wellness-Centric Leadership:",
+      "The Integrative Approach to",
+      "Sustainable Performance",
+    ],
     eyebrow: "Because burned-out leaders can't build lasting success.",
     paragraph:
       "This workshop blends leadership insight with wellness education to help leaders build resilience from the inside out. Grounded in integrative principles, you'll learn how to optimize energy, manage stress, and lead from a place of strength and sustainability.",
@@ -29,6 +36,7 @@ const PROGRAM_DETAILS = [
       "Build leadership presence that is calm, credible, and connected",
       "Create rituals that support you long after the workshop ends",
     ],
+    boxImage: wellnessBox,
     suitedFor:
       "Entrepreneurs, managers, and executives who want to lead powerfully - without compromising their health or humanity.",
     ctaLabel: "Reserve Your Spot",
