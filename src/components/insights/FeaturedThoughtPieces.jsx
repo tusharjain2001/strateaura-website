@@ -1,7 +1,9 @@
 import { ArrowRight } from "../ui/Icons";
 import thoughtDecor1 from "../../assets/insights/thought-decor-1.png";
 import thoughtDecor2 from "../../assets/insights/thought-decor-2.png";
-import thoughtDecor3 from "../../assets/insights/thought-decor-3.png";
+// Card 3's Figma decor node is "Group 69" — the same circle-cluster aura the
+// webinar cards use (the insights export of it shipped as a blank PNG).
+import thoughtDecor3 from "../../assets/webinar/card-aura-1.svg";
 import thoughtDecor4 from "../../assets/insights/thought-decor-4.png";
 import seamSparkle from "../../assets/insights/thought-seam-sparkle.png";
 
@@ -20,6 +22,7 @@ const CARDS = [
     title: "Why Strategy is the Real Self-Care.",
     desc: "Leadership, energy, and the truth behind VEIL™.",
     decor: thoughtDecor3,
+    decorClass: "aspect-[238.6/87.7] w-[78%] opacity-70",
   },
   {
     title: "The AI Dilemma in Higher Ed Marketing.",
@@ -53,7 +56,7 @@ export default function FeaturedThoughtPieces() {
               <img
                 src={card.decor}
                 alt=""
-                className="pointer-events-none absolute right-0 bottom-0 -z-10 max-w-[55%] opacity-10"
+                className={`pointer-events-none absolute right-0 bottom-0 -z-10 ${card.decorClass ?? "max-w-[55%] opacity-10"}`}
               />
               <p className="relative z-10 text-[22px] leading-normal font-bold text-white lg:text-[24px]">
                 {card.title}

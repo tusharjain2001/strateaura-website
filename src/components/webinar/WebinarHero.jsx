@@ -20,9 +20,11 @@ export default function WebinarHero({ onReserve }) {
         <h1 className="max-w-[760px] text-[clamp(2rem,4.5vw,3rem)] leading-[1.2] font-bold text-white">
           Lead Without Losing Yourself
         </h1>
-        <p className="mt-4 max-w-[595px] text-[clamp(1.0625rem,1.7vw,1.25rem)] leading-normal text-white lg:mt-5">
-          A free live webinar for women in leadership and high-demand
-          professional roles. Hosted by Dr. Suhair Hamouri — Founder, VEIL™
+        {/* Figma's exact 2-line wrap, forced (font scales with viewport so
+            the breaks hold up to the 1440 cap). */}
+        <p className="mt-4 text-[clamp(1.0625rem,1.39vw,1.25rem)] leading-normal text-white lg:mt-5 lg:[&>span]:block lg:[&>span]:whitespace-nowrap">
+          <span>A free live webinar for women in leadership and high-demand </span>
+          <span>professional roles. Hosted by Dr. Suhair Hamouri — Founder, VEIL™</span>
         </p>
         <CtaPill onClick={onReserve} variant="creamFilled" className="mt-8 lg:mt-12">
           Reserve My Spot

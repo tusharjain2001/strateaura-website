@@ -34,7 +34,8 @@ export default function BookFeature() {
             for decision-makers who want more than metrics, and are ready to
             stop outsourcing strategic thinking.
           </p>
-          <div className="mt-8 flex flex-wrap gap-5 lg:mt-11">
+          {/* Figma stacks the two CTAs vertically, left-aligned, ~36px gap. */}
+          <div className="mt-8 flex flex-col items-start gap-6 lg:mt-11 lg:gap-9">
             <CtaPill as="a" href="#preview-chapter" variant="goldOutline">
               Download a Preview Chapter
             </CtaPill>

@@ -1,4 +1,5 @@
 import CtaPill from "../ui/CtaPill";
+import { Sparkle } from "../ui/Icons";
 import voicesPhoto from "../../assets/insights/voices-photo.jpg";
 import voicesAccent from "../../assets/insights/voices-accent.png";
 
@@ -28,16 +29,26 @@ export default function VoicesAppearances() {
           <p className="mt-4 text-[clamp(1.125rem,1.6vw,1.4375rem)] leading-normal">
             Explore live clips and curated reflections from:
           </p>
-          <ul className="mt-4 list-disc space-y-1 pl-5 text-[clamp(1.0625rem,1.5vw,1.5rem)] leading-normal font-light">
-            <li>
-              <strong className="font-bold">Keynotes &amp; panel events</strong>{" "}
-              (GITEX, AMA Symposium, etc.)
+          {/* Figma marks each bullet with the site's 4-point sparkle glyph. */}
+          <ul className="mt-4 space-y-1 text-[clamp(1.0625rem,1.5vw,1.5rem)] leading-normal font-light">
+            <li className="flex items-start gap-3">
+              <Sparkle className="mt-[0.55em] size-[11px] shrink-0 text-white" />
+              <span>
+                <strong className="font-bold">Keynotes &amp; panel events</strong>{" "}
+                (GITEX, AMA Symposium, etc.)
+              </span>
             </li>
-            <li>
-              Podcast conversations on{" "}
-              <strong className="font-bold">modern leadership</strong>
+            <li className="flex items-start gap-3">
+              <Sparkle className="mt-[0.55em] size-[11px] shrink-0 text-white" />
+              <span>
+                Podcast conversations on{" "}
+                <strong className="font-bold">modern leadership</strong>
+              </span>
             </li>
-            <li>Upcoming public dialogues and future events</li>
+            <li className="flex items-start gap-3">
+              <Sparkle className="mt-[0.55em] size-[11px] shrink-0 text-white" />
+              <span>Upcoming public dialogues and future events</span>
+            </li>
           </ul>
           <p className="mt-4 text-[clamp(1.0625rem,1.5vw,1.5rem)] leading-normal font-light">
             When insight meets voice, transformation follows.
