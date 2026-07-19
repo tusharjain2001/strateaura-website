@@ -36,7 +36,9 @@ export default function WhatFrameworksMean() {
             flow; at lg+ it's pulled out of the copy column's padding and
             positioned by percentage of the row so the ~81px overlap holds
             at any width up to 1440. */}
-        <div className="mx-5 mb-10 rounded-[4px] bg-gold px-6 py-7 sm:mx-8 sm:px-8 sm:py-8 lg:absolute lg:top-[53.09%] lg:left-[38.47%] lg:z-10 lg:mx-0 lg:mb-0 lg:w-[52.57%] lg:px-[56px] lg:py-[52px]">
+        {/* top nudged from Figma's 53.09% to clear the intro paragraph's last
+            line — Inter wraps ~18px taller than the design's Acumin Pro. */}
+        <div className="mx-5 mb-10 rounded-[4px] bg-gold px-6 py-7 sm:mx-8 sm:px-8 sm:py-8 lg:absolute lg:top-[56.6%] lg:left-[38.47%] lg:z-10 lg:mx-0 lg:mb-0 lg:w-[52.57%] lg:px-[56px] lg:py-[52px]">
           <p className="text-[clamp(1.0625rem,1.6vw,1.4375rem)] leading-normal text-white">
             These models weren&rsquo;t created to &ldquo;fix&rdquo; your
             leadership.{" "}

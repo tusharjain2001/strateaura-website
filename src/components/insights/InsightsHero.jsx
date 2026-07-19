@@ -9,7 +9,7 @@ export default function InsightsHero() {
       <img
         src={auraTrail}
         alt=""
-        className="pointer-events-none absolute bottom-0 left-1/2 h-[45%] w-[90%] max-w-[1162px] -translate-x-1/2 object-contain object-bottom opacity-90"
+        className="pointer-events-none absolute bottom-0 left-1/2 h-[45%] w-[90%] max-w-[1162px] -translate-x-1/2 object-contain object-bottom opacity-90 mix-blend-multiply"
       />
 
       <div className="relative mx-auto flex w-full max-w-[1440px] flex-col items-center px-5 py-16 text-center sm:px-8 lg:py-24 xl:px-[95px]">

@@ -21,7 +21,7 @@ export default function VoicesAppearances() {
         </div>
 
         {/* Card — overlaps the photo's bottom-right corner on desktop */}
-        <div className="relative z-10 mx-auto -mt-10 w-[calc(100%-40px)] max-w-[700px] rounded-[4px] bg-gradient-to-b from-navy to-blue px-8 py-10 text-white sm:px-10 lg:absolute lg:top-[338px] lg:left-[568px] lg:mx-0 lg:mt-0 lg:h-[523px] lg:w-[795px] lg:max-w-none lg:px-[70px] lg:py-[76px]">
+        <div className="relative z-10 mx-auto -mt-10 w-[calc(100%-40px)] max-w-[700px] rounded-[4px] bg-gradient-to-b from-navy to-blue px-8 py-10 text-white sm:px-10 lg:absolute lg:top-[338px] lg:left-[39.44%] lg:mx-0 lg:mt-0 lg:min-h-[523px] lg:w-[55.21%] lg:max-w-none lg:px-[70px] lg:py-[76px]">
           <h2 className="text-[clamp(1.75rem,3.5vw,3.125rem)] leading-[1.2] font-bold">
             Voices &amp; Appearances
           </h2>

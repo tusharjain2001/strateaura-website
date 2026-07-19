@@ -36,10 +36,11 @@ export default function ConfirmationSection() {
       <div className="relative w-full max-w-[800px] rounded-[12px] border border-gold-light bg-gradient-to-b from-white to-gold-light lg:h-[550px]">
         {/* Decorative corner flourish, clipped to the card's rounded corner */}
         <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[12px]">
+          {/* Stretch-mode svg — both dimensions required (515x428 node box) */}
           <img
             src={cardCorner}
             alt=""
-            className="absolute right-[-1px] bottom-[-1px] w-[64%] max-w-[515px]"
+            className="absolute right-[-1px] bottom-[-1px] aspect-[515/428] w-[64%] max-w-[515px]"
           />
         </div>
 

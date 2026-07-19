@@ -1,5 +1,5 @@
 import CtaPill from "../ui/CtaPill";
-import veilLaurel from "../../assets/insights/veil-laurel.png";
+import veilLaurel from "../../assets/belief-laurel-right.svg";
 
 export default function ThinkingBehindVeil() {
   return (
@@ -9,7 +9,7 @@ export default function ThinkingBehindVeil() {
           <img
             src={veilLaurel}
             alt=""
-            className="pointer-events-none absolute -top-[24px] right-[-40px] hidden w-[45%] max-w-[567px] lg:block"
+            className="pointer-events-none absolute -top-[24px] right-[-40px] hidden aspect-[567/487] w-[45%] max-w-[567px] opacity-40 lg:block"
           />
 
           <p className="relative text-[20px] font-bold text-white/65 sm:text-[24px] lg:text-[32px]">

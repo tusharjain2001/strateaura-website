@@ -6,7 +6,9 @@ export default function SettingTheTone() {
     <section id="setting-the-tone" className="scroll-mt-[80px] bg-white lg:scroll-mt-[120px]">
       <div className="relative mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:h-[816px] lg:px-0 lg:py-0">
         {/* Photo — bleeds to the right edge of the container on desktop */}
-        <div className="relative overflow-hidden rounded-[4px] lg:absolute lg:top-[78px] lg:left-[466px] lg:h-[660px] lg:w-[921px]">
+        {/* Percentage geometry (466/1440, 921/1440) — fixed px overflowed the
+            page at container widths under 1387px (e.g. 1366 viewports). */}
+        <div className="relative overflow-hidden rounded-[4px] lg:absolute lg:top-[78px] lg:left-[32.36%] lg:aspect-[921/660] lg:h-auto lg:w-[63.96%]">
           <img
             src={settingTonePhoto}
             alt="Dr. Suhair Hamouri presenting on stage"
