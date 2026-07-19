@@ -12,6 +12,8 @@ import digitalMarketingPhoto from "../assets/programs/digital-marketing-photo.jp
 import digitalTransformationPhoto from "../assets/programs/digital-transformation-photo.jpg";
 import wellnessBox from "../assets/programs/wellnesscentricyellowbox.svg";
 import wellnessMaskedPhoto from "../assets/programs/wellnesscentricmaskedimagerightside.png";
+import higheredMaskedPhoto from "../assets/programs/highered-photo.png";
+import higheredBox from "../assets/programs/strategicmarketingbluebox.svg";
 
 const PROGRAM_DETAILS = [
   {
@@ -48,8 +50,13 @@ const PROGRAM_DETAILS = [
     photo: higheredPhoto,
     photoAlt: "Dr. Suhair Hamouri speaking at a higher education marketing conference",
     photoPosition: "center 15%",
-    heading:
-      "Strategic Marketing in Higher Education: Integration, Innovation, and AI-Powered Recruitment",
+    maskedPhoto: higheredMaskedPhoto,
+    heading: [
+      "Strategic Marketing in Higher",
+      "Education: Integration,",
+      "Innovation, and AI-Powered",
+      "Recruitment",
+    ],
     eyebrow: "Higher education deserves smarter, student-aware marketing.",
     paragraph:
       "This course equips university marketing teams with the tools to design integrated strategies that attract, engage, and convert students. From AI-powered recruitment to unified branding, it's a smart, strategic approach to education marketing in a fast-changing world.",
@@ -59,6 +66,7 @@ const PROGRAM_DETAILS = [
       "Build campaigns that resonate with today's digital-native students",
       "Create consistent, credible brand presence across all touchpoints",
     ],
+    boxImage: higheredBox,
     suitedFor:
       "This program is designed for higher education marketing teams, admission departments, and academic leadership seeking to lead in the completely dynamic world of marketing for higher education.",
     ctaLabel: "Bring This to your Campus",
