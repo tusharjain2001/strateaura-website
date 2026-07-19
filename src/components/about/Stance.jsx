@@ -5,10 +5,8 @@ import stance3 from "../../assets/about/stance-3.svg";
 
 const COLUMNS = [
   {
-    art: stance1,
+    art: stance3,
     left: "left-[102px]",
-    textLeft: "left-[201px]",
-    top: "top-[364px]",
     body: (
       <>
         At StrateAura™, we merge{" "}
@@ -23,8 +21,6 @@ const COLUMNS = [
   {
     art: stance2,
     left: "left-[513px]",
-    textLeft: "left-[610px]",
-    top: "top-[364px]",
     body: (
       <>
         We don't chase trends.{" "}
@@ -35,10 +31,8 @@ const COLUMNS = [
     ),
   },
   {
-    art: stance3,
+    art: stance1,
     left: "left-[920px]",
-    textLeft: "left-[1018px]",
-    top: "top-[377px]",
     body: (
       <>
         We don't offer generic playbooks.{" "}
@@ -76,12 +70,14 @@ export default function Stance() {
         />
       ))}
       {COLUMNS.map((col, i) => (
-        <p
+        <div
           key={`t${i}`}
-          className={`absolute ${col.top} ${col.textLeft} w-[219px] text-center text-[19px] leading-normal font-light text-white`}
+          className={`absolute top-[313px] ${col.left} flex h-[247px] w-[414px] items-center justify-center`}
         >
-          {col.body}
-        </p>
+          <p className="w-[219px] text-center text-[19px] leading-[1.3] font-light text-white">
+            {col.body}
+          </p>
+        </div>
       ))}
     </section>
   );

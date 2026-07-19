@@ -1,7 +1,7 @@
 import { ArrowRight } from "../ui/Icons";
 import sparkle from "../../assets/about/sparkle.svg";
 import cardAlign from "../../assets/about/card-align.svg";
-import cardWave from "../../assets/about/card-wave.svg";
+import cardWave from "../../assets/cta-aura.png";
 import cardIntegrity from "../../assets/about/card-integrity.svg";
 import cardEmpower from "../../assets/about/card-empower.svg";
 
@@ -58,7 +58,7 @@ export default function CoreValues() {
   return (
     <section className="relative h-[916px] w-[1440px] overflow-hidden">
       {/* golden wash */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#c99400] to-[#fffdf7] opacity-30" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#fffdf7] to-[#c99400] opacity-30" />
 
       <h2 className="absolute top-[172px] left-[125px] w-[327px] text-[35px] font-bold text-navy">
         Our Core Values

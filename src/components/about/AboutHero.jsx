@@ -1,5 +1,5 @@
 import hero from "../../assets/about/hero.png";
-import heroEllipses from "../../assets/about/hero-ellipses.svg";
+import heroEllipses from "../../assets/about/hero-ellipses.png";
 import badge from "../../assets/about/underline.svg";
 import whyArc from "../../assets/about/why-arc.svg";
 
@@ -43,10 +43,10 @@ export default function AboutHero() {
         alt=""
         className="pointer-events-none absolute top-[546px] left-[96px] h-[473px] w-[845px] rotate-180"
       />
-      <h2 className="absolute top-[635px] left-[171px] w-[666px] text-[35px] font-bold text-cream">
+      <h2 className="absolute top-[608px] left-[171px] w-[666px] text-[35px] font-bold text-cream">
         The Why Behind StrateAura™
       </h2>
-      <p className="absolute top-[698px] left-[171px] w-[616px] text-[24px] leading-normal font-light text-white">
+      <p className="absolute top-[671px] left-[171px] w-[616px] text-[24px] leading-[1.3] font-light text-white">
         StrateAura™ was born from a deeper truth: That leadership isn't just about
         making decisions, it's about how you carry them. That growth isn't about
         more, it's about what aligns. And that strategy, when done right, starts far
