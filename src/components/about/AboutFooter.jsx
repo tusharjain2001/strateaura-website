@@ -1,5 +1,5 @@
 import PillButton from "../ui/PillButton";
-import ctaAura from "../../assets/about/cta-aura.svg";
+import ctaAura from "../../assets/cta-aura.png";
 import logoA from "../../assets/about/foot-logo-a.svg";
 import logoB from "../../assets/about/foot-logo-b.svg";
 import logoC from "../../assets/about/foot-logo-c.svg";
