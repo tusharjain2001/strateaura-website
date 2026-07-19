@@ -7,13 +7,14 @@ import SiteFooter from "../components/layout/SiteFooter";
 
 import wellnessPhoto from "../assets/programs/wellness-photo.jpg";
 import higheredPhoto from "../assets/programs/highered-photo.jpg";
-import integratedMarketingPhoto from "../assets/programs/integrated-marketing-photo.jpg";
+import integratedMarketingPhoto from "../assets/programs/integrated-marketing-photo.png";
 import digitalMarketingPhoto from "../assets/programs/digital-marketing-photo.jpg";
 import digitalTransformationPhoto from "../assets/programs/digital-transformation-photo.jpg";
 import wellnessBox from "../assets/programs/wellnesscentricyellowbox.svg";
 import wellnessMaskedPhoto from "../assets/programs/wellnesscentricmaskedimagerightside.png";
 import higheredMaskedPhoto from "../assets/programs/highered-photo.png";
 import higheredBox from "../assets/programs/strategicmarketingbluebox.svg";
+import integratedBox from "../assets/programs/integratedyellowbox.svg";
 
 const PROGRAM_DETAILS = [
   {
@@ -78,7 +79,12 @@ const PROGRAM_DETAILS = [
     photo: integratedMarketingPhoto,
     photoAlt: "Dr. Suhair Hamouri presenting a certificate at the Integrated Marketing Strategy masterclass",
     photoPosition: "center 25%",
-    heading: "Integrated Marketing Strategy Masterclass: From Chaos to Clarity",
+    maskedPhoto: integratedMarketingPhoto,
+    heading: [
+      "Integrated Marketing",
+      "Strategy Masterclass: From",
+      "Chaos to Clarity",
+    ],
     eyebrow: "Turn scattered tactics into one powerful, cohesive strategy.",
     paragraph:
       "This hands-on masterclass guides marketers and business leaders through the ALA-Nexus Framework — a step-by-step method for transforming chaotic marketing efforts into integrated, high-ROI strategies. Learn how to align objectives, optimize resources, and build strategic clarity across your brand.",
@@ -88,6 +94,7 @@ const PROGRAM_DETAILS = [
       "Curate and sequence tactics to achieve strategic flow",
       "Interpret data into strategic decisions that drive results",
     ],
+    boxImage: integratedBox,
     suitedFor:
       "You're a brand owner, marketing leader, and consultant ready to stop guessing and start leading with strategy.",
     ctaLabel: "Enroll in this Masterclass",
