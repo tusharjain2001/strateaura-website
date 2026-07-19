@@ -1,7 +1,7 @@
 import TagRibbon from "./TagRibbon";
 import CtaPill from "../ui/CtaPill";
 import { Sparkle, ArrowUpRight } from "../ui/Icons";
-import leafWatermark from "../../assets/programs/section-leaf-watermark.svg";
+import leafWatermark from "../../assets/programs/section-leaf-watermark.png";
 import constructDeco1 from "../../assets/programs/construct-card-deco-1.svg";
 import constructDeco2 from "../../assets/programs/construct-card-deco-2.svg";
 import constructDeco3 from "../../assets/programs/construct-card-deco-3.svg";
@@ -61,7 +61,7 @@ export default function VeilFrameworkSection() {
       <img
         src={leafWatermark}
         alt=""
-        className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-[82%] w-full object-cover object-bottom lg:block"
+        className="pointer-events-none absolute inset-x-0 bottom-0 hidden w-full lg:block"
       />
 
       <div className="relative mx-auto w-full max-w-[1440px] px-5 sm:px-8 xl:px-[95px]">
@@ -74,17 +74,16 @@ export default function VeilFrameworkSection() {
             </span>
           </span>
 
-          <h2 className="mt-4 max-w-[1126px] text-[clamp(1.75rem,3.2vw,3.125rem)] leading-[1.2] font-bold text-navy">
-            VEIL™ - Strategic Health Framework for Women Leaders - The Flagship Program of
-            Strateaura™
+          <h2 className="mt-4 text-[clamp(1.75rem,2.9vw,2.875rem)] leading-[1.2] font-bold text-navy">
+            VEIL™ - Strategic Health Framework for Women Leaders - The Flagship Program of Strateaura™
           </h2>
 
           <p className="mt-8 text-[clamp(1.125rem,1.6vw,1.5rem)] font-medium text-navy">
             Core Concept
           </p>
 
-          <div className="mt-5 grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
-            <p className="text-justify text-[clamp(1rem,1.4vw,1.5rem)] leading-[1.5] text-black/60">
+          <div className="mt-5 flex flex-col gap-8 lg:flex-row lg:gap-[34px]">
+            <p className="text-justify text-[clamp(1rem,1.4vw,1.5rem)] leading-[1.5] text-black/60 lg:w-[590px] lg:shrink-0">
               VEIL™ is designed for women in leadership and high-demand professional roles who
               are performing well externally - and already paying a silent cost for how they are
               leading. They are capable, trusted, and accomplished — often the strongest person in
@@ -95,7 +94,7 @@ export default function VeilFrameworkSection() {
               are. VEIL is a strategic health framework grounded in validated science and designed
               specifically for women carrying sustained leadership responsibility.
             </p>
-            <p className="text-justify text-[clamp(1rem,1.4vw,1.5rem)] leading-[1.5] text-black/60">
+            <p className="text-justify text-[clamp(1rem,1.4vw,1.5rem)] leading-[1.5] text-black/60 lg:w-[507px] lg:shrink-0">
               The woman VEIL serves is not in crisis. She is still succeeding. What she needs is
               not another programme that teaches her how to perform. She needs a framework that
               helps her understand herself, preserve her internal architecture, and sustain her
@@ -151,12 +150,14 @@ export default function VeilFrameworkSection() {
             {/* Online Pathway */}
             <div className="rounded-xl border border-gold-light bg-white p-6 shadow-[0_0_27px_-11px_#b3902f] sm:p-8">
               <h3 className="text-[clamp(1.5rem,2.4vw,2rem)] leading-[1.2] font-bold text-gold">
-                The Online Pathway - MAP, DECODE, and UNVEIL
+                The Online Pathway -<br />
+                MAP, DECODE, and UNVEIL
               </h3>
               <p className="mt-4 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-navy-2">
                 A self-funded, self-paced online journey for individual women who are ready to
-                start without waiting for an institution to sponsor them. Free Live Webinar: Lead
-                Without Losing Yourself.
+                start without waiting for an institution to sponsor them.
+                <br />
+                Free Live Webinar: Lead Without Losing Yourself.
               </p>
 
               <div className="mt-6 flex flex-col gap-4">
@@ -208,7 +209,8 @@ export default function VeilFrameworkSection() {
             {/* UNVEIL Institutional */}
             <div className="rounded-xl border border-gold-light bg-white p-6 shadow-[0_0_27px_-11px_#b3902f] sm:p-8">
               <h3 className="text-[clamp(1.5rem,2.4vw,2rem)] leading-[1.2] font-bold text-gold">
-                UNVEIL - The Institutional Cohort Program
+                UNVEIL -<br />
+                The Institutional Cohort Program
               </h3>
               <p className="mt-4 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-navy-2">
                 A <span className="font-bold">12-week</span>, live, facilitator-led cohort for{" "}

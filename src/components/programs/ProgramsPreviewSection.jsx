@@ -6,30 +6,36 @@ import decoWave from "../../assets/programs/preview-card-deco-wave.svg";
 const PROGRAMS = [
   {
     label: "Wellness-Centric Leadership",
+    // Figma line composition (forced so the wrap matches word-for-word).
+    lines: ["Wellness-Centric", "Leadership"],
     href: "#wellness-centric-leadership",
     deco: decoRings,
     decoType: "rings",
   },
   {
     label: "Strategic Marketing in Higher Education",
+    lines: ["Strategic", "Marketing in", "Higher Education"],
     href: "#strategic-marketing-higher-education",
     deco: decoBlob,
     decoType: "blob",
   },
   {
     label: "Integrated Marketing Strategy masterclass",
+    lines: ["Integrated", "Marketing Strategy", "masterclass"],
     href: "#integrated-marketing-strategy",
     deco: decoRings,
     decoType: "rings",
   },
   {
     label: "Digital Marketing with Purpose",
+    lines: ["Digital Marketing", "with Purpose"],
     href: "#digital-marketing-purpose",
     deco: decoBlob,
     decoType: "blob",
   },
   {
     label: "Marketing in the Age of Digital Transformation",
+    lines: ["Marketing in the", "Age of Digital", "Transformation"],
     href: "#digital-transformation",
     deco: decoWave,
     decoType: "wave",
@@ -79,7 +85,11 @@ export default function ProgramsPreviewSection() {
                 className="group relative flex min-h-[193px] flex-col justify-between overflow-hidden rounded-[4px] bg-gradient-to-b from-navy to-blue p-5 transition-transform motion-safe:hover:-translate-y-1"
               >
                 <p className="relative z-10 text-[clamp(0.9375rem,1.4vw,1.125rem)] leading-snug font-bold text-white">
-                  {p.label}
+                  {p.lines.map((line, i) => (
+                    <span key={i} className="block">
+                      {line}
+                    </span>
+                  ))}
                 </p>
                 {/* The svg stretches (preserveAspectRatio=none) — both
                     dimensions must be explicit to keep the 20.8:11.8 ratio. */}
