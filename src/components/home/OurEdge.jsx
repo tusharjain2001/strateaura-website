@@ -1,4 +1,4 @@
-import edgePortrait from "../../assets/edge-portrait.png";
+import edgePortrait from "../../assets/edge-portrait-cutout.png";
 import quoteMark from "../../assets/quote-mark.svg";
 
 export default function OurEdge() {
@@ -7,10 +7,13 @@ export default function OurEdge() {
       {/* Right gradient panel */}
       <div className="absolute top-[114px] left-[541px] h-[564px] w-[796px] rounded-[4px] bg-gradient-to-b from-navy to-blue" />
 
-      {/* Arched portrait */}
-      <div className="absolute top-[107px] left-[130px] h-[601px] w-[467px] overflow-hidden rounded-t-[220px]">
-        <img src={edgePortrait} alt="StrateAura faculty" className="size-full object-cover" />
-      </div>
+      {/* Founder cutout — natural silhouette, no frame; the section's
+          overflow-hidden trims the bottom at the navy/white boundary. */}
+      <img
+        src={edgePortrait}
+        alt="StrateAura faculty"
+        className="pointer-events-none absolute top-[107px] left-[149px] h-[708px] w-[429px]"
+      />
 
       <img
         src={quoteMark}
