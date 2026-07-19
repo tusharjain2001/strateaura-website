@@ -1,16 +1,9 @@
 import edgePortrait from "../../assets/edge-portrait.png";
 import quoteMark from "../../assets/quote-mark.svg";
-import auraEdge from "../../assets/aura-left-edge.svg";
 
 export default function OurEdge() {
   return (
     <section className="relative h-[735px] w-[1440px] overflow-hidden bg-navy">
-      <img
-        src={auraEdge}
-        alt=""
-        className="pointer-events-none absolute top-[384px] left-[-352px] size-[705px] opacity-30"
-      />
-
       {/* Right gradient panel */}
       <div className="absolute top-[114px] left-[541px] h-[564px] w-[796px] rounded-[4px] bg-gradient-to-b from-navy to-blue" />
 

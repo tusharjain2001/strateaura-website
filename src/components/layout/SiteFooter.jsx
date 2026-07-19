@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import CtaPill from "../ui/CtaPill";
-import ctaAura from "../../assets/about/cta-aura.svg";
+import ctaAura from "../../assets/cta-aura.png";
 import logoA from "../../assets/about/foot-logo-a.svg";
 import logoB from "../../assets/about/foot-logo-b.svg";
 import logoC from "../../assets/about/foot-logo-c.svg";
@@ -41,16 +41,12 @@ export default function SiteFooter({ body, tagline, buttons, aside }) {
     <footer className="relative overflow-hidden bg-white">
       {/* CTA */}
       <div className="relative mx-auto w-full max-w-[1440px] px-5 pt-14 sm:px-8 lg:pt-[153px] xl:px-[116px]">
-        {/* The aura artwork is a 277x755 PORTRAIT svg that Figma displays
-            rotated -90° into a 755x277 landscape fan (big circle on the
-            left). The inner box is sized w=wrapper-height (36.69%) and
-            h=wrapper-width (272.57%) so the rotation exactly fills the
-            wrapper; the svg stretches to fill (preserveAspectRatio=none). */}
+        {/* Landscape aura fan (753x278) anchored to the right of the CTA. */}
         <div className="pointer-events-none absolute top-12 right-0 hidden aspect-[755/277] w-[52%] max-w-[755px] md:block lg:top-[144px]">
           <img
             src={ctaAura}
             alt=""
-            className="absolute top-1/2 left-1/2 h-[272.57%] w-[36.69%] max-w-none -translate-x-1/2 -translate-y-1/2 -rotate-90 -scale-y-100"
+            className="absolute inset-0 h-full w-full object-contain"
           />
         </div>
         <div className="relative lg:flex lg:items-start lg:justify-between lg:gap-10">

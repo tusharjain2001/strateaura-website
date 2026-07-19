@@ -1,6 +1,7 @@
 import PillButton from "../ui/PillButton";
-import Logo from "../ui/Logo";
-import ctaAura from "../../assets/cta-aura.svg";
+import footerLogo from "../../assets/footer-logo.svg";
+import footerArc from "../../assets/footer-blue-arc.png";
+import ctaAura from "../../assets/cta-aura.png";
 import socialTw from "../../assets/social-tw.svg";
 import socialFb from "../../assets/social-fb.svg";
 import socialLi from "../../assets/social-li.svg";
@@ -27,10 +28,17 @@ function FooterColumn({ heading, children }) {
 export default function ClosingCTA() {
   return (
     <section className="relative h-[1051px] w-[1440px] overflow-hidden bg-white">
+      {/* Navy aura arc sweeping down from the section above into the top-left corner */}
+      <img
+        src={footerArc}
+        alt=""
+        className="pointer-events-none absolute top-[-351px] left-0 h-[705px] w-[353px]"
+      />
+
       <img
         src={ctaAura}
         alt=""
-        className="pointer-events-none absolute top-[215px] right-0 w-[755px] opacity-90"
+        className="pointer-events-none absolute top-[215px] right-0 h-[277px] w-[755px]"
       />
 
       {/* Closing call to action */}
@@ -57,33 +65,44 @@ export default function ClosingCTA() {
       {/* Footer */}
       <div className="absolute top-[603px] left-[82px] w-[1277px]">
         <div className="border-t border-black/10 pt-[66px]">
-          <div className="flex justify-between">
-            <Logo variant="footer" />
+          <div className="flex items-start">
+            {/* Logo + address; the box width places COMPANY at Figma x=601 */}
+            <div className="w-[519px] shrink-0 pl-[23px]">
+              <img src={footerLogo} alt="StrateAura" className="h-[125px] w-[188px]" />
+              <p className="mt-4 max-w-[214px] text-[16px] leading-normal font-light text-[#525252]">
+                StrateAura Management Development Training LLC, Iris Bay - 2205 -
+                D90, Business Bay Dubai, U.A.E
+              </p>
+            </div>
 
-            <div className="flex gap-[64px] pr-[36px]">
-              <FooterColumn heading="COMPANY">
-                <ul className="mt-2 text-[14px] leading-[35px] font-medium tracking-[0.2px] text-ink">
-                  {COMPANY.map((item) => (
-                    <li key={item}>
-                      <a href="#" className="transition-colors hover:text-gold">
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </FooterColumn>
+            <div className="flex">
+              <div className="w-[226px]">
+                <FooterColumn heading="COMPANY">
+                  <ul className="mt-2 text-[14px] leading-[35px] font-medium tracking-[0.2px] text-ink">
+                    {COMPANY.map((item) => (
+                      <li key={item}>
+                        <a href="#" className="transition-colors hover:text-gold">
+                          {item}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </FooterColumn>
+              </div>
 
-              <FooterColumn heading="FRAMEWORKS">
-                <ul className="mt-2 w-[175px] text-[14px] leading-[35px] font-medium tracking-[0.2px] text-ink">
-                  {FRAMEWORKS.map((item) => (
-                    <li key={item}>
-                      <a href="#" className="transition-colors hover:text-gold">
-                        {item}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </FooterColumn>
+              <div className="w-[265px]">
+                <FooterColumn heading="FRAMEWORKS">
+                  <ul className="mt-2 w-[175px] text-[14px] leading-[35px] font-medium tracking-[0.2px] text-ink">
+                    {FRAMEWORKS.map((item) => (
+                      <li key={item}>
+                        <a href="#" className="transition-colors hover:text-gold">
+                          {item}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </FooterColumn>
+              </div>
 
               <FooterColumn heading="CONNECT WITH US">
                 <div className="mt-[10px] flex items-center gap-[12px]">
