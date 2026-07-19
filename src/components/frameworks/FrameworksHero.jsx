@@ -25,8 +25,10 @@ export default function FrameworksHero() {
           1440 width, not the raw (unbounded) viewport — otherwise the band
           keeps growing past its Figma size above 1440px (e.g. at 1536/1920). */}
       <div className="relative mx-auto flex w-full max-w-[1440px] items-center justify-center px-5 py-20 text-center sm:px-8 lg:min-h-[488px] lg:py-24 xl:px-[95px]">
-        {/* Cascading gradient "cloud" band, anchored to this container. */}
-        <div className="pointer-events-none absolute left-[8%] top-[25%] h-[46%] w-[81%]">
+        {/* Cascading gradient "cloud" band, anchored to this container.
+            Dampened to Figma's pale wash — at full opacity the gold band
+            drops the gold headline to ~2:1 contrast. */}
+        <div className="pointer-events-none absolute left-[8%] top-[25%] h-[46%] w-[81%] opacity-30">
           <div className="flex h-full w-full">
             {CLOUDS.map((cloud, i) => (
               <img
