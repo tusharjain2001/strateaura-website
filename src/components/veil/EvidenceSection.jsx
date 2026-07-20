@@ -2,7 +2,7 @@ import CtaPill from "../ui/CtaPill";
 import evidencePhoto from "../../assets/veil/evidence-photo.jpg";
 import scallopMask from "../../assets/veil/evidence-scallop-mask.svg";
 import scallopBorder from "../../assets/veil/evidence-scallop-border.svg";
-import evidenceArcs from "../../assets/veil/evidence-arcs.svg";
+import evidenceFan from "../../assets/veil/evidence-fan.svg";
 import evidenceSparkle from "../../assets/veil/evidence-sparkle.svg";
 
 const maskStyle = {
@@ -17,7 +17,7 @@ const maskStyle = {
 function EvidenceCard({ className = "" }) {
   return (
     <div
-      className={`relative z-10 rounded-[4px] bg-gradient-to-b from-[#a07e22] to-[#dfbc5a] ${className}`}
+      className={`relative z-10 rounded-[4px] bg-gradient-to-b from-[#dfbc5a] to-[#a07e22] ${className}`}
     >
       <img
         src={evidenceSparkle}
@@ -56,17 +56,6 @@ function EvidenceCard({ className = "" }) {
 export default function EvidenceSection() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-[#fffdf7] to-[rgba(231,197,101,0.25)]">
-      {/* Decorative gold arcs pinned to the section's top-right corner. The
-          source strip is tall (401x883) and gets rotated 90deg to lie flat;
-          the outer box uses the post-rotation (wide) footprint. */}
-      <div className="pointer-events-none absolute top-0 right-0 hidden h-[300px] w-[660px] items-center justify-center overflow-hidden lg:flex">
-        <div className="rotate-90">
-          <div className="relative h-[660px] w-[300px]">
-            <img src={evidenceArcs} alt="" className="absolute inset-0 size-full" />
-          </div>
-        </div>
-      </div>
-
       {/* Mobile/tablet: simple stack, photo fully contained (no bleed). */}
       <div className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:hidden">
         <div className="relative mx-auto aspect-[1102.7/800] w-full max-w-[560px]">
@@ -96,11 +85,20 @@ export default function EvidenceSection() {
             />
           </div>
           <img src={scallopBorder} alt="" className="pointer-events-none absolute inset-0 size-full" />
-          {/* Solid gold quarter-disc filling the mask's top-right scallop
-              bite (viewBox x868->1102.7, y0->259.5 of 1102.7x800): flat
-              edges along the container's top and right, curve on the
-              bottom-left hugging the bite's arc. */}
-          <div className="pointer-events-none absolute top-0 left-[78.7%] h-[32.4%] w-[21.3%] rounded-bl-full bg-gold" />
+        </div>
+
+        {/* Fan of pale-gold ovals (Figma "Group 85", opacity 0.2 baked into
+            the svg) — Figma x557,y0, 883x401, source rotated 90deg. Renders
+            ON TOP of the photo (last layer in Figma): it washes the photo's
+            top-right pale and fills the scallop notch with pale cream. This
+            is the real "gold arc" — NOT a solid disc. It clears the card
+            (fan y0-401, card y502+) so the card stays crisp. */}
+        <div className="pointer-events-none absolute top-0 left-[38.68%] flex h-[39.98%] w-[61.32%] items-center justify-center">
+          <img
+            src={evidenceFan}
+            alt=""
+            className="h-[220.2%] w-[45.41%] max-w-none rotate-90"
+          />
         </div>
 
         <EvidenceCard className="absolute top-[50.05%] left-[38.68%] w-[49.58%] max-w-[560px] p-10" />
