@@ -5,27 +5,35 @@ import thoughtDecor3 from "../../assets/insights/thought-decor-3.png";
 import thoughtDecor4 from "../../assets/insights/thought-decor-4.png";
 import seamSparkle from "../../assets/insights/thought-seam-sparkle.png";
 
+// Decor placement from Figma (node 1136:5694). Each asset is already exported
+// at exactly its Figma size with its own opacity baked in, so it is placed at
+// full strength and sized by width alone — the natural aspect gives the height.
+// All four bleed past the card's right and/or bottom edge, which overflow-hidden
+// clips. Offsets are anchored to the bottom-right so they hold as the card grows.
 const CARDS = [
   {
     title: "The Hidden Cost of Tactic Addiction.",
     desc: "Why your marketing feels busy but broken.",
-    decor: thoughtDecor2,
+    decor: thoughtDecor2, // 211x223
+    decorClass: "-right-[22px] -bottom-[31px] w-[69.2%]",
   },
   {
     title: "From Brand Activity to Brand Health.",
     desc: "How to stop performing and start building resonance.",
-    decor: thoughtDecor1,
+    decor: thoughtDecor1, // 160x164
+    decorClass: "-right-[33px] -bottom-[33px] w-[52.1%]",
   },
   {
     title: "Why Strategy is the Real Self-Care.",
     desc: "Leadership, energy, and the truth behind VEIL™.",
-    decor: thoughtDecor3,
-    decorClass: "aspect-[238.6/87.7] w-[78%] opacity-70",
+    decor: thoughtDecor3, // 239x88
+    decorClass: "-right-[50px] bottom-0 w-[78.2%]",
   },
   {
     title: "The AI Dilemma in Higher Ed Marketing.",
     desc: "Reclaiming relevance in a world of automation.",
-    decor: thoughtDecor4,
+    decor: thoughtDecor4, // 159x125
+    decorClass: "right-0 bottom-[2px] w-[51.5%]",
   },
 ];
 
@@ -36,41 +44,50 @@ export default function FeaturedThoughtPieces() {
         <h2 className="text-[clamp(1.875rem,3.5vw,3.125rem)] leading-[1.2] font-bold text-navy">
           Featured Thought Pieces
         </h2>
-        <p className="mt-4 max-w-[944px] text-[clamp(1.0625rem,1.7vw,1.5rem)] leading-normal font-light text-black lg:mt-4">
+        {/* Figma holds this on one line in a 944px box (node 1136:5672), but
+            Inter needs ~1116px for the same 24px sentence and so wrapped. The
+            cap is lifted at lg — the 1300px content column has room — and the
+            clamp keeps it on one line further down as the font scales with the
+            viewport. */}
+        <p className="mt-4 max-w-[944px] text-[clamp(1.0625rem,1.7vw,1.5rem)] leading-normal font-light text-black lg:mt-4 lg:max-w-none">
           Each one is designed to surface hidden truths and offer a better
           lens, not just a new tactic.
         </p>
 
-        <div className="relative mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-[57px] lg:grid-cols-4 lg:gap-[21px]">
+        {/* Figma spaces the four cards 26px apart and puts one 35.8x36 sparkle
+            centred on EACH card's top-right corner. They were previously pinned
+            to the grid at left-1/4, left-1/2 and left-3/4, which lands them in
+            the gutters rather than on the corners, because those fractions
+            ignore the gaps. */}
+        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-[57px] lg:grid-cols-4 lg:gap-[26px]">
           {CARDS.map((card) => (
-            <a
-              key={card.title}
-              href="#"
-              className="group relative flex min-h-[260px] flex-col overflow-hidden rounded-[4px] bg-gradient-to-b from-navy to-blue p-8 transition-transform motion-safe:hover:-translate-y-1 lg:min-h-[280px] lg:p-[38px_39px]"
-            >
-              {/* Fully-opaque source asset — used only as a very faint corner
-                  wash, kept below the text via -z-10 and a low opacity so it
-                  can never obscure copy. */}
+            <div key={card.title} className="relative">
+              {/* overflow-hidden clips the decor to the rounded corners, so the
+                  sparkle has to be its sibling to hang outside the card. */}
+              <a
+                href="#"
+                className="group relative flex h-full min-h-[260px] flex-col overflow-hidden rounded-[4px] bg-gradient-to-b from-navy to-blue p-8 transition-transform motion-safe:hover:-translate-y-1 lg:min-h-[280px] lg:p-[39px]"
+              >
+                <img
+                  src={card.decor}
+                  alt=""
+                  className={`pointer-events-none absolute ${card.decorClass}`}
+                />
+                <p className="relative z-10 text-[22px] leading-normal font-bold text-white lg:text-[24px]">
+                  {card.title}
+                </p>
+                <p className="relative z-10 mt-3 text-[19px] leading-normal text-white lg:text-[21px]">
+                  {card.desc}
+                </p>
+                <ArrowRight className="relative z-10 mt-auto w-9 pt-6 text-white" />
+              </a>
               <img
-                src={card.decor}
+                src={seamSparkle}
                 alt=""
-                className={`pointer-events-none absolute right-0 bottom-0 -z-10 ${card.decorClass ?? "max-w-[55%] opacity-10"}`}
+                className="pointer-events-none absolute -top-[18px] -right-[18px] hidden size-[36px] lg:block"
               />
-              <p className="relative z-10 text-[22px] leading-normal font-bold text-white lg:text-[24px]">
-                {card.title}
-              </p>
-              <p className="relative z-10 mt-3 text-[19px] leading-normal text-white lg:text-[21px]">
-                {card.desc}
-              </p>
-              <ArrowRight className="relative z-10 mt-auto w-9 pt-6 text-white" />
-            </a>
+            </div>
           ))}
-
-          {/* Sparkles pinned to the top seams between the cards (desktop only) */}
-          <img src={seamSparkle} alt="" className="pointer-events-none absolute -top-[15px] left-1/4 hidden size-[30px] -translate-x-1/2 lg:block" />
-          <img src={seamSparkle} alt="" className="pointer-events-none absolute -top-[15px] left-1/2 hidden size-[30px] -translate-x-1/2 lg:block" />
-          <img src={seamSparkle} alt="" className="pointer-events-none absolute -top-[15px] left-3/4 hidden size-[30px] -translate-x-1/2 lg:block" />
-          <img src={seamSparkle} alt="" className="pointer-events-none absolute -top-[15px] -right-[15px] hidden size-[30px] lg:block" />
         </div>
       </div>
     </section>
