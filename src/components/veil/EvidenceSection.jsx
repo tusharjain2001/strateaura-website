@@ -3,36 +3,33 @@ import evidencePhoto from "../../assets/veil/evidence-photo.jpg";
 import evidenceFan from "../../assets/veil/evidence-fan.svg";
 import evidenceSparkle from "../../assets/veil/evidence-sparkle.svg";
 
-// Scallop shape (Figma node 1221:318, viewBox 1102.7x800): flat top/bottom
-// edges from x234->868, the right and left edges bulge out to the frame with
-// concave "bites" pulled in at the four quadrant corners. Used for BOTH the
-// clip and the gold border stroke so the photo edge and the stroke coincide.
-const SCALLOP =
-  "M868.29 0C870.376 0 871.974 1.8376 871.712 3.90724C867.251 39.0672 868.552 116.15 922.867 180.501C977.37 245.074 1061.88 258.364 1098.96 256.016C1100.97 255.888 1102.7 257.463 1102.7 259.481V540.519C1102.7 542.537 1100.97 544.112 1098.96 543.984C1061.88 541.636 977.37 554.926 922.867 619.499C868.552 683.85 867.251 760.933 871.712 796.093C871.974 798.162 870.376 800 868.29 800H234.413C232.327 800 230.729 798.162 230.991 796.093C235.452 760.933 234.151 683.85 179.835 619.499C125.332 554.926 40.8231 541.636 3.74632 543.984C1.73235 544.112 0 542.537 0 540.519V259.481C0 257.463 1.73235 255.888 3.74631 256.016C40.8231 258.364 125.332 245.074 179.835 180.501C234.151 116.15 235.452 39.0672 230.991 3.90723C230.729 1.83759 232.327 0 234.413 0H868.29Z";
+// Scallop shapes exported from Figma "Mask group" (node 1221:320), viewBox
+// 0..828 x 0..800. The clip path and the (inset) border path are the exact
+// vectors from the design so the photo edge and the gold stroke coincide.
+const SCALLOP_CLIP =
+  "M593.29 0C595.376 0 596.974 1.8376 596.711 3.90724C592.251 39.0672 593.552 116.15 647.867 180.501C702.37 245.074 786.88 258.364 823.956 256.016C825.97 255.888 827.703 257.463 827.703 259.481V540.519C827.703 542.537 825.97 544.112 823.956 543.984C786.88 541.636 702.37 554.926 647.867 619.499C593.552 683.85 592.251 760.933 596.711 796.093C596.974 798.162 595.376 800 593.29 800H-40.5871C-42.6734 800 -44.2714 798.162 -44.0088 796.093C-39.5481 760.933 -40.8492 683.85 -95.1647 619.499C-149.668 554.926 -234.177 541.636 -271.254 543.984C-273.268 544.112 -275 542.537 -275 540.519V259.481C-275 257.463 -273.268 255.888 -271.254 256.016C-234.177 258.364 -149.668 245.074 -95.1647 180.501C-40.8492 116.15 -39.5481 39.0672 -44.0088 3.90723C-44.2714 1.83759 -42.6734 0 -40.5872 0H593.29Z";
+const SCALLOP_BORDER =
+  "M591.088 5.40527C586.862 42.2815 589.162 119.329 643.736 183.987C698.746 249.16 783.208 263.345 822.297 261.519V538.48C783.208 536.654 698.746 550.84 643.736 616.013C589.162 680.671 586.862 757.718 591.088 794.595H-38.3857C-34.1595 757.718 -36.4591 680.671 -91.0342 616.013C-146.044 550.84 -230.506 536.654 -269.595 538.48V261.519C-230.506 263.346 -146.044 249.16 -91.0342 183.987C-36.4591 119.329 -34.1595 42.2815 -38.3857 5.40527H591.088Z";
 
 /**
- * The team photo clipped to the scalloped shape, with the gold gradient
- * border traced on the same path. Rendered as an inline SVG (clipPath) rather
- * than a CSS mask because CSS masks with these exported SVGs render
- * inconsistently — the notch would not actually cut the photo. The `id`
- * differentiates the desktop/mobile clipPath instances on one page.
+ * The team photo clipped to Figma's scalloped shape, with the gold gradient
+ * border traced on the matching path. Inline SVG clipPath (not a CSS mask,
+ * which renders these exported shapes unreliably). The photo `<image>` is
+ * placed at the design's exact transform (Figma "Mask group" pattern) so the
+ * crop matches. `id` differentiates the desktop/mobile instances on one page.
  */
 function ScallopPhoto({ id, className = "" }) {
   return (
-    <svg
-      viewBox="0 0 1102.7 800"
-      preserveAspectRatio="none"
-      className={className}
-    >
+    <svg viewBox="0 0 828 800" preserveAspectRatio="none" className={className}>
       <defs>
         <clipPath id={id}>
-          <path d={SCALLOP} />
+          <path d={SCALLOP_CLIP} />
         </clipPath>
         <linearGradient
-          id={`${id}-border`}
-          x1="551.351"
+          id={`${id}-b`}
+          x1="276.351"
           y1="0"
-          x2="551.351"
+          x2="276.351"
           y2="800"
           gradientUnits="userSpaceOnUse"
         >
@@ -40,24 +37,19 @@ function ScallopPhoto({ id, className = "" }) {
           <stop offset="1" stopColor="#725300" />
         </linearGradient>
       </defs>
-      {/* Photo placed at Figma's exact transform inside the scallop frame
-          (node 1221:316): 1382x778 at x-110.95,y10.92 — this zooms past the
-          crest onto the sign + group, matching the design's crop. The box
-          aspect equals the photo's, so preserveAspectRatio="none" fills it
-          without distortion. The scallop clip bites the right edge. */}
       <image
         href={evidencePhoto}
-        x="-110.95"
-        y="10.92"
-        width="1382"
-        height="778"
+        x="-386.1"
+        y="10.98"
+        width="1382.7"
+        height="777.3"
         preserveAspectRatio="none"
         clipPath={`url(#${id})`}
       />
       <path
-        d={SCALLOP}
+        d={SCALLOP_BORDER}
         fill="none"
-        stroke={`url(#${id}-border)`}
+        stroke={`url(#${id}-b)`}
         strokeWidth="10.8108"
       />
     </svg>
@@ -106,37 +98,31 @@ function EvidenceCard({ className = "" }) {
 export default function EvidenceSection() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-[#fffdf7] to-[rgba(231,197,101,0.25)]">
-      {/* Mobile/tablet: simple stack, photo fully contained (no bleed). */}
+      {/* Mobile/tablet: simple stack. */}
       <div className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:hidden">
         <ScallopPhoto
           id="ev-scallop-m"
-          className="mx-auto aspect-[1102.7/800] w-full max-w-[560px]"
+          className="mx-auto aspect-[828/800] w-full max-w-[520px]"
         />
         <EvidenceCard className="mt-6 p-7 sm:p-9" />
       </div>
 
-      {/* Desktop: photo bleeds off the section's left edge (its own left 25%
-          sits off-canvas); the scalloped right edge bites into the pale fan,
-          and the gold card overlaps its right edge. Figma section 1440x1003. */}
+      {/* Desktop: Figma section 1440x1003, everything at exact node coords. */}
       <div className="relative mx-auto hidden w-full max-w-[1440px] lg:block lg:h-[1003px]">
-        {/* Fan of pale-gold ovals (Figma "Group 85", opacity 0.2 baked into
-            the svg) — Figma x557,y0, 883x401, source rotated 90deg. Sits
-            BEHIND the photo: the scallop notches reveal it as pale cream and
-            it extends across the open right side. This IS the "circle" the
-            top-right shows — the photo is cut where the circle is. */}
-        <div className="pointer-events-none absolute top-0 left-[38.68%] flex h-[39.98%] w-[61.32%] items-center justify-center">
-          <img
-            src={evidenceFan}
-            alt=""
-            className="h-[220.2%] w-[45.41%] max-w-none rotate-90"
-          />
-        </div>
-
-        {/* Photo + border, in the scallop's own 1102.7x800 frame at Figma's
-            x-275,y102 (left -19.1%, top 10.17%, of the 1440x1003 section). */}
+        {/* Masked photo — Figma "Mask group": scallop-clipped photo + gold
+            border, 828x800 visible view placed at section x0, y102. */}
         <ScallopPhoto
           id="ev-scallop-d"
-          className="pointer-events-none absolute top-[10.17%] left-[-19.1%] h-[79.76%] w-[76.58%]"
+          className="pointer-events-none absolute top-[10.17%] left-0 h-[79.76%] w-[57.5%]"
+        />
+
+        {/* Fan of pale-gold ovals — Figma "Group 85" (opacity baked in,
+            already landscape). 883x401 at x557, y0, on top: fills the scallop
+            notch and extends across the open right side. */}
+        <img
+          src={evidenceFan}
+          alt=""
+          className="pointer-events-none absolute top-0 left-[38.68%] h-[39.98%] w-[61.32%]"
         />
 
         <EvidenceCard className="absolute top-[50.05%] left-[38.68%] w-[49.58%] p-10" />
