@@ -41,8 +41,8 @@ export default function MobileEdge() {
           <div
             className="absolute top-[-21.846px] left-[-131.914px] h-[529.499px] w-[530.056px]"
             style={{
-              WebkitMaskImage: `url(${edgeMask})`,
-              maskImage: `url(${edgeMask})`,
+              WebkitMaskImage: `url("${edgeMask}")`,
+              maskImage: `url("${edgeMask}")`,
               WebkitMaskSize: "251.227px 381px",
               maskSize: "251.227px 381px",
               WebkitMaskPosition: "132.914px 21.846px",
