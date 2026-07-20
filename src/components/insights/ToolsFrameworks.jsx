@@ -49,12 +49,20 @@ const CARDS = [
  * mouse user cannot move the rail at all. Trackpad/touch already scroll
  * natively; this adds click-drag and vertical-wheel translation, releasing the
  * wheel back to the page once the rail hits an end so the page never traps.
+ *
+ * `restInset` (optional): the rail carries extra leading space so the first
+ * card can be dragged out from behind the fade. On mount we scroll so that
+ * first card sits `restInset`px from the rail's left edge — i.e. its Figma
+ * resting spot (faded behind the heading) — leaving room to drag either way.
  */
-function useDragScroll() {
+function useDragScroll(restInset) {
   const ref = useRef(null);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (restInset != null && el.children[0]) {
+      el.scrollLeft = el.children[0].offsetLeft - restInset;
+    }
     let down = false;
     let startX = 0;
     let startLeft = 0;
@@ -109,7 +117,7 @@ function useDragScroll() {
       el.removeEventListener("click", onClick, true);
       el.removeEventListener("wheel", onWheel);
     };
-  }, []);
+  }, [restInset]);
   return ref;
 }
 
@@ -174,7 +182,10 @@ function HeadingBlock({ className = "" }) {
 
 export default function ToolsFrameworks() {
   const mobileRail = useDragScroll();
-  const desktopRail = useDragScroll();
+  // Rest the first card 224px from the left (its faded Figma spot) so it can be
+  // dragged fully into view — the flaw in the previous version was that the
+  // first card was pinned at scroll 0 and could never be reached.
+  const desktopRail = useDragScroll(224);
 
   return (
     <section className="overflow-hidden bg-white">
@@ -200,18 +211,18 @@ export default function ToolsFrameworks() {
           scrolls; a white gradient panel fades the left cards out behind the
           heading, which sits over the decorative swirl emblem. */}
       <div className="relative mx-auto hidden w-full max-w-[1440px] lg:block lg:h-[818px]">
-        {/* Card rail — base layer. Starts 224px in (Figma) and scrolls. The
+        {/* Card rail — base layer. The big left pad is dead space the first card
+            is dragged out of (its resting scroll is set in useDragScroll so the
+            card sits at Figma's 224px, faded behind the heading). The
             fade/swirls/heading above are pointer-events-none, so a drag anywhere
             reaches this rail. */}
         <div
           ref={desktopRail}
-          className="absolute top-[120px] right-0 left-0 flex cursor-grab gap-[40px] overflow-x-auto pt-5 pl-[224px] select-none [scrollbar-width:none] active:cursor-grabbing [&::-webkit-scrollbar]:hidden"
+          className="absolute top-[120px] right-0 left-0 flex cursor-grab gap-[40px] overflow-x-auto pt-5 pr-[40px] pl-[900px] select-none [scrollbar-width:none] active:cursor-grabbing [&::-webkit-scrollbar]:hidden"
         >
           {CARDS.map((card) => (
             <Card key={card.title.join(" ")} card={card} />
           ))}
-          {/* trailing spacer so the last card can scroll clear of the edge */}
-          <div className="shrink-0 pr-[64px]" aria-hidden />
         </div>
 
         {/* White fade panel — cards scroll behind it (Figma node 1136:5821). */}
