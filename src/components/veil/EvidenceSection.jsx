@@ -121,12 +121,15 @@ export default function EvidenceSection() {
         />
 
         {/* Fan of pale-gold ovals — Figma "Group 85" (opacity baked in,
-            already landscape). 883x401 at x557, y0, on top: fills the scallop
-            notch and extends across the open right side. */}
+            already landscape). Left edge stays at the card/notch column
+            (x557 = 38.68%) so the big oval fills the scallop notch; the right
+            edge bleeds to the viewport (Figma runs it off the artboard right),
+            so it's anchored with right-[calc((100%-100vw)/2)]. The svg has
+            preserveAspectRatio="none" so it fills that stretched span. */}
         <img
           src={evidenceFan}
           alt=""
-          className="pointer-events-none absolute top-0 left-[38.68%] h-[39.98%] w-[61.32%]"
+          className="pointer-events-none absolute top-0 left-[38.68%] right-[calc((100%-100vw)/2)] h-[39.98%]"
         />
 
         <EvidenceCard className="absolute top-[50.05%] left-[38.68%] w-[49.58%] p-10" />
