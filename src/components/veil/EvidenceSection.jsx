@@ -40,15 +40,18 @@ function ScallopPhoto({ id, className = "" }) {
           <stop offset="1" stopColor="#725300" />
         </linearGradient>
       </defs>
-      {/* Photo covers the frame (object-cover), left-aligned so the crest and
-          sign stay in view; the scallop clip bites the right edge. */}
+      {/* Photo placed at Figma's exact transform inside the scallop frame
+          (node 1221:316): 1382x778 at x-110.95,y10.92 — this zooms past the
+          crest onto the sign + group, matching the design's crop. The box
+          aspect equals the photo's, so preserveAspectRatio="none" fills it
+          without distortion. The scallop clip bites the right edge. */}
       <image
         href={evidencePhoto}
-        x="0"
-        y="0"
-        width="1102.7"
-        height="800"
-        preserveAspectRatio="xMinYMid slice"
+        x="-110.95"
+        y="10.92"
+        width="1382"
+        height="778"
+        preserveAspectRatio="none"
         clipPath={`url(#${id})`}
       />
       <path
@@ -75,8 +78,8 @@ function EvidenceCard({ className = "" }) {
         The Evidence
       </h2>
       <p className="mt-3 text-[clamp(0.9375rem,1.2vw,1.0625rem)] leading-normal font-light text-white">
-        The science behind VEIL — 9 internationally validated instruments,
-        all with:
+        The science behind VEIL 9 internationally validated instruments, all
+        with:
       </p>
       <ul className="mt-2 list-disc space-y-1 pl-5 text-[clamp(0.9375rem,1.2vw,1.0625rem)] leading-normal font-light text-white">
         <li>Arabic-validated versions, 5 pre and post measures</li>
@@ -136,7 +139,7 @@ export default function EvidenceSection() {
           className="pointer-events-none absolute top-[10.17%] left-[-19.1%] h-[79.76%] w-[76.58%]"
         />
 
-        <EvidenceCard className="absolute top-[50.05%] left-[38.68%] w-[49.58%] max-w-[560px] p-10" />
+        <EvidenceCard className="absolute top-[50.05%] left-[38.68%] w-[49.58%] p-10" />
       </div>
     </section>
   );
