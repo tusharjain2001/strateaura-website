@@ -6,27 +6,31 @@ import assessPattern from "../../assets/frameworks/ala-assess-pattern.svg";
 import leveragePattern from "../../assets/frameworks/ala-leverage-pattern.svg";
 import actuatePattern from "../../assets/frameworks/ala-actuate-pattern.svg";
 
+// Pattern placement taken from Figma (node 1434:2913). Each is expressed as a
+// share of its 379x280 card so it scales with the card, and each bleeds past a
+// card edge — the wrapper clips it to the rounded corners.
 const CARDS = [
   {
     key: "assess",
     title: "Assess",
     body: "What’s really happening, in your decisions, your data, your behaviour, your energy.",
     pattern: assessPattern,
-    patternClass: "right-0 bottom-0 w-[62%]",
+    patternClass: "right-[-2.1%] bottom-[-11.1%] w-[55.8%]",
   },
   {
     key: "leverage",
     title: "Leverage",
     body: "What’s working (even if hidden), strengths, patterns, underused insight.",
     pattern: leveragePattern,
-    patternClass: "right-0 bottom-[10%] w-[44%]",
+    patternClass: "right-[-0.5%] bottom-[-7.9%] w-[42.2%]",
   },
   {
     key: "actuate",
     title: "Actuate",
     body: "What needs to move, with intention, timing, and support.",
     pattern: actuatePattern,
-    patternClass: "right-0 bottom-[18%] w-[72%]",
+    // Figma flips this one vertically (-scale-y-100).
+    patternClass: "right-[-20.3%] bottom-0 w-[70.2%] -scale-y-100",
   },
 ];
 
@@ -50,14 +54,19 @@ export default function AlaNexusSection() {
             <p className="text-[20px] font-bold tracking-wide text-gold uppercase">
               Core Concept
             </p>
-            <p className="mt-4 text-[clamp(1.0625rem,1.6vw,1.4375rem)] leading-normal text-black/60">
-              <strong className="font-bold text-black/60">
+            {/* Figma (node 1434:2952) keeps these as two lines of one tight
+                block: the bold sentence sits alone on line 1, the recalibration
+                sentence starts on line 2 with no paragraph gap between them. */}
+            <div className="mt-5 text-[clamp(1.0625rem,1.6vw,1.4375rem)] leading-normal text-black/60">
+              <p className="font-bold text-black/60">
                 ALA-Nexus™ isn&rsquo;t just a planning model.
-              </strong>{" "}
-              It&rsquo;s a recalibration system for overwhelmed leaders and
-              disjointed teams.
-            </p>
-            <p className="mt-4 text-[clamp(1.0625rem,1.6vw,1.4375rem)] leading-normal text-black/60">
+              </p>
+              <p>
+                It&rsquo;s a recalibration system for overwhelmed leaders and
+                disjointed teams.
+              </p>
+            </div>
+            <p className="mt-7 text-[clamp(1.125rem,1.7vw,1.5rem)] leading-normal text-black/60">
               It unfolds in three deeply practical, deeply personal stages:
             </p>
           </div>

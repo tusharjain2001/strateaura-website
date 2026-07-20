@@ -93,7 +93,8 @@ export default function FiveCsSection() {
         <div className="mt-4 lg:flex lg:items-start lg:justify-between lg:gap-10">
           <div>
             <h2 className="text-[clamp(2rem,4vw,3.125rem)] leading-[1.2] font-bold text-navy-2">
-              The 5Cs of Brand Health
+              {/* Figma breaks this heading after "of" (node 1434:2992). */}
+              The 5Cs of <span className="lg:block">Brand Health</span>
             </h2>
             <p className="mt-2 max-w-[366px] text-[clamp(1.125rem,1.8vw,1.5rem)] leading-normal text-black/60">
               This is more than brand strategy. It&rsquo;s a rhythm. One that
@@ -105,17 +106,21 @@ export default function FiveCsSection() {
             <p className="text-[20px] font-bold tracking-wide text-gold uppercase">
               Core Concept
             </p>
-            <p className="mt-4 text-[clamp(1.0625rem,1.6vw,1.4375rem)] leading-normal text-black/60">
-              <strong className="font-bold text-black/60">
-                The 5Cs of Brand Health isn&rsquo;t just a marketing
-                framework.
-              </strong>{" "}
-              It&rsquo;s a brand rhythm — a five-stage system for building
-              presence that is consistent, credible, and genuinely yours.
-              From concept to advocacy, it guides you through every stage of
-              the brand journey without losing the essence that makes your
-              organisation distinct.
-            </p>
+            {/* Figma (node 1434:2994) keeps these as one tight block: the bold
+                sentence sits alone on line 1, the body starts on line 2 with no
+                paragraph gap between them. */}
+            <div className="mt-5 text-[clamp(1.0625rem,1.6vw,1.4375rem)] leading-normal text-black/60">
+              <p className="font-bold text-black/60">
+                The 5Cs of Brand Health isn&rsquo;t just a marketing framework.
+              </p>
+              <p>
+                It&rsquo;s a brand rhythm — a five-stage system for building
+                presence that is consistent, credible, and genuinely yours.
+                From concept to advocacy, it guides you through every stage of
+                the brand journey without losing the essence that makes your
+                organisation distinct.
+              </p>
+            </div>
             <CtaPill
               as="a"
               href="#brand-health-support"
