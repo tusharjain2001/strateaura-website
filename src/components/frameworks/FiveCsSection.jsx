@@ -2,24 +2,30 @@ import FrameworkTag from "./FrameworkTag";
 import CtaPill from "../ui/CtaPill";
 import { Sparkle, ArrowRight } from "../ui/Icons";
 import conceptualisePattern from "../../assets/frameworks/fivecs-conceptualise-pattern.svg";
-import curatePattern from "../../assets/frameworks/fivecs-curate-pattern.svg";
-import convertPattern from "../../assets/frameworks/fivecs-convert-pattern.svg";
-import cultivateLaurel from "../../assets/frameworks/fivecs-cultivate-laurel.svg";
+import curatePattern from "../../assets/frameworks/fivecs-curate-pattern.png";
+import convertPattern from "../../assets/frameworks/fivecs-convert-pattern.png";
+import cultivateLaurel from "../../assets/frameworks/fivecs-cultivate-laurel.png";
 
+// Pattern placement taken from Figma (node 1434:2953). Each box is expressed as
+// a share of its own card — 379x280 for the single-width cards, 794x280 for the
+// wide Cultivate card — so it scales with the card, and several bleed past a
+// card edge, which the wrapper clips to the rounded corners. The assets are all
+// preserveAspectRatio="none", so width AND height are set to pin the exact box.
 const CARDS = [
   {
     key: "conceptualise",
     title: "Conceptualise",
     body: "Understand your context, your customers, your core essence",
     pattern: conceptualisePattern,
-    patternClass: "right-0 bottom-[8%] w-[62%]",
+    // Figma flips this one vertically (-scale-y-100) and lets it bleed right.
+    patternClass: "left-[46.7%] top-[54.6%] h-[44.6%] w-[73.6%] -scale-y-100",
   },
   {
     key: "curate",
     title: "Curate",
     body: "Shape strategy that reflects your full identity",
     pattern: curatePattern,
-    patternClass: "-right-[10%] top-[10%] w-[70%]",
+    patternClass: "left-[44.9%] top-[21.4%] h-[111.4%] w-[82.3%]",
   },
   {
     key: "communicate",
@@ -33,7 +39,7 @@ const CARDS = [
     title: "Convert",
     body: "Measure what truly matters: traction, trust, and resonance",
     pattern: convertPattern,
-    patternClass: "-right-[6%] bottom-0 w-[64%] -rotate-90 origin-bottom-right",
+    patternClass: "left-[76.8%] top-0 h-full w-[23.1%]",
     wide: false,
   },
   {
@@ -41,7 +47,7 @@ const CARDS = [
     title: "Cultivate",
     body: "Sustain loyalty, adapt with intention, and evolve without losing your essence",
     pattern: cultivateLaurel,
-    patternClass: "right-0 top-0 h-full w-[46%]",
+    patternClass: "left-[53.8%] -top-[5.4%] h-[110.7%] w-[47%]",
     wide: true,
   },
 ];
@@ -67,18 +73,21 @@ function Card({ card }) {
       {/* Straddles the top-right corner (centered on the corner point, half
           outside the card) — see LeaveWith.jsx. */}
       <Sparkle className="pointer-events-none absolute -top-[11px] -right-[11px] z-10 size-[22px] text-white lg:-top-[14px] lg:-right-[14px] lg:size-[28px]" />
-      <div className="relative p-6 lg:p-[38px]">
-        <p className="text-[clamp(1.25rem,1.7vw,1.5rem)] font-bold text-white">
+      {/* Figma pads 41px left / 39px top and parks the arrow 36px off the card
+          bottom, identical on every card — mt-auto keeps them on one baseline
+          instead of letting short copy float the arrow up. */}
+      <div className="relative flex h-full flex-col p-6 lg:pt-[39px] lg:pr-[41px] lg:pb-[23px] lg:pl-[41px]">
+        <p className="text-[20px] leading-[1.24] font-bold text-white lg:text-[24px]">
           {card.title}
         </p>
         <p
-          className={`mt-3 text-[clamp(1.0625rem,1.4vw,1.3125rem)] leading-normal text-white ${
-            card.wide ? "max-w-[420px]" : "max-w-[258px]"
+          className={`mt-[14px] text-[17px] leading-[1.24] font-medium text-white lg:text-[21px] ${
+            card.wide ? "lg:max-w-[374px]" : "lg:max-w-[258px]"
           }`}
         >
           {card.body}
         </p>
-        <ArrowRight className="mt-8 w-[40px] text-white/80 lg:mt-11" />
+        <ArrowRight className="mt-8 w-[43px] text-white lg:mt-auto" />
       </div>
     </div>
   );
@@ -132,7 +141,8 @@ export default function FiveCsSection() {
           </div>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3 lg:mt-14 lg:gap-[21px]">
+        {/* Figma: 36px between columns, 42px between rows, 80px below the CTA. */}
+        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3 lg:mt-20 lg:gap-x-9 lg:gap-y-[42px]">
           {CARDS.map((card) => (
             <Card key={card.key} card={card} />
           ))}
