@@ -1,22 +1,32 @@
 import CtaPill from "../ui/CtaPill";
-import bookLaurel from "../../assets/belief-laurel-right.svg";
+import bookLaurel from "../../assets/insights/book-laurel.svg";
 
 export default function BookFeature() {
+  // Figma's wash (node 1136:5740) starts at rgba(255,249,232,0) — the cream
+  // token at ZERO alpha, so the left of the band is the white page showing
+  // through and only the right fades to #ecd79e. The opaque `cream` token
+  // tinted the whole section.
   return (
-    <section className="relative overflow-hidden bg-gradient-to-r from-cream to-[#ecd79e]">
-      {/* Content container is the positioning root for the laurel mark too,
-          so its exact Figma px offset stays pinned to the 1440 reference
-          (never rescales above 1440) instead of the full-bleed section. */}
-      <div className="relative mx-auto w-full max-w-[1440px] px-5 py-16 sm:px-8 lg:px-[156px] lg:py-[81px]">
-        {/* Large laurel mark — Figma node 1136:5741 sits at x600/y0, 847x695
-            (roughly the section's full height) within the 1439-wide frame.
-            Centred vertically so it reads as "section-height" regardless of
-            how tall the copy makes the section at other breakpoints. */}
-        <img
-          src={bookLaurel}
-          alt=""
-          className="pointer-events-none absolute top-1/2 left-[42%] z-0 hidden aspect-[847/695] w-[59%] max-w-[847px] -translate-y-1/2 opacity-95 lg:left-[600px] lg:block lg:w-[847px]"
-        />
+    <section className="relative overflow-hidden bg-gradient-to-r from-cream/0 to-[#ecd79e]">
+      {/* Laurel mark — Figma node 1136:5741 is 847x695 running from x600 to
+          x1447: it spans the section's full 696px height and bleeds 7px off the
+          page's right edge. It belongs to the full-bleed section, NOT the
+          max-w-[1440px] content box — pinned inside that box it stops short of
+          the right edge on any viewport wider than 1440.
+          Height comes from inset-y-0 rather than a fixed 695px so it always
+          reaches the section's base as Figma has it. The section runs taller
+          than 696 whenever Inter pushes the copy past its Acumin height, and a
+          fixed height would leave a gap at the bottom. The asset's artwork
+          fills its viewBox edge to edge and is preserveAspectRatio="none", so
+          it stretches to fit cleanly. */}
+      {/* The insets go on a wrapper, not the <img>: Tailwind's preflight sets
+          `height: auto` on images, which beats the height implied by top/bottom
+          and collapses it to a squashed strip. size-full on the image restores
+          it (same fix as SiteFooter.jsx). */}
+      <span className="pointer-events-none absolute inset-y-0 -right-[7px] z-0 hidden w-[847px] lg:block">
+        <img src={bookLaurel} alt="" className="size-full" />
+      </span>
+      <div className="relative mx-auto w-full max-w-[1440px] px-5 py-16 sm:px-8 lg:min-h-[696px] lg:px-[156px] lg:py-[81px]">
 
         {/* Explicit stacking context above the (absolutely-positioned) laurel
             so the copy always reads clearly over it, matching Figma's paint
@@ -25,17 +35,19 @@ export default function BookFeature() {
           <h2 className="text-[clamp(2rem,4vw,3.125rem)] leading-[1.2] font-bold text-gold">
             Book Feature
           </h2>
-          <p className="mt-2 text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-black/65">
+          {/* Figma tops: heading 81, subtitle 160, body 241, CTAs 450 — which
+              is 19px, 52px and 64px of clear space between them. */}
+          <p className="mt-2 text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-black/65 lg:mt-[19px]">
             Clicks, Leads, and Strategy Feeds
           </p>
-          <p className="mt-6 max-w-[616px] text-[clamp(1.125rem,1.8vw,1.5rem)] leading-normal font-light text-black/60">
+          <p className="mt-6 max-w-[616px] text-[clamp(1.125rem,1.8vw,1.5rem)] leading-normal font-light text-black/60 lg:mt-[52px]">
             Your Guide to Cutting Through the Noise and Building Marketing
             That Matters. This isn’t a textbook. It’s a field guide. Built
             for decision-makers who want more than metrics, and are ready to
             stop outsourcing strategic thinking.
           </p>
           {/* Figma stacks the two CTAs vertically, left-aligned, ~36px gap. */}
-          <div className="mt-8 flex flex-col items-start gap-6 lg:mt-11 lg:gap-9">
+          <div className="mt-8 flex flex-col items-start gap-6 lg:mt-16 lg:gap-9">
             <CtaPill as="a" href="#preview-chapter" variant="goldOutline">
               Download a Preview Chapter
             </CtaPill>

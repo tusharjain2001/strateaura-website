@@ -1,6 +1,6 @@
 import CtaPill from "../ui/CtaPill";
 import { Sparkle } from "../ui/Icons";
-import voicesPhoto from "../../assets/insights/voices-photo.jpg";
+import voicesPhoto from "../../assets/insights/voices-photo.png";
 import voicesAccent from "../../assets/insights/voices-accent.png";
 
 export default function VoicesAppearances() {
