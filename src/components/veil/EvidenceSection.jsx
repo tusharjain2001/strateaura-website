@@ -132,7 +132,13 @@ export default function EvidenceSection() {
           <img src={evidenceFan} alt="" className="h-full w-full" />
         </div>
 
-        <EvidenceCard className="absolute top-[50.05%] left-[38.68%] w-[49.58%] p-10" />
+        {/* The card is anchored to the same viewport-left reference as the
+            photo (calc offset), not the centered container — otherwise above
+            1440 the photo bleeds left while the card stays centred and the two
+            drift apart, so the card stops overlapping the group. This keeps
+            the card covering the photo's right portion at every width, as in
+            Figma (card left = photo left + 557px = 38.68% of 1440). */}
+        <EvidenceCard className="absolute top-[50.05%] left-[calc((100%-100vw)/2+38.68%)] w-[49.58%] p-10" />
       </div>
     </section>
   );
