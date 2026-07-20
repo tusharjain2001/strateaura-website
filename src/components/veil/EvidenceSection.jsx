@@ -110,10 +110,14 @@ export default function EvidenceSection() {
       {/* Desktop: Figma section 1440x1003, everything at exact node coords. */}
       <div className="relative mx-auto hidden w-full max-w-[1440px] lg:block lg:h-[1003px]">
         {/* Masked photo — Figma "Mask group": scallop-clipped photo + gold
-            border, 828x800 visible view placed at section x0, y102. */}
+            border, 828x800 visible view. In Figma it bleeds off the artboard's
+            LEFT edge, so it must hug the viewport's left with no margin. The
+            centered 1440 container gains side margins above 1440px, so
+            left-[calc((100%-100vw)/2)] pulls the photo back to the viewport's
+            left edge at any width; the 57.5% keeps it at its natural 828px. */}
         <ScallopPhoto
           id="ev-scallop-d"
-          className="pointer-events-none absolute top-[10.17%] left-0 h-[79.76%] w-[57.5%]"
+          className="pointer-events-none absolute top-[10.17%] left-[calc((100%-100vw)/2)] h-[79.76%] w-[57.5%]"
         />
 
         {/* Fan of pale-gold ovals — Figma "Group 85" (opacity baked in,
