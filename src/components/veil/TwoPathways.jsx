@@ -67,7 +67,9 @@ function SubcardList({ items }) {
       {items.map((item, i) => (
         <li key={i}>
           {Array.isArray(item) ? (
-            item.map((line, j) => <span key={j}>{line}</span>)
+            // Trailing space so the lines read as one sentence when they run
+            // inline on mobile; the spans only become forced line breaks at lg.
+            item.map((line, j) => <span key={j}>{line}{" "}</span>)
           ) : (
             <span>{item}</span>
           )}
@@ -94,22 +96,15 @@ export default function TwoPathways() {
         <div className="mt-10 flex flex-col gap-8 lg:mt-14 lg:gap-10">
           {/* UNVEIL Institutional */}
           <div className="rounded-xl bg-white p-6 shadow-[0_0_27px_-11px_#b3902f] sm:p-8 lg:p-12">
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
-              {/* Heading wraps on Figma's 3 lines; the CTA sits at the card's
-                  bottom (justify-between against the stretched row). */}
-              <div className="lg:flex lg:flex-col lg:justify-between lg:self-stretch">
-                <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold lg:[&>span]:block lg:[&>span]:whitespace-nowrap">
-                  <span>UNVEIL - </span>
-                  <span>The Institutional </span>
-                  <span>Cohort Program</span>
-                </h3>
-                <div className="mt-6">
-                  <CtaPill as="a" href="/contact" variant="navyOutline" size="md">
-                    Request a Cohort Proposal
-                  </CtaPill>
-                </div>
-              </div>
-              <div>
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8">
+              {/* Heading, body, then CTA — on mobile the CTA drops below the
+                  body (Figma); on desktop grid placement keeps it bottom-left. */}
+              <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold lg:col-start-1 lg:row-start-1 lg:[&>span]:block lg:[&>span]:whitespace-nowrap">
+                <span>UNVEIL - </span>
+                <span>The Institutional </span>
+                <span>Cohort Program</span>
+              </h3>
+              <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
                 <p className="text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-navy-2">
                   A <strong className="font-bold">12-week</strong>, live, facilitator-led
                   cohort for <strong className="font-bold">8–12 women.</strong> Delivered
@@ -131,25 +126,23 @@ export default function TwoPathways() {
                   </ul>
                 </div>
               </div>
+              <div className="lg:col-start-1 lg:row-start-2 lg:self-end">
+                <CtaPill as="a" href="/contact" variant="navyOutline" size="md">
+                  Request a Cohort Proposal
+                </CtaPill>
+              </div>
             </div>
           </div>
 
           {/* Online Pathway */}
           <div className="rounded-xl border border-gold-light bg-white p-6 shadow-[0_0_27px_-11px_#b3902f] sm:p-8 lg:p-12">
-            <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16">
-              <div className="lg:flex lg:flex-col lg:justify-between lg:self-stretch">
-                <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold lg:[&>span]:block lg:[&>span]:whitespace-nowrap">
-                  <span>The Online Pathway - </span>
-                  <span>MAP, DECODE, and </span>
-                  <span>UNVEIL</span>
-                </h3>
-                <div className="mt-6 lg:mt-10">
-                  <CtaPill as="a" href="/webinar" variant="navyOutline" size="md">
-                    Register for the Free Webinar
-                  </CtaPill>
-                </div>
-              </div>
-              <div>
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8">
+              <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold lg:col-start-1 lg:row-start-1 lg:[&>span]:block lg:[&>span]:whitespace-nowrap">
+                <span>The Online Pathway - </span>
+                <span>MAP, DECODE, and </span>
+                <span>UNVEIL</span>
+              </h3>
+              <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
                 <p className="text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-navy-2">
                   A self-funded, self-paced online journey for individual women who are
                   ready to start without waiting for an institution to sponsor them. No
@@ -158,6 +151,11 @@ export default function TwoPathways() {
                 <p className="mt-3 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal font-bold text-navy-2">
                   Free Live Webinar: Lead Without Losing Yourself.
                 </p>
+              </div>
+              <div className="lg:col-start-1 lg:row-start-2 lg:self-end">
+                <CtaPill as="a" href="/webinar" variant="navyOutline" size="md">
+                  Register for the Free Webinar
+                </CtaPill>
               </div>
             </div>
 

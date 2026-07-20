@@ -18,9 +18,9 @@ const SCALLOP_BORDER =
  * placed at the design's exact transform (Figma "Mask group" pattern) so the
  * crop matches. `id` differentiates the desktop/mobile instances on one page.
  */
-function ScallopPhoto({ id, className = "" }) {
+function ScallopPhoto({ id, viewBox = "0 0 828 800", className = "" }) {
   return (
-    <svg viewBox="0 0 828 800" preserveAspectRatio="none" className={className}>
+    <svg viewBox={viewBox} preserveAspectRatio="none" className={className}>
       <defs>
         <clipPath id={id}>
           <path d={SCALLOP_CLIP} />
@@ -100,9 +100,13 @@ export default function EvidenceSection() {
     <section className="relative overflow-hidden bg-gradient-to-b from-[#fffdf7] to-[rgba(231,197,101,0.25)]">
       {/* Mobile/tablet: simple stack. */}
       <div className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:hidden">
+        {/* Mobile shows the full symmetric scallop (both side notches), centred
+            — the desktop crop bleeds off the left, but mobile has no card to
+            overlap it, so it stands alone like Figma. */}
         <ScallopPhoto
           id="ev-scallop-m"
-          className="mx-auto aspect-[828/800] w-full max-w-[520px]"
+          viewBox="-275 0 1103 800"
+          className="mx-auto aspect-[1103/800] w-full max-w-[560px]"
         />
         <EvidenceCard className="mt-6 p-7 sm:p-9" />
       </div>

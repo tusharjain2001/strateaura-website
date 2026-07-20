@@ -4,18 +4,22 @@ import heroPhoto from "../../assets/veil/hero-photo.jpg";
 export default function VeilHero() {
   return (
     <section className="relative overflow-hidden bg-navy-2">
-      {/* Photo bleeds full-bleed behind a navy wash that goes solid on the
-          left (where the copy sits) and fades out toward the right. */}
+      {/* Photo: a block on top for mobile (Figma stacks it above a solid navy
+          text block); on desktop it bleeds full-bleed behind the copy. */}
       <img
         src={heroPhoto}
         alt=""
-        className="pointer-events-none absolute inset-0 size-full object-cover object-[68%_center]"
+        className="pointer-events-none block h-[400px] w-full object-cover object-[68%_center] lg:absolute lg:inset-0 lg:h-full"
       />
-      <div className="absolute inset-0 bg-[linear-gradient(-90deg,rgba(35,58,88,0.2)_43.681%,#233a58_85.938%)]" />
+      {/* Mobile: fade the photo's lower edge into the navy text block below. */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-[400px] bg-[linear-gradient(to_bottom,transparent_58%,#233a58_100%)] lg:hidden" />
+      {/* Desktop: navy wash, solid on the left where the copy sits. */}
+      <div className="pointer-events-none absolute inset-0 hidden bg-[linear-gradient(-90deg,rgba(35,58,88,0.2)_43.681%,#233a58_85.938%)] lg:block" />
 
       {/* Text block sits at Figma's x=58 with forced 3-line heading and
-          3-line subcopy wraps, matching the reference exactly. */}
-      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col items-start justify-center px-5 py-16 sm:px-8 sm:py-20 lg:min-h-[800px] lg:py-24 xl:px-[58px]">
+          3-line subcopy wraps, matching the reference exactly. On mobile it
+          flows below the photo on the navy background. */}
+      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col items-start justify-center px-5 pt-8 pb-14 sm:px-8 lg:min-h-[800px] lg:py-24 xl:px-[58px]">
         <h1 className="text-[clamp(2rem,3.75vw,3.375rem)] leading-[1.22] font-bold text-white lg:[&>span]:block lg:[&>span]:whitespace-nowrap">
           <span>VEIL™ - Lead </span>
           <span>Without Losing </span>
