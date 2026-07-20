@@ -59,27 +59,28 @@ export default function FeaturedThoughtPieces() {
             to the grid at left-1/4, left-1/2 and left-3/4, which lands them in
             the gutters rather than on the corners, because those fractions
             ignore the gaps. */}
-        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:mt-[57px] lg:grid-cols-4 lg:gap-[26px]">
+        {/* Mobile keeps Figma's 2x2 grid; it opens to a single row of four at lg. */}
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:mt-10 sm:gap-5 lg:mt-[57px] lg:grid-cols-4 lg:gap-[26px]">
           {CARDS.map((card) => (
             <div key={card.title} className="relative">
               {/* overflow-hidden clips the decor to the rounded corners, so the
                   sparkle has to be its sibling to hang outside the card. */}
               <a
                 href="#"
-                className="group relative flex h-full min-h-[260px] flex-col overflow-hidden rounded-[4px] bg-gradient-to-b from-navy to-blue p-8 transition-transform motion-safe:hover:-translate-y-1 lg:min-h-[280px] lg:p-[39px]"
+                className="group relative flex h-full min-h-[185px] flex-col overflow-hidden rounded-[4px] bg-gradient-to-b from-navy to-blue p-4 transition-transform motion-safe:hover:-translate-y-1 sm:min-h-[260px] sm:p-7 lg:min-h-[280px] lg:p-[39px]"
               >
                 <img
                   src={card.decor}
                   alt=""
                   className={`pointer-events-none absolute ${card.decorClass}`}
                 />
-                <p className="relative z-10 text-[22px] leading-normal font-bold text-white lg:text-[24px]">
+                <p className="relative z-10 text-[15px] leading-[1.2] font-bold text-white sm:text-[22px] sm:leading-normal lg:text-[24px]">
                   {card.title}
                 </p>
-                <p className="relative z-10 mt-3 text-[19px] leading-normal text-white lg:text-[21px]">
+                <p className="relative z-10 mt-2 text-[12.5px] leading-snug text-white sm:mt-3 sm:text-[18px] sm:leading-normal lg:text-[21px]">
                   {card.desc}
                 </p>
-                <ArrowRight className="relative z-10 mt-auto w-9 pt-6 text-white" />
+                <ArrowRight className="relative z-10 mt-auto w-7 pt-4 text-white sm:w-9 sm:pt-6" />
               </a>
               <img
                 src={seamSparkle}

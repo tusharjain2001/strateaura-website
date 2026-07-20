@@ -3,11 +3,14 @@ import newsletterBg from "../../assets/insights/newsletter-bg.png";
 
 export default function NewsletterCta() {
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden bg-gradient-to-b from-[#1f3a58] to-[#3a6296]">
+      {/* The bg asset carries a white curved cut-out for the desktop composition;
+          on mobile object-cover reveals that white mid-section and hides the
+          copy, so it is desktop-only — the navy gradient covers mobile. */}
       <img
         src={newsletterBg}
         alt=""
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-top"
+        className="pointer-events-none absolute inset-0 hidden h-full w-full object-cover object-top lg:block"
       />
       <div className="relative mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-8 px-5 py-16 sm:px-8 lg:grid-cols-[429px_1fr] lg:gap-[77px] lg:px-[143px] lg:py-[123px]">
         <h2 className="text-[clamp(1.75rem,3.2vw,3.125rem)] leading-[1.2] font-bold text-white">

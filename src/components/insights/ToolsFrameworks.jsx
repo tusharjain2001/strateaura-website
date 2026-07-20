@@ -121,13 +121,14 @@ function useDragScroll(restInset) {
   return ref;
 }
 
-function Card({ card }) {
+function Card({ card, className = "" }) {
   return (
-    <div className="relative shrink-0">
+    <div className={`relative ${className}`}>
       {/* Card body — clipped so the bottom decoration stays inside the rounded
           corners. The corner star is a sibling (outside this clip) so it can
-          straddle the top-right corner as in Figma. */}
-      <div className="relative h-[420px] w-[80vw] max-w-[480px] overflow-hidden rounded-[8px] bg-gradient-to-b from-gold to-gold-light text-white sm:w-[420px] lg:h-[501px] lg:w-[480px]">
+          straddle the top-right corner as in Figma. Width comes from the wrapper
+          (full-width stacked on mobile, fixed 480 in the desktop rail). */}
+      <div className="relative h-[420px] w-full overflow-hidden rounded-[8px] bg-gradient-to-b from-gold to-gold-light text-white lg:h-[501px]">
         <div className="absolute top-8 right-7 left-7 lg:top-[86px] lg:left-[64px] lg:w-[363px]">
           <p className="text-[clamp(1.375rem,2.1vw,1.9375rem)] leading-[1.12] font-bold">
             {card.title.map((line, i) => (
@@ -181,7 +182,6 @@ function HeadingBlock({ className = "" }) {
 }
 
 export default function ToolsFrameworks() {
-  const mobileRail = useDragScroll();
   // Rest the first card 224px from the left (its faded Figma spot) so it can be
   // dragged fully into view — the flaw in the previous version was that the
   // first card was pinned at scroll 0 and could never be reached.
@@ -189,7 +189,8 @@ export default function ToolsFrameworks() {
 
   return (
     <section className="overflow-hidden bg-white">
-      {/* Mobile / tablet — heading stacked above the scrolling rail. */}
+      {/* Mobile / tablet — heading then the cards stacked full-width, one per
+          row (Figma's mobile layout; the horizontal rail is desktop-only). */}
       <div className="relative px-5 py-14 sm:px-8 lg:hidden">
         <img
           src={bgSwirls}
@@ -197,12 +198,9 @@ export default function ToolsFrameworks() {
           className="pointer-events-none absolute -top-6 -left-10 w-[380px] opacity-70 mix-blend-multiply select-none"
         />
         <HeadingBlock className="relative max-w-[560px]" />
-        <div
-          ref={mobileRail}
-          className="mt-9 flex cursor-grab gap-6 overflow-x-auto pt-4 pr-5 pb-1 select-none [scrollbar-width:none] active:cursor-grabbing [&::-webkit-scrollbar]:hidden"
-        >
+        <div className="mt-9 flex flex-col items-center gap-6">
           {CARDS.map((card) => (
-            <Card key={card.title.join(" ")} card={card} />
+            <Card key={card.title.join(" ")} card={card} className="w-full max-w-[480px]" />
           ))}
         </div>
       </div>
@@ -221,7 +219,7 @@ export default function ToolsFrameworks() {
           className="absolute top-[120px] right-0 left-0 flex cursor-grab gap-[40px] overflow-x-auto pt-5 pr-[40px] pl-[900px] select-none [scrollbar-width:none] active:cursor-grabbing [&::-webkit-scrollbar]:hidden"
         >
           {CARDS.map((card) => (
-            <Card key={card.title.join(" ")} card={card} />
+            <Card key={card.title.join(" ")} card={card} className="w-[480px] shrink-0" />
           ))}
         </div>
 
