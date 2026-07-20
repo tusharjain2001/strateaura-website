@@ -1,6 +1,7 @@
 import FrameworkTag from "./FrameworkTag";
 import CtaPill from "../ui/CtaPill";
-import { Sparkle, ArrowRight } from "../ui/Icons";
+import cardStar from "../../assets/frameworks/5cstar.png";
+import cardArrow from "../../assets/frameworks/5carrow.png";
 import conceptualisePattern from "../../assets/frameworks/fivecs-conceptualise-pattern.svg";
 import curatePattern from "../../assets/frameworks/fivecs-curate-pattern.png";
 import convertPattern from "../../assets/frameworks/fivecs-convert-pattern.png";
@@ -9,8 +10,9 @@ import cultivateLaurel from "../../assets/frameworks/fivecs-cultivate-laurel.png
 // Pattern placement taken from Figma (node 1434:2953). Each box is expressed as
 // a share of its own card — 379x280 for the single-width cards, 794x280 for the
 // wide Cultivate card — so it scales with the card, and several bleed past a
-// card edge, which the wrapper clips to the rounded corners. The assets are all
-// preserveAspectRatio="none", so width AND height are set to pin the exact box.
+// card edge, which the wrapper clips to the rounded corners. Both width and
+// height are pinned because each asset is exported at its exact Figma box size
+// (312x312, 88x280, 373x310), so the box and the artwork agree at 1440.
 const CARDS = [
   {
     key: "conceptualise",
@@ -66,13 +68,19 @@ function Card({ card }) {
           <img
             src={card.pattern}
             alt=""
-            className={`pointer-events-none absolute h-auto ${card.patternClass}`}
+            className={`pointer-events-none absolute ${card.patternClass}`}
           />
         </div>
       )}
       {/* Straddles the top-right corner (centered on the corner point, half
           outside the card) — see LeaveWith.jsx. */}
-      <Sparkle className="pointer-events-none absolute -top-[11px] -right-[11px] z-10 size-[22px] text-white lg:-top-[14px] lg:-right-[14px] lg:size-[28px]" />
+      {/* Exported from Figma at 36x39 (not square), centred on the corner point
+          so half of it hangs outside the card. */}
+      <img
+        src={cardStar}
+        alt=""
+        className="pointer-events-none absolute -top-[15px] -right-[14px] z-10 h-[30px] w-[28px] lg:-top-[19px] lg:-right-[18px] lg:h-[39px] lg:w-[36px]"
+      />
       {/* Figma pads 41px left / 39px top and parks the arrow 36px off the card
           bottom, identical on every card — mt-auto keeps them on one baseline
           instead of letting short copy float the arrow up. */}
@@ -87,7 +95,11 @@ function Card({ card }) {
         >
           {card.body}
         </p>
-        <ArrowRight className="mt-8 w-[43px] text-white lg:mt-auto" />
+        <img
+          src={cardArrow}
+          alt=""
+          className="mt-8 h-[30px] w-[45px] lg:mt-auto"
+        />
       </div>
     </div>
   );
