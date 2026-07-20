@@ -2,37 +2,78 @@ import { useState } from "react";
 import FrameworkTag from "./FrameworkTag";
 import CtaPill from "../ui/CtaPill";
 import { Sparkle } from "../ui/Icons";
-import card1Pattern from "../../assets/frameworks/veil-card1-pattern.svg";
-import card23Pattern from "../../assets/frameworks/veil-card23-pattern.svg";
+import energyPattern from "../../assets/frameworks/veil-energy-pattern.svg";
+import emotionalPattern from "../../assets/frameworks/veil-emotional-pattern.svg";
+import innerPattern from "../../assets/frameworks/veil-inner-pattern.svg";
 import legacyPattern from "../../assets/frameworks/veil-legacy-pattern.svg";
 import cornerStar from "../../assets/frameworks/framework3bluestar.png";
 
+// All four cards share one layout (Figma 1136:6665 / 6712 / 6722 and
+// 1434:3074): a 31px/1.1 title, a blank line, then a mixed-weight paragraph —
+// all in a 363px column at x:64, y:86 — with the star icon centred at y:374.
+// Only the artwork differs. `pattern.box` is the on-card rectangle; `art` and
+// `rotate` are only needed where Figma rotates the asset, in which case `art`
+// is its pre-rotation size.
 const CARDS = [
   {
-    key: "misaligned",
-    text: "Misaligned with the work they once loved.",
-    pattern: card1Pattern,
-    // body: awaiting copy from the client — renders between the headline and
-    // the star icon once supplied. Figma has no body text for cards 1-3.
-    body: null,
+    key: "energy",
+    title: "Energy Alignment",
+    body: (
+      <>
+        What your <strong className="font-bold">body tells</strong> you before
+        your <strong className="font-bold">mind can process it.</strong>
+      </>
+    ),
+    pattern: {
+      src: energyPattern,
+      box: { left: 0, top: 325, width: 480, height: 176.372 },
+      art: { width: 176.372, height: 480 },
+      rotate: 90,
+    },
   },
   {
-    key: "noise",
-    text: "Surrounded by noise, but unclear about direction.",
-    pattern: card23Pattern,
-    body: null,
+    key: "emotional",
+    title: "Emotional Intelligence",
+    body: (
+      <>
+        The <strong className="font-bold">capacity</strong> to respond without{" "}
+        <strong className="font-bold">over-performing</strong>.
+      </>
+    ),
+    pattern: {
+      src: emotionalPattern,
+      box: { left: -42, top: 380.5, width: 565.045, height: 108 },
+    },
   },
   {
-    key: "accomplished",
-    text: "Accomplished on paper, but disconnected inside.",
-    pattern: card23Pattern,
-    body: null,
+    key: "inner",
+    title: "Inner Leadership",
+    body: (
+      <>
+        <strong className="font-bold">Quiet authority</strong> that comes from
+        within, <strong className="font-bold">not role.</strong>
+      </>
+    ),
+    pattern: {
+      src: innerPattern,
+      box: { left: -0.5, top: 354.5, width: 481, height: 161 },
+    },
   },
   {
     key: "legacy",
-    legacy: true,
-    pattern: legacyPattern,
-    body: null,
+    title: "Sustainable Legacy",
+    body: (
+      <>
+        <strong className="font-bold">A presence</strong> that outlasts titles
+        and <strong className="font-bold">keeps you whole</strong>
+      </>
+    ),
+    pattern: {
+      src: legacyPattern,
+      box: { left: -90, top: 340, width: 660, height: 165 },
+      art: { width: 165, height: 660 },
+      rotate: -90,
+    },
   },
 ];
 
@@ -68,12 +109,22 @@ function CircleStar({ className = "", style }) {
 }
 
 /**
- * Decorative pattern. Figma rotates both assets -90deg (and mirrors the card
- * ones), so the artwork is authored at the pre-rotation size and rotated about
- * its own centre inside a box of the post-rotation size. Safe to do in CSS
- * here precisely because the deck is fixed-px — nothing rescales underneath it.
+ * Decorative pattern. Where Figma rotates the asset, it is authored at the
+ * pre-rotation size (`art`) and spun about its own centre inside a box of the
+ * post-rotation size (`box`). Safe to do in CSS here precisely because the deck
+ * is fixed-px — nothing rescales underneath it.
  */
-function DeckPattern({ src, box, art, mirrored }) {
+function DeckPattern({ src, box, art, rotate }) {
+  if (!rotate) {
+    return (
+      <img
+        src={src}
+        alt=""
+        className="pointer-events-none absolute max-w-none"
+        style={box}
+      />
+    );
+  }
   return (
     <div className="pointer-events-none absolute" style={box}>
       <img
@@ -82,57 +133,25 @@ function DeckPattern({ src, box, art, mirrored }) {
         className="absolute top-1/2 left-1/2 max-w-none"
         style={{
           ...art,
-          transform: `translate(-50%, -50%) rotate(-90deg)${
-            mirrored ? " scaleY(-1)" : ""
-          }`,
+          transform: `translate(-50%, -50%) rotate(${rotate}deg)`,
         }}
       />
     </div>
   );
 }
 
-/** Cards 1-3, at Figma's exact offsets (72px gutter, headline at y=70). */
+/** Every card: copy left-aligned at x=64, only the star centred. */
 function DeckCardBody({ card }) {
   return (
     <div className="relative h-full">
-      <DeckPattern
-        src={card.pattern}
-        box={{ left: 336, top: 185, width: 184.292, height: 316 }}
-        art={{ width: 316, height: 184.292 }}
-        mirrored
-      />
-      <div className="relative px-[72px] pt-[70px]">
-        <p className="max-w-[298px] text-[40px] leading-[1.26] font-bold text-white">
-          {card.text}
-        </p>
-        {card.body && (
-          <p className="mt-5 max-w-[298px] text-[21px] leading-[1.3] text-white/90">
-            {card.body}
-          </p>
-        )}
-        <CircleStar className="mt-6" />
-      </div>
-    </div>
-  );
-}
-
-/** Card 4. Copy is left-aligned at x=64; only the star is centred. */
-function DeckLegacyBody({ card }) {
-  return (
-    <div className="relative h-full">
-      <DeckPattern
-        src={card.pattern}
-        box={{ left: -90, top: 340, width: 660, height: 165 }}
-        art={{ width: 165, height: 660 }}
-      />
+      <DeckPattern {...card.pattern} />
       <div className="relative pt-[86px] pr-[53px] pl-[64px]">
         <p className="text-[31px] leading-[1.1] font-bold text-white">
-          Sustainable Legacy
+          {card.title}
         </p>
         {/* Figma separates these with an empty line, i.e. one 1.1 line-height. */}
         <p className="mt-[34px] max-w-[363px] text-[31px] leading-[1.1] text-white">
-          <span className="font-bold">A presence</span> that outlasts titles and{" "}
-          <span className="font-bold">keeps you whole</span>
+          {card.body}
         </p>
       </div>
       <CircleStar
@@ -185,11 +204,7 @@ function StackDeck() {
               }}
               className="absolute left-0 cursor-pointer overflow-hidden rounded-[8px] bg-gradient-to-b from-navy to-blue text-left shadow-[0_-6px_16px_rgba(0,0,0,0.18)] transition-[top] duration-500 ease-in-out"
             >
-              {card.legacy ? (
-                <DeckLegacyBody card={card} />
-              ) : (
-                <DeckCardBody card={card} />
-              )}
+              <DeckCardBody card={card} />
             </button>
           );
         })}
@@ -219,30 +234,11 @@ function StackDeck() {
 function StaticCard({ card }) {
   return (
     <div className="relative overflow-hidden rounded-[8px] bg-gradient-to-b from-navy to-blue px-7 py-8">
-      {card.legacy ? (
-        <>
-          <p className="text-[26px] leading-[1.1] font-bold text-white">
-            Sustainable Legacy
-          </p>
-          <p className="mt-5 text-[26px] leading-[1.1] text-white">
-            <span className="font-bold">A presence</span> that outlasts titles
-            and <span className="font-bold">keeps you whole</span>
-          </p>
-          <CircleStar className="mt-8" />
-        </>
-      ) : (
-        <>
-          <p className="text-[28px] leading-[1.26] font-bold text-white">
-            {card.text}
-          </p>
-          {card.body && (
-            <p className="mt-4 text-[18px] leading-[1.3] text-white/90">
-              {card.body}
-            </p>
-          )}
-          <CircleStar className="mt-6" />
-        </>
-      )}
+      <p className="text-[26px] leading-[1.1] font-bold text-white">
+        {card.title}
+      </p>
+      <p className="mt-5 text-[26px] leading-[1.1] text-white">{card.body}</p>
+      <CircleStar className="mt-8" />
     </div>
   );
 }
