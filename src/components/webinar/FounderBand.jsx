@@ -1,5 +1,5 @@
 import founderCutout from "../../assets/webinar/founder-cutout.png";
-import bandSparkle from "../../assets/webinar/band-sparkle.svg";
+import bandSparkle from "../../assets/webinar/band-sparkle.png";
 
 export default function FounderBand() {
   return (
