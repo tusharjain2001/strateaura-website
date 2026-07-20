@@ -5,11 +5,16 @@ import subcardDeco2 from "../../assets/programs/construct-card-deco-2.svg";
 import subcardDeco3 from "../../assets/programs/construct-card-deco-3.svg";
 import subcardSparkle from "../../assets/programs/construct-card-sparkle.svg";
 
+// Titles and bullets carry Figma's exact line breaks (node 1220:224): the
+// bold prefix sits alone on line 1, and the two long bullets break where the
+// design does. Inter wraps differently than the design font, so the breaks
+// are forced (block + whitespace-nowrap at lg) rather than left to reflow.
 const PHASES = [
   {
     title: (
       <>
-        MAP - <span className="font-normal">Know Your Terrain:</span>
+        <span className="block">MAP -</span>
+        <span className="block font-normal">Know Your Terrain:</span>
       </>
     ),
     items: [
@@ -23,34 +28,50 @@ const PHASES = [
   {
     title: (
       <>
-        DECODE - <span className="font-normal">Design Your Architecture:</span>
+        <span className="block">DECODE -</span>
+        <span className="block font-normal">Design Your Architecture:</span>
       </>
     ),
     items: [
       "3 weeks",
       "The way your system responds",
-      "The gap between who you are at your strongest and how you have been showing up.",
+      [
+        "The gap between who you are",
+        "at your strongest and how you",
+        "have been showing up.",
+      ],
     ],
     deco: subcardDeco2,
   },
   {
     title: (
       <>
-        UNVEIL - <span className="font-normal">Live Cohort</span>
-        <br />
-        <span className="font-normal">(for online graduates):</span>
+        <span className="block">
+          UNVEIL - <span className="font-normal">Live Cohort</span>
+        </span>
+        <span className="block font-normal">(for online graduates):</span>
       </>
     ),
-    items: ["6 weeks", "Live cohort from Phase 3", "Architecture, authority, the closing ceremony"],
+    items: [
+      "6 weeks",
+      "Live cohort from Phase 3",
+      ["Architecture, authority, the", "closing ceremony"],
+    ],
     deco: subcardDeco3,
   },
 ];
 
 function SubcardList({ items }) {
   return (
-    <ul className="relative z-10 mt-4 list-[square] space-y-1 pl-5 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-white">
-      {items.map((item) => (
-        <li key={item}>{item}</li>
+    <ul className="relative z-10 mt-4 list-[square] space-y-1 pl-5 text-[clamp(1rem,1.28vw,1.125rem)] leading-normal text-white lg:[&_span]:block lg:[&_span]:whitespace-nowrap">
+      {items.map((item, i) => (
+        <li key={i}>
+          {Array.isArray(item) ? (
+            item.map((line, j) => <span key={j}>{line}</span>)
+          ) : (
+            <span>{item}</span>
+          )}
+        </li>
       ))}
     </ul>
   );
