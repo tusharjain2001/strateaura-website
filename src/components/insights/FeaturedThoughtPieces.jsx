@@ -1,9 +1,7 @@
 import { ArrowRight } from "../ui/Icons";
 import thoughtDecor1 from "../../assets/insights/thought-decor-1.png";
 import thoughtDecor2 from "../../assets/insights/thought-decor-2.png";
-// Card 3's Figma decor node is "Group 69" — the same circle-cluster aura the
-// webinar cards use (the insights export of it shipped as a blank PNG).
-import thoughtDecor3 from "../../assets/webinar/card-aura-1.svg";
+import thoughtDecor3 from "../../assets/insights/thought-decor-3.png";
 import thoughtDecor4 from "../../assets/insights/thought-decor-4.png";
 import seamSparkle from "../../assets/insights/thought-seam-sparkle.png";
 

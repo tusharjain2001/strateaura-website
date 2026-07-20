@@ -1,4 +1,4 @@
-import settingTonePhoto from "../../assets/insights/setting-tone-photo.jpg";
+import settingTonePhoto from "../../assets/insights/setting-tone-photo.png";
 import toneCardBlob from "../../assets/insights/tone-card-blob.png";
 
 export default function SettingTheTone() {
@@ -14,14 +14,19 @@ export default function SettingTheTone() {
             alt="Dr. Suhair Hamouri presenting on stage"
             className="aspect-[921/660] w-full object-cover lg:aspect-auto lg:h-full"
           />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/70 to-transparent" />
+          {/* Figma (node 1136:5689): the scrim is 372.41 of the photo's 660px,
+              i.e. 56.4%, not 40%. */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[56.4%] bg-gradient-to-t from-black/70 to-transparent" />
         </div>
 
         {/* Gold speech-bubble card, overlapping the photo's left edge on desktop.
             min-h (not a fixed h) lets the box grow if the copy needs more
             room than Figma's 473px — the blob image stretches to match so the
             text never overflows past the shape's bottom edge. */}
-        <div className="relative -mt-8 lg:absolute lg:top-[197px] lg:left-[98px] lg:mt-0 lg:min-h-[473px] lg:w-[845px]">
+        {/* Figma (node 1136:5690) draws the shape from x=98 to x=929 — 831px,
+            which is the asset's native 832 width. The old 845 was the outer
+            frame, and stretched the blob ~1.6% wider than it was drawn. */}
+        <div className="relative -mt-8 lg:absolute lg:top-[197px] lg:left-[98px] lg:mt-0 lg:min-h-[473px] lg:w-[832px]">
           <img
             src={toneCardBlob}
             alt=""
@@ -31,7 +36,13 @@ export default function SettingTheTone() {
             <h2 className="max-w-[666px] text-[clamp(1.5rem,3vw,2.1875rem)] leading-[1.2] font-bold">
               Setting the Tone
             </h2>
-            <p className="mt-4 max-w-[600px] pr-6 text-[clamp(1.0625rem,1.7vw,1.375rem)] leading-[1.4] lg:mt-5 lg:pr-[80px]">
+            {/* Figma's measure is 616px (node 1136:5692). Held at 22px rather
+                than Figma's 24px on purpose: at 24px, Inter runs the copy to an
+                11th line, which pushes the box past the shape's 473px and
+                stretches the blob image out of shape. 22px in the full 616px
+                keeps it at Figma's 10 lines, so the bubble sits at its drawn
+                height. */}
+            <p className="mt-4 max-w-[600px] pr-6 text-[clamp(1.0625rem,1.7vw,1.375rem)] leading-[1.4] lg:mt-5 lg:max-w-[616px] lg:pr-0">
               This is not a content dump. This is a space for thoughtful
               professionals, evolving leaders, and high-performing individuals
               to pause, reframe, and rise. We believe insight should be
