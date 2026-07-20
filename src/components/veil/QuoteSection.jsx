@@ -33,14 +33,11 @@ export default function QuoteSection() {
           <QuoteText />
         </div>
         <div className="relative aspect-[921/660] w-full overflow-hidden rounded-[4px]">
-          {/* Source JPG is baked in mirrored — flip it back so the venue
-              signage reads correctly, as in Figma. */}
           <img
             src={quotePhoto}
             alt="Dr. Suhair Hamouri presenting at Philosophy House, Fujairah"
-            className="pointer-events-none absolute inset-0 size-full -scale-x-100 object-cover"
+            className="pointer-events-none absolute inset-0 size-full object-cover"
           />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[56%] bg-gradient-to-t from-black/70 to-transparent" />
         </div>
       </div>
 
@@ -53,14 +50,11 @@ export default function QuoteSection() {
           wraps never drift at other widths. */}
       <div className="relative mx-auto hidden w-full max-w-[1440px] lg:block lg:h-[816px]">
         <div className="absolute top-[9.56%] left-[32.36%] h-[80.88%] w-[63.96%] overflow-hidden rounded-[4px]">
-          {/* Source JPG is baked in mirrored — flip it back so the venue
-              signage reads correctly, as in Figma. */}
           <img
             src={quotePhoto}
             alt="Dr. Suhair Hamouri presenting at Philosophy House, Fujairah"
-            className="pointer-events-none absolute inset-0 size-full -scale-x-100 object-cover"
+            className="pointer-events-none absolute inset-0 size-full object-cover"
           />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-black/70 to-transparent" />
         </div>
 
         {/* Bubble box: the svg includes the tail — panel is its left 81.4%
