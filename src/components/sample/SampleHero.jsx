@@ -16,7 +16,7 @@ export default function SampleHero() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-navy-2/60 to-navy-2" />
 
-      <div className="relative mx-auto flex min-h-[560px] w-full max-w-[1920px] flex-col justify-end px-6 pb-14 sm:px-8 lg:min-h-[715px] lg:px-12 lg:pb-20 xl:px-[72px]">
+      <div className="relative mx-auto flex min-h-[560px] w-full max-w-[1920px] flex-col justify-end px-6 pb-28 sm:px-8 lg:min-h-[715px] lg:px-12 lg:pb-40 xl:px-[72px]">
         <div className="max-w-[789px]">
           <h1 className="text-[clamp(2rem,2.29vw,44px)] font-bold leading-[1.12] text-white">
             Where Strategy Comes to Life. Where Leaders Find Their Edge.

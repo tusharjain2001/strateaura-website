@@ -115,7 +115,7 @@ function CardBody({ card }) {
       <div className="relative h-full">
         <CardPattern {...card.pattern} />
         {/* Copy is left-aligned at x=64; only the icon is centred. */}
-        <p className="relative w-[363px] pt-[86px] pl-[64px] text-[31px] leading-[1.1] text-white">
+        <p className="relative ml-[64px] w-[363px] pt-[83px] text-[29px] leading-[33px] text-white">
           {card.body}
         </p>
         <IconCircle
@@ -158,12 +158,12 @@ export default function ProblemWeAddress() {
         className="pointer-events-none absolute top-[160px] left-[-44px] h-[703px] w-[735px] opacity-90"
       />
 
-      <div className="absolute top-[212px] left-[222px] w-[405px] text-[35px] leading-tight font-bold text-navy">
+      <div className="absolute top-[206px] left-[222px] w-[405px] text-[35px] leading-[1.2] font-bold text-navy">
         The Problem
         <br />
         We Address
       </div>
-      <p className="absolute top-[316px] left-[222px] w-[470px] text-[24px] leading-normal font-light text-black [&>span]:block">
+      <p className="absolute top-[313px] left-[222px] w-[470px] text-[24px] leading-[27px] font-light text-black [&>span]:block">
         <span className="whitespace-nowrap">We live in a world of constant doing,</span>
         <span className="whitespace-nowrap">chasing visibility, metrics, and</span>
         <span>motion. But too many leaders feel</span>
@@ -229,7 +229,7 @@ export default function ProblemWeAddress() {
         href="#solutions"
         variant="goldOutlineWhite"
         icon="sparkle"
-        className="absolute top-[500px] left-[222px]"
+        className="absolute top-[463px] left-[222px]"
       >
         Our Solutions
       </PillButton>

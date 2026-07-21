@@ -23,7 +23,7 @@ export default function Frameworks() {
         className="pointer-events-none absolute top-[386px] left-[1px] w-[1438px]"
       />
 
-      <h2 className="absolute top-[151px] left-[152px] w-[562px] text-[35px] font-bold text-navy">
+      <h2 className="absolute top-[148px] left-[152px] w-[562px] text-[35px] leading-[1.2] font-bold text-navy">
         Our Signature Frameworks
       </h2>
       <PillButton
@@ -35,7 +35,7 @@ export default function Frameworks() {
       >
         Discover Models
       </PillButton>
-      <p className="absolute top-[234px] left-[152px] w-[744px] text-[24px] leading-normal font-light text-black">
+      <p className="absolute top-[231px] left-[152px] w-[744px] text-[22.4px] leading-[30px] font-light text-black">
         We teach models you won't find in standard leadership courses. These are
         systems that make inner insight visible and sustainable.
       </p>
