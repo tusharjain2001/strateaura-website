@@ -94,7 +94,10 @@ export default function MobileFooter() {
             <Link to="/" aria-label="StrateAura home">
               <img src={footerLogo} alt="StrateAura" className="h-[54px] w-[80px]" />
             </Link>
-            <div className="w-[113px] shrink-0">
+            {/* Figma's 113px box measures "CONNECT WITH US" in Acumin Pro;
+                Inter needs ~118px and wrapped inside it. Sized to content
+                instead so the heading stays on one line. */}
+            <div className="shrink-0">
               <p className="text-[12px] leading-[24px] font-bold text-gold">
                 CONNECT WITH US
               </p>
@@ -114,18 +117,20 @@ export default function MobileFooter() {
           </div>
 
           {/* Link columns — node 1434:785 */}
-          <div className="flex items-start justify-between">
-            <div className="w-[136px] shrink-0">
-              <FooterLinks heading="COMPANY" items={COMPANY} />
-            </div>
-            <div className="w-[175px] shrink-0">
-              <FooterLinks heading="FRAMEWORKS" items={FRAMEWORKS} />
-            </div>
+          {/* Figma's 136/175px columns are Acumin measurements — "Insights &
+              Resources" needs ~148px in Inter and wrapped. Both columns size to
+              their content now, so the links stay on one line each while still
+              being able to wrap if a very narrow screen leaves no room. */}
+          <div className="flex items-start justify-between gap-[16px]">
+            <FooterLinks heading="COMPANY" items={COMPANY} />
+            <FooterLinks heading="FRAMEWORKS" items={FRAMEWORKS} />
           </div>
         </div>
 
         {/* Node 1434:792 */}
-        <div className="mt-[41px] w-[294px] max-w-full text-[14px] leading-[24px] tracking-[0.2px] text-ink">
+        {/* Same as above: Figma's 294px box fits the copyright line in Acumin
+            but not in Inter, which needs ~317px. */}
+        <div className="mt-[41px] max-w-full text-[14px] leading-[24px] tracking-[0.2px] text-ink">
           <p className="font-medium">
             StrateAura © 2024-2026 / All Rights Reserved
           </p>
