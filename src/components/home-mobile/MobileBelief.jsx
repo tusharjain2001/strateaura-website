@@ -1,4 +1,4 @@
-import beliefLaurel from "../../assets/home-mobile/belief-laurel.svg";
+import beliefLaurel from "../../assets/home-mobile/belief-laurel-mobile.png";
 
 /**
  * "Our Belief" band — Figma node 1434:622.
@@ -21,7 +21,7 @@ export default function MobileBelief() {
         src={beliefLaurel}
         alt=""
         aria-hidden
-        className="pointer-events-none absolute top-[36px] left-[29.35%] w-[74.08%] max-w-none"
+        className="pointer-events-none absolute top-[36px] left-[29.35%] w-[74.08%] max-w-none opacity-30"
       />
 
       <div className="relative z-10 mx-auto flex min-h-[304px] w-full max-w-[430px] flex-col justify-center px-[35px] py-[72px]">
