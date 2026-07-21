@@ -46,12 +46,18 @@ export default function MobilePhilosophy() {
         </div>
 
         <div className="mt-[59px]">
-          {/* Gold panel — the flat part of Vector 12 (337px of its 419px). */}
-          <div className="rounded-t-[8px] bg-gold px-[31px] pt-[37px] pb-[76px]">
+          {/* Gold panel — the flat part of Vector 12 (337px of its 419px), so
+              37px above the copy and 28px below it (Figma's text frame is
+              271.82 tall: 37 + 271.82 + 28 = 337).
+
+              --phil-col is the panel's inner width. The body copy scales off it
+              so Inter reproduces Figma's line breaks: the column is 307px of
+              16px Acumin Pro, and Inter runs ~5% wider, hence 16/(307*1.05). */}
+          <div className="rounded-t-[8px] bg-gold px-[31px] pt-[37px] pb-[28px] [--phil-col:calc(min(100vw,430px)-94px)]">
             <p className="text-[24px] leading-normal font-bold text-cream">
               The Why Behind StrateAura™
             </p>
-            <p className="mt-[16px] text-[16px] leading-normal font-light text-white">
+            <p className="mt-[16px] text-[min(16px,calc(var(--phil-col)*0.0496))] leading-normal font-light text-white">
               StrateAura™ was born from a deeper truth: That leadership isn’t
               just about making decisions, it’s about how you carry them. That
               growth isn’t about more, it’s about what aligns. And that
@@ -67,7 +73,7 @@ export default function MobilePhilosophy() {
             <img
               src={philPhoto}
               alt="Aura Al Ramahi, founder of StrateAura™"
-              className="block aspect-[369/396] w-full rounded-b-[8px] object-cover object-top"
+              className="block aspect-[369/407] w-full rounded-b-[8px] object-cover"
             />
             <img
               src={philArch}

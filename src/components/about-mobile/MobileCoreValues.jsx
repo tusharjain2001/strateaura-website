@@ -2,7 +2,7 @@ import MobileContainer from "../home-mobile/MobileContainer";
 import arrowA from "../../assets/about-mobile/val-arrow-a.svg";
 import arrowB from "../../assets/about-mobile/val-arrow-b.svg";
 import decorAlignment from "../../assets/about-mobile/val-decor-alignment.svg";
-import decorElevation from "../../assets/about-mobile/val-decor-elevation.svg";
+import decorElevation from "../../assets/about-mobile/val-decor-elevation.png";
 import decorIntegrity from "../../assets/about-mobile/val-decor-integrity.svg";
 import decorEmpowerment from "../../assets/about-mobile/val-decor-empowerment.svg";
 
@@ -26,7 +26,6 @@ const CARDS = [
     decor: decorElevation,
     // 1295:3912 — ellipse row, rotated a quarter turn in Figma.
     decorStyle: { left: "7.69%", top: "60.5%", width: "104.63%", height: "46.49%" },
-    decorClassName: "-rotate-90 -scale-y-100",
   },
   {
     title: "Integrity",

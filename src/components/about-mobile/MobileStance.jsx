@@ -51,11 +51,21 @@ const STATEMENTS = [
  * The plates keep their Figma height as a floor and stretch vertically if the
  * copy needs more room at narrow widths; the spikes eat ~21% of the width on
  * each side, which is where the horizontal padding comes from.
+ *
+ * The band is node 1293:3631 — not plain white but a #4c7dbe -> white -> #4c7dbe
+ * horizontal gradient at 10%, so the blue only tints the two outer edges. It
+ * runs y=1117..2074 in the frame, which is where the 94px of bottom padding
+ * comes from (the copy ends at 1979.65).
  */
 export default function MobileStance() {
   return (
-    <section className="bg-white pt-[60px] pb-[48px]">
-      <MobileContainer>
+    <section className="relative overflow-hidden bg-white pt-[60px] pb-[94px]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,#4c7dbe_0%,#ffffff_50%,#4c7dbe_100%)] opacity-10"
+      />
+
+      <MobileContainer className="relative">
         <div className="mx-auto flex w-full max-w-[274px] flex-col items-center gap-[22px]">
           <div className="relative flex h-[37px] w-[202px] items-center justify-center">
             <img
