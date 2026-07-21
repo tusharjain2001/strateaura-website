@@ -6,30 +6,39 @@ import assessPattern from "../../assets/frameworks/ala-assess-pattern.svg";
 import leveragePattern from "../../assets/frameworks/ala-leverage-pattern.svg";
 import actuatePattern from "../../assets/frameworks/ala-actuate-pattern.svg";
 
-// Pattern boxes are Figma's (node 1296:4554) expressed as a share of the 370px
-// card, so each keeps its place as the column grows to the 430px cap. Every one
-// bleeds past an edge; the wrapper clips them to the rounded corners.
+// Pattern boxes from Figma node 1296:4554. `left` and `w` are shares of the
+// card's width; `top` is also driven by width (--card-w) rather than a share of
+// height, because these cards size to their copy and so no longer match Figma's
+// fixed 234/242/208px heights — a height percentage drifts as the copy reflows,
+// while the width ratio holds. Each bleeds past an edge and the wrapper clips
+// them to the rounded corners.
 const CARDS = [
   {
     key: "assess",
     title: "Assess",
     body: "What’s really happening, in your decisions, your data, your behaviour, your energy.",
     pattern: assessPattern,
-    patternClass: "left-[48.4%] top-[36.6%] w-[51.5%]",
+    // 178.95 / 85.66 / 190.69 wide on a 370px card; overflows the bottom by 39.
+    patternClass:
+      "left-[48.366%] top-[calc(var(--card-w)*0.23151)] w-[51.537%]",
   },
   {
     key: "leverage",
     title: "Leverage",
     body: "What’s working (even if hidden), strengths, patterns, underused insight.",
     pattern: leveragePattern,
-    patternClass: "left-[58.3%] top-[49.3%] w-[41.6%]",
+    // 216.11 / 119.27 / 154.51 wide on a 371px card; sits flush to the bottom.
+    patternClass:
+      "left-[58.251%] top-[calc(var(--card-w)*0.32149)] w-[41.646%]",
   },
   {
     key: "actuate",
     title: "Actuate",
     body: "What needs to move, with intention, timing, and support.",
-    // Figma flips this one vertically, as on desktop.
-    patternClass: "left-[50.2%] bottom-0 w-[50%] -scale-y-100",
+    // 185.80 / 157.44 / 184.82 wide on a 371px card, mirrored vertically as on
+    // desktop; overflows the bottom by 66, which `bottom-0` was hiding.
+    patternClass:
+      "left-[50.081%] top-[calc(var(--card-w)*0.42437)] w-[49.817%] -scale-y-100",
     pattern: actuatePattern,
   },
 ];
@@ -66,7 +75,12 @@ export default function FwAlaNexus() {
           It unfolds in three deeply practical, deeply personal stages:
         </p>
 
-        <div className="mt-[40px] flex flex-col gap-[16px]">
+        {/* --ala-col is the copy column: the card's inner width, capped at
+            Figma's 300px text box. Figma sets the title at 23.469px and the
+            body at 20.536px inside that box; Inter needs ~5% more room, so both
+            scale off the column (20.536/(300*1.05) = 0.0652, and 0.0745 for the
+            title to hold the same ratio) and the Figma line breaks survive. */}
+        <div className="mt-[40px] flex flex-col gap-[16px] [--ala-col:min(calc(min(100vw,430px)-108px),300px)] [--card-w:calc(min(100vw,430px)-32px)]">
           {CARDS.map((card) => (
             <div
               key={card.key}
@@ -81,14 +95,16 @@ export default function FwAlaNexus() {
                   className={`pointer-events-none absolute h-auto ${card.patternClass}`}
                 />
               </div>
-              <div className="relative px-[38px] pt-[29px] pb-[38px]">
-                <p className="text-[22px] leading-[29px] font-bold text-white">
+              {/* Card-local geometry from node 1296:4557: title at 37.74,
+                  body at 86, arrow at 195 on a 234px card. */}
+              <div className="relative px-[38px] pt-[38px] pb-[36px]">
+                <p className="text-[min(23.469px,calc(var(--ala-col)*0.0745))] leading-[1.25] font-bold text-white">
                   {card.title}
                 </p>
-                <p className="mt-[18px] max-w-[300px] text-[19px] leading-[25.5px] text-white">
+                <p className="mt-[19px] max-w-[300px] text-[min(20.536px,calc(var(--ala-col)*0.0652))] leading-[1.3] text-white">
                   {card.body}
                 </p>
-                <ArrowRight className="mt-[14px] w-[39.58px] text-white" />
+                <ArrowRight className="mt-[12px] w-[39.58px] text-white" />
               </div>
             </div>
           ))}
