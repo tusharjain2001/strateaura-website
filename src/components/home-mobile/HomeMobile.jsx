@@ -26,8 +26,21 @@ export default function HomeMobile() {
       <MobileNav />
       <main>
         <MobileHero />
-        <MobileSignaturePrograms />
-        <MobileVeil />
+        {/* Node 1434:406 — a 1593x402 rect rotated to run from the bottom of
+            the hero (y=814) to y=2407, so it backs Signature Programs and the
+            VEIL card as one band. Its fill is #FEE8A9 -> #FFFFFF at 40%, and
+            the rotation puts the cream stop at the bottom. Both sections inside
+            are transparent so this shows through. */}
+        <div className="relative">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#FFFFFF_0%,#FEE8A9_100%)] opacity-40"
+          />
+          <div className="relative">
+            <MobileSignaturePrograms />
+            <MobileVeil />
+          </div>
+        </div>
         <MobileMarketingPrograms />
         <MobileCtaBand />
         <MobileWhatWeOffer />

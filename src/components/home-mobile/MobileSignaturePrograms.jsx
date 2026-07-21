@@ -6,8 +6,9 @@ import MobilePill from "./MobilePill";
  * Sits between the hero photo and the VEIL flagship block.
  */
 export default function MobileSignaturePrograms() {
+  // No background: the cream band (node 1434:406) is painted by HomeMobile.
   return (
-    <section className="bg-white pt-[60px]">
+    <section className="pt-[60px]">
       <MobileContainer>
         <h2 className="text-[28px] leading-normal font-bold text-navy">
           Signature Programs

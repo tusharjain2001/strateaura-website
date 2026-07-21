@@ -35,7 +35,7 @@ const CARDS = [
  */
 export default function MobileVeil() {
   return (
-    <section className="bg-white pt-[46px] pb-[53px]">
+    <section className="pt-[46px] pb-[53px]">
       <div className="mx-auto w-full max-w-[430px] px-4">
         {/* --veil-col is the card's inner content width; the body copy below is
             sized off it so Inter reproduces the Figma line breaks. Figma's
