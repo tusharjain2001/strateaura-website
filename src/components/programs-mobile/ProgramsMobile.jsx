@@ -18,13 +18,12 @@ import digitalTransformationPhoto from "../../assets/programs/digital-transforma
  * (per-line headings for the 1440px canvas, masked photo variants, image side).
  * Touching it would change the desktop page.
  *
- * `band` names the wash behind each block — Figma alternates gold and navy and
- * leaves Higher Education on white.
+ * `tone` is gold or navy and drives the whole block: heading colour, the
+ * section wash behind it, the CTA, and the checklist card.
  */
 const DETAILS = [
   {
     id: "wellness",
-    band: "goldUp",
     tone: "gold",
     heading:
       "Wellness-Centric Leadership: The Integrative Approach to Sustainable Performance",
@@ -45,7 +44,6 @@ const DETAILS = [
   },
   {
     id: "higher-education",
-    band: "none",
     tone: "navy",
     heading:
       "Strategic Marketing in Higher Education: Integration, Innovation, and AI-Powered Recruitment",
@@ -67,7 +65,6 @@ const DETAILS = [
   },
   {
     id: "integrated-marketing",
-    band: "navy",
     tone: "gold",
     heading:
       "Integrated Marketing Strategy Masterclass: From Chaos to Clarity",
@@ -89,7 +86,6 @@ const DETAILS = [
   },
   {
     id: "digital-marketing",
-    band: "gold",
     tone: "navy",
     heading:
       "Digital Marketing with Purpose: Navigating AI, Data, and Strategy for Impact",
@@ -110,7 +106,6 @@ const DETAILS = [
   },
   {
     id: "digital-transformation",
-    band: "navy",
     tone: "gold",
     heading:
       "Marketing in the Age of Digital Transformation: Agility, Innovation, and Customer-Centricity",

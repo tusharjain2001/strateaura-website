@@ -2,15 +2,29 @@ import MobileContainer from "../home-mobile/MobileContainer";
 import MobilePill from "../home-mobile/MobilePill";
 import bulletStar from "../../assets/programs/yellowcardpointer.png";
 
-// Figma nodes 1433:174 / 1433:9 / 1433:6 / 1433:8 — the section washes alternate
-// gold and navy down the page. Each is a vertical gradient into #fffdf7, and the
-// gold ones sit at 30% while the navy ones sit at 20%. "none" is Higher
-// Education, which Figma leaves on plain white.
-const BANDS = {
-  gold: "bg-gradient-to-b from-[#c99400] to-[#fffdf7] opacity-30",
-  goldUp: "bg-gradient-to-b from-[#fffdf7] to-[#c99400] opacity-30",
-  navy: "bg-gradient-to-b from-[#233a58] to-[#fffdf7] opacity-20",
-  none: null,
+// Every block carries one tone, and the tone drives all three of its colours:
+// the heading, the section wash behind it, and the checklist card at the end.
+//
+// The washes are Figma nodes 1433:174 / 1433:9 / 1433:6 / 1433:8 / 1433:7. Each
+// is rotated a half turn, so the stop order reverses: they read light at the
+// top deepening to colour at the bottom, not the other way round. Un-rotated
+// their spans also line up one section off, which is what put the navy wash
+// behind Integrated Marketing instead of Higher Education. Rotated, all five sit
+// 60px above and below their own block.
+const TONES = {
+  gold: {
+    heading: "text-gold",
+    wash: "bg-gradient-to-b from-[#fffdf7] to-[#c99400] opacity-30",
+    card: "from-gold to-gold-dark",
+    pill: "goldOutline",
+  },
+  navy: {
+    heading: "text-navy-2",
+    wash: "bg-gradient-to-b from-[#fffdf7] to-[#233a58] opacity-20",
+    // 1433:216 — navy to blue, not the gold ramp.
+    card: "from-navy to-blue",
+    pill: "navyOutline",
+  },
 };
 
 /**
@@ -22,7 +36,6 @@ const BANDS = {
  */
 export default function PmDetail({
   id,
-  band = "none",
   tone = "gold",
   heading,
   eyebrow,
@@ -34,26 +47,20 @@ export default function PmDetail({
   photoAlt,
   bullets,
 }) {
-  const wash = BANDS[band];
+  const t = TONES[tone] ?? TONES.gold;
 
   return (
     <section id={id} className="relative overflow-hidden pt-[60px] pb-[60px]">
-      {wash && (
-        <div
-          aria-hidden
-          className={`pointer-events-none absolute inset-0 ${wash}`}
-        />
-      )}
+      <div
+        aria-hidden
+        className={`pointer-events-none absolute inset-0 ${t.wash}`}
+      />
 
       <MobileContainer className="relative">
         {/* Headings alternate gold / navy down the page (1433:179, :203, :227,
             :366, :251). Everything below them is plain black at 60% — not the
             navy this block first used. */}
-        <h2
-          className={`text-[24px] leading-normal font-bold ${
-            tone === "navy" ? "text-navy-2" : "text-gold"
-          }`}
-        >
+        <h2 className={`text-[24px] leading-normal font-bold ${t.heading}`}>
           {heading}
         </h2>
 
@@ -75,7 +82,7 @@ export default function PmDetail({
           <MobilePill
             as="a"
             href={ctaHref}
-            variant={tone === "navy" ? "navyOutline" : "goldOutline"}
+            variant={t.pill}
             size="veil"
           >
             {ctaLabel}
@@ -93,7 +100,9 @@ export default function PmDetail({
             normal leading, so the rows butt up with no gap between them.
             --box-col is the copy's own column (279px in Figma): the text scales
             off it so Inter keeps each item to the two lines the design shows. */}
-        <div className="mt-[32px] rounded-[4px] bg-gradient-to-b from-gold to-gold-dark px-[27px] pt-[20px] pb-[24px] [--box-col:calc(min(100vw,430px)-116px)]">
+        <div
+          className={`mt-[32px] rounded-[4px] bg-gradient-to-b px-[27px] pt-[20px] pb-[24px] [--box-col:calc(min(100vw,430px)-116px)] ${t.card}`}
+        >
           <p className="text-[20px] leading-normal font-bold text-white">
             In this program, you will:
           </p>
