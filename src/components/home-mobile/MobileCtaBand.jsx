@@ -1,7 +1,7 @@
 import MobileContainer from "./MobileContainer";
 import MobilePill from "./MobilePill";
 import ctaSwoosh from "../../assets/home-mobile/cta-swoosh.svg";
-import ctaPhoto from "../../assets/home-mobile/cta-photo.jpg";
+import ctaPhoto from "../../assets/home-mobile/cta-photo-new.png";
 
 /**
  * Closing CTA band — Figma node 1434:560 (photo is the sibling node 1434:839).
@@ -51,7 +51,8 @@ export default function MobileCtaBand() {
               as="a"
               href="/contact"
               variant="creamOutline"
-              className="w-full max-w-[290px] text-cream [&>span:last-child]:bg-cream"
+              size="ctaBand"
+              className="max-w-full text-cream [&>span:last-child]:bg-cream"
             >
               Book a Strategic Conversation
             </MobilePill>

@@ -70,6 +70,18 @@ const SIZES = {
     circle: "size-[32.87px]",
     glyph: "size-[17px]",
   },
+  // Closing CTA band pill (Figma node 1434:566). Figma draws it 290px wide with
+  // a 226px label, but "Book a Strategic Conversation" needs ~237px in Inter,
+  // which pushes the glyph circle out past the capsule. The pill is left to size
+  // to its content instead (the band has 351px to give), and the label only
+  // scales once the viewport can no longer hold the natural ~303px: 98px is the
+  // container's 32px padding plus this pill's 66px of chrome, and 0.066 is
+  // 16/237 with a couple of px of slack.
+  ctaBand: {
+    pill: "gap-[9.52px] py-[5px] pr-[5.79px] pl-[17.48px] text-[min(16px,calc((min(100vw,430px)-98px)*0.066))]",
+    circle: "size-[31.2px]",
+    glyph: "size-[22.25px]",
+  },
 };
 
 export default function MobilePill({
