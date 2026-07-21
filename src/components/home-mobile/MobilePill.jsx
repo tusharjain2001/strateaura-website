@@ -37,11 +37,25 @@ const VARIANTS = {
   },
 };
 
-// Two sizes appear in the frame: the 16px label pills used inside sections and
-// the 20px "View All Programs"-style pills that head a section.
+// Three sizes appear in the frame: the 16px label pills used inside sections,
+// the 20px "View All Programs"-style pills that head a section, and the hero's
+// slightly tighter pair (Figma nodes 1434:478/1434:484 sit at a 0.804 scale).
 const SIZES = {
-  sm: { pill: "pl-[16px] text-[16px]", circle: "size-[32px]", glyph: "size-[17px]" },
-  md: { pill: "pl-[21px] text-[20px]", circle: "size-[34px]", glyph: "size-[18px]" },
+  sm: {
+    pill: "gap-3 py-[5px] pr-[5px] pl-[16px] text-[16px]",
+    circle: "size-[32px]",
+    glyph: "size-[17px]",
+  },
+  md: {
+    pill: "gap-3 py-[5px] pr-[5px] pl-[21px] text-[20px]",
+    circle: "size-[34px]",
+    glyph: "size-[18px]",
+  },
+  hero: {
+    pill: "gap-[9.65px] py-[6.44px] pr-[6.44px] pl-[12.87px] text-[16px]",
+    circle: "size-[25.8px]",
+    glyph: "size-[18.4px]",
+  },
 };
 
 export default function MobilePill({
@@ -60,7 +74,7 @@ export default function MobilePill({
 
   return (
     <Tag
-      className={`group inline-flex items-center justify-between gap-3 rounded-full py-[5px] pr-[5px] leading-none font-bold whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${s.pill} ${v.pill} ${className}`}
+      className={`group inline-flex items-center justify-between rounded-full leading-none font-bold whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${s.pill} ${v.pill} ${className}`}
       {...props}
     >
       <span>{children}</span>
