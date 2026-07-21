@@ -4,6 +4,7 @@ import VeilFrameworkSection from "../components/programs/VeilFrameworkSection";
 import ProgramsPreviewSection from "../components/programs/ProgramsPreviewSection";
 import ProgramDetailSection from "../components/programs/ProgramDetailSection";
 import SiteFooter from "../components/layout/SiteFooter";
+import ProgramsMobile from "../components/programs-mobile/ProgramsMobile";
 
 import wellnessPhoto from "../assets/programs/wellness-photo.jpg";
 import higheredPhoto from "../assets/programs/highered-photo.jpg";
@@ -162,19 +163,29 @@ const PROGRAM_DETAILS = [
 // reference and the layout reflows below it. Above 1440px content stays at
 // its natural Figma size (each section centres a max-w-[1440px] container
 // while its background bleeds full-width) — never zoom-scaled.
+//
+// The mobile design (Figma node 1295:3960) is a different composition, not a
+// narrow version of this one, so it is its own tree rendered below lg. The
+// desktop markup below is unchanged and takes over at lg.
 export default function ProgramsPage() {
   return (
-    <div className="bg-white text-black">
-      <SiteHeader />
-      <main>
-        <ProgramsHero />
-        <VeilFrameworkSection />
-        <ProgramsPreviewSection />
-        {PROGRAM_DETAILS.map((program) => (
-          <ProgramDetailSection key={program.id} {...program} />
-        ))}
-      </main>
-      <SiteFooter />
-    </div>
+    <>
+      <div className="lg:hidden">
+        <ProgramsMobile />
+      </div>
+
+      <div className="hidden bg-white text-black lg:block">
+        <SiteHeader />
+        <main>
+          <ProgramsHero />
+          <VeilFrameworkSection />
+          <ProgramsPreviewSection />
+          {PROGRAM_DETAILS.map((program) => (
+            <ProgramDetailSection key={program.id} {...program} />
+          ))}
+        </main>
+        <SiteFooter />
+      </div>
+    </>
   );
 }

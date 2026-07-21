@@ -37,10 +37,10 @@ export default function MobileVeil() {
   return (
     <section className="pt-[46px] pb-[53px]">
       <div className="mx-auto w-full max-w-[430px] px-4">
-        {/* --veil-col is the card's inner content width; the body copy below is
+        {/* --pill-col is the card's inner content width; the body copy below is
             sized off it so Inter reproduces the Figma line breaks. Figma's
             column is 334px of Acumin Pro, and Inter runs ~5% wider. */}
-        <div className="overflow-hidden rounded-xl border border-gold-light bg-linear-to-b from-white to-gold-light px-[18px] pt-[19px] pb-[14px] [--veil-col:calc(min(100vw,430px)-70px)]">
+        <div className="overflow-hidden rounded-xl border border-gold-light bg-linear-to-b from-white to-gold-light px-[18px] pt-[19px] pb-[14px] [--pill-col:calc(min(100vw,430px)-70px)]">
           <h2 className="text-[28px] leading-normal font-bold text-navy">
             VEIL™: Lead Without
             <br />
@@ -72,7 +72,7 @@ export default function MobileVeil() {
             The Flagship Program
           </p>
 
-          <div className="mt-[16px] space-y-[1em] text-[min(16px,calc(var(--veil-col)*0.0456))] leading-normal text-navy">
+          <div className="mt-[16px] space-y-[1em] text-[min(16px,calc(var(--pill-col)*0.0456))] leading-normal text-navy">
             <p>
               For women in leadership and high-demand professional roles who are
               performing well externally - and already paying a silent cost for

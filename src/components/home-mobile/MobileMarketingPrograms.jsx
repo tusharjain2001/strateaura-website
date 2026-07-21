@@ -8,7 +8,10 @@ import decorWave from "../../assets/home-mobile/mkt-wave.svg";
 // Figma nodes 1434:801 / 812 / 818 / 829 / 834 — five navy→blue gradient cards.
 // Each carries one line-art watermark bleeding off its own right edge, so the
 // decor is described here as an absolutely positioned overlay per card.
-const CARDS = [
+//
+// Exported because the mobile Programs page (Figma node 1433:133) repeats the
+// same five tiles; only the surrounding copy differs.
+export const CARDS = [
   {
     id: "wellness",
     // 1434:803 splits this across two lines explicitly.
