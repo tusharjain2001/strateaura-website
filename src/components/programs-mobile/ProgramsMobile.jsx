@@ -7,10 +7,10 @@ import PmPreview from "./PmPreview";
 import PmDetail from "./PmDetail";
 
 import wellnessPhoto from "../../assets/programs/wellness-photo.png";
-import higheredPhoto from "../../assets/programs/highered-photo.jpg";
-import integratedPhoto from "../../assets/programs/integrated-marketing-photo.jpg";
-import digitalMarketingPhoto from "../../assets/programs/digital-marketing-photo.jpg";
-import digitalTransformationPhoto from "../../assets/programs/digital-transformation-photo.jpg";
+import higheredPhoto from "../../assets/programs/highered-photo.png";
+import integratedPhoto from "../../assets/programs/integrated-marketing-photo.png";
+import digitalMarketingPhoto from "../../assets/programs/digital-marketing-photo.png";
+import digitalTransformationPhoto from "../../assets/programs/digital-transformation-photo.png";
 
 /**
  * The five detail blocks. The copy matches ProgramsPage's PROGRAM_DETAILS, but

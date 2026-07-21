@@ -1,6 +1,6 @@
 import MobileContainer from "../home-mobile/MobileContainer";
 import MobilePill from "../home-mobile/MobilePill";
-import bulletCheck from "../../assets/programs/pathway-bullet-check.svg";
+import bulletStar from "../../assets/programs/yellowcardpointer.png";
 
 // Figma nodes 1433:174 / 1433:9 / 1433:6 / 1433:8 — the section washes alternate
 // gold and navy down the page. Each is a vertical gradient into #fffdf7, and the
@@ -70,34 +70,43 @@ export default function PmDetail({
           {suitedFor}
         </p>
 
+        {/* The CTA takes the section's tone, like the heading above it. */}
         <div className="mt-[32px] [--pill-col:calc(min(100vw,430px)-32px)]">
-          <MobilePill as="a" href={ctaHref} variant="goldOutline" size="veil">
+          <MobilePill
+            as="a"
+            href={ctaHref}
+            variant={tone === "navy" ? "navyOutline" : "goldOutline"}
+            size="veil"
+          >
             {ctaLabel}
           </MobilePill>
         </div>
 
-        <img
-          src={photo}
-          alt={photoAlt}
-          className="mt-[36px] block aspect-[371/415] w-full rounded-[4px] object-cover"
-        />
+        {/* Each photo ships pre-masked with the arch cut and transparency, at
+            exactly its Figma node's size (371x415, 369x450, ...). Forcing a
+            shared aspect ratio and object-cover cropped every one of them to
+            Wellness's proportions, so the image is left at its natural size. */}
+        <img src={photo} alt={photoAlt} className="mt-[36px] block w-full" />
 
-        {/* 1433:192 — gold checklist card. Figma pins each check at a fixed
-            y, but the list is a flow layout here so the copy can wrap. */}
-        <div className="mt-[32px] rounded-[4px] bg-gradient-to-b from-gold to-gold-dark px-[27px] pt-[20px] pb-[24px]">
+        {/* 1433:192 — gold checklist card. Figma pins the star at x=27 and the
+            copy at x=57 on a 38px pitch, which is exactly two lines of 16px at
+            normal leading, so the rows butt up with no gap between them.
+            --box-col is the copy's own column (279px in Figma): the text scales
+            off it so Inter keeps each item to the two lines the design shows. */}
+        <div className="mt-[32px] rounded-[4px] bg-gradient-to-b from-gold to-gold-dark px-[27px] pt-[20px] pb-[24px] [--box-col:calc(min(100vw,430px)-116px)]">
           <p className="text-[20px] leading-normal font-bold text-white">
             In this program, you will:
           </p>
-          <ul className="mt-[12px] flex flex-col gap-[12px]">
+          <ul className="mt-[20px] flex flex-col">
             {bullets.map((bullet) => (
               <li key={bullet} className="flex items-start gap-[10px]">
                 <img
-                  src={bulletCheck}
+                  src={bulletStar}
                   alt=""
                   aria-hidden
-                  className="mt-[3px] size-[20px] shrink-0"
+                  className="mt-[1px] size-[20px] shrink-0"
                 />
-                <span className="text-[16px] leading-normal font-light text-white">
+                <span className="text-[min(16px,calc(var(--box-col)*0.054))] leading-normal font-light text-white">
                   {bullet}
                 </span>
               </li>
