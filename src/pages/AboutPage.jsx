@@ -26,7 +26,7 @@ export default function AboutPage() {
 
       <div
         style={{ zoom: scale }}
-        className="mx-auto hidden w-[1440px] overflow-x-clip bg-white text-black lg:block"
+        className="hidden w-[1440px] overflow-x-clip bg-white text-black lg:block"
       >
         <Navbar />
         <main>

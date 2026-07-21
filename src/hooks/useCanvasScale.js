@@ -3,17 +3,13 @@ import { useEffect, useState } from "react";
 /**
  * The design is a fixed 1440px-wide canvas (every section is laid out at exact
  * Figma coordinates). This hook returns the factor needed to scale that canvas
- * down to fit narrower viewports so it looks identical to Figma.
- *
- * The scale is capped at 1: above the 1440px design width the canvas stays at
- * its natural Figma size (never magnified) and is centred with side margins —
- * magnifying past native size is not the design. Below 1440px it scales down
- * proportionally so the whole layout still fits without a horizontal scrollbar.
+ * so it always fills the current viewport width — the page then looks identical
+ * to Figma on any screen size instead of sitting centred with empty side gaps.
  */
 export default function useCanvasScale(designWidth = 1440) {
   const getScale = () =>
     typeof document !== "undefined"
-      ? Math.min(1, document.documentElement.clientWidth / designWidth)
+      ? document.documentElement.clientWidth / designWidth
       : 1;
 
   const [scale, setScale] = useState(getScale);
