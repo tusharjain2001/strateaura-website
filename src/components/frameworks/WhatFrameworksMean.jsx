@@ -1,24 +1,16 @@
 import CtaPill from "../ui/CtaPill";
-import useCanvasScale from "../../hooks/useCanvasScale";
 import speakerPhoto from "../../assets/frameworks/mean-speaker-photo.png";
 
 export default function WhatFrameworksMean() {
   // The section is designed at Figma's 1440px width. Up to 1440 it reflows
-  // responsively; beyond 1440 we zoom the whole 1440 layout up so it fills the
-  // viewport exactly like Figma (instead of sitting centred with side gaps).
-  const scale = Math.max(1, useCanvasScale());
-  const zoomed = scale > 1;
-
+  // responsively; at and beyond 1440 it stays at its natural Figma size and the
+  // container centres (max-w-[1440px] + mx-auto) with the background bleeding
+  // full-width — matching every other section on the page (never magnified).
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(180deg,rgba(247,244,238,0)_0%,#e8d9ae_100%)]">
-      <div
-        style={zoomed ? { zoom: scale } : undefined}
-        className={`relative flex flex-col lg:min-h-[776px] lg:flex-row ${
-          zoomed ? "w-[1440px]" : "mx-auto w-full max-w-[1440px]"
-        }`}
-      >
-        {/* Arch photo — sits flush to the container's left edge (which is the
-            screen edge, since the section fills the width at every size). */}
+      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col lg:min-h-[776px] lg:flex-row">
+        {/* Arch photo — sits flush to the container's left edge (the screen edge
+            up to 1440; above that the container centres like its siblings). */}
         <div className="relative h-[280px] shrink-0 sm:h-[380px] lg:h-auto lg:w-[44.1%] lg:self-stretch">
           {/* Gold panel behind the photo (Figma "Vector 15"): shows through the
               arch's rounded top-left corner as a gold arc/crescent. */}

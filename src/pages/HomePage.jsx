@@ -29,7 +29,7 @@ export default function HomePage() {
 
       <div
         style={{ zoom: scale }}
-        className="hidden w-[1440px] overflow-x-clip bg-white text-black lg:block"
+        className="mx-auto hidden w-[1440px] overflow-x-clip bg-white text-black lg:block"
       >
         <Navbar />
         <main>
