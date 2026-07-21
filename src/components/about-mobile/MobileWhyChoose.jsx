@@ -1,27 +1,15 @@
 import MobileContainer from "../home-mobile/MobileContainer";
 import MobilePill from "../home-mobile/MobilePill";
-import photo from "../../assets/about-mobile/choose-photo.jpg";
-import photoMask from "../../assets/about-mobile/choose-mask.svg";
-import frameA from "../../assets/about-mobile/choose-frame-a.svg";
-import frameB from "../../assets/about-mobile/choose-frame-b.svg";
+import photo from "../../assets/about-mobile/belowcorevalues.png";
 import band from "../../assets/about-mobile/choose-band.svg";
-
-// Figma node 1414:242 — the scalloped "Subtract" shape. Stretched to the photo
-// box with maskSize 100% 100% (same technique as the desktop About page) so the
-// crop stays fluid instead of pinned to the 369x267.757 Figma frame.
-const MASK = {
-  maskImage: `url("${photoMask}")`,
-  WebkitMaskImage: `url("${photoMask}")`,
-  maskSize: "100% 100%",
-  WebkitMaskSize: "100% 100%",
-  maskRepeat: "no-repeat",
-  WebkitMaskRepeat: "no-repeat",
-};
 
 /**
  * "Why People Choose Us" block of the mobile About Us page — Figma nodes
  * 1293:3701 (scalloped photo + gold panel) sitting on the 1293:3566 backdrop
  * (white-to-#fee8a9 wash with the ellipse band along the bottom edge).
+ *
+ * The photo ships as a flat pre-masked PNG rather than being composed at
+ * runtime from a CSS mask plus two frame SVGs.
  */
 export default function MobileWhyChoose() {
   return (
@@ -41,32 +29,13 @@ export default function MobileWhyChoose() {
       </div>
 
       <MobileContainer className="relative">
-        {/* 1414:237 — group photo masked to the scalloped frame */}
-        <div className="relative aspect-[369/267.757] w-full">
-          <div className="absolute inset-0 overflow-hidden" style={MASK}>
-            <img
-              src={photo}
-              alt="StrateAura community"
-              className="size-full -scale-x-100 object-cover"
-            />
-            <div
-              aria-hidden
-              className="absolute inset-x-0 bottom-0 h-[51.52%] bg-gradient-to-t from-black to-transparent opacity-70"
-            />
-          </div>
-          <img
-            src={frameA}
-            alt=""
-            aria-hidden
-            className="pointer-events-none absolute top-[1.538%] left-[2.124%] h-[96.31%] w-[95.12%] max-w-none"
-          />
-          <img
-            src={frameB}
-            alt=""
-            aria-hidden
-            className="pointer-events-none absolute top-[1.538%] left-[3.03%] h-[96.31%] w-[95.12%] max-w-none -scale-x-100"
-          />
-        </div>
+        {/* 1414:237 — pre-masked export (369x268, scallop crop and both gold
+            frames already baked in), so no runtime mask is needed. */}
+        <img
+          src={photo}
+          alt="StrateAura community"
+          className="block w-full"
+        />
 
         {/* 1293:3706 — gold panel */}
         <div
