@@ -22,6 +22,10 @@ const VARIANTS = {
     pill: "border border-white text-white",
     circle: "bg-white text-gold",
   },
+  creamOutline: {
+    pill: "border border-cream text-white",
+    circle: "bg-cream text-gold",
+  },
   navyOutline: {
     pill: "border border-navy-2 text-navy-2",
     circle: "bg-navy-2 text-white",

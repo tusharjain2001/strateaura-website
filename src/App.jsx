@@ -8,6 +8,7 @@ import FrameworksPage from "./pages/FrameworksPage";
 import ProgramsPage from "./pages/ProgramsPage";
 import VeilPage from "./pages/VeilPage";
 import InsightsPage from "./pages/InsightsPage";
+import SamplePage from "./pages/SamplePage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/programs" element={<ProgramsPage />} />
         <Route path="/veil" element={<VeilPage />} />
         <Route path="/insights" element={<InsightsPage />} />
+        <Route path="/sample" element={<SamplePage />} />
       </Routes>
     </BrowserRouter>
   );
