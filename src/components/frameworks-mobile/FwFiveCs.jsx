@@ -86,7 +86,7 @@ function Card({ card }) {
 export default function FwFiveCs() {
   return (
     <section className="bg-[linear-gradient(100deg,rgba(255,249,232,0)_0%,#EDD8A1_100%)] py-[60px]">
-      <MobileContainer>
+      <MobileContainer className="[--pill-col:calc(min(100vw,430px)-32px)]">
         <FwTag>FRAMEWORK 2</FwTag>
 
         <h2 className="mt-[23px] text-[25px] leading-[30px] font-bold text-navy-2">
@@ -117,7 +117,8 @@ export default function FwFiveCs() {
           as="a"
           href="#brand-health-support"
           variant="goldOutline"
-          className="mt-[24px] w-[290px] max-w-full"
+          size="smFluid"
+          className="mt-[24px] max-w-full"
         >
           Explore Brand Health Support
         </MobilePill>

@@ -200,8 +200,11 @@ function Deck() {
 export default function FwVeil() {
   return (
     <section className="bg-white pt-[61px]">
-      <MobileContainer>
-        <FwTag>FRAMEWORK 2</FwTag>
+      <MobileContainer className="[--pill-col:calc(min(100vw,430px)-32px)]">
+        {/* Figma's mobile frame labels this "FRAMEWORK 2" (node 1296:4658),
+            same as the 5Cs section above it. That is a typo in the file — this
+            is the third framework and the desktop page says FRAMEWORK 3. */}
+        <FwTag>FRAMEWORK 3</FwTag>
 
         <h2 className="mt-[16px] text-[25px] leading-[29px] font-bold text-navy-2">
           VEIL&trade; Leadership System
@@ -251,7 +254,8 @@ export default function FwVeil() {
           as="a"
           href="/veil"
           variant="navyOutline"
-          className="mt-[16px] w-[304px] max-w-full"
+          size="smFluid"
+          className="mt-[16px] max-w-full"
         >
           Explore VEIL&trade; — The Full Program
         </MobilePill>

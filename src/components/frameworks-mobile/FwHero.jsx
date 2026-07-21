@@ -23,7 +23,7 @@ import speakerPhoto from "../../assets/frameworks/mean-speaker-photo.jpg";
 export default function FwHero() {
   return (
     <section className="relative bg-[linear-gradient(180deg,#FEF5DC_0%,#FFFFFF_100%)] bg-[length:100%_1185px] bg-no-repeat">
-      <MobileContainer className="relative">
+      <MobileContainer className="relative [--pill-col:calc(min(100vw,430px)-32px)]">
         {/* 1296:4514 — small gold sparkle in the top-right corner. */}
         <Sparkle className="absolute top-[15px] right-4 size-[10px] text-gold" />
 
@@ -79,7 +79,11 @@ export default function FwHero() {
           </p>
           <a
             href="#signature-models"
-            className="group mt-[14px] flex h-[43.67px] w-[301px] max-w-full items-center justify-between rounded-full border border-cream pr-[5px] pl-[18px] text-[15px] leading-none font-bold whitespace-nowrap text-white"
+            // Figma's 301px is its Acumin measurement; the label needs ~248px
+            // in Inter and the chrome (18 + 33.6 circle + 5 + 2 border) another
+            // 59, so a fixed width pushed the sparkle outside the capsule. Sized
+            // to content, with the label scaling once the column can't hold it.
+            className="group mt-[14px] flex h-[43.67px] max-w-full items-center justify-between gap-[8px] rounded-full border border-cream pr-[5px] pl-[18px] text-[min(15px,calc((var(--pill-col)-59px)*0.0605))] leading-none font-bold whitespace-nowrap text-white"
           >
             <span>Discover Our Signature Models</span>
             <span className="flex size-[33.6px] shrink-0 items-center justify-center rounded-full bg-white transition-transform motion-safe:group-hover:scale-105">

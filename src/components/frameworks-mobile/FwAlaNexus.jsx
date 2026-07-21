@@ -34,11 +34,16 @@ const CARDS = [
   },
 ];
 
-/** Framework 1 — Figma node 1296:4541. */
+/**
+ * Framework 1 — Figma node 1296:4541.
+ *
+ * The bottom padding is 60px, not 84: this block ends at y=2403.5 and the 5Cs
+ * band starts at 2464, so 84 pushed the band 24px below where Figma starts it.
+ */
 export default function FwAlaNexus() {
   return (
-    <section className="bg-white pt-[120px] pb-[84px]">
-      <MobileContainer>
+    <section className="bg-white pt-[120px] pb-[60px]">
+      <MobileContainer className="[--pill-col:calc(min(100vw,430px)-32px)]">
         <FwTag>FRAMEWORK 1</FwTag>
 
         <h2 className="mt-[23px] text-[25px] leading-[30px] font-bold text-navy-2">
@@ -93,7 +98,8 @@ export default function FwAlaNexus() {
           as="a"
           href="#apply-ala-nexus"
           variant="navyOutline"
-          className="mt-[24px] w-[323px] max-w-full"
+          size="smFluid"
+          className="mt-[24px] max-w-full"
         >
           Apply ALA-Nexus to Your Business
         </MobilePill>

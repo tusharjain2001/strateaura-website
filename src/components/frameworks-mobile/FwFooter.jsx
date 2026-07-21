@@ -62,7 +62,7 @@ function FooterLinks({ heading, items }) {
 export default function FwFooter() {
   return (
     <footer className="bg-white pt-[100px] pb-[26px]">
-      <div className="mx-auto w-full max-w-[430px] px-4">
+      <div className="mx-auto w-full max-w-[430px] px-4 [--pill-col:calc(min(100vw,430px)-32px)]">
         {/* 1296:4740 — closing CTA */}
         <h2 className="text-[28px] leading-[34px] font-bold text-navy">
           Ready to Work Together?
@@ -78,7 +78,8 @@ export default function FwFooter() {
           as="a"
           href="/contact"
           variant="goldOutline"
-          className="mt-[23px] w-[290px] max-w-full"
+          size="smFluid"
+          className="mt-[23px] max-w-full"
         >
           Book a Strategic Conversation
         </MobilePill>

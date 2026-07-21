@@ -51,6 +51,18 @@ const SIZES = {
     circle: "size-[34px]",
     glyph: "size-[18px]",
   },
+  // `sm`'s metrics exactly, but the label scales so it can never push the glyph
+  // circle out of the capsule. For pills Figma gives a fixed width taken from
+  // its Acumin measurement — Inter needs ~5% more and the circle is shrink-0, so
+  // the overflow lands on the icon. sm's chrome is 16 + 12 + 32 + 5 + 2 border =
+  // 67px, and 0.059 is 16/271 for the longest label using this size ("Apply
+  // ALA-Nexus to Your Business"); shorter labels simply reach the 16px cap at a
+  // narrower column. The parent must set --pill-col to its content width.
+  smFluid: {
+    pill: "gap-3 py-[5px] pr-[5px] pl-[16px] text-[min(16px,calc((var(--pill-col)-67px)*0.059))]",
+    circle: "size-[32px]",
+    glyph: "size-[17px]",
+  },
   hero: {
     pill: "gap-[9.65px] py-[6.44px] pr-[6.44px] pl-[12.87px] text-[16px]",
     circle: "size-[25.8px]",
