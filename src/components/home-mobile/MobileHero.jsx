@@ -47,7 +47,12 @@ export default function MobileHero() {
           <MobilePill as="a" href="/veil" variant="creamFilled" size="hero">
             VIEL<sup className="text-[10.32px]">TM</sup> Program
           </MobilePill>
-          <MobilePill as="a" href="/programs" variant="creamOutline" size="hero">
+          <MobilePill
+            as="a"
+            href="/programs"
+            variant="creamOutline"
+            size="hero"
+          >
             Browse All Programs
           </MobilePill>
         </div>

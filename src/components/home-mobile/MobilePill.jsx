@@ -56,6 +56,20 @@ const SIZES = {
     circle: "size-[25.8px]",
     glyph: "size-[18.4px]",
   },
+  // VEIL card pills (Figma nodes 1434:513 / 1434:519). "Learn More about MAP &
+  // DECODE" is 259px at 16px Acumin and ~272px in Inter, which overflows the
+  // capsule and pushes the glyph circle out past the border.
+  //
+  // The label scales off --veil-col (the card's inner width, set by MobileVeil)
+  // but the chrome around it does not, so the 74.3px of padding + gap + circle +
+  // border is subtracted before scaling — a plain multiplier holds at 402px and
+  // then diverges as the screen narrows. 0.0588 is 16/272, the px-per-unit of
+  // label width in Inter.
+  veil: {
+    pill: "gap-[13.15px] py-[5px] pr-[5.25px] pl-[21px] text-[min(16px,calc((var(--veil-col)-74.3px)*0.0588))]",
+    circle: "size-[32.87px]",
+    glyph: "size-[17px]",
+  },
 };
 
 export default function MobilePill({
