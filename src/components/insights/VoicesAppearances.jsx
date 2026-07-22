@@ -1,37 +1,41 @@
 import CtaPill from "../ui/CtaPill";
 import { Sparkle } from "../ui/Icons";
 import voicesPhoto from "../../assets/insights/voices-photo.png";
+import voicesPhotoMobile from "../../assets/insights/voices-photo-mobile.png";
 
 export default function VoicesAppearances() {
   return (
     <section className="relative overflow-hidden bg-white">
       <div className="mx-auto w-full max-w-[1440px] lg:relative lg:h-[1002px]">
-        {/* Photo — the asset is 1010x832 with Figma's mask (the concave curve
-            at the top right) already baked into its alpha, so it is placed at
-            its native size, NOT stretched. Verified against a render of the
-            Figma node: the asset's opaque right edge matches the design's photo
-            boundary row for row at offset 0 (740px at the top, bulging to 870
-            through the curve, 739px at the bottom), with the photo top at y=93.
-            The Figma node tree's 1110px-wide image at x:-64 is the pre-mask
-            source, not the visible shape — sizing to that made it ~300px too
-            wide.
-            The box is anchored by BOTH edges: its right stays at container
-            x=1010 so it keeps overlapping the card (which is also positioned
-            off the container), while its left reaches the viewport edge so no
-            white gap opens up above 1440. Anchoring only the left made the two
-            drift apart as the screen widened. At exactly 1440 the box is the
-            asset's native 1010x832 and object-cover is a no-op, so it stays
-            pixel-exact; wider, it zooms uniformly with the curve pinned right. */}
-        <div className="relative lg:absolute lg:top-[93px] lg:left-[calc(50%-50vw)] lg:right-[calc(100%-1010px)] lg:h-[832px]">
+        {/* Mobile photo — the Figma mobile design (node 1434:3833) uses a
+            different mask than desktop: a scalloped frame with concave notches
+            on both sides. Exported flat (mask + crop baked in) so the shape and
+            framing match the design exactly, full-bleed across the section. */}
+        <img
+          src={voicesPhotoMobile}
+          alt="Dr. Suhair Hamouri speaking with attendees at a conference"
+          className="block w-full lg:hidden"
+        />
+
+        {/* Desktop photo — the asset is 1010x832 with Figma's desktop mask (the
+            concave curve at the top right) baked into its alpha, so it is placed
+            at its native size, NOT stretched. The box is anchored by BOTH edges:
+            its right stays at container x=1010 so it keeps overlapping the card,
+            while its left reaches the viewport edge so no white gap opens up
+            above 1440. At exactly 1440 the box is the asset's native 1010x832
+            and object-cover is a no-op; wider, it zooms with the curve pinned
+            right. */}
+        <div className="hidden lg:absolute lg:top-[93px] lg:left-[calc(50%-50vw)] lg:right-[calc(100%-1010px)] lg:block lg:h-[832px]">
           <img
             src={voicesPhoto}
             alt="Dr. Suhair Hamouri speaking with attendees at a conference"
-            className="aspect-[1010/832] w-full object-cover lg:aspect-auto lg:h-full lg:w-full lg:object-right"
+            className="h-full w-full object-cover object-right"
           />
         </div>
 
-        {/* Card — overlaps the photo's bottom-right corner on desktop */}
-        <div className="relative z-10 mx-auto -mt-10 w-[calc(100%-40px)] max-w-[700px] rounded-[4px] bg-gradient-to-b from-navy to-blue px-8 py-10 text-white sm:px-10 lg:absolute lg:top-[338px] lg:left-[39.44%] lg:mx-0 lg:mt-0 lg:min-h-[523px] lg:w-[55.21%] lg:max-w-none lg:px-[70px] lg:pt-[76px] lg:pb-[62px]">
+        {/* Card — sits below the photo on mobile (Figma node 1434:3839);
+            overlaps the photo's bottom-right corner on desktop */}
+        <div className="relative z-10 mx-4 mt-3 mb-14 rounded-[4px] bg-gradient-to-b from-navy to-blue px-8 py-10 text-white sm:mx-auto sm:w-[calc(100%-64px)] sm:max-w-[700px] sm:px-10 lg:absolute lg:top-[338px] lg:left-[39.44%] lg:mx-0 lg:mt-0 lg:mb-0 lg:min-h-[523px] lg:w-[55.21%] lg:max-w-none lg:px-[70px] lg:pt-[76px] lg:pb-[62px]">
           <h2 className="text-[clamp(1.75rem,3.5vw,3.125rem)] leading-[1.2] font-bold">
             Voices &amp; Appearances
           </h2>

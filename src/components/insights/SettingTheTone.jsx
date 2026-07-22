@@ -1,5 +1,6 @@
 import settingTonePhoto from "../../assets/insights/setting-tone-photo.png";
 import toneCardBlob from "../../assets/insights/tone-card-blob.png";
+import toneTailMobile from "../../assets/insights/setting-tone-tail-mobile.svg";
 
 export default function SettingTheTone() {
   return (
@@ -26,13 +27,21 @@ export default function SettingTheTone() {
         {/* Figma (node 1136:5690) draws the shape from x=98 to x=929 — 831px,
             which is the asset's native 832 width. The old 845 was the outer
             frame, and stretched the blob ~1.6% wider than it was drawn. */}
-        <div className="relative -mt-8 lg:absolute lg:top-[197px] lg:left-[98px] lg:mt-0 lg:min-h-[473px] lg:w-[832px]">
+        <div className="relative z-10 -mt-[90px] lg:absolute lg:top-[197px] lg:left-[98px] lg:z-auto lg:mt-0 lg:min-h-[473px] lg:w-[832px]">
           <img
             src={toneCardBlob}
             alt=""
             className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
           />
-          <div className="relative rounded-[4px] bg-gradient-to-br from-gold-dark to-gold px-6 py-8 text-cream sm:px-10 sm:py-10 lg:rounded-none lg:bg-none lg:px-0 lg:py-[60px] lg:pl-[48px]">
+          {/* Mobile: the gold card's tail points UP into the photo (Figma node
+              1434:3761). The tail svg keeps its exact curvature; the solid-gold
+              body below carries the copy. Desktop keeps the blob shape. */}
+          <img
+            src={toneTailMobile}
+            alt=""
+            className="pointer-events-none -mb-px block w-full lg:hidden"
+          />
+          <div className="relative rounded-b-[4px] bg-gold px-6 pt-8 pb-8 text-cream sm:px-10 sm:pt-10 sm:pb-10 lg:rounded-none lg:bg-transparent lg:px-0 lg:py-[60px] lg:pl-[48px]">
             <h2 className="max-w-[666px] text-[clamp(1.5rem,3vw,2.1875rem)] leading-[1.2] font-bold">
               Setting the Tone
             </h2>
