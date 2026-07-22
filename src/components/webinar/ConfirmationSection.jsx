@@ -7,9 +7,12 @@ import checkBadge from "../../assets/webinar/confirm-check-badge.svg";
 
 export default function ConfirmationSection() {
   return (
-    // Height caps to one viewport under the sticky header; the design's
-    // 800px band is the tall-screen reference.
-    <section className="relative flex min-h-[560px] items-center justify-center overflow-hidden bg-white px-5 py-24 sm:px-8 lg:h-[min(800px,calc(100svh-120px))] lg:py-0">
+    // The design's 800px band is the tall-screen reference and it shrinks to
+    // one viewport under the 74px sticky header — but only as a *minimum*: the
+    // card is a fixed 550 and its check badge hangs 63px over the top edge, so
+    // a hard height would let both spill out of the overflow-hidden box on a
+    // short window. The vertical padding keeps the badge clear of the header.
+    <section className="relative flex min-h-[560px] items-center justify-center overflow-hidden bg-white px-5 py-24 sm:px-8 lg:min-h-[min(800px,calc(100svh-74px))] lg:py-[72px]">
       {/* Pale gold sparkles behind the card, top-right + bottom-left pairs */}
       <img
         src={sparkleLg}
