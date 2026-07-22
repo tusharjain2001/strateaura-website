@@ -46,10 +46,8 @@ const PHASES = [
   {
     title: (
       <>
-        <span className="block">
-          UNVEIL - <span className="font-normal">Live Cohort</span>
-        </span>
-        <span className="block font-normal">(for online graduates):</span>
+        <span className="block">UNVEIL -</span>
+        <span className="block font-normal">Claim Your Ground:</span>
       </>
     ),
     items: [
@@ -96,71 +94,59 @@ export default function TwoPathways() {
         <div className="mt-10 flex flex-col gap-8 lg:mt-14 lg:gap-10">
           {/* UNVEIL Institutional */}
           <div className="rounded-xl bg-white p-6 shadow-[0_0_27px_-11px_#b3902f] sm:p-8 lg:p-12">
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8">
-              {/* Heading, body, then CTA — on mobile the CTA drops below the
-                  body (Figma); on desktop grid placement keeps it bottom-left. */}
-              {/* Figma mobile (node 1434:4031) isolates the "UNVEIL -" prefix
-                  on its own line and lets the rest flow; desktop forces all
-                  three lines. */}
-              <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold lg:col-start-1 lg:row-start-1">
-                <span className="block">UNVEIL - </span>
-                <span className="lg:block lg:whitespace-nowrap">The Institutional </span>
-                <span className="lg:block lg:whitespace-nowrap">Cohort Program</span>
-              </h3>
-              <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
-                <p className="text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-navy-2">
-                  A <strong className="font-bold">12-week</strong>, live, facilitator-led
-                  cohort for <strong className="font-bold">8–12 women.</strong> Delivered
-                  in-person. Uses{" "}
-                  <strong className="font-bold">
-                    9 internationally validated psychometric instruments
-                  </strong>
-                  , all with Arabic-validated versions. Every participant exits with a
-                  scored record of change across{" "}
-                  <strong className="font-bold">5 instruments.</strong>
-                </p>
+            {/* Title and CTA stack together on the left, the summary lines sit
+                on the right — the same order on mobile, where the grid
+                collapses to one column. */}
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-x-16">
+              <div>
+                <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold">
+                  UNVEIL: Institutional
+                </h3>
                 <div className="mt-6">
-                  <p className="text-[clamp(1.125rem,1.6vw,1.5rem)] font-bold text-navy-2">
-                    KHDA Attested Certificate of Completion.
-                  </p>
-                  <ul className="mt-2 list-[square] space-y-1 pl-5 text-[clamp(1rem,1.4vw,1.25rem)] text-navy-2">
-                    <li>Institutions sponsoring women in leadership roles</li>
-                    <li>Director level and above</li>
-                  </ul>
+                  <CtaPill as="a" href="/contact" variant="navyOutline" size="md">
+                    Request a Cohort Proposal
+                  </CtaPill>
                 </div>
               </div>
-              <div className="lg:col-start-1 lg:row-start-2 lg:self-end">
-                <CtaPill as="a" href="/contact" variant="navyOutline" size="md">
-                  Request a Cohort Proposal
-                </CtaPill>
+              <div className="text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-navy-2">
+                <p className="font-bold">
+                  For institutions · 12 weeks · 8–12 women · In-person
+                </p>
+                <p className="mt-4">
+                  Internationally validated instruments · Pre/post measurement ·
+                  KHDA Attested Certificate · Cohort reporting
+                </p>
+                <p className="mt-4">Led by Dr. Suhair Hamouri</p>
               </div>
             </div>
           </div>
 
           {/* Online Pathway */}
           <div className="rounded-xl border border-gold-light bg-white p-6 shadow-[0_0_27px_-11px_#b3902f] sm:p-8 lg:p-12">
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8">
-              {/* Figma mobile (node 1434:4045): prefix on line one, the rest
-                  flows; desktop forces all three lines. */}
-              <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold lg:col-start-1 lg:row-start-1">
-                <span className="block">The Online Pathway - </span>
-                <span className="lg:block lg:whitespace-nowrap">MAP, DECODE, and </span>
-                <span className="lg:block lg:whitespace-nowrap">UNVEIL</span>
-              </h3>
-              <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
-                <p className="text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-navy-2">
-                  A self-funded, self-paced online journey for individual women who are
-                  ready to start without waiting for an institution to sponsor them. No
-                  commitments required.
-                </p>
-                <p className="mt-3 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal font-bold text-navy-2">
-                  Free Live Webinar: Lead Without Losing Yourself.
-                </p>
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-x-16">
+              <div>
+                <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold">
+                  UNVEIL: Online
+                </h3>
+                <div className="mt-6">
+                  <CtaPill as="a" href="/webinar" variant="navyOutline" size="md">
+                    Join the Free Webinar
+                  </CtaPill>
+                </div>
               </div>
-              <div className="lg:col-start-1 lg:row-start-2 lg:self-end">
-                <CtaPill as="a" href="/webinar" variant="navyOutline" size="md">
-                  Register for the Free Webinar
-                </CtaPill>
+              <div className="text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-navy-2">
+                <p className="font-bold">
+                  For individuals · Self-funded · Live virtual
+                </p>
+                <p className="mt-4">
+                  <strong className="font-bold">Part 1:</strong> 6 weeks ·
+                  Biological awareness + Identity work + Architecture ·
+                  Investment TBC
+                </p>
+                <p className="mt-4">
+                  <strong className="font-bold">Part 2:</strong> 6 weeks ·
+                  Authority + Integration + Closing Event in person
+                </p>
               </div>
             </div>
 

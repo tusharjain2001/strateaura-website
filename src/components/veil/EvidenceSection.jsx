@@ -68,28 +68,33 @@ function EvidenceCard({ className = "" }) {
         alt=""
         className="pointer-events-none absolute -top-6 -right-6 hidden size-[48px] lg:block"
       />
-      <h2 className="text-[clamp(1.5rem,2.2vw,1.875rem)] font-bold text-white">
+      {/* Figma 1638:2221 — 37.8px heading, 18px Medium body, both 43px in from
+          the card edge with the heading 50px down and 70px of foot below the
+          pill. */}
+      <h2 className="text-[clamp(1.5rem,2.63vw,2.3643rem)] leading-[1.2] font-bold text-white">
         The Evidence
       </h2>
-      <p className="mt-3 text-[clamp(0.9375rem,1.2vw,1.0625rem)] leading-normal font-light text-white">
-        The science behind VEIL 9 internationally validated instruments, all
-        with:
-      </p>
-      <ul className="mt-2 list-disc space-y-1 pl-5 text-[clamp(0.9375rem,1.2vw,1.0625rem)] leading-normal font-light text-white">
-        <li>Arabic-validated versions, 5 pre and post measures</li>
-        <li>
-          Quantified evidence of change at program close, 34 peer-reviewed
-          sources
-        </li>
-        <li>Grounding every claim in the curriculum.</li>
-      </ul>
-      <p className="mt-4 text-[clamp(0.9375rem,1.2vw,1.0625rem)] leading-normal font-light text-white">
-        VEIL measures change across:
-      </p>
-      <p className="text-[clamp(0.9375rem,1.2vw,1.0625rem)] leading-normal font-bold text-white">
-        Perceived Stress · Burnout · Self-Compassion · Assertiveness ·
-        Self-Efficacy
-      </p>
+      {/* Plain lines rather than a bulleted list — the claims are separated by
+          middots within each line, and only the blank lines break the block. */}
+      <div className="mt-3 text-[clamp(0.9375rem,1.25vw,1.123rem)] leading-normal font-medium text-white">
+        <p>The science behind VEIL.</p>
+        <p>
+          Internationally validated psychometric instruments · All with
+          Arabic-validated versions for Gulf professional populations
+        </p>
+        <p>
+          Pre and post measurement · Quantified evidence of change at programme
+          close
+        </p>
+        <p className="mt-4">
+          Evidence-based curriculum grounded in peer-reviewed research
+        </p>
+        <p className="mt-4">VEIL measures change across:</p>
+        <p>
+          Perceived Stress · Burnout · Sleep Quality · Self-Compassion ·
+          Leadership Confidence
+        </p>
+      </div>
       <CtaPill as="a" href="/webinar" variant="creamFilled" size="md" className="mt-6">
         Join the Free Live Webinar
       </CtaPill>
@@ -143,8 +148,13 @@ export default function EvidenceSection() {
             1440 the photo bleeds left while the card stays centred and the two
             drift apart, so the card stops overlapping the group. This keeps
             the card covering the photo's right portion at every width, as in
-            Figma (card left = photo left + 557px = 38.68% of 1440). */}
-        <EvidenceCard className="absolute top-[50.05%] left-[calc((100%-100vw)/2+38.68%)] w-[49.58%] p-10" />
+            Figma (card left = photo left + 557px = 38.68% of 1440).
+
+            Figma 1638:2222 places it at 557,351 sized 714x502 in the 1440x1003
+            frame: left 38.68%, top 35%, width 49.58%. The height is left to the
+            content — Figma's 502px as a min-height left dead space under the
+            pill, because Inter sets this copy shorter than the design font. */}
+        <EvidenceCard className="absolute top-[35%] left-[calc((100%-100vw)/2+38.68%)] w-[49.58%] px-[43px] pt-[50px] pb-[46px]" />
       </div>
     </section>
   );
