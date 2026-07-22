@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import CtaPill from "../ui/CtaPill";
+import MobileSiteFooter from "./MobileSiteFooter";
 import ctaAura from "../../assets/cta-aura.png";
 import logoA from "../../assets/about/foot-logo-a.svg";
 import logoB from "../../assets/about/foot-logo-b.svg";
@@ -38,7 +39,16 @@ const SOCIALS = [
  */
 export default function SiteFooter({ body, tagline, buttons, aside }) {
   return (
-    <footer className="relative overflow-hidden bg-white">
+    <>
+      {/* Below lg every fluid page shows the Home-style mobile footer so the
+          footer matches across the site; the layout below is desktop-only. */}
+      <MobileSiteFooter
+        body={body}
+        tagline={tagline}
+        buttons={buttons}
+        aside={aside}
+      />
+      <footer className="relative hidden overflow-hidden bg-white lg:block">
       {/* CTA */}
       <div className="relative mx-auto w-full max-w-[1440px] px-5 pt-14 sm:px-8 lg:pt-[153px] xl:px-[116px]">
         {/* Landscape aura fan (753x278) anchored to the right of the CTA.
@@ -146,7 +156,8 @@ export default function SiteFooter({ body, tagline, buttons, aside }) {
           </a>
         </div>
       </div>
-    </footer>
+      </footer>
+    </>
   );
 }
 
