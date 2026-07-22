@@ -5,7 +5,7 @@ import Stance from "../components/about/Stance";
 import CoreValues from "../components/about/CoreValues";
 import WhyChoose from "../components/about/WhyChoose";
 import Founder from "../components/about/Founder";
-import AboutFooter from "../components/about/AboutFooter";
+import SiteFooter from "../components/layout/SiteFooter";
 import AboutMobile from "../components/about-mobile/AboutMobile";
 
 /**
@@ -36,9 +36,12 @@ export default function AboutPage() {
             <CoreValues />
             <WhyChoose />
             <Founder />
-            <AboutFooter />
           </main>
         </div>
+        {/* Shared site footer, outside the zoomed canvas like the header so it
+            renders at true size. Its mobile half is lg:hidden and this wrapper
+            is desktop-only, so AboutMobile's own footer is untouched. */}
+        <SiteFooter />
       </div>
     </>
   );

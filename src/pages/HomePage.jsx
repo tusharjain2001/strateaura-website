@@ -7,7 +7,7 @@ import Frameworks from "../components/home/Frameworks";
 import Belief from "../components/home/Belief";
 import ProblemWeAddress from "../components/home/ProblemWeAddress";
 import Insights from "../components/home/Insights";
-import ClosingCTA from "../components/home/ClosingCTA";
+import SiteFooter from "../components/layout/SiteFooter";
 import HomeMobile from "../components/home-mobile/HomeMobile";
 
 /**
@@ -44,9 +44,12 @@ export default function HomePage() {
             <Belief />
             <ProblemWeAddress />
             <Insights />
-            <ClosingCTA />
           </main>
         </div>
+        {/* Shared site footer, outside the zoomed canvas like the header so it
+            renders at true size. Its mobile half is lg:hidden and this wrapper
+            is desktop-only, so HomeMobile's own footer is untouched. */}
+        <SiteFooter />
       </div>
     </>
   );
