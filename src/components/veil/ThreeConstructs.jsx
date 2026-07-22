@@ -3,20 +3,37 @@ import cardAura2 from "../../assets/webinar/card-aura-2.svg";
 import cardAura3 from "../../assets/webinar/card-aura-3.svg";
 import cardSparkle from "../../assets/veil/construct-sparkle-gold.svg";
 
+// Body copy carries Figma's exact line breaks. Inter sets wider than the design
+// font, so left to reflow the cards wrap at different words; the lines below are
+// forced at lg (block + whitespace-nowrap) and flow naturally on mobile.
 const CONSTRUCTS = [
   {
     title: "Capacity Regulation",
-    body: "The biological and physiological foundation. Sleep, energy, recovery, and the body's signals - before they become crises.",
+    body: [
+      "The biological and physiological",
+      "foundation. Sleep, energy, recovery,",
+      "and the body's signals - before they",
+      "become crises.",
+    ],
     aura: cardAura1,
   },
   {
     title: "Identity Coherence",
-    body: "The internal sense of self that remains stable under institutional pressure. She brings power to the title - not derives it from one.",
+    body: [
+      "The internal sense of self that remains",
+      "stable under institutional pressure.",
+      "She brings power to the title - not",
+      "derives it from one.",
+    ],
     aura: cardAura2,
   },
   {
     title: "Authority Execution",
-    body: "Decisions made cleanly. Boundaries held without apology. Presence that is grounded, not performed.",
+    body: [
+      "Decisions made cleanly. Boundaries",
+      "held without apology. Presence that is",
+      "grounded, not performed.",
+    ],
     aura: cardAura3,
   },
 ];
@@ -54,8 +71,15 @@ export default function ThreeConstructs() {
               <p className="relative z-10 text-[clamp(1.25rem,1.8vw,1.75rem)] font-bold text-white">
                 {card.title}
               </p>
-              <p className="relative z-10 mt-4 max-w-[85%] text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-white">
-                {card.body}
+              {/* The 85% cap is gone and the size tops out at 18px so the
+                  longest forced line still fits the card at 1440 — a line that
+                  cannot fit would overflow rather than wrap, being nowrap. */}
+              <p className="relative z-10 mt-4 text-[clamp(1rem,1.3vw,1.125rem)] leading-normal text-white lg:[&>span]:block lg:[&>span]:whitespace-nowrap">
+                {card.body.map((line, i) => (
+                  // Trailing space keeps the lines reading as one paragraph
+                  // when they run inline below lg.
+                  <span key={i}>{line} </span>
+                ))}
               </p>
             </div>
           ))}
