@@ -64,8 +64,8 @@ export default function PmFeatured() {
             VEIL™️ is designed for women in leadership and high-demand
             professional roles who are performing well externally - and already
             paying a silent cost for how they are leading. They are capable,
-            trusted, and accomplished — often the strongest person in the room —
-            but quietly navigating changes they cannot fully explain. VEIL is
+            trusted, and accomplished often the strongest person in the room but
+            quietly navigating changes they cannot fully explain. VEIL is
             not a wellness programme. It is not resilience training. It is a
             strategic health framework that helps women understand what is
             happening beneath sustained performance, reconnect with themselves,

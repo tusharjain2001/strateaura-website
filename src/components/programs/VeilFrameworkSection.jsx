@@ -82,20 +82,24 @@ export default function VeilFrameworkSection() {
             Core Concept
           </p>
 
-          <div className="mt-5 flex flex-col gap-8 lg:flex-row lg:gap-[34px]">
-            <p className="text-justify text-[clamp(1rem,1.4vw,1.5rem)] leading-[1.5] text-black/60 lg:w-[590px] lg:shrink-0">
+          {/* Figma 1638:3972 / 1638:2884 — two 545px justified columns, 51px
+              apart. The widths are what drive the line breaks, so they must
+              stay exact for the copy to wrap as designed. */}
+          <div className="mt-5 flex flex-col gap-8 lg:flex-row lg:gap-[51px]">
+            <p className="text-justify text-[clamp(1rem,1.4vw,1.5rem)] leading-[1.5] text-black/60 lg:w-[545px] lg:shrink-0">
               VEIL™ is designed for women in leadership and high-demand professional roles who
               are performing well externally - and already paying a silent cost for how they are
-              leading. They are capable, trusted, and accomplished — often the strongest person in
-              the room — but quietly navigating changes they cannot fully explain. VEIL is not a
+              leading. They are capable, trusted, and accomplished often the strongest person in
+              the room but quietly navigating changes they cannot fully explain. VEIL is not a
               wellness programme. It is not resilience training. It is a strategic health
               framework that helps women understand what is happening beneath sustained
               performance, reconnect with themselves, and continue leading without losing who they
               are. VEIL is a strategic health framework grounded in validated science and designed
-              specifically for women carrying sustained leadership responsibility.
+              specifically for
             </p>
-            <p className="text-justify text-[clamp(1rem,1.4vw,1.5rem)] leading-[1.5] text-black/60 lg:w-[507px] lg:shrink-0">
-              The woman VEIL serves is not in crisis. She is still succeeding. What she needs is
+            <p className="text-justify text-[clamp(1rem,1.4vw,1.5rem)] leading-[1.5] text-black/60 lg:w-[545px] lg:shrink-0">
+              women carrying sustained leadership responsibility. The woman VEIL serves is not in
+              crisis. She is still succeeding. What she needs is
               not another programme that teaches her how to perform. She needs a framework that
               helps her understand herself, preserve her internal architecture, and sustain her
               leadership without paying an invisible personal cost. Through the VEIL Framework you
