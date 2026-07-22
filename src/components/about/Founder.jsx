@@ -68,7 +68,8 @@ export default function Founder() {
         <span className="font-bold">(COE, HBMSU UAE)</span>, a Certified Digital
         Marketing Expert{" "}
         <span className="font-bold">(CDME, DMI + AMA, Dublin)</span>, and a keynote
-        speaker. She is the author of Clicks, Leads, and Strategy Feeds (2024), a
+        speaker. She is the author of{" "}
+        <span className="font-bold">Clicks, Leads, and Strategy Feeds (2024)</span>, a
         member of the American Marketing Association, and a graduate of the Dent
         Global Key Person of Influence Program, Dublin.
       </p>
