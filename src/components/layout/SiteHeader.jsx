@@ -13,47 +13,53 @@ const LINKS = [
 ];
 
 /**
- * Responsive gold navbar for the fluid (non-canvas) pages. Same links and
- * styling as the legacy Navbar, plus a collapsible menu below xl.
+ * Site navbar — Figma node 1672:324 (1440 x 74).
+ *
+ * Exact desktop geometry at 1440: a 72px/20px padded gold bar; the 177x30
+ * lockup on the left; the nav block on the right is 1061px wide and
+ * space-between, so the links sit at x=307 and the search + Log In cluster
+ * ends flush at x=1368. `grow max-w-[1061px]` reproduces that at 1440 and
+ * lets it shrink below. Below xl the links collapse into a menu panel.
  */
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   const linkClass =
-    "flex items-center gap-2 whitespace-nowrap transition-opacity hover:opacity-80";
+    "flex items-center gap-[8px] whitespace-nowrap text-[17px] leading-[1.5] font-bold text-white transition-opacity hover:opacity-80";
 
   const renderLink = (link) =>
     link.to ? (
       <Link to={link.to} className={linkClass} onClick={() => setOpen(false)}>
         {link.label}
-        {link.dropdown && <ChevronDown className="w-3" />}
+        {link.dropdown && <ChevronDown className="h-[7px] w-[12px]" />}
       </Link>
     ) : (
       <a href={link.href} className={linkClass} onClick={() => setOpen(false)}>
         {link.label}
-        {link.dropdown && <ChevronDown className="w-3" />}
+        {link.dropdown && <ChevronDown className="h-[7px] w-[12px]" />}
       </a>
     );
 
   return (
     <header className="sticky top-0 z-50 w-full bg-gold">
-      <nav className="mx-auto flex h-[80px] w-full max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:h-[120px] xl:px-[72px]">
+      <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-5 py-[20px] sm:px-8 xl:px-[72px]">
         <Link to="/" aria-label="StrateAura home" className="shrink-0">
           <img
             src={logo}
             alt="StrateAura"
-            className="h-[56px] w-[84px] lg:h-[80px] lg:w-[120px]"
+            className="h-[24px] w-[142px] xl:h-[30px] xl:w-[177px]"
           />
         </Link>
 
-        {/* Desktop links */}
-        <div className="hidden items-center gap-8 xl:flex 2xl:gap-[60px]">
-          <ul className="flex items-center gap-8 text-[17px] font-bold text-white 2xl:gap-[60px]">
+        {/* Desktop nav block — 1061px wide at the 1440 design width */}
+        <div className="hidden grow items-center justify-between xl:flex xl:max-w-[1061px]">
+          <ul className="flex items-center gap-[32px] min-[1440px]:gap-[60px]">
             {LINKS.map((link) => (
               <li key={link.label}>{renderLink(link)}</li>
             ))}
           </ul>
-          <div className="flex items-center gap-7">
+
+          <div className="flex shrink-0 items-center gap-[28px]">
             <button
               aria-label="Search"
               className="text-white transition-opacity hover:opacity-80"
@@ -62,7 +68,7 @@ export default function SiteHeader() {
             </button>
             <a
               href="#login"
-              className="flex items-center justify-center rounded-[37px] border border-white px-4 py-1 text-[17px] font-bold text-white transition-colors hover:bg-white hover:text-gold"
+              className="flex items-center justify-center rounded-[37px] border border-white px-[16px] py-[4px] text-[17px] leading-[1.5] font-bold text-white transition-colors hover:bg-white hover:text-gold"
             >
               Log In
             </a>
@@ -78,12 +84,12 @@ export default function SiteHeader() {
         >
           {open ? <CloseIcon className="size-7" /> : <MenuIcon className="size-7" />}
         </button>
-      </nav>
+      </div>
 
       {/* Mobile menu panel */}
       {open && (
         <div className="border-t border-white/20 bg-gold xl:hidden">
-          <ul className="flex flex-col gap-1 px-5 py-4 text-[17px] font-bold text-white sm:px-8">
+          <ul className="mx-auto flex w-full max-w-[1440px] flex-col gap-1 px-5 py-4 sm:px-8">
             {LINKS.map((link) => (
               <li key={link.label} className="py-2">
                 {renderLink(link)}
@@ -98,7 +104,7 @@ export default function SiteHeader() {
               </button>
               <a
                 href="#login"
-                className="rounded-[37px] border border-white px-4 py-1 transition-colors hover:bg-white hover:text-gold"
+                className="rounded-[37px] border border-white px-[16px] py-[4px] text-[17px] leading-[1.5] font-bold text-white transition-colors hover:bg-white hover:text-gold"
               >
                 Log In
               </a>

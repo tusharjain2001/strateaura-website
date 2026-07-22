@@ -1,5 +1,5 @@
 import useCanvasScale from "../hooks/useCanvasScale";
-import Navbar from "../components/home/Navbar";
+import SiteHeader from "../components/layout/SiteHeader";
 import AboutHero from "../components/about/AboutHero";
 import Stance from "../components/about/Stance";
 import CoreValues from "../components/about/CoreValues";
@@ -13,6 +13,10 @@ import AboutMobile from "../components/about-mobile/AboutMobile";
  * coordinates, scaled with `zoom`), so it cannot reflow for narrow screens.
  * The mobile design (Figma node 1293:3543) is therefore its own component
  * tree, rendered below lg; the canvas below is untouched and takes over at lg.
+ *
+ * SiteHeader sits *outside* the zoomed canvas so the navbar renders at its
+ * true size — identical to the fluid pages — instead of being magnified along
+ * with the canvas on screens wider than 1440.
  */
 export default function AboutPage() {
   const scale = useCanvasScale();
@@ -23,19 +27,18 @@ export default function AboutPage() {
         <AboutMobile />
       </div>
 
-      <div
-        style={{ zoom: scale }}
-        className="hidden w-[1440px] overflow-x-clip bg-white text-black lg:block"
-      >
-        <Navbar />
-        <main>
-          <AboutHero />
-          <Stance />
-          <CoreValues />
-          <WhyChoose />
-          <Founder />
-          <AboutFooter />
-        </main>
+      <div className="hidden bg-white text-black lg:block">
+        <SiteHeader />
+        <div style={{ zoom: scale }} className="w-[1440px] overflow-x-clip">
+          <main>
+            <AboutHero />
+            <Stance />
+            <CoreValues />
+            <WhyChoose />
+            <Founder />
+            <AboutFooter />
+          </main>
+        </div>
       </div>
     </>
   );

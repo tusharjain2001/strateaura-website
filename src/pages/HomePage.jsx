@@ -1,5 +1,5 @@
 import useCanvasScale from "../hooks/useCanvasScale";
-import Navbar from "../components/home/Navbar";
+import SiteHeader from "../components/layout/SiteHeader";
 import Hero from "../components/home/Hero";
 import SignaturePrograms from "../components/home/SignaturePrograms";
 import MarketingPrograms from "../components/home/MarketingPrograms";
@@ -19,6 +19,10 @@ import HomeMobile from "../components/home-mobile/HomeMobile";
  * The scale is deliberately uncapped: the canvas always fills the viewport
  * width, magnifying past 1 on screens wider than 1440. Capping it at 1 leaves
  * white gutters either side, which the client has rejected twice.
+ *
+ * SiteHeader sits *outside* the zoomed canvas so the navbar renders at its
+ * true size — identical to the fluid pages — instead of being magnified along
+ * with the canvas.
  */
 export default function HomePage() {
   const scale = useCanvasScale();
@@ -29,21 +33,20 @@ export default function HomePage() {
         <HomeMobile />
       </div>
 
-      <div
-        style={{ zoom: scale }}
-        className="hidden w-[1440px] overflow-x-clip bg-white text-black lg:block"
-      >
-        <Navbar />
-        <main>
-          <Hero />
-          <SignaturePrograms />
-          <MarketingPrograms />
-          <Frameworks />
-          <Belief />
-          <ProblemWeAddress />
-          <Insights />
-          <ClosingCTA />
-        </main>
+      <div className="hidden bg-white text-black lg:block">
+        <SiteHeader />
+        <div style={{ zoom: scale }} className="w-[1440px] overflow-x-clip">
+          <main>
+            <Hero />
+            <SignaturePrograms />
+            <MarketingPrograms />
+            <Frameworks />
+            <Belief />
+            <ProblemWeAddress />
+            <Insights />
+            <ClosingCTA />
+          </main>
+        </div>
       </div>
     </>
   );
