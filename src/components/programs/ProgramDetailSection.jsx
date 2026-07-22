@@ -56,6 +56,14 @@ export default function ProgramDetailSection({
     : "lg:order-2 lg:items-end lg:pr-[136px] lg:pl-[40px]";
   const blockWidth = "lg:w-[407px] lg:max-w-full";
 
+  // The photo touches the frame edge in Figma, so past 1440 it keeps bleeding
+  // out to the viewport edge rather than stopping at the centred content box.
+  // `min(50vw,720px)-50vw` is 0 up to 1440 and the negative overhang beyond it;
+  // the matching width bump keeps the inner edge on the 722px column line.
+  const bleed = imageOnRight
+    ? "lg:mr-[calc(min(50vw,720px)-50vw)] lg:ml-0 lg:w-[calc(100%+50vw-min(50vw,720px))]"
+    : "lg:ml-[calc(min(50vw,720px)-50vw)] lg:mr-0 lg:w-[calc(100%+50vw-min(50vw,720px))]";
+
   // Overlapping "In this program, you will:" card. Each program exports its own
   // SVG (653-673 wide, i.e. ~92% of the image), hung ~17% of the image width
   // past its inner edge and ~12% up from its foot.
@@ -149,22 +157,24 @@ export default function ProgramDetailSection({
           </div>
         </div>
 
-        {/* Photo + highlight card column. The image fills the 722px column and
-            sits flush against the frame edge, 4px below the heading's top. Per
-            the page convention the 1440 content block stays centred above that
-            width — only the section wash bleeds full-bleed. */}
+        {/* Photo + highlight card column. The image fills the 722px column, its
+            inner edge on the column line and its outer edge bled to the screen. */}
         <div className={`relative ${imageOnRight ? "lg:order-2" : "lg:order-1"}`}>
           {maskedPhoto ? (
             /* Pre-masked photo exported from Figma (the arc silhouette is baked
                into the transparent PNG), so it is placed at its natural aspect —
                not CSS-clipped or cover-cropped. The highlight box is anchored to
                this tight wrapper so it tracks the image at any width. */
-            <div className="relative mx-auto w-full max-w-[480px] sm:max-w-[560px] lg:mx-0 lg:max-w-none">
+            <div
+              className={`relative mx-auto w-full max-w-[480px] sm:max-w-[560px] lg:max-w-none ${bleed}`}
+            >
               <img src={maskedPhoto} alt={photoAlt} className="block w-full" />
               {highlightBox}
             </div>
           ) : (
-            <div className="relative mx-auto w-full max-w-[480px] sm:max-w-[560px] lg:mx-0 lg:max-w-none">
+            <div
+              className={`relative mx-auto w-full max-w-[480px] sm:max-w-[560px] lg:max-w-none ${bleed}`}
+            >
               {/* Figma 1638:3098 — 722x884 with a 361px (half-width) arch on
                   both top corners and a 4px foot on the inner side. */}
               <div
