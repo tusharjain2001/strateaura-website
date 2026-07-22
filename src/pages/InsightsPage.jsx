@@ -5,7 +5,6 @@ import ThinkingBehindVeil from "../components/insights/ThinkingBehindVeil";
 import FeaturedThoughtPieces from "../components/insights/FeaturedThoughtPieces";
 import BookFeature from "../components/insights/BookFeature";
 import VoicesAppearances from "../components/insights/VoicesAppearances";
-import ToolsFrameworks from "../components/insights/ToolsFrameworks";
 import NewsletterCta from "../components/insights/NewsletterCta";
 import SiteFooter from "../components/layout/SiteFooter";
 
@@ -24,7 +23,6 @@ export default function InsightsPage() {
         <FeaturedThoughtPieces />
         <BookFeature />
         <VoicesAppearances />
-        <ToolsFrameworks />
         <NewsletterCta />
       </main>
       <SiteFooter />

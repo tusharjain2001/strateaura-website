@@ -3,7 +3,7 @@ import newsletterBg from "../../assets/insights/newsletter-bg.png";
 
 export default function NewsletterCta() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#1f3a58] to-[#3a6296]">
+    <section className="relative bg-gradient-to-b from-[#1f3a58] to-[#3a6296]">
       {/* The bg asset carries a white curved cut-out for the desktop composition;
           on mobile object-cover reveals that white mid-section and hides the
           copy, so it is desktop-only — the navy gradient covers mobile. */}
@@ -12,6 +12,22 @@ export default function NewsletterCta() {
         alt=""
         className="pointer-events-none absolute inset-0 hidden h-full w-full object-cover object-top lg:block"
       />
+
+      {/* Figma 1638:1914 is a boolean union of the 1440x548 band and a 705px
+          sparkle at x=-444, y=195.5 — i.e. centred 91.5px outside the left edge
+          and exactly on the band's foot — so the navy carries on past the band
+          in the sparkle's silhouette. The band already covers its top half; this
+          draws the bottom half, clipped 130px down as the Figma frame does. */}
+      <div className="pointer-events-none absolute top-full left-0 hidden h-[130px] w-full overflow-hidden lg:block">
+        <svg
+          viewBox="0 0 35.65 35.65"
+          fill="currentColor"
+          aria-hidden
+          className="absolute top-[-352px] left-[-444px] size-[705px] text-[#3a6296]"
+        >
+          <path d="M17.82 35.65C17.82 25.81 9.84 17.83 0 17.83C9.84 17.83 17.82 9.85 17.82 0.01C17.82 9.85 25.8 17.83 35.64 17.83C25.8 17.83 17.82 25.81 17.82 35.65Z" />
+        </svg>
+      </div>
       <div className="relative mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-8 px-5 py-16 sm:px-8 lg:grid-cols-[429px_1fr] lg:gap-[77px] lg:px-[143px] lg:py-[123px]">
         <h2 className="text-[clamp(1.75rem,3.2vw,3.125rem)] leading-[1.2] font-bold text-white">
           Don’t Miss the Insight That Changes Everything.
