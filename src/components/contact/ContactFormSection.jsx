@@ -50,7 +50,7 @@ export default function ContactFormSection() {
     >
       <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 items-end gap-x-10 px-5 sm:px-8 lg:min-h-[min(923px,calc(100svh-120px))] lg:grid-cols-[644px_1fr] lg:px-[40px] xl:gap-x-[81px] xl:pl-[76px] xl:pr-[84px]">
         {/* Contact form card */}
-        <div className="my-10 w-full rounded-[8px] bg-white px-6 py-8 sm:px-10 lg:my-[clamp(20px,calc((100svh-923px)/2+87px),87px)] lg:px-[42px] lg:py-[47px] [@media(max-height:960px)]:lg:py-8">
+        <div className="mt-8 mb-[60px] w-full rounded-[8px] bg-white px-6 py-8 sm:px-10 lg:my-[clamp(20px,calc((100svh-923px)/2+87px),87px)] lg:px-[42px] lg:py-[47px] [@media(max-height:960px)]:lg:py-8">
           <h2 className="text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.2] font-bold text-gold">
             Contact Us
           </h2>
@@ -141,15 +141,16 @@ export default function ContactFormSection() {
           )}
         </div>
 
-        {/* Arch-shaped photo. Anchored to SECTION geometry at any section
-            height: top edge 134px into the section, bottom flush. The
-            absolute img inside a stretched wrapper keeps the photo's
-            intrinsic size from inflating the grid row. */}
-        <div className="lg:relative lg:w-full lg:max-w-[555px] lg:self-stretch lg:justify-self-end">
+        {/* Arch-shaped photo. Mobile shows it above the form card (order-first);
+            on lg it's anchored to SECTION geometry at any section height:
+            top edge 134px into the section, bottom flush. The absolute img
+            inside a stretched wrapper keeps the photo's intrinsic size from
+            inflating the grid row. */}
+        <div className="order-first lg:order-none lg:relative lg:w-full lg:max-w-[555px] lg:self-stretch lg:justify-self-end">
           <img
             src={contactPhoto}
             alt="Dr. Suhair Hamouri at a meeting table"
-            className="mx-auto mt-10 w-[260px] max-w-full rounded-t-full object-cover sm:w-[320px] lg:absolute lg:inset-x-0 lg:bottom-0 lg:mt-0 lg:h-[calc(100%-134px)] lg:w-full"
+            className="mx-auto mt-[60px] aspect-[370/526] w-full max-w-[370px] rounded-t-full object-cover lg:absolute lg:inset-x-0 lg:bottom-0 lg:mt-0 lg:aspect-auto lg:h-[calc(100%-134px)] lg:max-w-none"
           />
         </div>
       </div>
