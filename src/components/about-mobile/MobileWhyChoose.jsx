@@ -48,14 +48,20 @@ export default function MobileWhyChoose() {
           <h2 className="text-[20px] leading-normal font-bold text-[#95741a]">
             Why People Choose Us{" "}
           </h2>
-          <p className="mt-[9px] text-[16px] leading-normal text-[#a78526]">
-            Because they’ve tried the playbooks. Because they’ve followed the
-            methods. And something still felt off. They come to us not to learn
-            more,{" "}
-            <span className="font-bold">
-              But to return to what they know, and build from that place.{" "}
-            </span>
-          </p>
+          <div className="mt-[9px] text-[16px] leading-normal text-[#a78526]">
+            <p>
+              StrateAura™ brings together academic rigor, industry expertise, and
+              regional relevance. With a deep understanding of both global trends
+              and local business dynamics, we design programs that resonate with
+              the cultural and professional aspirations of our clients in the UAE
+              and beyond.
+            </p>
+            <p>
+              Each course is developed and led by experienced faculty and
+              practitioners with advanced degrees and years of corporate and
+              academic experience.
+            </p>
+          </div>
           <MobilePill
             as="a"
             href="#programs"

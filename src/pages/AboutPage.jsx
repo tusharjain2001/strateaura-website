@@ -5,7 +5,6 @@ import Stance from "../components/about/Stance";
 import CoreValues from "../components/about/CoreValues";
 import WhyChoose from "../components/about/WhyChoose";
 import Founder from "../components/about/Founder";
-import Different from "../components/about/Different";
 import AboutFooter from "../components/about/AboutFooter";
 import AboutMobile from "../components/about-mobile/AboutMobile";
 
@@ -35,7 +34,6 @@ export default function AboutPage() {
           <CoreValues />
           <WhyChoose />
           <Founder />
-          <Different />
           <AboutFooter />
         </main>
       </div>

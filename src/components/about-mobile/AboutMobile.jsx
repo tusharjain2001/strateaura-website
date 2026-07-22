@@ -4,7 +4,6 @@ import MobileStance from "./MobileStance";
 import MobileCoreValues from "./MobileCoreValues";
 import MobileWhyChoose from "./MobileWhyChoose";
 import MobileFounder from "./MobileFounder";
-import MobileDifferent from "./MobileDifferent";
 import MobileAboutFooter from "./MobileAboutFooter";
 
 /**
@@ -26,7 +25,6 @@ export default function AboutMobile() {
         <MobileCoreValues />
         <MobileWhyChoose />
         <MobileFounder />
-        <MobileDifferent />
       </main>
       <MobileAboutFooter />
     </div>
