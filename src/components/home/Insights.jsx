@@ -75,16 +75,22 @@ export default function Insights() {
 
       {/* 1638:1033-1061 — article list. The rules run from x 720 to x 1448, so
           they bleed past the right edge of the canvas and are clipped by it;
-          the row content itself is only 651px wide. */}
+          the row content itself is only 651px wide.
+
+          Rows pitch every 173px (lines 1638:1033/1040/1041). Each li spans the
+          full 728 so its rule runs the whole width. The 252x140 thumbnail sits
+          at the row's top, 17px under the rule, and the text 22.5px below that
+          — padding the whole row instead pushed the image to 176px, past the
+          173px pitch, so it covered the next row's rule. */}
       <ul className="absolute top-[281px] left-[720px] w-[728px]">
         {ARTICLES.map((article, i) => (
           <li
             key={article.title}
-            className={`flex h-[173px] w-[651px] items-start gap-[27px] border-t pt-[36px] border-black/15 ${
+            className={`flex h-[173px] w-[728px] items-start gap-[27px] border-t pt-[17px] border-black/15 ${
               i === ARTICLES.length - 1 ? "border-b" : ""
             }`}
           >
-            <div className="flex w-[372px] flex-col gap-[7px]">
+            <div className="mt-[22.5px] flex w-[372px] flex-col gap-[7px]">
               <h4 className="text-[22px] leading-[1.2] font-bold text-gold">
                 {article.title}
               </h4>

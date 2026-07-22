@@ -12,6 +12,11 @@ import heroAura from "../../assets/home2/hero-aura.svg";
  *
  * Line breaks in the copy are forced: the Inter fallback runs wider than the
  * design's Acumin Pro and would otherwise wrap at different words.
+ *
+ * The copy block sits 60px above its Figma y-offsets (heading 310, body 420,
+ * pills 535). The canvas is zoom-scaled to the viewport width, so on a wide
+ * screen the 680px hero renders taller than the space under the header and the
+ * pills fell below the fold.
  */
 export default function Hero() {
   return (
@@ -33,14 +38,14 @@ export default function Hero() {
       />
 
       {/* 1638:882 — 789x106 */}
-      <h1 className="absolute top-[310px] left-[80px] w-[789px] text-[44px] leading-[1.2] font-bold text-white [&>span]:block">
+      <h1 className="absolute top-[250px] left-[80px] w-[789px] text-[44px] leading-[1.2] font-bold text-white [&>span]:block">
         <span className="whitespace-nowrap">
           Where Strategy Comes to Life. Where
         </span>
         <span>Leaders Find Their Edge.</span>
       </h1>
       {/* 1638:883 — 700x89 */}
-      <p className="absolute top-[420px] left-[80px] w-[700px] text-[20px] leading-[1.2] text-white [&>span]:block">
+      <p className="absolute top-[360px] left-[80px] w-[700px] text-[20px] leading-[1.2] text-white [&>span]:block">
         <span className="whitespace-nowrap">
           At StrateAura™, we create spaces for elevated learning and aligned
           action. This
@@ -58,7 +63,7 @@ export default function Hero() {
         href="/veil"
         variant="creamFilled"
         icon="sparkle"
-        className="absolute top-[535px] left-[80px] min-w-[272px]"
+        className="absolute top-[475px] left-[80px] min-w-[272px]"
       >
         VEIL™ Program
       </PillButton>
@@ -67,7 +72,7 @@ export default function Hero() {
         href="/programs"
         variant="creamOutline"
         icon="sparkle"
-        className="absolute top-[535px] left-[391px] min-w-[335px]"
+        className="absolute top-[475px] left-[391px] min-w-[335px]"
       >
         Browse All Programs
       </PillButton>
