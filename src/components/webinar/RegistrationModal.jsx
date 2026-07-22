@@ -131,6 +131,8 @@ export default function RegistrationModal({ open, onClose }) {
   const dialogRef = useRef(null);
   const selectRef = useRef(null);
   const [webinar, setWebinar] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (!open) return undefined;
@@ -180,16 +182,31 @@ export default function RegistrationModal({ open, onClose }) {
 
   if (!open) return null;
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     if (!webinar) {
       selectRef.current?.focus();
       return;
     }
-    // Submissions go to the email platform configured for StrateAura
-    // (Mailchimp / ConvertKit), list tagged "VEIL Webinar Pre-Registration".
-    // Wire that call here when the platform credentials are available.
-    navigate("/webinar/confirmation");
+
+    const form = event.currentTarget;
+    const fields = Object.fromEntries(new FormData(form));
+
+    setSubmitting(true);
+    setError("");
+    try {
+      // Emails the team and sends the registrant a confirmation from
+      // training@strateaura.com; only navigate once that has gone through, so a
+      // failure leaves the filled-in form intact to retry.
+      await postJson("/api/webinar/register", {
+        ...fields,
+        consent: form.consent.checked,
+      });
+      navigate("/webinar/confirmation");
+    } catch (err) {
+      setError(err.message);
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -221,6 +238,16 @@ export default function RegistrationModal({ open, onClose }) {
         </p>
 
         <form onSubmit={handleSubmit} className="mt-7 lg:mt-10">
+          {/* Honeypot — hidden from people, catches bots that fill every input */}
+          <input
+            type="text"
+            name="company"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            className="absolute h-0 w-0 opacity-0"
+          />
+
           <div className="flex flex-col gap-4 lg:gap-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:gap-[29px]">
               <Field label="First Name">
@@ -271,9 +298,21 @@ export default function RegistrationModal({ open, onClose }) {
             </span>
           </label>
 
+          {error && (
+            <p role="alert" className="mt-4 text-[16px] leading-normal text-[#c80000]">
+              {error}
+            </p>
+          )}
+
           <div className="mt-6">
-            <CtaPill type="submit" variant="goldOutline" size="md">
-              Reserve My Spot
+            <CtaPill
+              type="submit"
+              variant="goldOutline"
+              size="md"
+              disabled={submitting}
+              className={submitting ? "opacity-60" : ""}
+            >
+              {submitting ? "Sending…" : "Reserve My Spot"}
             </CtaPill>
           </div>
         </form>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CtaPill from "../ui/CtaPill";
+import { postJson } from "../../lib/api";
 import contactPhoto from "../../assets/contact/contact-photo.jpg";
 
 const inputClass =
@@ -18,13 +19,25 @@ function Field({ label, optional = false, children }) {
 
 export default function ContactFormSection() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    // Submissions are meant to go to the email platform / CRM configured for
-    // StrateAura (Mailchimp / ConvertKit / HubSpot) as a general enquiry.
-    // Wire that call here when the platform credentials are available.
-    setSubmitted(true);
+    const fields = Object.fromEntries(new FormData(event.currentTarget));
+
+    setSubmitting(true);
+    setError("");
+    try {
+      // Emails the team and sends the enquirer a confirmation from
+      // training@strateaura.com.
+      await postJson("/api/contact", fields);
+      setSubmitted(true);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -57,6 +70,16 @@ export default function ContactFormSection() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="mt-8 lg:mt-11">
+              {/* Honeypot — hidden from people, catches bots that fill every input */}
+              <input
+                type="text"
+                name="company"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="absolute h-0 w-0 opacity-0"
+              />
+
               <div className="flex flex-col gap-5 lg:gap-6">
                 <div className="flex flex-col gap-5 sm:flex-row sm:gap-[29px]">
                   <Field label="First Name">
@@ -97,9 +120,21 @@ export default function ContactFormSection() {
                 Fields marked * are mandatory
               </p>
 
+              {error && (
+                <p role="alert" className="mt-3 text-[16px] leading-normal text-[#c80000]">
+                  {error}
+                </p>
+              )}
+
               <div className="mt-5">
-                <CtaPill type="submit" variant="goldOutline" size="md">
-                  Begin the Conversation
+                <CtaPill
+                  type="submit"
+                  variant="goldOutline"
+                  size="md"
+                  disabled={submitting}
+                  className={submitting ? "opacity-60" : ""}
+                >
+                  {submitting ? "Sending…" : "Begin the Conversation"}
                 </CtaPill>
               </div>
             </form>
