@@ -5,12 +5,12 @@ import COUNTRIES from "../../data/countries";
 import archPhoto from "../../assets/webinar/arch-photo.jpg";
 
 const inputClass =
-  "h-[52px] w-full border border-[#d9d9d9] bg-[#f7f7f7] px-4 text-[17px] text-navy-2 outline-none transition-colors focus:border-gold focus-visible:outline-2 focus-visible:outline-gold lg:h-[60px] lg:text-[18px]";
+  "h-[35px] w-full border border-[#d9d9d9] bg-[#f7f7f7] px-3 text-[15px] text-navy-2 outline-none transition-colors focus:border-gold focus-visible:outline-2 focus-visible:outline-gold sm:h-[52px] sm:px-4 sm:text-[17px] lg:h-[60px] lg:text-[18px]";
 
 function Field({ label, children }) {
   return (
     <label className="flex w-full flex-col gap-[2px]">
-      <span className="text-[18px] leading-normal text-ink-2 lg:text-[20px]">
+      <span className="text-[14px] leading-normal text-ink-2 sm:text-[18px] lg:text-[20px]">
         {label} <span className="text-[#c80000]">*</span>
       </span>
       {children}
@@ -38,31 +38,35 @@ export default function RegisterSection() {
       id="register"
       className="scroll-mt-[80px] bg-[rgba(249,222,146,0.6)] lg:scroll-mt-[120px]"
     >
-      <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 items-end gap-x-10 px-5 sm:px-8 lg:min-h-[min(923px,calc(100svh-120px))] lg:grid-cols-[1fr_644px] lg:px-[40px] xl:gap-x-[83px] xl:pr-[76px]">
+      <div className="mx-auto grid w-full max-w-[1440px] grid-cols-1 items-end gap-x-10 px-4 sm:px-8 lg:min-h-[min(923px,calc(100svh-120px))] lg:grid-cols-[1fr_644px] lg:px-[40px] xl:gap-x-[83px] xl:pr-[76px]">
         {/* Arch-shaped photo. Same anchoring as Figma at any section height:
             top edge 91px into the section, bottom flush. The absolute img
             inside a stretched wrapper keeps the photo's intrinsic size from
-            inflating the grid row. */}
-        <div className="order-2 lg:order-1 lg:relative lg:w-full lg:max-w-[597px] lg:self-stretch">
+            inflating the grid row. Phone Figma (1296:5738): the arch photo
+            comes FIRST at full column width (370x514), 59px into the section,
+            with the form card 36px below it. */}
+        <div className="lg:relative lg:w-full lg:max-w-[597px] lg:self-stretch">
           <img
             src={archPhoto}
             alt="Dr. Suhair Hamouri with the VEIL book"
-            className="mx-auto mt-10 w-[260px] max-w-full rounded-t-full object-cover sm:w-[320px] lg:absolute lg:inset-x-0 lg:top-[91px] lg:mt-0 lg:h-[calc(100%-91px)] lg:w-full"
+            className="mx-auto mt-[59px] aspect-[370/514] w-full rounded-t-full object-cover sm:mt-10 sm:aspect-auto sm:w-[320px] lg:absolute lg:inset-x-0 lg:top-[91px] lg:mt-0 lg:h-[calc(100%-91px)] lg:w-full"
           />
         </div>
 
         {/* Registration card */}
-        <div className="order-1 my-10 w-full rounded-[8px] bg-white px-6 py-8 sm:px-10 lg:order-2 lg:my-[clamp(24px,calc((100svh-850px)/2),107px)] lg:px-[42px] lg:py-[47px] [@media(max-height:920px)]:lg:py-8">
-          <h2 className="text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.2] font-bold text-gold">
+        <div className="mt-9 mb-[60px] w-full rounded-[8px] bg-white px-6 py-8 sm:my-10 sm:px-10 lg:my-[clamp(24px,calc((100svh-850px)/2),107px)] lg:px-[42px] lg:py-[47px] [@media(max-height:920px)]:lg:py-8">
+          <h2 className="text-[24px] leading-[1.2] font-bold text-gold sm:text-[clamp(1.75rem,3vw,2.5rem)]">
             Contact Us
           </h2>
-          <p className="mt-2 text-[clamp(1.125rem,1.8vw,1.5rem)] leading-normal font-light text-navy-2">
+          <p className="mt-1 text-[16px] leading-normal font-light text-navy-2 sm:mt-2 sm:text-[clamp(1.125rem,1.8vw,1.5rem)]">
             Book a Strategic Conversation
           </p>
 
-          <form onSubmit={handleSubmit} className="mt-8 lg:mt-11">
-              <div className="flex flex-col gap-5 lg:gap-6">
-                <div className="flex flex-col gap-5 sm:flex-row sm:gap-[29px]">
+          <form onSubmit={handleSubmit} className="mt-6 sm:mt-8 lg:mt-11">
+              {/* Phone Figma (1296:5747) keeps First/Last Name side by side
+                  even at 402px, so the name row never stacks. */}
+              <div className="flex flex-col gap-[14px] sm:gap-5 lg:gap-6">
+                <div className="flex gap-[17px] sm:gap-[29px]">
                   <Field label="First Name">
                     <input name="firstName" autoComplete="given-name" required className={inputClass} />
                   </Field>
@@ -93,15 +97,15 @@ export default function RegisterSection() {
                 </Field>
               </div>
 
-              <p className="mt-3 text-[15px] leading-normal text-[#c80000] lg:text-[17px]">
+              <p className="mt-1.5 text-[12px] leading-normal text-[#c80000] sm:mt-3 sm:text-[15px] lg:text-[17px]">
                 Fields marked * are mandatory
               </p>
 
-              <div className="mt-5 flex flex-col items-start gap-[18px]">
-                <CtaPill type="submit" variant="goldFilled" size="md">
+              <div className="mt-6 flex flex-col items-start gap-[10px] sm:mt-5 sm:gap-[18px]">
+                <CtaPill type="submit" variant="goldFilled" size="mdCompact">
                   Reserve My Spot
                 </CtaPill>
-                <p className="text-[15px] leading-normal text-ink-2 italic lg:text-[16px]">
+                <p className="text-[12px] leading-normal text-ink-2 italic sm:text-[15px] lg:text-[16px]">
                   It's free. No date is confirmed yet — you will be the first to
                   know when the next session is scheduled. We will never share
                   your email.

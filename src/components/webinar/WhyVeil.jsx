@@ -2,9 +2,11 @@ import quoteMark from "../../assets/webinar/quote-mark-navy.png";
 
 export default function WhyVeil() {
   return (
-    <section className="bg-gradient-to-r from-[rgba(76,125,190,0.1)] via-[rgba(255,255,255,0.1)] to-[rgba(76,125,190,0.1)]">
-      <div className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:py-[110px] xl:px-[95px]">
-        <div className="flex items-end gap-5 lg:gap-8">
+    <section className="bg-[#eff3f9] lg:bg-gradient-to-r lg:from-[rgba(76,125,190,0.1)] lg:via-[rgba(255,255,255,0.1)] lg:to-[rgba(76,125,190,0.1)]">
+      <div className="mx-auto w-full max-w-[1440px] px-4 pt-[83px] pb-[60px] sm:px-8 sm:py-14 lg:py-[110px] xl:px-[95px]">
+        {/* Phone Figma (1296:5712) stacks the quote glyph ABOVE the heading
+            (24px apart); from sm up they sit side by side as on desktop. */}
+        <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:gap-5 lg:gap-8">
           {/* Figma (nodes 1222:494 / 1222:496) sets the glyph at y 110-174 and
               the heading at y 146-202 — so the quote is NOT on the heading's
               baseline, it rides 28px higher, finishing around the middle of the
@@ -12,9 +14,9 @@ export default function WhyVeil() {
           <img
             src={quoteMark}
             alt=""
-            className="pointer-events-none mb-3 w-11 shrink-0 lg:mb-7 lg:w-[70px]"
+            className="pointer-events-none w-10 shrink-0 sm:mb-3 sm:w-11 lg:mb-7 lg:w-[70px]"
           />
-          <h2 className="text-[clamp(2.25rem,4.5vw,4rem)] leading-none font-bold text-navy-2">
+          <h2 className="text-[32px] leading-none font-bold text-navy-2 sm:text-[clamp(2.25rem,4.5vw,4rem)]">
             Why VEIL™
           </h2>
         </div>
@@ -22,8 +24,8 @@ export default function WhyVeil() {
         {/* Figma (node 1222:492) is 32px on a 44px line in a 1250px measure.
             The blocks are separated by an empty line (44px = space-y-11), but
             the two opening sentences are consecutive lines of ONE block with no
-            gap between them. */}
-        <div className="mt-10 max-w-[1250px] space-y-7 text-[clamp(1.125rem,2.3vw,2rem)] leading-[1.375] text-navy-2 lg:mt-14 lg:space-y-11">
+            gap between them. Phone (1296:5716): 16px on a 24px line. */}
+        <div className="mt-4 max-w-[1250px] space-y-6 text-[16px] leading-6 text-navy-2 sm:mt-10 sm:space-y-7 sm:text-[clamp(1.125rem,2.3vw,2rem)] sm:leading-[1.375] lg:mt-14 lg:space-y-11">
           <div>
             <p>You are good at what you do. Possibly excellent.</p>
             <p>

@@ -24,11 +24,13 @@ const CARDS = [
 export default function LeaveWith() {
   return (
     <section className="bg-white">
-      <div className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:px-[120px] lg:py-[115px]">
-        <h2 className="text-center text-[clamp(1.875rem,3.5vw,3.125rem)] leading-[1.2] font-bold text-navy">
+      <div className="mx-auto w-full max-w-[1440px] px-4 pt-[61px] pb-20 sm:px-8 sm:py-14 lg:px-[120px] lg:py-[115px]">
+        {/* Phone Figma (1296:5717): 24px heading and 16px intro, both
+            LEFT-aligned; centred at the md 3-column switch as on desktop. */}
+        <h2 className="text-[24px] leading-[1.2] font-bold text-navy sm:text-[clamp(1.875rem,3.5vw,3.125rem)] md:text-center">
           What you will Leave with...
         </h2>
-        <p className="mt-4 text-center text-[clamp(1.25rem,2.2vw,2rem)] leading-normal text-navy lg:mt-8">
+        <p className="mt-2 text-[16px] leading-normal text-navy sm:mt-4 sm:text-[clamp(1.25rem,2.2vw,2rem)] md:text-center lg:mt-8">
           In 90 minutes, you will leave with:
         </p>
 
@@ -38,13 +40,15 @@ export default function LeaveWith() {
             right edge). The sparkles were previously pinned to the grid at
             left-1/3 and left-2/3, which lands them in the gutters rather than
             on the card corners because those fractions ignore the gap. */}
-        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3 lg:mt-[57px] lg:gap-[21px]">
+        <div className="mt-[15px] grid grid-cols-1 gap-4 sm:mt-10 sm:gap-5 md:grid-cols-3 lg:mt-[57px] lg:gap-[21px]">
           {CARDS.map((card) => (
             <div key={card.lead} className="relative">
               {/* overflow-hidden clips the aura to the rounded corners, so the
-                  sparkle has to be its sibling to hang outside the card. */}
-              <div className="relative h-full min-h-[190px] overflow-hidden rounded-[4px] bg-gradient-to-b from-navy to-blue p-6 lg:min-h-[167px] lg:p-[26px]">
-                <p className="relative z-10 text-[clamp(1.125rem,1.667vw,1.5rem)] leading-normal text-white">
+                  sparkle has to be its sibling to hang outside the card.
+                  Phone Figma (1296:5722): compact cards that hug their copy —
+                  no min-height, no aura arcs. */}
+              <div className="relative h-full overflow-hidden rounded-[4px] bg-gradient-to-b from-navy to-blue p-[26px] sm:min-h-[190px] sm:p-6 lg:min-h-[167px] lg:p-[26px]">
+                <p className="relative z-10 text-[16px] leading-normal text-white sm:text-[clamp(1.125rem,1.667vw,1.5rem)]">
                   <strong className="font-bold">{card.lead}</strong>
                   {card.rest}
                 </p>
@@ -53,7 +57,7 @@ export default function LeaveWith() {
                 <img
                   src={card.aura}
                   alt=""
-                  className="pointer-events-none absolute right-0 bottom-0 w-[63.8%]"
+                  className="pointer-events-none absolute right-0 bottom-0 hidden w-[63.8%] sm:block"
                 />
               </div>
               <img

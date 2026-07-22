@@ -47,6 +47,19 @@ const SIZES = {
     circle: "size-[32px] lg:size-[36px]",
     glyph: "size-[14px] lg:size-[16px]",
   },
+  // Webinar-page mobile pills follow the phone Figma (1296:5703 / 1296:5763)
+  // exactly, then return to the lg/md scales from sm up so tablet and desktop
+  // render precisely as before.
+  lgCompact: {
+    pill: "h-[35px] gap-3 pr-[5px] pl-[15px] text-[16px] sm:h-[54px] sm:gap-4 sm:pr-2 sm:pl-6 sm:text-[20px] lg:h-[65px] lg:gap-5 lg:pl-8 lg:text-[24px]",
+    circle: "size-[26px] sm:size-[42px] lg:size-[50px]",
+    glyph: "size-[12px] sm:size-[18px] lg:size-[22px]",
+  },
+  mdCompact: {
+    pill: "h-[29px] gap-[11px] pr-1 pl-[17px] text-[16px] sm:h-[46px] sm:gap-3 sm:pr-[6px] sm:pl-6 sm:text-[20px] lg:h-[50px] lg:gap-[19px] lg:pl-[29px] lg:text-[24px]",
+    circle: "size-[21px] sm:size-[32px] lg:size-[36px]",
+    glyph: "size-[10px] sm:size-[14px] lg:size-[16px]",
+  },
 };
 
 export default function CtaPill({
