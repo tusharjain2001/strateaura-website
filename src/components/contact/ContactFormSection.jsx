@@ -73,7 +73,7 @@ export default function ContactFormSection() {
               {/* Honeypot — hidden from people, catches bots that fill every input */}
               <input
                 type="text"
-                name="company"
+                name="hpField"
                 tabIndex={-1}
                 autoComplete="off"
                 aria-hidden="true"
