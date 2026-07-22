@@ -1,7 +1,5 @@
-// Base URL of the strateaura-backend service. Set VITE_API_BASE_URL in .env
-// (and in the host's environment settings for production builds); the fallback
-// is the backend's local dev port.
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+// The strateaura-backend service that handles the webinar and contact forms.
+const BASE_URL = "https://strateaura-backend.vercel.app";
 
 /**
  * POSTs JSON and normalises the backend's error shapes into one thrown Error:
