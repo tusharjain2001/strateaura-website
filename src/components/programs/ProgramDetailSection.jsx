@@ -9,7 +9,7 @@ const THEME = {
     cta: "goldOutline",
   },
   blue: {
-    wash: "bg-gradient-to-b from-white to-navy-2/15",
+    wash: "bg-gradient-to-b from-[#fffdf7] to-navy-2/20",
     heading: "text-navy-2",
     overlay: "bg-gradient-to-b from-navy to-blue",
     cta: "navyOutline",
@@ -44,17 +44,25 @@ export default function ProgramDetailSection({
   const t = THEME[theme] ?? THEME.gold;
   const imageOnRight = imageSide === "right";
 
-  // Overlapping "In this program, you will:" card. Either the Figma-exported
-  // SVG (text baked in) or a constructed gradient card. Positioned to overlap
-  // the image's bottom-inner corner and hang toward the copy, matching Figma.
+  // Figma 1638:3096 (1440 reference). The image is 722 wide (50.14% of the
+  // frame) and hugs the frame edge; the copy block starts 91px past the image
+  // and is 485 wide, with the body/CTA indented a further 89px at 407 wide.
+  // When the image is on the right the whole thing mirrors, so the copy blocks
+  // are right-aligned against their column instead.
+  const copyPad = imageOnRight ? "lg:order-1 lg:pr-[91px]" : "lg:order-2 lg:pl-[91px]";
+  const blockOffset = imageOnRight ? "lg:ml-auto lg:mr-[89px]" : "lg:ml-[89px]";
+  const headingAlign = imageOnRight ? "lg:ml-auto" : "";
+
+  // Overlapping "In this program, you will:" card (673 x 297 at 1440, so 93.2%
+  // of the image width), sitting 169px in from the image's outer edge — which
+  // leaves it hanging 120px past the image's inner edge — and 97px up from the
+  // image's foot. Expressed as percentages of the image so it tracks any width.
+  const boxPosition = `lg:absolute lg:bottom-[11%] lg:mt-0 lg:w-[93.2%] ${
+    imageOnRight ? "lg:right-[23.4%] lg:left-auto" : "lg:left-[23.4%] lg:right-auto"
+  }`;
+
   const highlightBox = boxImage ? (
-    <div
-      className={`relative mt-6 lg:absolute lg:bottom-[10%] lg:mt-0 lg:w-[653px] lg:max-w-[calc(100%-0.5rem)] xl:max-w-none ${
-        imageOnRight
-          ? "lg:left-1 lg:right-auto xl:left-[-124px]"
-          : "lg:right-1 lg:left-auto xl:right-[-120px]"
-      }`}
-    >
+    <div className={`relative mt-6 ${boxPosition}`}>
       <img
         src={boxImage}
         alt={`In this program, you will: ${bullets.join("; ")}.`}
@@ -63,11 +71,7 @@ export default function ProgramDetailSection({
     </div>
   ) : (
     <div
-      className={`relative mt-6 rounded-[4px] p-6 sm:p-8 lg:absolute lg:bottom-[11%] lg:mt-0 lg:w-[653px] lg:max-w-[calc(100%-0.5rem)] xl:max-w-none ${
-        imageOnRight
-          ? "lg:left-1 lg:right-auto xl:left-[-124px]"
-          : "lg:right-1 lg:left-auto xl:right-[-120px]"
-      } ${t.overlay}`}
+      className={`relative mt-6 rounded-[4px] p-6 sm:p-8 ${boxPosition} ${t.overlay}`}
     >
       <p className="text-[clamp(1.125rem,1.6vw,1.375rem)] font-bold text-white">
         In this program, you will:
@@ -91,15 +95,17 @@ export default function ProgramDetailSection({
       id={id}
       className={`relative overflow-hidden scroll-mt-[80px] lg:scroll-mt-[120px] ${t.wash}`}
     >
-      <div className="relative mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-12 px-5 py-14 sm:px-8 lg:min-h-[820px] lg:grid-cols-2 lg:items-stretch lg:gap-0 lg:py-16 xl:px-[75px]">
+      {/* Figma vertical rhythm at 1440: heading top 122, body +47, "suited
+          for" +44, its copy +15, CTA +94, image top 126 and 15px of foot. */}
+      <div
+        className={`relative mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-12 px-5 py-14 sm:px-8 lg:gap-0 lg:px-0 lg:pt-[122px] lg:pb-[15px] ${
+          imageOnRight ? "lg:grid-cols-[1fr_50.14%]" : "lg:grid-cols-[50.14%_1fr]"
+        }`}
+      >
         {/* Copy column */}
-        <div
-          className={`relative z-10 flex flex-col justify-center lg:max-w-[520px] ${
-            imageOnRight ? "lg:order-1" : "lg:order-2 lg:justify-self-end"
-          }`}
-        >
+        <div className={`relative z-10 flex flex-col ${copyPad}`}>
           <h2
-            className={`text-[clamp(1.5rem,2.6vw,2.1875rem)] leading-[1.2] font-bold ${t.heading}`}
+            className={`text-[clamp(1.5rem,2.6vw,2.1875rem)] leading-[1.2] font-bold lg:max-w-[485px] ${headingAlign} ${t.heading}`}
           >
             {Array.isArray(heading)
               ? heading.map((line, i) => (
@@ -110,56 +116,56 @@ export default function ProgramDetailSection({
               : heading}
           </h2>
 
-          <div className="mt-6 space-y-4 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-black/60">
+          {/* Figma sets eyebrow and paragraph as one text block separated by a
+              blank line, i.e. a full 24px line of space. */}
+          <div
+            className={`mt-6 space-y-6 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-black/60 lg:mt-[47px] lg:max-w-[407px] ${blockOffset}`}
+          >
             <p className="font-bold">{eyebrow}</p>
             <p>{paragraph}</p>
           </div>
 
-          <p className="mt-8 text-[clamp(1.125rem,1.6vw,1.375rem)] font-bold text-black/60">
+          <p
+            className={`mt-8 text-[clamp(1.125rem,1.8vw,1.5625rem)] font-bold text-black/60 lg:mt-[44px] lg:max-w-[407px] ${blockOffset}`}
+          >
             This program is suited for:
           </p>
-          <p className="mt-2 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal font-light text-black/60">
+          <p
+            className={`mt-2 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal font-light text-black/60 lg:mt-[15px] lg:max-w-[407px] ${blockOffset}`}
+          >
             {suitedFor}
           </p>
 
-          <div className="mt-8">
+          <div className={`mt-8 lg:mt-[94px] lg:w-fit ${blockOffset}`}>
             <CtaPill as="a" href={ctaHref} variant={t.cta} size="lg">
               {ctaLabel}
             </CtaPill>
           </div>
         </div>
 
-        {/* Photo + highlight card column */}
-        <div className={`relative ${imageOnRight ? "lg:order-2" : "lg:order-1"}`}>
+        {/* Photo + highlight card column. The image fills the 722px column and
+            sits flush against the frame edge, 4px below the heading's top. Per
+            the page convention the 1440 content block stays centred above that
+            width — only the section wash bleeds full-bleed. */}
+        <div
+          className={`relative lg:pt-[4px] ${imageOnRight ? "lg:order-2" : "lg:order-1"}`}
+        >
           {maskedPhoto ? (
-            /* Pre-masked photo exported from Figma (the rounded/arc silhouette is
-               baked into the transparent PNG), so it is placed at its natural
-               722x813 aspect — not CSS-clipped or cover-cropped — and bled to the
-               outer screen edge. The highlight box is anchored to this tight
-               wrapper so it tracks the image at any width. */
-            <div
-              className={`flex justify-center lg:h-full ${
-                imageOnRight
-                  ? "lg:justify-end lg:mr-[-32px] xl:mr-[calc(min(50vw,720px)-50vw-75px)]"
-                  : "lg:justify-start lg:ml-[-32px] xl:ml-[calc(min(50vw,720px)-50vw-75px)]"
-              }`}
-            >
-              <div className="relative w-full max-w-[480px] sm:max-w-[560px] lg:h-full lg:w-fit lg:max-w-none">
-                <img
-                  src={maskedPhoto}
-                  alt={photoAlt}
-                  className="block w-full lg:h-full lg:w-auto"
-                />
-                {highlightBox}
-              </div>
+            /* Pre-masked photo exported from Figma (the arc silhouette is baked
+               into the transparent PNG), so it is placed at its natural aspect —
+               not CSS-clipped or cover-cropped. The highlight box is anchored to
+               this tight wrapper so it tracks the image at any width. */
+            <div className="relative mx-auto w-full max-w-[480px] sm:max-w-[560px] lg:mx-0 lg:max-w-none">
+              <img src={maskedPhoto} alt={photoAlt} className="block w-full" />
+              {highlightBox}
             </div>
           ) : (
-            <>
+            <div className="relative mx-auto w-full max-w-[480px] sm:max-w-[560px] lg:mx-0 lg:max-w-none">
+              {/* Figma 1638:3098 — 722x884 with a 361px (half-width) arch on
+                  both top corners and a 4px foot on the inner side. */}
               <div
-                className={`relative mx-auto aspect-[722/813] w-full max-w-[480px] overflow-hidden rounded-[28px] sm:max-w-[560px] lg:mx-0 lg:aspect-auto lg:h-full lg:w-auto lg:max-w-none ${
-                  imageOnRight
-                    ? "lg:mr-[-32px] xl:mr-[calc(min(50vw,720px)-50vw-75px)] lg:rounded-tl-[42%] lg:rounded-br-[42%] lg:rounded-tr-none lg:rounded-bl-[4px]"
-                    : "lg:ml-[-32px] xl:ml-[calc(min(50vw,720px)-50vw-75px)] lg:rounded-tr-[42%] lg:rounded-tl-[42%] lg:rounded-br-none lg:rounded-bl-[4px]"
+                className={`relative aspect-[722/884] w-full overflow-hidden rounded-[28px] lg:rounded-t-[361px] ${
+                  imageOnRight ? "lg:rounded-br-[4px] lg:rounded-bl-none" : "lg:rounded-bl-[4px] lg:rounded-br-none"
                 }`}
               >
                 <img
@@ -170,7 +176,7 @@ export default function ProgramDetailSection({
                 />
               </div>
               {highlightBox}
-            </>
+            </div>
           )}
         </div>
       </div>
