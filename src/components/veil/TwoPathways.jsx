@@ -99,10 +99,13 @@ export default function TwoPathways() {
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8">
               {/* Heading, body, then CTA — on mobile the CTA drops below the
                   body (Figma); on desktop grid placement keeps it bottom-left. */}
-              <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold lg:col-start-1 lg:row-start-1 lg:[&>span]:block lg:[&>span]:whitespace-nowrap">
-                <span>UNVEIL - </span>
-                <span>The Institutional </span>
-                <span>Cohort Program</span>
+              {/* Figma mobile (node 1434:4031) isolates the "UNVEIL -" prefix
+                  on its own line and lets the rest flow; desktop forces all
+                  three lines. */}
+              <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold lg:col-start-1 lg:row-start-1">
+                <span className="block">UNVEIL - </span>
+                <span className="lg:block lg:whitespace-nowrap">The Institutional </span>
+                <span className="lg:block lg:whitespace-nowrap">Cohort Program</span>
               </h3>
               <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
                 <p className="text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-navy-2">
@@ -137,10 +140,12 @@ export default function TwoPathways() {
           {/* Online Pathway */}
           <div className="rounded-xl border border-gold-light bg-white p-6 shadow-[0_0_27px_-11px_#b3902f] sm:p-8 lg:p-12">
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-x-16 lg:gap-y-8">
-              <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold lg:col-start-1 lg:row-start-1 lg:[&>span]:block lg:[&>span]:whitespace-nowrap">
-                <span>The Online Pathway - </span>
-                <span>MAP, DECODE, and </span>
-                <span>UNVEIL</span>
+              {/* Figma mobile (node 1434:4045): prefix on line one, the rest
+                  flows; desktop forces all three lines. */}
+              <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold lg:col-start-1 lg:row-start-1">
+                <span className="block">The Online Pathway - </span>
+                <span className="lg:block lg:whitespace-nowrap">MAP, DECODE, and </span>
+                <span className="lg:block lg:whitespace-nowrap">UNVEIL</span>
               </h3>
               <div className="lg:col-start-2 lg:row-span-2 lg:row-start-1">
                 <p className="text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-navy-2">
@@ -175,10 +180,12 @@ export default function TwoPathways() {
                       className="absolute right-0 bottom-2 w-[62%] opacity-80"
                     />
                   </div>
+                  {/* Corner sparkle is a desktop-only flourish; the Figma
+                      mobile subcards (nodes 1434:4055/4065/4075) have none. */}
                   <img
                     src={subcardSparkle}
                     alt=""
-                    className="pointer-events-none absolute -top-[14px] -right-[14px] z-10 size-[28px]"
+                    className="pointer-events-none absolute -top-[14px] -right-[14px] z-10 hidden size-[28px] lg:block"
                   />
                   <p className="relative z-10 text-[clamp(1.25rem,1.8vw,1.5rem)] font-bold text-white">
                     {phase.title}

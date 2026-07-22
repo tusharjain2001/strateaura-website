@@ -61,10 +61,12 @@ function EvidenceCard({ className = "" }) {
     <div
       className={`relative z-10 rounded-[4px] bg-gradient-to-b from-[#dfbc5a] to-[#a07e22] ${className}`}
     >
+      {/* Corner sparkle is a desktop-only flourish; the Figma mobile evidence
+          card (node 1434:4183) has none. */}
       <img
         src={evidenceSparkle}
         alt=""
-        className="pointer-events-none absolute -top-6 -right-6 size-[48px]"
+        className="pointer-events-none absolute -top-6 -right-6 hidden size-[48px] lg:block"
       />
       <h2 className="text-[clamp(1.5rem,2.2vw,1.875rem)] font-bold text-white">
         The Evidence

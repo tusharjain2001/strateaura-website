@@ -1,5 +1,6 @@
 import quotePhoto from "../../assets/veil/why-veil-photo.jpg";
 import quoteBubble from "../../assets/veil/why-veil-quote-bubble.svg";
+import quoteTailMobile from "../../assets/veil/why-veil-quote-tail-mobile.svg";
 
 function QuoteText({ className = "" }) {
   return (
@@ -27,12 +28,24 @@ function QuoteText({ className = "" }) {
 export default function QuoteSection() {
   return (
     <section className="bg-gradient-to-b from-[#f1dd9e] to-[#fffdf7]">
-      {/* Mobile/tablet: simple stack, no overlap. */}
-      <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-5 py-14 sm:px-8 lg:hidden">
-        <div className="rounded-2xl bg-gradient-to-b from-navy to-blue p-7 sm:p-10">
-          <QuoteText />
+      {/* Mobile/tablet: the quote sits on the navy->blue card, but the mobile
+          Figma variant (node 1434:4194) points its tail DOWN into the photo.
+          The card is split into a content-height gradient rectangle plus a
+          fixed-aspect tail svg so the tail keeps its exact Figma curvature at
+          any width; the card layer sits above the photo, whose negative margin
+          lets the tail dip ~45% into it (Figma has the tip land mid-photo). */}
+      <div className="mx-auto flex w-full max-w-[1440px] flex-col px-5 py-14 sm:px-8 lg:hidden">
+        <div className="relative z-10">
+          <div className="bg-gradient-to-r from-navy to-blue px-7 pt-8 pb-10 sm:px-10 sm:pt-10 sm:pb-12">
+            <QuoteText />
+          </div>
+          <img
+            src={quoteTailMobile}
+            alt=""
+            className="pointer-events-none -mt-px block w-full"
+          />
         </div>
-        <div className="relative aspect-[921/660] w-full overflow-hidden rounded-[4px]">
+        <div className="relative -mt-[32%] aspect-[921/660] w-full overflow-hidden rounded-[4px]">
           <img
             src={quotePhoto}
             alt="Dr. Suhair Hamouri presenting at Philosophy House, Fujairah"

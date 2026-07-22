@@ -44,10 +44,12 @@ export default function ThreeConstructs() {
                   className="absolute right-0 bottom-1 w-[62%]"
                 />
               </div>
+              {/* Corner sparkle is a desktop-only flourish; the Figma mobile
+                  cards (node 1434:3991) have no sparkle. */}
               <img
                 src={cardSparkle}
                 alt=""
-                className="pointer-events-none absolute -top-[15px] -right-[15px] z-10 size-[30px]"
+                className="pointer-events-none absolute -top-[15px] -right-[15px] z-10 hidden size-[30px] lg:block"
               />
               <p className="relative z-10 text-[clamp(1.25rem,1.8vw,1.75rem)] font-bold text-white">
                 {card.title}
