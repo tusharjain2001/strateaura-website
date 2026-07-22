@@ -44,21 +44,23 @@ export default function ProgramDetailSection({
   const t = THEME[theme] ?? THEME.gold;
   const imageOnRight = imageSide === "right";
 
-  // Figma 1638:3096 (1440 reference). The image is 722 wide (50.14% of the
-  // frame) and hugs the frame edge; the copy block starts 91px past the image
-  // and is 485 wide, with the body/CTA indented a further 89px at 407 wide.
-  // When the image is on the right the whole thing mirrors, so the copy blocks
-  // are right-aligned against their column instead.
-  const copyPad = imageOnRight ? "lg:order-1 lg:pr-[91px]" : "lg:order-2 lg:pl-[91px]";
-  const blockOffset = imageOnRight ? "lg:ml-auto lg:mr-[89px]" : "lg:ml-[89px]";
-  const headingAlign = imageOnRight ? "lg:ml-auto" : "";
+  // Figma 1638:3096 (image left) and 1638:3116 (image right), both on a 1440
+  // frame. The image is always 722 wide (50.14%) and flush with the frame edge.
+  // The copy blocks align to the frame's *outer* edge — 107px in when the copy
+  // sits on the left, ~136px when it sits on the right — with the heading 485
+  // wide and everything below it 407. Widths are explicit rather than max-w:
+  // inside a flex column an auto margin makes a block shrink to its text, which
+  // knocks short lines like "This program is suited for:" out of alignment.
+  const copyCol = imageOnRight
+    ? "lg:order-1 lg:items-start lg:pl-[107px] lg:pr-[40px]"
+    : "lg:order-2 lg:items-end lg:pr-[136px] lg:pl-[40px]";
+  const blockWidth = "lg:w-[407px] lg:max-w-full";
 
-  // Overlapping "In this program, you will:" card (673 x 297 at 1440, so 93.2%
-  // of the image width), sitting 169px in from the image's outer edge — which
-  // leaves it hanging 120px past the image's inner edge — and 97px up from the
-  // image's foot. Expressed as percentages of the image so it tracks any width.
-  const boxPosition = `lg:absolute lg:bottom-[11%] lg:mt-0 lg:w-[93.2%] ${
-    imageOnRight ? "lg:right-[23.4%] lg:left-auto" : "lg:left-[23.4%] lg:right-auto"
+  // Overlapping "In this program, you will:" card. Each program exports its own
+  // SVG (653-673 wide, i.e. ~92% of the image), hung ~17% of the image width
+  // past its inner edge and ~12% up from its foot.
+  const boxPosition = `lg:absolute lg:bottom-[12%] lg:mt-0 lg:w-[92%] ${
+    imageOnRight ? "lg:left-[-17%] lg:right-auto" : "lg:right-[-17%] lg:left-auto"
   }`;
 
   const highlightBox = boxImage ? (
@@ -95,17 +97,21 @@ export default function ProgramDetailSection({
       id={id}
       className={`relative overflow-hidden scroll-mt-[80px] lg:scroll-mt-[120px] ${t.wash}`}
     >
-      {/* Figma vertical rhythm at 1440: heading top 122, body +47, "suited
-          for" +44, its copy +15, CTA +94, image top 126 and 15px of foot. */}
+      {/* The image sits 126-131px below the section top in both frames with a
+          ~14px foot. The copy is centred against the image and nudged 36px up
+          (a 72px bottom pad under justify-center), which lands the heading at
+          Figma's y=122 for the 884-tall image and y=176 for the 813-tall one. */}
       <div
-        className={`relative mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-12 px-5 py-14 sm:px-8 lg:gap-0 lg:px-0 lg:pt-[122px] lg:pb-[15px] ${
+        className={`relative mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-12 px-5 py-14 sm:px-8 lg:gap-0 lg:px-0 lg:pt-[128px] lg:pb-[14px] ${
           imageOnRight ? "lg:grid-cols-[1fr_50.14%]" : "lg:grid-cols-[50.14%_1fr]"
         }`}
       >
         {/* Copy column */}
-        <div className={`relative z-10 flex flex-col ${copyPad}`}>
+        <div
+          className={`relative z-10 flex flex-col lg:justify-center lg:pb-[72px] ${copyCol}`}
+        >
           <h2
-            className={`text-[clamp(1.5rem,2.6vw,2.1875rem)] leading-[1.2] font-bold lg:max-w-[485px] ${headingAlign} ${t.heading}`}
+            className={`text-[clamp(1.5rem,2.6vw,2.1875rem)] leading-[1.2] font-bold lg:w-[485px] lg:max-w-full ${t.heading}`}
           >
             {Array.isArray(heading)
               ? heading.map((line, i) => (
@@ -119,24 +125,24 @@ export default function ProgramDetailSection({
           {/* Figma sets eyebrow and paragraph as one text block separated by a
               blank line, i.e. a full 24px line of space. */}
           <div
-            className={`mt-6 space-y-6 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-black/60 lg:mt-[47px] lg:max-w-[407px] ${blockOffset}`}
+            className={`mt-6 space-y-6 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-black/60 lg:mt-[44px] ${blockWidth}`}
           >
             <p className="font-bold">{eyebrow}</p>
             <p>{paragraph}</p>
           </div>
 
           <p
-            className={`mt-8 text-[clamp(1.125rem,1.8vw,1.5625rem)] font-bold text-black/60 lg:mt-[44px] lg:max-w-[407px] ${blockOffset}`}
+            className={`mt-8 text-[clamp(1.125rem,1.8vw,1.5625rem)] font-bold text-black/60 lg:mt-[40px] ${blockWidth}`}
           >
             This program is suited for:
           </p>
           <p
-            className={`mt-2 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal font-light text-black/60 lg:mt-[15px] lg:max-w-[407px] ${blockOffset}`}
+            className={`mt-2 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal font-light text-black/60 lg:mt-[15px] ${blockWidth}`}
           >
             {suitedFor}
           </p>
 
-          <div className={`mt-8 lg:mt-[94px] lg:w-fit ${blockOffset}`}>
+          <div className="mt-8 w-fit lg:mt-[40px]">
             <CtaPill as="a" href={ctaHref} variant={t.cta} size="lg">
               {ctaLabel}
             </CtaPill>
@@ -147,9 +153,7 @@ export default function ProgramDetailSection({
             sits flush against the frame edge, 4px below the heading's top. Per
             the page convention the 1440 content block stays centred above that
             width — only the section wash bleeds full-bleed. */}
-        <div
-          className={`relative lg:pt-[4px] ${imageOnRight ? "lg:order-2" : "lg:order-1"}`}
-        >
+        <div className={`relative ${imageOnRight ? "lg:order-2" : "lg:order-1"}`}>
           {maskedPhoto ? (
             /* Pre-masked photo exported from Figma (the arc silhouette is baked
                into the transparent PNG), so it is placed at its natural aspect —
