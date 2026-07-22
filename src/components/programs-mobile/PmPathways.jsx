@@ -1,6 +1,7 @@
 import MobileContainer from "../home-mobile/MobileContainer";
 import MobilePill from "../home-mobile/MobilePill";
 import check from "../../assets/programs/pathway-bullet-check.svg";
+import pathwaysBg from "../../assets/programs/pathways-bg-mobile.svg";
 
 // Figma nodes 1433:36 / 1433:61 / 1433:86 — cream phase cards inside the online
 // pathway card, each a title over a two-column checklist.
@@ -68,8 +69,18 @@ function PhaseCard({ title, points }) {
  */
 export default function PmPathways() {
   return (
-    <section className="pt-[60px] pb-[46px]">
-      <MobileContainer>
+    <section className="relative pt-[60px] pb-[46px]">
+      {/* 1433:11 — Frame 98: white→gold wash with white swirls behind both
+          cards. Figma stretches the 584px-wide art past the 402px frame
+          (19.18% off the left edge), so the img overfills the section the
+          same way; the page root's overflow-x-clip crops it. */}
+      <img
+        src={pathwaysBg}
+        alt=""
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 left-[-19.18%] h-full w-[145.31%] max-w-none"
+      />
+      <MobileContainer className="relative">
         {/* 1433:14 — centred, Medium weight (not bold). */}
         <h2 className="text-center text-[20px] leading-normal font-medium text-navy-2">
           Two pathways are available:
