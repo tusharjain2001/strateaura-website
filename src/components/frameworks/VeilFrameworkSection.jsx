@@ -291,7 +291,7 @@ export default function VeilFrameworkSection() {
                 </strong>{" "}
                 for institutions, and through{" "}
                 <strong className="font-bold text-black/60">
-                  MAP and DECODE, a self-paced online pathway
+                  the online pathway
                 </strong>{" "}
                 for individual women. All instruments used in VEIL are
                 internationally validated with Arabic-validated versions for

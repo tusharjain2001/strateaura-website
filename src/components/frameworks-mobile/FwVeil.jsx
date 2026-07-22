@@ -241,9 +241,7 @@ export default function FwVeil() {
               UNVEIL, a 12-week cohort program
             </strong>{" "}
             for institutions, and through{" "}
-            <strong className="font-bold">
-              MAP and DECODE, a self-paced online pathway
-            </strong>{" "}
+            <strong className="font-bold">the online pathway</strong>{" "}
             for individual women. All instruments used in VEIL are
             internationally validated with Arabic-validated versions for Gulf
             professional populations.
