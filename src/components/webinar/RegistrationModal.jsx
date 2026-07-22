@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CtaPill from "../ui/CtaPill";
+import { postJson } from "../../lib/api";
 import { ChevronDown, CloseIcon } from "../ui/Icons";
 
 const WEBINAR_OPTIONS = [
