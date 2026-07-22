@@ -1,4 +1,4 @@
-import MobileNav from "../home-mobile/MobileNav";
+import SiteHeader from "../layout/SiteHeader";
 import MobilePhilosophy from "./MobilePhilosophy";
 import MobileStance from "./MobileStance";
 import MobileCoreValues from "./MobileCoreValues";
@@ -18,7 +18,7 @@ import MobileAboutFooter from "./MobileAboutFooter";
 export default function AboutMobile() {
   return (
     <div className="w-full overflow-x-clip bg-white text-black">
-      <MobileNav />
+      <SiteHeader />
       <main>
         <MobilePhilosophy />
         <MobileStance />

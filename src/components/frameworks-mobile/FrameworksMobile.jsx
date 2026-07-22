@@ -1,4 +1,4 @@
-import MobileNav from "../home-mobile/MobileNav";
+import SiteHeader from "../layout/SiteHeader";
 import FwHero from "./FwHero";
 import FwAlaNexus from "./FwAlaNexus";
 import FwFiveCs from "./FwFiveCs";
@@ -18,7 +18,7 @@ import FwFooter from "./FwFooter";
 export default function FrameworksMobile() {
   return (
     <div className="w-full overflow-x-clip bg-white text-black">
-      <MobileNav />
+      <SiteHeader />
       <main>
         <FwHero />
         <FwAlaNexus />

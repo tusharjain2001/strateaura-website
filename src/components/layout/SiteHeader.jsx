@@ -41,7 +41,7 @@ export default function SiteHeader() {
     );
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-gold">
+    <header className="sticky top-0 z-50 w-full bg-gold select-none">
       <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-5 py-[20px] sm:px-8 xl:px-[72px]">
         <Link to="/" aria-label="StrateAura home" className="shrink-0">
           <img
@@ -62,7 +62,7 @@ export default function SiteHeader() {
           <div className="flex shrink-0 items-center gap-[28px]">
             <button
               aria-label="Search"
-              className="text-white transition-opacity hover:opacity-80"
+              className="cursor-pointer text-white transition-opacity hover:opacity-80"
             >
               <SearchIcon className="size-[22px]" />
             </button>
@@ -80,7 +80,7 @@ export default function SiteHeader() {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen(!open)}
-          className="text-white xl:hidden"
+          className="cursor-pointer text-white xl:hidden"
         >
           {open ? <CloseIcon className="size-7" /> : <MenuIcon className="size-7" />}
         </button>

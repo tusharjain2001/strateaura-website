@@ -1,4 +1,4 @@
-import MobileNav from "../home-mobile/MobileNav";
+import SiteHeader from "../layout/SiteHeader";
 import MobileAboutFooter from "../about-mobile/MobileAboutFooter";
 import PmHero from "./PmHero";
 import PmFeatured from "./PmFeatured";
@@ -140,7 +140,7 @@ const DETAILS = [
 export default function ProgramsMobile() {
   return (
     <div className="w-full overflow-x-clip bg-white text-black">
-      <MobileNav />
+      <SiteHeader />
       <main>
         {/* Node 1295:3965 — a cream→white wash that starts under the navbar and
             runs 950px down, backing the hero and the top of the VEIL section.

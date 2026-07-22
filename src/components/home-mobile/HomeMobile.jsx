@@ -1,4 +1,4 @@
-import MobileNav from "./MobileNav";
+import SiteHeader from "../layout/SiteHeader";
 import MobileHero from "./MobileHero";
 import MobileSignaturePrograms from "./MobileSignaturePrograms";
 import MobileVeil from "./MobileVeil";
@@ -23,7 +23,7 @@ import MobileFooter from "./MobileFooter";
 export default function HomeMobile() {
   return (
     <div className="w-full overflow-x-clip bg-white text-black">
-      <MobileNav />
+      <SiteHeader />
       <main>
         <MobileHero />
         {/* Node 1434:406 — a 1593x402 rect rotated to run from the bottom of
