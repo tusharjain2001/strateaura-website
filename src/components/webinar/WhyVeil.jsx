@@ -1,25 +1,11 @@
-import quoteMark from "../../assets/webinar/quote-mark-navy.png";
-
 export default function WhyVeil() {
   return (
     <section className="bg-[#eff3f9] lg:bg-gradient-to-r lg:from-[rgba(76,125,190,0.1)] lg:via-[rgba(255,255,255,0.1)] lg:to-[rgba(76,125,190,0.1)]">
       <div className="mx-auto w-full max-w-[1440px] px-4 pt-[83px] pb-[60px] sm:px-8 sm:py-14 lg:py-[110px] xl:px-[95px]">
-        {/* Phone Figma (1296:5712) stacks the quote glyph ABOVE the heading
-            (24px apart); from sm up they sit side by side as on desktop. */}
-        <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-end sm:gap-5 lg:gap-8">
-          {/* Figma (nodes 1222:494 / 1222:496) sets the glyph at y 110-174 and
-              the heading at y 146-202 — so the quote is NOT on the heading's
-              baseline, it rides 28px higher, finishing around the middle of the
-              letterforms. The bottom margin lifts it by that amount. */}
-          <img
-            src={quoteMark}
-            alt=""
-            className="pointer-events-none w-10 shrink-0 sm:mb-3 sm:w-11 lg:mb-7 lg:w-[70px]"
-          />
-          <h2 className="text-[32px] leading-none font-bold text-navy-2 sm:text-[clamp(2.25rem,4.5vw,4rem)]">
-            Why VEIL™
-          </h2>
-        </div>
+        {/* Figma 1638:2416 — 48px heading, no quote glyph. */}
+        <h2 className="text-[32px] leading-none font-bold text-navy-2 sm:text-[clamp(2rem,4.5vw,3rem)]">
+          Why VEIL™
+        </h2>
 
         {/* Figma (node 1222:492) is 32px on a 44px line in a 1250px measure.
             The blocks are separated by an empty line (44px = space-y-11), but
