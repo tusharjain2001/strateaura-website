@@ -60,14 +60,14 @@ function FooterLinks({ heading, items }) {
 /**
  * Closing CTA + site footer — Figma node 1434:707.
  *
- * A white panel with a 121px top-left corner radius that rides 145px up over
- * the navy "Our Edge" band (node 1434:695), so the navy shows through the
- * curve and clips the bottom of the founder portrait. It therefore expects to
- * be rendered directly after <MobileEdge /> on the mobile Home page.
+ * The board drew this as a white panel with a 121px top-left corner radius
+ * riding 145px up over the navy "Our Edge" band. That band is no longer on
+ * the page, so the footer sits in normal flow — the negative margin would
+ * otherwise ride up over the last Insights image and cut it.
  */
 export default function MobileFooter() {
   return (
-    <footer className="relative z-10 -mt-[145.24px] rounded-tl-[121px] bg-white pt-[97px] pb-[30px]">
+    <footer className="relative bg-white pt-[97px] pb-[30px]">
       <div className="mx-auto w-full max-w-[430px] px-4">
         <div className="flex flex-col gap-[38px]">
           {/* Closing CTA — node 1434:711 */}
