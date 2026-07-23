@@ -73,7 +73,7 @@ export default function Insights() {
         <h3 className="mt-[39px] w-[469px] text-[24px] leading-[1.2] font-bold text-gold">
           These Aren’t Productivity Problems. They’re Patterns of Misalignment.
         </h3>
-        <p className="mt-[17px] text-[16px] leading-normal text-black/60">
+        <p className="mt-[17px] text-[16px] leading-[1.2] text-black/60">
           Published December 15, 2025
         </p>
         {/* 1728:378 — 16px justified, ending on the underlined link */}

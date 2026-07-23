@@ -11,7 +11,7 @@ export default function SignaturePrograms() {
     <section className="relative h-[556px] w-[1440px]">
       {/* 1728:534 — two forced lines. 32px per the designer's note: this is the
           one section header that isn't on the page's 30px header size. */}
-      <h2 className="absolute top-0 left-[158px] w-[670px] text-[32px] leading-normal font-bold text-navy">
+      <h2 className="absolute top-0 left-[158px] w-[670px] text-[32px] leading-[1.2] font-bold text-navy">
         Signature Programs
         <br />
         (KHDA-certified)
@@ -35,7 +35,7 @@ export default function SignaturePrograms() {
         {/* 1728:543 — Figma's 284.5 box is measured in Acumin Pro; Inter runs
             wider and split "VEIL™: Lead Without", so the two lines are forced
             and the box left to size itself. */}
-        <h3 className="absolute top-[37.18px] left-[42.03px] text-[30px] leading-normal font-bold text-navy [&>span]:block [&>span]:whitespace-nowrap">
+        <h3 className="absolute top-[37.18px] left-[42.03px] text-[30px] leading-[1.2] font-bold text-navy [&>span]:block [&>span]:whitespace-nowrap">
           <span>VEIL™: Lead Without</span>
           <span>Losing Yourself</span>
         </h3>
@@ -47,7 +47,7 @@ export default function SignaturePrograms() {
 
         {/* 1728:542 — 16px in Figma's 417.9 box; the copy wraps rather than
             being pinned to the board's breaks, which were measured in Acumin. */}
-        <div className="absolute top-[84.06px] left-[524.58px] w-[417.9px] text-[16px] leading-normal text-navy">
+        <div className="absolute top-[84.06px] left-[524.58px] w-[417.9px] text-[16px] leading-[1.2] text-navy">
           <p>
             For women in leadership and high-demand professional roles who are
             performing well externally - and already paying a silent cost for

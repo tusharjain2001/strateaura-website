@@ -100,14 +100,14 @@ export default function MarketingPrograms() {
   return (
     <section className="relative h-[391px] w-[1440px]">
       {/* 1728:212 — 490x69.5 */}
-      <h2 className="absolute top-0 left-[158px] w-[490px] text-[30px] leading-normal font-bold text-navy">
+      <h2 className="absolute top-0 left-[158px] w-[490px] text-[30px] leading-[1.2] font-bold text-navy">
         Our Marketing &amp;
         <br />
         Leadership Programs.
       </h2>
 
       {/* 1728:213 — 508 wide at x 773.3, sitting 6.3 below the heading's cap line */}
-      <p className="absolute top-[6.26px] left-[773.3px] w-[508px] text-[16px] leading-normal text-navy">
+      <p className="absolute top-[6.26px] left-[773.3px] w-[508px] text-[16px] leading-[1.2] text-navy">
         We offer a suite of practical marketing and leadership programs for
         professionals, teams, and institutions. All programs carry KHDA Attested
         Attendance Certificate.
@@ -122,7 +122,7 @@ export default function MarketingPrograms() {
             className="absolute top-0 overflow-hidden rounded-[2.585px] bg-gradient-to-b from-navy to-blue"
           >
             <CardArt {...card.art} />
-            <h3 className="absolute top-[20.7px] left-[14.55px] w-[175px] text-[16.8px] leading-[23px] font-bold text-white">
+            <h3 className="absolute top-[20.7px] left-[14.55px] w-[175px] text-[16.8px] leading-[20px] font-bold text-white">
               {card.lines.map((line) => (
                 <span key={line} className="block whitespace-nowrap">
                   {line}

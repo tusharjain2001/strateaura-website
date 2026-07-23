@@ -86,7 +86,7 @@ export default function Frameworks() {
       />
 
       {/* 1728:505 — 30.3px, and the pill right-aligned to the content column */}
-      <h2 className="absolute top-0 left-[158px] w-[670px] text-[30px] leading-normal font-bold text-navy">
+      <h2 className="absolute top-0 left-[158px] w-[670px] text-[30px] leading-[1.2] font-bold text-navy">
         Our Signature Frameworks
       </h2>
       <PillButton
@@ -102,7 +102,7 @@ export default function Frameworks() {
       </PillButton>
 
       {/* 1728:512 — 601.4 wide, directly under the 53px heading box */}
-      <p className="absolute top-[53px] left-[158px] w-[601.37px] text-[16px] leading-normal font-light text-black">
+      <p className="absolute top-[53px] left-[158px] w-[601.37px] text-[16px] leading-[1.2] font-light text-black">
         We teach models you won’t find in standard leadership courses. These are
         systems that make inner insight visible and sustainable.
       </p>

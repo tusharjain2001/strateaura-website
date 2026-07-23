@@ -158,13 +158,13 @@ export default function ProblemWeAddress() {
         className="pointer-events-none absolute top-[17px] left-[-44px] h-[631px] w-[660px] opacity-90"
       />
 
-      <div className="absolute top-[64.63px] left-[195px] w-[364px] text-[30px] leading-normal font-bold text-navy">
+      <div className="absolute top-[64.63px] left-[195px] w-[364px] text-[30px] leading-[1.2] font-bold text-navy">
         The Problem
         <br />
         We Address
       </div>
       {/* 1728:296 — 16px light in Figma's 340.2 box */}
-      <p className="absolute top-[157.99px] left-[195px] w-[340.2px] text-[16px] leading-normal font-light text-black">
+      <p className="absolute top-[157.99px] left-[195px] w-[340.2px] text-[16px] leading-[1.2] font-light text-black">
         We live in a world of constant doing, chasing visibility, metrics, and
         motion. But too many leaders feel
       </p>
