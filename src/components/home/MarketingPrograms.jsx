@@ -1,6 +1,7 @@
 import fan from "../../assets/home2/mkt-fan.svg";
 import poly from "../../assets/home2/mkt-poly.svg";
 import arc from "../../assets/home2/mkt-arc.svg";
+import CardArrow from "../ui/CardArrow";
 
 /**
  * Our Marketing & Leadership Programs — "Alt/ Home" board, node 1728:210
@@ -47,6 +48,7 @@ const CARDS = [
 
 const CARD_W = 214.052;
 const CARD_H = 155.771;
+const ARROW_W = 16.159;
 
 /**
  * Decorative motif. Figma draws the "fan" horizontally (155.771x57.237) and
@@ -127,10 +129,12 @@ export default function MarketingPrograms() {
                 </span>
               ))}
             </h3>
-            {/* 1728:218 etc — 16px arrow rule at y 135.1 */}
-            <span
-              style={{ left: card.arrowLeft }}
-              className="absolute top-[135.09px] block h-[1.5px] w-[16.159px] bg-white after:absolute after:top-[-2.5px] after:right-[-1px] after:h-[6.5px] after:w-[6.5px] after:rotate-45 after:border-t-[1.5px] after:border-r-[1.5px] after:border-white after:content-['']"
+            {/* 1728:218 etc — 16px arrow rule centred on y 135.8 */}
+            <CardArrow
+              length={ARROW_W}
+              left={card.arrowLeft}
+              centerY={135.84}
+              className="text-white"
             />
           </div>
         ))}

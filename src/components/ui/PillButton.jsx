@@ -43,13 +43,13 @@ const SIZES = {
     pill: "h-[65px] gap-5 pl-8 pr-2",
     label: "text-[24px]",
     circle: "size-[50px]",
-    glyph: "size-[36px]",
+    glyph: "size-[31px]",
   },
   sm: {
     pill: "h-[53px] gap-4 pl-[26px] pr-[6px]",
     label: "text-[19px]",
     circle: "size-[40px]",
-    glyph: "size-[29px]",
+    glyph: "size-[25px]",
   },
 };
 
