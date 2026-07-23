@@ -42,7 +42,11 @@ export default function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-gold select-none">
-      <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-5 py-[20px] sm:px-8 xl:px-[72px]">
+      {/* The gap is a floor, not the design value: at 1440 the nav block hits
+          its 1061 cap and justify-between opens the board's 58px, but on a
+          1280-1439 desktop the block grows to fill the row and "Home" would
+          otherwise sit flush against the lockup. */}
+      <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between gap-4 px-5 py-[20px] sm:px-8 xl:gap-[40px] xl:px-[72px]">
         <Link to="/" aria-label="StrateAura home" className="shrink-0">
           <img
             src={logo}
