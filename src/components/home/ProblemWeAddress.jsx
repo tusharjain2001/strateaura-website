@@ -25,6 +25,8 @@ const STAR = 32; // corner star, straddles each card's top-right corner
 // untouched.
 const SECTION_H = 796; // the section's designed height, unchanged
 const HEADER_H = 74; // sticky SiteHeader height in real (unzoomed) px
+const PIN_GAP = 56; // breathing room between the navbar and the pinned deck
+const PIN_TOP = HEADER_H + PIN_GAP; // where the section pins, real px
 const CARD_SCROLL = 400; // canvas px of scroll each arriving card consumes
 const TRACK_EXTRA = CARD_SCROLL * (4 - 1); // cards 2-4 arrive on scroll
 
@@ -138,7 +140,7 @@ function CardBody({ card }) {
     <div className="relative h-full">
       <CardPattern {...card.pattern} />
       <div className="relative pt-[63px] pl-[64.6px]">
-        <p className="w-[267px] text-[35.9px] leading-[1.26] font-bold text-white">
+        <p className="w-[267px] text-[22px] leading-[1.26] font-bold text-white">
           {card.title}
         </p>
         <IconCircle className="mt-[27px]" />
@@ -169,7 +171,7 @@ export default function ProblemWeAddress() {
       if (!rect.width) return; // display:none — the mobile tree is showing
       const s = rect.width / 1440;
       setScale(s);
-      const p = (HEADER_H - rect.top) / (TRACK_EXTRA * s);
+      const p = (PIN_TOP - rect.top) / (TRACK_EXTRA * s);
       setProgress(Math.min(1, Math.max(0, p)));
     };
     const queue = () => {
@@ -203,18 +205,20 @@ export default function ProblemWeAddress() {
   return (
     // The scroll track: taller than the section by the distance the pin
     // consumes. The sticky wrapper holds the designed 796px section, which
-    // pins below the SiteHeader (74 real px ÷ zoom = canvas px) while the
-    // cards arrive, then releases.
+    // pins PIN_GAP below the SiteHeader (real px ÷ zoom = canvas px) while
+    // the cards arrive, then releases.
     <section
       ref={trackRef}
       className="relative w-[1440px]"
       style={{ height: SECTION_H + TRACK_EXTRA }}
     >
-      <div className="sticky" style={{ top: HEADER_H / scale }}>
+      <div className="sticky" style={{ top: PIN_TOP / scale }}>
         {/* The board hangs everything off the top card (1728:298), so the
             section starts flush with the deck and the copy column hangs
-            below it. */}
-        <div className="relative h-[796px] w-[1440px] overflow-hidden">
+            below it. Clip x only: the laurel bleeds past the left edge, but
+            the first card's corner star must straddle the deck's top edge
+            (16px above the section) without being cut. */}
+        <div className="relative h-[796px] w-[1440px] overflow-x-clip">
           <img
             src={laurelLeft}
             alt=""
