@@ -27,6 +27,8 @@ const ARTICLES = [
     gap: 27,
     title: "Presence Is Not Charisma. It’s Strategic Alignment.",
     date: "Published December 28, 2025.",
+    textHeight: 95,
+    dateTop: 58,
     photo: artOne,
   },
   {
@@ -36,6 +38,8 @@ const ARTICLES = [
     gap: 27,
     title: "Why High-Performing Women Are Quietly Exhausted",
     date: "Published January 09, 2026.",
+    textHeight: 96,
+    dateTop: 59,
     photo: artTwo,
   },
   {
@@ -45,6 +49,8 @@ const ARTICLES = [
     gap: 59,
     title: "Self-Leadership Is Not Soft. It’s Foundational.",
     date: "Published January 22, 2026.",
+    textHeight: 102,
+    dateTop: 65,
     photo: artThree,
   },
   {
@@ -54,6 +60,8 @@ const ARTICLES = [
     gap: 59,
     title: "Leadership Health Is the Next Competitive Advantage.",
     date: "Published January 30, 2026.",
+    textHeight: 102,
+    dateTop: 65,
     photo: artFour,
   },
 ];
@@ -67,7 +75,7 @@ export default function Insights() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#fffefa] to-[#ffbb00] opacity-20" />
 
       {/* 1755:4646 — header row, justified across x 91..1341 */}
-      <h2 className="absolute top-[110.7px] left-[91px] text-[30px] leading-[1.2] font-bold text-gold">
+      <h2 className="absolute top-[105.7px] left-[91px] text-[30px] leading-[1.2] font-bold text-gold">
         Insights &amp; Resources
       </h2>
       <PillButton
@@ -93,15 +101,15 @@ export default function Insights() {
           />
         </div>
         {/* 1755:4685 — 24px headline, 16px date 68px below it, body 110px below */}
-        <h3 className="mt-[39px] w-[469px] text-[24px] leading-[1.2] font-bold text-gold">
+        <h3 className="mt-[38px] w-[469px] text-[24px] leading-[1.2] font-bold text-gold">
           These Aren’t Productivity Problems. They’re Patterns of Misalignment.
         </h3>
-        <p className="mt-[10.4px] text-[16px] leading-[1.2] text-black/60">
+        <p className="mt-[9.4px] text-[16px] leading-[1.2] text-black/60">
           Published December 15, 2025
         </p>
-        {/* 1755:4690 — 16px justified. Paragraphs are separated by one blank
-            line in Figma, i.e. a single 19.2px line box. */}
-        <div className="mt-[22.8px] space-y-[19.2px] text-justify text-[16px] leading-[1.2] text-black/60">
+        {/* 1755:4690 — 16px justified on a 19px pitch (Acumin's "normal" here).
+            Paragraphs are separated by one blank line, i.e. one 19px line box. */}
+        <div className="mt-[22.8px] space-y-[19px] text-justify text-[16px] leading-[19px] text-black/60">
           <p>
             We live in a world obsessed with productivity — more tools, more
             systems, more ways to do more. Yet many high-performing leaders feel
@@ -145,14 +153,23 @@ export default function Insights() {
             className="absolute left-[716px] flex h-[148.143px] items-center"
             style={{ top: `${article.top}px`, gap: `${article.gap}px` }}
           >
+            {/* The block carries Figma's own box height so `items-center`
+                lands the text where the board has it — the title/date pair on
+                its own is 16px shorter in Inter and would centre too low. */}
             <div
-              className="flex shrink-0 flex-col gap-[7px]"
-              style={{ width: `${article.textWidth}px` }}
+              className="relative shrink-0"
+              style={{
+                width: `${article.textWidth}px`,
+                height: `${article.textHeight}px`,
+              }}
             >
-              <h4 className="text-[22px] leading-[1.2] font-bold text-gold">
+              <h4 className="absolute top-0 left-0 w-full text-[22px] leading-[1.2] font-bold text-gold">
                 {article.title}
               </h4>
-              <p className="text-[16px] leading-[1.2] text-black/60">
+              <p
+                className="absolute left-0 w-full text-[16px] leading-[1.2] text-black/60"
+                style={{ top: `${article.dateTop}px` }}
+              >
                 {article.date}
               </p>
             </div>
