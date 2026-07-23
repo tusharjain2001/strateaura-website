@@ -67,6 +67,14 @@ const SIZES = {
     circle: "size-[27px]",
     glyph: "size-[19.3px]",
   },
+  // The retuned About board (1638:1357) shrinks the "Explore Our Programs"
+  // pill inside the gold panel to 33.5 tall; nothing else on the site uses it.
+  xxs: {
+    pill: "h-[33.513px] gap-[3px] pl-[9.8px] pr-[4.1px]",
+    label: "text-[11.6px]",
+    circle: "size-[25.779px]",
+    glyph: "size-[18.38px]",
+  },
 };
 
 export default function PillButton({
