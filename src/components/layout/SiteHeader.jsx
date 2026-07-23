@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
-import { ChevronDown, CloseIcon, MenuIcon, SearchIcon } from "../ui/Icons";
+import { CloseIcon, MenuIcon } from "../ui/Icons";
 
 const LINKS = [
   { label: "Home", to: "/" },
   { label: "About Us", to: "/about" },
   { label: "VEIL™", to: "/veil" },
-  { label: "Our Programs", to: "/programs", dropdown: true },
+  { label: "Our Programs", to: "/programs" },
   { label: "Insights & Resources", to: "/insights" },
   { label: "Contact", to: "/contact" },
 ];
@@ -16,10 +16,13 @@ const LINKS = [
  * Site navbar — Figma node 1672:324 (1440 x 74).
  *
  * Exact desktop geometry at 1440: a 72px/20px padded gold bar; the 177x30
- * lockup on the left; the nav block on the right is 1061px wide and
- * space-between, so the links sit at x=307 and the search + Log In cluster
- * ends flush at x=1368. `grow max-w-[1061px]` reproduces that at 1440 and
- * lets it shrink below. Below xl the links collapse into a menu panel.
+ * lockup on the left; the nav block on the right is 1061px wide, which puts
+ * the links at x=307. `grow max-w-[1061px]` reproduces that at 1440 and lets
+ * it shrink below. Below xl the links collapse into a menu panel.
+ *
+ * The board's search button and Log In pill were dropped at the client's
+ * request, so the right end of the bar is deliberately empty; the links keep
+ * their Figma positions rather than spreading into the freed space.
  */
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -29,18 +32,16 @@ export default function SiteHeader() {
   // project's gold-dark token. The search button, Log In pill and logo keep
   // their own treatments.
   const linkClass =
-    "flex items-center gap-[8px] whitespace-nowrap text-[17px] leading-[1.5] font-bold text-white transition-colors duration-300 hover:text-gold-dark";
+    "flex items-center whitespace-nowrap text-[17px] leading-[1.5] font-bold text-white transition-colors duration-300 hover:text-gold-dark";
 
   const renderLink = (link) =>
     link.to ? (
       <Link to={link.to} className={linkClass} onClick={() => setOpen(false)}>
         {link.label}
-        {link.dropdown && <ChevronDown className="h-[7px] w-[12px]" />}
       </Link>
     ) : (
       <a href={link.href} className={linkClass} onClick={() => setOpen(false)}>
         {link.label}
-        {link.dropdown && <ChevronDown className="h-[7px] w-[12px]" />}
       </a>
     );
 
@@ -66,21 +67,6 @@ export default function SiteHeader() {
               <li key={link.label}>{renderLink(link)}</li>
             ))}
           </ul>
-
-          <div className="flex shrink-0 items-center gap-[28px]">
-            <button
-              aria-label="Search"
-              className="cursor-pointer text-white transition-opacity hover:opacity-80"
-            >
-              <SearchIcon className="size-[22px]" />
-            </button>
-            <a
-              href="#login"
-              className="flex items-center justify-center rounded-[37px] border border-white px-[16px] py-[4px] text-[17px] leading-[1.5] font-bold text-white transition-colors hover:bg-white hover:text-gold"
-            >
-              Log In
-            </a>
-          </div>
         </div>
 
         {/* Mobile menu toggle */}
@@ -103,20 +89,6 @@ export default function SiteHeader() {
                 {renderLink(link)}
               </li>
             ))}
-            <li className="mt-2 flex items-center gap-6 border-t border-white/20 pt-4 pb-2">
-              <button
-                aria-label="Search"
-                className="text-white transition-opacity hover:opacity-80"
-              >
-                <SearchIcon className="size-[22px]" />
-              </button>
-              <a
-                href="#login"
-                className="rounded-[37px] border border-white px-[16px] py-[4px] text-[17px] leading-[1.5] font-bold text-white transition-colors hover:bg-white hover:text-gold"
-              >
-                Log In
-              </a>
-            </li>
           </ul>
         </div>
       )}

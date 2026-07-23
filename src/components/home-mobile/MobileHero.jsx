@@ -44,7 +44,8 @@ export default function MobileHero() {
         </p>
 
         <div className="mt-[40px] flex flex-col items-start gap-[12.87px]">
-          <MobilePill as="a" href="/veil" variant="creamFilled" size="hero">
+          {/* Hollow like "Browse All Programs", matching the desktop hero. */}
+          <MobilePill as="a" href="/veil" variant="creamOutline" size="hero">
             VEIL<sup className="text-[10.32px]">TM</sup> Program
           </MobilePill>
           <MobilePill

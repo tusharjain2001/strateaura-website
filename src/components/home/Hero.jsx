@@ -35,8 +35,11 @@ export default function Hero() {
 
       {/* 1728:259 — 32px bold, two lines inside a 632 box. Tops here are the
           board's less the 4/3/2px Inter sits low in its line box. */}
-      <h1 className="absolute top-[251px] left-[80px] w-[632px] text-[32px] leading-[1.2] font-bold text-white">
-        Where Strategy Comes to Life. Where Leaders Find Their Edge.
+      {/* The break is forced after "Life." — left to wrap, Inter pulls the
+          second "Where" up onto line 1. */}
+      <h1 className="absolute top-[251px] left-[80px] w-[632px] text-[32px] leading-[1.2] font-bold text-white [&>span]:block">
+        <span className="whitespace-nowrap">Where Strategy Comes to Life.</span>
+        <span className="whitespace-nowrap">Where Leaders Find Their Edge.</span>
       </h1>
       {/* 1728:260 — 20px regular in a 700 box */}
       <p className="absolute top-[332px] left-[80px] w-[700px] text-[20px] leading-[1.2] text-white">
