@@ -5,34 +5,40 @@ import { Sparkle } from "./Icons";
  * Matches the Figma pill at desktop sizes and scales down on smaller screens,
  * so legacy fixed-canvas pages can keep using PillButton untouched.
  */
+/**
+ * Hover mirrors the live strateaura.com buttons: over 300ms each pill swaps
+ * into its opposite — outlines fill with their accent, fills hollow out into
+ * an outline — and the icon circle inverts with it. Filled variants draw the
+ * hover "border" with an inset ring so no layout shifts.
+ */
 const VARIANTS = {
   creamFilled: {
-    pill: "bg-cream text-gold",
-    circle: "bg-gold text-cream",
+    pill: "bg-cream text-gold ring-1 ring-inset ring-cream/0 hover:bg-transparent hover:text-white hover:ring-cream",
+    circle: "bg-gold text-cream group-hover:bg-cream group-hover:text-gold",
   },
   goldFilled: {
-    pill: "bg-gold text-white",
-    circle: "bg-white text-gold",
+    pill: "bg-gold text-white ring-1 ring-inset ring-gold/0 hover:bg-transparent hover:text-gold hover:ring-gold",
+    circle: "bg-white text-gold group-hover:bg-gold group-hover:text-white",
   },
   goldOutline: {
-    pill: "border border-gold text-gold",
-    circle: "bg-gold text-cream",
+    pill: "border border-gold text-gold hover:bg-gold hover:text-cream",
+    circle: "bg-gold text-cream group-hover:bg-cream group-hover:text-gold",
   },
   whiteOutline: {
-    pill: "border border-white text-white",
-    circle: "bg-white text-gold",
+    pill: "border border-white text-white hover:bg-white hover:text-gold",
+    circle: "bg-white text-gold group-hover:bg-gold group-hover:text-white",
   },
   creamOutline: {
-    pill: "border border-cream text-white",
-    circle: "bg-cream text-gold",
+    pill: "border border-cream text-white hover:bg-cream hover:text-gold",
+    circle: "bg-cream text-gold group-hover:bg-gold group-hover:text-cream",
   },
   navyOutline: {
-    pill: "border border-navy-2 text-navy-2",
-    circle: "bg-navy-2 text-white",
+    pill: "border border-navy-2 text-navy-2 hover:bg-navy-2 hover:text-white",
+    circle: "bg-navy-2 text-white group-hover:bg-white group-hover:text-navy-2",
   },
   navyFilled: {
-    pill: "bg-navy-2 text-white",
-    circle: "bg-white text-navy-2",
+    pill: "bg-navy-2 text-white ring-1 ring-inset ring-navy-2/0 hover:bg-transparent hover:text-navy-2 hover:ring-navy-2",
+    circle: "bg-white text-navy-2 group-hover:bg-navy-2 group-hover:text-white",
   },
 };
 
@@ -77,12 +83,12 @@ export default function CtaPill({
 
   return (
     <Tag
-      className={`group inline-flex items-center justify-between rounded-full font-bold whitespace-nowrap transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${s.pill} ${v.pill} ${className}`}
+      className={`group inline-flex items-center justify-between rounded-full font-bold whitespace-nowrap transition-[color,background-color,box-shadow] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${s.pill} ${v.pill} ${className}`}
       {...props}
     >
       <span className="leading-none">{children}</span>
       <span
-        className={`flex shrink-0 items-center justify-center rounded-full transition-transform motion-safe:group-hover:scale-105 ${s.circle} ${v.circle}`}
+        className={`flex shrink-0 items-center justify-center rounded-full transition-[color,background-color,transform] duration-300 motion-safe:group-hover:scale-105 ${s.circle} ${v.circle}`}
       >
         <Icon className={s.glyph} />
       </span>

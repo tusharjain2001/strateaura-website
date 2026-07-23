@@ -6,26 +6,32 @@ import { Sparkle, ArrowRight, ArrowUpRight } from "./Icons";
  *
  * variant controls the pill/circle colours; icon controls the glyph.
  */
+/**
+ * Hover mirrors the live strateaura.com buttons: over 300ms each pill swaps
+ * into its opposite — outlines fill with their accent, fills hollow out into
+ * an outline — and the icon circle inverts with it. Filled variants draw the
+ * hover "border" with an inset ring so no layout shifts.
+ */
 const VARIANTS = {
   creamFilled: {
-    pill: "bg-cream text-gold",
-    circle: "bg-gold text-cream",
+    pill: "bg-cream text-gold ring-1 ring-inset ring-cream/0 hover:bg-transparent hover:text-white hover:ring-cream",
+    circle: "bg-gold text-cream group-hover:bg-cream group-hover:text-gold",
   },
   creamOutline: {
-    pill: "border border-cream text-white",
-    circle: "bg-cream text-gold",
+    pill: "border border-cream text-white hover:bg-cream hover:text-gold",
+    circle: "bg-cream text-gold group-hover:bg-gold group-hover:text-cream",
   },
   goldOutline: {
-    pill: "border border-gold text-gold",
-    circle: "bg-gold text-cream",
+    pill: "border border-gold text-gold hover:bg-gold hover:text-cream",
+    circle: "bg-gold text-cream group-hover:bg-cream group-hover:text-gold",
   },
   goldOutlineWhite: {
-    pill: "bg-white border border-gold text-gold",
-    circle: "bg-gold text-cream",
+    pill: "bg-white border border-gold text-gold hover:bg-gold hover:text-white",
+    circle: "bg-gold text-cream group-hover:bg-white group-hover:text-gold",
   },
   navyOutline: {
-    pill: "border border-navy-2 text-navy-2",
-    circle: "bg-navy-2 text-white",
+    pill: "border border-navy-2 text-navy-2 hover:bg-navy-2 hover:text-white",
+    circle: "bg-navy-2 text-white group-hover:bg-white group-hover:text-navy-2",
   },
 };
 
@@ -79,12 +85,12 @@ export default function PillButton({
 
   return (
     <Tag
-      className={`group inline-flex items-center justify-between rounded-full font-bold whitespace-nowrap transition-colors ${s.pill} ${v.pill} ${className}`}
+      className={`group inline-flex items-center justify-between rounded-full font-bold whitespace-nowrap transition-[color,background-color,box-shadow] duration-300 ${s.pill} ${v.pill} ${className}`}
       {...props}
     >
       <span className={`${s.label} leading-none`}>{children}</span>
       <span
-        className={`flex shrink-0 items-center justify-center rounded-full transition-transform group-hover:scale-105 ${s.circle} ${v.circle}`}
+        className={`flex shrink-0 items-center justify-center rounded-full transition-[color,background-color,transform] duration-300 group-hover:scale-105 ${s.circle} ${v.circle}`}
       >
         <Glyph className={s.glyph} />
       </span>

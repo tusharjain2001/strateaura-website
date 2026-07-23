@@ -119,7 +119,7 @@ export default function MarketingPrograms() {
           <div
             key={card.left}
             style={{ left: card.left, width: CARD_W, height: CARD_H }}
-            className="absolute top-0 overflow-hidden rounded-[2.585px] bg-gradient-to-b from-navy to-blue"
+            className="absolute top-0 overflow-hidden rounded-[2.585px] bg-gradient-to-b from-navy to-blue transition-[scale,box-shadow] duration-[400ms] hover:scale-90 hover:shadow-[0_0_10px_var(--color-blue)]"
           >
             <CardArt {...card.art} />
             <h3 className="absolute top-[20.7px] left-[14.55px] w-[175px] text-[16.8px] leading-[20px] font-bold text-white">

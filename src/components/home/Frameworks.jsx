@@ -21,6 +21,8 @@ const CARDS = [
   {
     left: 0,
     panel: "from-[#1f3a58] to-[#437dbe]",
+    // Hover glow in the card's own accent, per the live site's program cards.
+    glow: "group-hover:shadow-[0_0_10px_var(--color-blue)]",
     title: "VEIL™ Framework",
     subtitle: "Energy, presence, legacy.",
     breakLine: true,
@@ -35,6 +37,7 @@ const CARDS = [
   {
     left: 383.594,
     panel: "from-[#b3902f] to-[#ffdf85]",
+    glow: "group-hover:shadow-[0_0_10px_var(--color-gold)]",
     title: "ALA-Nexus™",
     subtitle: "Assess, Leverage, Actuate.",
     breakLine: true,
@@ -51,6 +54,7 @@ const CARDS = [
   {
     left: 767.188,
     panel: "from-[#b3902f] to-[#ffdf85]",
+    glow: "group-hover:shadow-[0_0_10px_var(--color-gold)]",
     title: "The 5Cs of Brand Health",
     // 1728:528 is the one card whose subtitle runs on from the title rather
     // than starting a new line.
@@ -115,7 +119,7 @@ export default function Frameworks() {
           <div
             key={card.left}
             style={{ left: card.left, width: CARD_W, height: CARD_H }}
-            className="absolute top-0"
+            className="group absolute top-0 transition-transform duration-[400ms] hover:scale-90"
           >
             <img
               src={card.sparkle}
@@ -123,7 +127,7 @@ export default function Frameworks() {
               className="pointer-events-none absolute -top-[13px] -right-[14px] z-10 size-[29px]"
             />
             <div
-              className={`relative h-full w-full overflow-hidden rounded-[3.233px] bg-gradient-to-b ${card.panel}`}
+              className={`relative h-full w-full overflow-hidden rounded-[3.233px] bg-gradient-to-b transition-shadow duration-[400ms] ${card.panel} ${card.glow}`}
             >
               <img
                 src={card.art.src}
