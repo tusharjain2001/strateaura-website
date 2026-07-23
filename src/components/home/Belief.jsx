@@ -14,18 +14,27 @@ export default function Belief() {
         className="pointer-events-none absolute top-[-39px] left-[976px] h-[315px] w-[384px] opacity-90"
       />
 
-      {/* Alt/ Home board (1748:2): both columns start at y 94 in the band. The
-          type follows the designer's page rule — 30px header, 16px sub-head. */}
-      <h2 className="absolute top-[94px] left-[136px] text-[30px] leading-[1.2] font-bold text-gold">
-        Our
-        <br />
-        Belief
-      </h2>
-      {/* 1728:285 — Figma's 466 box */}
-      <p className="absolute top-[94px] left-[394px] w-[466px] text-[16px] leading-[1.2] font-light text-black/65">
-        Real growth begins with the courage to pause. To think again, To lead
-        from the inside out, with energy, intention, and presence.
-      </p>
+      {/* 1748:2 — a 724x87 row at y 94, gap 145, items-center. The centring is
+          what keeps the two columns optically flush: at the designer's 16px the
+          body block is shorter than the 30px heading, so top-aligning them left
+          it floating ~9px high. The heading box is pinned to Figma's 113 so the
+          body keeps its distance from it despite Inter's narrower "Belief".
+
+          Left inset is 158, not the board's 136: the client wants this column
+          flush with the framework cards in the section above. The whole row
+          shifts, so the 145 gap holds and the body starts at 416. */}
+      <div className="absolute top-[87px] left-[158px] flex h-[87px] w-[724px] items-center gap-[145px]">
+        <h2 className="w-[113px] shrink-0 text-[30px] leading-[1.2] font-bold text-gold">
+          Our
+          <br />
+          Belief
+        </h2>
+        {/* 1728:285 — Figma's 466 box */}
+        <p className="w-[466px] text-[16px] leading-[1.2] font-light text-black/65">
+          Real growth begins with the courage to pause. To think again, To lead
+          from the inside out, with energy, intention, and presence.
+        </p>
+      </div>
     </section>
   );
 }
