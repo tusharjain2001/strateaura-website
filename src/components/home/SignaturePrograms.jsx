@@ -33,11 +33,12 @@ export default function SignaturePrograms() {
 
       {/* 1728:541 — flagship card, 1123.3x330.6 */}
       <div className="absolute top-[247px] left-[158px] h-[331px] w-[1123px] overflow-hidden rounded-[10px] border border-gold-light bg-gradient-to-b from-white to-gold-light">
-        {/* 1728:543 — 284.5x69.5 */}
-        <h3 className="absolute top-[37px] left-[42px] w-[285px] text-[30px] leading-normal font-bold text-navy">
-          VEIL™: Lead Without
-          <br />
-          Losing Yourself
+        {/* 1728:543 — Figma's 284.5 box is measured in Acumin Pro; Inter runs
+            wider and split "VEIL™: Lead Without", so the two lines are forced
+            and the box left to size itself. */}
+        <h3 className="absolute top-[37px] left-[42px] text-[30px] leading-normal font-bold text-navy [&>span]:block [&>span]:whitespace-nowrap">
+          <span>VEIL™: Lead Without</span>
+          <span>Losing Yourself</span>
         </h3>
 
         {/* 1728:544 — 261.4x21.8 */}
@@ -45,18 +46,23 @@ export default function SignaturePrograms() {
           The Flagship Program
         </p>
 
-        {/* 1728:542 — 417.9 wide, the middle line is a blank line of leading */}
-        <div className="absolute top-[84px] left-[525px] w-[418px] text-[15px] leading-normal text-navy">
+        {/* 1728:542 — line breaks forced to the board's; the box is 440 rather
+            than Figma's 417.9 so Inter's longest line still fits on one line. */}
+        <div className="absolute top-[84px] left-[525px] w-[440px] text-[15px] leading-normal text-navy">
           <p>
-            For women in leadership and high-demand professional roles who are
-            performing well externally - and already paying a silent cost for
-            how they are leading. Not a wellness program. Not resilience
-            training. A flagship strategic health framework built in the GCC,
-            for the GCC, grounded in internationally validated science.
+            <span className="block whitespace-nowrap">For women in leadership and high-demand professional roles</span>
+            <span className="block whitespace-nowrap">who are performing well externally - and already paying a</span>
+            <span className="block whitespace-nowrap">silent cost for how they are leading. Not a wellness program.</span>
+            <span className="block whitespace-nowrap">Not resilience training. A flagship strategic health framework</span>
+            <span className="block whitespace-nowrap">built in the GCC, for the GCC, grounded in internationally</span>
+            <span className="block whitespace-nowrap">validated science.</span>
           </p>
           <p className="mt-[18px]">
-            <span className="font-bold">12 weeks · Live cohort · 6 phases</span>{" "}
-            · Validated psychometric instruments · Measurable outcomes
+            <span className="block whitespace-nowrap">
+              <strong className="font-bold">12 weeks · Live cohort · 6 phases</strong>{" "}
+              · Validated psychometric
+            </span>
+            <span className="block whitespace-nowrap">instruments · Measurable outcomes</span>
           </p>
         </div>
 

@@ -40,11 +40,19 @@ const CARDS = [
     solution: true,
     body: (
       <>
-        These{" "}
-        <span className="font-bold">aren&rsquo;t productivity problems.</span>{" "}
-        They&rsquo;re misalignment patterns, and they{" "}
-        <span className="font-bold">don&rsquo;t fix themselves</span> with
-        tactics.
+        <span className="block whitespace-nowrap">
+          These <strong className="font-bold">aren&rsquo;t productivity</strong>
+        </span>
+        <span className="block whitespace-nowrap">
+          <strong className="font-bold">problems.</strong> They&rsquo;re
+        </span>
+        <span className="block whitespace-nowrap">misalignment patterns,</span>
+        <span className="block whitespace-nowrap">
+          and they <strong className="font-bold">don&rsquo;t fix</strong>
+        </span>
+        <span className="block whitespace-nowrap">
+          <strong className="font-bold">themselves</strong> with tactics.
+        </span>
       </>
     ),
     pattern: { src: waveC },
@@ -162,9 +170,12 @@ export default function ProblemWeAddress() {
         <br />
         We Address
       </div>
-      <p className="absolute top-[295px] left-[195px] w-[341px] text-[21.5px] leading-normal font-light text-black">
-        We live in a world of constant doing, chasing visibility, metrics, and
-        motion. But too many leaders feel
+      {/* Board's 340.2 box is Acumin Pro; Inter needs ~365 for the longest of
+          these three lines, so the box is widened rather than left to reflow. */}
+      <p className="absolute top-[295px] left-[195px] w-[375px] text-[21.5px] leading-normal font-light text-black [&>span]:block [&>span]:whitespace-nowrap">
+        <span>We live in a world of constant doing,</span>
+        <span>chasing visibility, metrics, and</span>
+        <span>motion. But too many leaders feel</span>
       </p>
 
       {/* Stacked accordion — click a card to bring it to full height. Clicking

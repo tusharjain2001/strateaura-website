@@ -116,7 +116,7 @@ export default function MobileMarketingPrograms() {
             Leadership Programs.
           </h2>
           <p className="text-[16px] leading-normal">
-            We also offer a suite of practical marketing and leadership programs
+            StrateAura offers a suite of practical marketing and leadership programs
             for professionals, teams, and institutions. All programs carry KHDA
             Attested Attendance Certificate.
           </p>

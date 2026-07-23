@@ -45,7 +45,7 @@ export default function MobileHero() {
 
         <div className="mt-[40px] flex flex-col items-start gap-[12.87px]">
           <MobilePill as="a" href="/veil" variant="creamFilled" size="hero">
-            VIEL<sup className="text-[10.32px]">TM</sup> Program
+            VEIL<sup className="text-[10.32px]">TM</sup> Program
           </MobilePill>
           <MobilePill
             as="a"

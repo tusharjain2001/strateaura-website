@@ -15,47 +15,31 @@ import arc from "../../assets/home2/mkt-arc.svg";
 const CARDS = [
   {
     left: 0,
-    title: (
-      <>
-        Wellness-Centric
-        <br />
-        Leadership
-      </>
-    ),
-    titleWidth: 133.795,
-    titleTop: 20.75,
+    lines: ["Wellness-", "Centric", "Leadership"],
     arrowLeft: 23.27,
     art: { src: fan, kind: "fan", left: 156.82 },
   },
   {
     left: 227.265,
-    title: "Strategic Marketing in Higher Education",
-    titleWidth: 137.026,
-    titleTop: 20.69,
+    lines: ["Strategic", "Marketing in", "Higher Education"],
     arrowLeft: 21.98,
     art: { src: poly, kind: "poly" },
   },
   {
     left: 454.529,
-    title: "Integrated Marketing Strategy masterclass",
-    titleWidth: 151.959,
-    titleTop: 20.75,
+    lines: ["Integrated", "Marketing Strategy", "masterclass"],
     arrowLeft: 20.04,
     art: { src: fan, kind: "fan", left: 156.91 },
   },
   {
     left: 681.794,
-    title: "Digital Marketing with Purpose",
-    titleWidth: 144.783,
-    titleTop: 20.69,
+    lines: ["Digital Marketing", "with Purpose"],
     arrowLeft: 20.04,
     art: { src: poly, kind: "poly" },
   },
   {
     left: 909.059,
-    title: "Marketing in the Age of Digital Transformation",
-    titleWidth: 139.612,
-    titleTop: 20.69,
+    lines: ["Marketing in the", "Age of Digital", "Transformation"],
     arrowLeft: 23.27,
     art: { src: arc, kind: "arc" },
   },
@@ -121,10 +105,10 @@ export default function MarketingPrograms() {
       </h2>
 
       {/* 1728:213 — 416.3 wide, sitting 6.3 below the heading's cap line */}
-      <p className="absolute top-[6px] left-[865px] w-[417px] text-[16px] leading-normal text-navy">
-        We offer a suite of practical marketing and leadership programs for
-        professionals, teams, and institutions. All programs carry KHDA Attested
-        Attendance Certificate.
+      <p className="absolute top-[6px] left-[865px] w-[430px] text-[14px] leading-[1.55] text-navy [&>span]:block [&>span]:whitespace-nowrap">
+        <span>StrateAura offers a suite of practical marketing and leadership</span>
+        <span>programs for professionals, teams, and institutions. All programs</span>
+        <span>carry KHDA Attested Attendance Certificate.</span>
       </p>
 
       {/* 1728:214 — card row, 1123.3x155.8 at y 114.8 */}
@@ -136,11 +120,12 @@ export default function MarketingPrograms() {
             className="absolute top-0 overflow-hidden rounded-[2.585px] bg-gradient-to-b from-navy to-blue"
           >
             <CardArt {...card.art} />
-            <h3
-              style={{ top: card.titleTop, width: card.titleWidth }}
-              className="absolute left-[14.55px] text-[16.8px] leading-[23px] font-bold text-white"
-            >
-              {card.title}
+            <h3 className="absolute top-[20.7px] left-[14.55px] w-[175px] text-[16.8px] leading-[23px] font-bold text-white">
+              {card.lines.map((line) => (
+                <span key={line} className="block whitespace-nowrap">
+                  {line}
+                </span>
+              ))}
             </h3>
             {/* 1728:218 etc — 16px arrow rule at y 135.1 */}
             <span

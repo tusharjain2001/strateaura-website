@@ -1,27 +1,4 @@
 import MobilePill from "./MobilePill";
-import cardDecor1 from "../../assets/home-mobile/veil-card-1.svg";
-import cardDecor2 from "../../assets/home-mobile/veil-card-2.svg";
-import cardDecor3 from "../../assets/home-mobile/veil-card-3.svg";
-
-// Figma nodes 1434:529 / 1434:539 / 1434:549 — gold-gradient cards, each with
-// the same ellipse-swirl decor anchored at left 131.67 / top 98 (231x84.9).
-const CARDS = [
-  {
-    title: "Capacity Regulation",
-    body: "the biological and physiological foundation of sustained performance",
-    decor: cardDecor1,
-  },
-  {
-    title: "Identity Coherence",
-    body: "the internal sense of self that remains stable under institutional pressure",
-    decor: cardDecor2,
-  },
-  {
-    title: "Authority Execution",
-    body: "the practiced capacity to act from clarity, hold boundaries without apology, and lead from a grounded place",
-    decor: cardDecor3,
-  },
-];
 
 /**
  * VEIL™ flagship block — Figma nodes 1434:500 (card) / 1434:509 (content).
@@ -54,9 +31,8 @@ export default function MobileVeil() {
               variant="navyOutline"
               size="veil"
               icon="arrowUp"
-              className="w-full"
             >
-              Learn More about MAP &amp; DECODE
+              Explore Veil
             </MobilePill>
             <MobilePill
               as="a"
@@ -86,32 +62,6 @@ export default function MobileVeil() {
               </span>{" "}
               · Validated psychometric instruments · Measurable outcomes
             </p>
-            <p>
-              Online pathway also available:
-              <span className="font-bold"> MAP · DECODE · UNVEIL</span>
-            </p>
-          </div>
-
-          <div className="mt-[37px] flex flex-col gap-[16px]">
-            {CARDS.map((card) => (
-              <div
-                key={card.title}
-                className="relative min-h-[213px] overflow-hidden rounded-[4px] bg-gradient-to-b from-gold to-gold-dark p-[24px]"
-              >
-                <img
-                  src={card.decor}
-                  alt=""
-                  aria-hidden
-                  className="pointer-events-none absolute top-[98px] left-[131.67px] h-[84.879px] w-[231px] max-w-none"
-                />
-                <p className="relative z-10 text-[24px] leading-normal font-bold text-white">
-                  {card.title}
-                </p>
-                <p className="relative z-10 mt-[16px] text-[20px] leading-normal text-white">
-                  {card.body}
-                </p>
-              </div>
-            ))}
           </div>
         </div>
       </div>
