@@ -10,7 +10,7 @@ const WEIGHT = { bold: "font-bold", semi: "font-semibold" };
  */
 export default function BlogArticle({ post }) {
   return (
-    <div className="absolute top-[91px] left-[127px] w-[1187px] text-[#1f3a58]">
+    <div className="relative ml-[127px] w-[1187px] pt-[91px] text-[#1f3a58]">
       <h1 className="relative top-[-2px] text-[30px] leading-[1.2] font-bold">
         {post.eyebrow}
         <br />

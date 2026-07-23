@@ -24,16 +24,16 @@ const FRAMEWORKS = [
 ];
 // Board order: Tw 1050, FB 1080, LinkedIn 1110, In 1140 — Tw is the only 18x14.
 const SOCIALS = [
-  { src: socialTw, label: "Twitter", left: 1050, top: 1960, h: 14 },
-  { src: socialFb, label: "Facebook", left: 1080, top: 1958, h: 18 },
-  { src: socialLi, label: "LinkedIn", left: 1110, top: 1958, h: 18 },
-  { src: socialIn, label: "Instagram", left: 1140, top: 1958, h: 18 },
+  { src: socialTw, label: "Twitter", left: 1050, top: 490, h: 14 },
+  { src: socialFb, label: "Facebook", left: 1080, top: 488, h: 18 },
+  { src: socialLi, label: "LinkedIn", left: 1110, top: 488, h: 18 },
+  { src: socialIn, label: "Instagram", left: 1140, top: 488, h: 18 },
 ];
 
 /**
  * CTA + footer for the Blog Page board (node 1755:3767 "Group 88"), laid out at
- * exact canvas coordinates (board y − 74, since SiteHeader renders outside the
- * zoom canvas).
+ * coordinates relative to the group's own origin (board y − 1544), so it can
+ * follow an article of any length — the board's posts are not all one height.
  *
  * This is the same design as AboutFooter but shifted 40px left (CTA at x76 vs
  * 116, the rules at x40 vs 80) and without the address paragraph under the
@@ -42,22 +42,22 @@ const SOCIALS = [
  */
 export default function BlogFooter() {
   return (
-    <>
+    <div className="relative h-[858px] w-[1440px]">
       {/* 1755:3849 — the ellipse fan, 754.62x277.28 pinned to the CTA's top */}
       <img
         src={ctaAura}
         alt=""
-        className="pointer-events-none absolute top-[1470px] left-[645px] h-[277.279px] w-[754.621px]"
+        className="pointer-events-none absolute top-0 left-[645px] h-[277.279px] w-[754.621px]"
       />
 
-      <h2 className="absolute top-[1474px] left-[76px] w-[492px] text-[35px] leading-[1.2] font-bold text-navy">
+      <h2 className="absolute top-[4px] left-[76px] w-[492px] text-[35px] leading-[1.2] font-bold text-navy">
         Ready to Work Together?
       </h2>
-      <p className="absolute top-[1560px] left-[76px] w-[566px] text-[24px] leading-[1.2] font-light text-black">
+      <p className="absolute top-[90px] left-[76px] w-[566px] text-[24px] leading-[1.2] font-light text-black">
         We work with those ready to think deeper, move cleaner, and lead with
         presence, not pressure.
       </p>
-      <p className="absolute top-[1634px] left-[79px] text-[30px] leading-[1.2] font-medium text-gold">
+      <p className="absolute top-[164px] left-[79px] text-[30px] leading-[1.2] font-medium text-gold">
         Apply to work with us!
       </p>
 
@@ -65,7 +65,7 @@ export default function BlogFooter() {
           50px circle 10 in from the right. */}
       <a
         href="#book"
-        className="group absolute top-[1723px] left-[76px] block h-[65px] w-[439px] rounded-full border border-gold"
+        className="group absolute top-[253px] left-[76px] block h-[65px] w-[439px] rounded-full border border-gold"
       >
         {/* 22.3px, not the board's 24: the pill is a fixed 439 box and Inter
             sets this label ~8% wider than Acumin, which ran it under the icon.
@@ -79,9 +79,9 @@ export default function BlogFooter() {
       </a>
 
       {/* 1755:3771 — footer block. Both rules run x40..1317. */}
-      <div className="absolute top-[1858px] left-[40px] h-px w-[1277px] bg-black/10" />
+      <div className="absolute top-[388px] left-[40px] h-px w-[1277px] bg-black/10" />
 
-      <div className="absolute top-[1924px] left-[63px] h-[125px] w-[188px] overflow-hidden">
+      <div className="absolute top-[454px] left-[63px] h-[125px] w-[188px] overflow-hidden">
         {/* Each SVG stretches (preserveAspectRatio="none"), so it needs a
             positioned wrapper box to fill — the insets cannot go on the <img>
             because preflight's `height: auto` collapses the three pieces. */}
@@ -97,7 +97,7 @@ export default function BlogFooter() {
       </div>
 
       <FooterHeading left={559}>COMPANY</FooterHeading>
-      <ul className="absolute top-[1953px] left-[559px] text-[14px] leading-[35px] font-medium tracking-[0.2px] text-ink">
+      <ul className="absolute top-[483px] left-[559px] text-[14px] leading-[35px] font-medium tracking-[0.2px] text-ink">
         {COMPANY.map((item) => (
           <li key={item.label}>
             <Link to={item.to} className="transition-colors hover:text-gold">
@@ -108,7 +108,7 @@ export default function BlogFooter() {
       </ul>
 
       <FooterHeading left={785}>FRAMEWORKS</FooterHeading>
-      <ul className="absolute top-[1953px] left-[785px] w-[175px] text-[14px] leading-[35px] font-medium tracking-[0.2px] text-ink">
+      <ul className="absolute top-[483px] left-[785px] w-[175px] text-[14px] leading-[35px] font-medium tracking-[0.2px] text-ink">
         {FRAMEWORKS.map((item) => (
           <li key={item.label}>
             <Link to={item.to} className="transition-colors hover:text-gold">
@@ -130,30 +130,30 @@ export default function BlogFooter() {
           <img src={s.src} alt="" className="w-[18px]" style={{ height: `${s.h}px` }} />
         </a>
       ))}
-      <p className="absolute top-[1991px] left-[1050px] text-[14px] leading-[35px] font-medium tracking-[0.2px] text-ink">
+      <p className="absolute top-[521px] left-[1050px] text-[14px] leading-[35px] font-medium tracking-[0.2px] text-ink">
         <Link to="/contact" className="transition-colors hover:text-gold">
           Contact
         </Link>
       </p>
 
-      <div className="absolute top-[2205px] left-[40px] h-px w-[1277px] bg-black/10" />
-      <p className="absolute top-[2235px] left-[63px] text-[14px] leading-[24px] font-medium tracking-[0.2px] text-ink">
+      <div className="absolute top-[735px] left-[40px] h-px w-[1277px] bg-black/10" />
+      <p className="absolute top-[765px] left-[63px] text-[14px] leading-[24px] font-medium tracking-[0.2px] text-ink">
         StrateAura © 2024-2026 / All Rights Reserved
       </p>
       <a
         href="#"
-        className="absolute top-[2235px] left-[1175px] text-[14px] leading-[24px] font-bold tracking-[0.2px] text-ink transition-colors hover:text-gold"
+        className="absolute top-[765px] left-[1175px] text-[14px] leading-[24px] font-bold tracking-[0.2px] text-ink transition-colors hover:text-gold"
       >
         Privacy Policy
       </a>
-    </>
+    </div>
   );
 }
 
 function FooterHeading({ left, children }) {
   return (
     <p
-      className="absolute top-[1919px] text-[14px] leading-[24px] font-bold tracking-[0.2px] text-gold"
+      className="absolute top-[449px] text-[14px] leading-[24px] font-bold tracking-[0.2px] text-gold"
       style={{ left: `${left}px` }}
     >
       {children}

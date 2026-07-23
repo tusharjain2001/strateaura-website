@@ -37,12 +37,19 @@ export default function BlogPage() {
       {/* Desktop canvas — untouched by the mobile work above */}
       <div className="hidden lg:block">
         <div style={{ zoom: scale }} className="w-[1440px] overflow-x-clip">
-          <main className="relative h-[2328px] w-[1440px] overflow-hidden">
+          {/* The article is in flow and the footer follows it, so posts longer
+              than the board's still land the CTA the same distance below the
+              last line. For Blog #1 this reproduces the board exactly: its
+              article ends at canvas 1291 and the 177px gap puts the CTA group
+              at 1470, for a 2328px canvas. */}
+          <main className="relative w-[1440px] overflow-hidden">
             {/* 1755:3694 — cream wash, a 90°-rotated #fee8a9 → white ramp at
-                40%, 1320 tall so it fades out just below the article. */}
+                40%, 1320 tall so it fades out below the article. */}
             <div className="absolute top-0 left-0 h-[1320px] w-[1440px] bg-gradient-to-b from-[#fee8a9] to-white opacity-40" />
             <BlogArticle post={post} />
-            <BlogFooter />
+            <div className="mt-[177px]">
+              <BlogFooter />
+            </div>
           </main>
         </div>
       </div>

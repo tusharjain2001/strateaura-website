@@ -30,6 +30,7 @@ const ARTICLES = [
     date: "Published December 28, 2025.",
     textHeight: 95,
     dateTop: 58,
+    slug: "presence-is-not-charisma",
     photo: artOne,
   },
   {
@@ -41,6 +42,7 @@ const ARTICLES = [
     date: "Published January 09, 2026.",
     textHeight: 96,
     dateTop: 59,
+    slug: "why-high-performing-women-are-quietly-exhausted",
     photo: artTwo,
   },
   {
@@ -52,6 +54,7 @@ const ARTICLES = [
     date: "Published January 22, 2026.",
     textHeight: 102,
     dateTop: 65,
+    slug: "self-leadership-is-not-soft",
     photo: artThree,
   },
   {
@@ -63,6 +66,7 @@ const ARTICLES = [
     date: "Published January 30, 2026.",
     textHeight: 102,
     dateTop: 65,
+    slug: "leadership-health-is-the-next-competitive-advantage",
     photo: artFour,
   },
 ];
@@ -70,9 +74,8 @@ const ARTICLES = [
 // The closing rule under the last row; the board leaves 100px of wash below it.
 const LAST_RULE = 936.17;
 
-// Slug of the featured piece in src/data/blogPosts.jsx. The four list rows get
-// a `slug` of their own once their boards land; until then their headings stay
-// plain text rather than linking to a page that doesn't exist.
+// Slug of the featured piece in src/data/blogPosts.jsx; the four list rows
+// carry their own `slug`. Every heading here links to /insights/<slug>.
 const FEATURED_SLUG = "these-arent-productivity-problems";
 
 export default function Insights() {
@@ -176,7 +179,12 @@ export default function Insights() {
               }}
             >
               <h4 className="absolute top-0 left-0 w-full text-[22px] leading-[1.2] font-bold text-gold">
-                {article.title}
+                <Link
+                  to={`/insights/${article.slug}`}
+                  className="hover:underline"
+                >
+                  {article.title}
+                </Link>
               </h4>
               <p
                 className="absolute left-0 w-full text-[16px] leading-[1.2] text-black/60"
