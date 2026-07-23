@@ -28,7 +28,9 @@ const ARTICLES = [
 
 export default function Insights() {
   return (
-    <section className="relative h-[1218px] w-[1440px] overflow-hidden">
+    // 1728:362 is 1068 tall: the last rule lands at y 973 and the board leaves
+    // 95px of air under it, not the 245 this section used to carry.
+    <section className="relative h-[1068px] w-[1440px] overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-[#fffefa] to-[#ffbb00]/20" />
 
       {/* 1638:1020 / 1638:1021 — header row */}

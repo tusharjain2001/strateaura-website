@@ -26,7 +26,7 @@ export default function SignaturePrograms() {
         variant="goldOutline"
         icon="sparkle"
         size="sm"
-        className="absolute top-[141px] left-[1029px]"
+        className="absolute top-[141px] right-[159px] min-w-[252.5px]"
       >
         View All Programs
       </PillButton>

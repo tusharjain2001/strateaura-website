@@ -1,4 +1,5 @@
 import PillButton from "../ui/PillButton";
+import CardArrow from "../ui/CardArrow";
 import frameworkBg from "../../assets/signature-framework-bg.png";
 import cardOneArt from "../../assets/home2/fw-card1-art.svg";
 import cardTwoArt from "../../assets/home2/fw-card2-art.svg";
@@ -25,6 +26,7 @@ const CARDS = [
     titleLeft: 34.76,
     titleWidth: 250.248,
     arrowLeft: 33.14,
+    arrow: "text-white",
     sparkle: sparkleOne,
     // inset[31.3% -19.78% -18.57% 28.13%] of the 356.1x304.7 panel
     art: { src: cardOneArt, left: 100.18, top: 95.38, width: 326.38, height: 265.94 },
@@ -37,6 +39,8 @@ const CARDS = [
     titleLeft: 35.56,
     titleWidth: 209.348,
     arrowLeft: 40.41,
+    // The two gold cards draw the arrow in gold (#b3902f), not white.
+    arrow: "text-gold",
     sparkle: sparkleTwo,
     art: { src: cardTwoArt, left: 128.52, top: 126.09, width: 181.866, height: 186.716 },
   },
@@ -48,6 +52,7 @@ const CARDS = [
     titleLeft: 32.33,
     titleWidth: 227.939,
     arrowLeft: 31.52,
+    arrow: "text-gold",
     sparkle: sparkleThree,
     art: {
       src: cardThreeArt,
@@ -62,6 +67,7 @@ const CARDS = [
 
 const CARD_W = 356.122;
 const CARD_H = 304.727;
+const ARROW_W = 37.99;
 
 export default function Frameworks() {
   return (
@@ -83,7 +89,7 @@ export default function Frameworks() {
         variant="goldOutline"
         icon="sparkle"
         size="sm"
-        className="absolute top-0 left-[1052px]"
+        className="absolute top-0 right-[159px] min-w-[229.5px]"
       >
         Discover Models
       </PillButton>
@@ -132,10 +138,12 @@ export default function Frameworks() {
                 <br />
                 <span className="font-medium">{card.subtitle}</span>
               </p>
-              {/* 1728:518 etc — 38px arrow rule at y 265.1 */}
-              <span
-                style={{ left: card.arrowLeft }}
-                className="absolute top-[265.12px] block h-[1.6px] w-[37.99px] bg-white after:absolute after:top-[-3.5px] after:right-[-1px] after:h-[8.5px] after:w-[8.5px] after:rotate-45 after:border-t-[1.6px] after:border-r-[1.6px] after:border-white after:content-['']"
+              {/* 1728:518 etc — 38px arrow rule centred on y 265.9 */}
+              <CardArrow
+                length={ARROW_W}
+                left={card.arrowLeft}
+                centerY={265.92}
+                className={card.arrow}
               />
             </div>
           </div>

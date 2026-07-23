@@ -19,9 +19,14 @@ export default function Belief() {
         <br />
         Belief
       </h2>
-      <p className="absolute top-[94px] left-[394px] w-[466px] text-[24px] leading-normal font-light text-black/65">
-        Real growth begins with the courage to pause. To think again, To lead from
-        the inside out, with energy, intention, and presence.
+      {/* Figma sets this in 3 lines inside a 466 box, but Inter runs wider than
+          the board's face and reflows it to 4. The breaks are pinned to Figma's
+          and the box widened to hold them — it still clears the laurel, which
+          starts at x 976. */}
+      <p className="absolute top-[94px] left-[394px] w-[560px] text-[24px] leading-normal font-light text-black/65 [&>span]:block [&>span]:whitespace-nowrap">
+        <span>Real growth begins with the courage to</span>
+        <span>pause. To think again, To lead from the inside</span>
+        <span>out, with energy, intention, and presence.</span>
       </p>
     </section>
   );
