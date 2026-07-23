@@ -68,7 +68,7 @@ export default function SiteFooter({ body, tagline, buttons, aside }) {
             <h2 className="text-[clamp(1.625rem,2.5vw,2.1875rem)] leading-[1.2] font-bold text-navy">
               Ready to Work Together?
             </h2>
-            <p className="mt-4 max-w-[566px] text-[clamp(1.125rem,1.7vw,1.5rem)] leading-normal font-light text-black lg:mt-7">
+            <p className="mt-4 max-w-[566px] text-[clamp(1.125rem,1.7vw,1.5rem)] leading-[1.2] font-light text-black lg:mt-7">
               {body ??
                 "We work with those ready to think deeper, move cleaner, and lead with presence, not pressure."}
             </p>
@@ -106,9 +106,11 @@ export default function SiteFooter({ body, tagline, buttons, aside }) {
                   <img src={logoC} alt="" className="size-full" />
                 </span>
               </div>
-              <p className="mt-3 max-w-[214px] text-[16px] leading-normal font-light text-[#525252]">
-                StrateAura Management Development Training LLC, Iris Bay - 2205 -
-                D90, Business Bay Dubai, U.A.E
+              {/* 1730:627 — two paragraphs in a 214 box, not one run */}
+              <p className="mt-3 max-w-[214px] text-[16px] leading-[1.2] font-light text-[#525252]">
+                StrateAura Management Development Training LLC.
+                <br />
+                Iris Bay - 2205 - D90, Business Bay Dubai, U.A.E
               </p>
             </div>
 

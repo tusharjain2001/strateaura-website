@@ -230,7 +230,6 @@ export default function ProblemWeAddress() {
         variant="goldOutlineWhite"
         icon="sparkle"
         size="xs"
-        padLeft={22}
         className="absolute top-[289.95px] left-[195px]"
       >
         Our Solutions

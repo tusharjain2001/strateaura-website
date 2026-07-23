@@ -53,7 +53,6 @@ export default function Insights() {
         variant="goldOutline"
         icon="sparkle"
         size="xs"
-        padLeft={22}
         className="absolute top-[139px] left-[1120px]"
       >
         Browse Insights

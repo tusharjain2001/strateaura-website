@@ -95,7 +95,6 @@ export default function Frameworks() {
         variant="goldOutline"
         icon="sparkle"
         size="xs"
-        padLeft={22}
         className="absolute top-0 right-[158.7px]"
       >
         Discover Models

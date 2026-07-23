@@ -52,7 +52,7 @@ export default function Hero() {
         variant="creamFilled"
         icon="sparkle"
         size="xs"
-        className="absolute top-[446px] left-[80px] min-w-[215px]"
+        className="absolute top-[446px] left-[80px]"
       >
         VEIL™ Program
       </PillButton>
@@ -62,8 +62,7 @@ export default function Hero() {
         variant="creamOutline"
         icon="sparkle"
         size="xs"
-        padLeft={16}
-        className="absolute top-[446px] left-[311px] min-w-[257.45px]"
+        className="absolute top-[446px] left-[311px]"
       >
         Browse All Programs
       </PillButton>

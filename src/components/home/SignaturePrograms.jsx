@@ -24,8 +24,7 @@ export default function SignaturePrograms() {
         variant="goldOutline"
         icon="sparkle"
         size="xs"
-        padLeft={22}
-        className="absolute top-[14.5px] right-[158.7px] min-w-[238px]"
+        className="absolute top-[14.5px] right-[158.7px]"
       >
         View All Programs
       </PillButton>
@@ -70,7 +69,6 @@ export default function SignaturePrograms() {
           variant="navyOutline"
           icon="arrowUp"
           size="xs"
-          padLeft={22}
           className="absolute top-[170.55px] left-[33.14px]"
         >
           Explore Veil
@@ -81,7 +79,6 @@ export default function SignaturePrograms() {
           variant="navyOutline"
           icon="sparkle"
           size="xs"
-          padLeft={22}
           className="absolute top-[239.26px] left-[33.14px]"
         >
           Register for the Free Webinar
