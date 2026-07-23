@@ -2,9 +2,9 @@ import TagRibbon from "./TagRibbon";
 import CtaPill from "../ui/CtaPill";
 import { Sparkle, ArrowUpRight } from "../ui/Icons";
 import leafWatermark from "../../assets/programs/section-leaf-watermark.png";
-import constructDeco1 from "../../assets/programs/construct-card-deco-1.svg";
-import constructDeco2 from "../../assets/programs/construct-card-deco-2.svg";
-import constructDeco3 from "../../assets/programs/construct-card-deco-3.svg";
+import constructDeco1 from "../../assets/programs/construct-card-deco-1.png";
+import constructDeco2 from "../../assets/programs/construct-card-deco-1.png";
+import constructDeco3 from "../../assets/programs/construct-card-deco-1.png";
 import constructSparkle from "../../assets/programs/construct-card-sparkle.svg";
 import pathwayCheck from "../../assets/programs/pathway-bullet-check.svg";
 
@@ -64,7 +64,11 @@ export default function VeilFrameworkSection() {
         className="pointer-events-none absolute inset-x-0 bottom-0 hidden w-full lg:block"
       />
 
-      <div className="relative mx-auto w-full max-w-[1440px] px-5 sm:px-8 xl:px-[95px]">
+      {/* The board insets this section further than the rest of the page: the
+          headline starts at x157 and the two text columns span 157-1298, i.e.
+          the 1141px block is centred in the 1440. 149px of padding reproduces
+          that and leaves the left and right margins equal. */}
+      <div className="relative mx-auto w-full max-w-[1440px] px-5 sm:px-8 xl:px-[149px]">
         {/* Core Concept */}
         <div className="pt-14 lg:pt-[76px]">
           <span className="relative inline-flex items-center justify-center px-6 py-1.5 text-gold">
@@ -74,19 +78,37 @@ export default function VeilFrameworkSection() {
             </span>
           </span>
 
-          <h2 className="mt-4 text-[clamp(1.75rem,2.9vw,2.875rem)] leading-[1.2] font-bold text-navy">
-            VEIL™ - Strategic Health Framework for Women Leaders - The Flagship Program of Strateaura™
+          {/* 1638:2881 — two lines breaking after "Women". The board sets 50px
+              in a 1126 box, but Inter runs wider than its Acumin Pro, so those
+              words need ~1210px: the cap comes down to 46px and the box is left
+              at the full content column, or line one wraps a third time. The
+              break is forced rather than left to the box width, which is what
+              kept pulling "Leaders -" up. */}
+          <h2 className="mt-4 text-[clamp(1.75rem,3.2vw,2.875rem)] leading-[1.2] font-bold text-navy lg:mt-[30px]">
+            VEIL™ - Strategic Health Framework for Women{" "}
+            <br className="hidden lg:inline" />
+            Leaders - The Flagship Program of Strateaura™
           </h2>
 
-          <p className="mt-8 text-[clamp(1.125rem,1.6vw,1.5rem)] font-medium text-navy">
+          {/* 1638:2880 — 24px medium, 48px under the headline */}
+          <p className="mt-8 text-[clamp(1.125rem,1.67vw,1.5rem)] font-medium text-navy lg:mt-[48px]">
             Core Concept
           </p>
 
           {/* Figma 1638:3972 / 1638:2884 — two 545px justified columns, 51px
-              apart. The widths are what drive the line breaks, so they must
-              stay exact for the copy to wrap as designed. */}
+              apart, set 24/36. Both the width and the size drive the line
+              breaks, so the type is pinned to 1.67vw (24px at the board's
+              1440) rather than the 1.4vw used elsewhere, which only reached
+              24px at ~1714 and packed extra words onto every line.
+
+              The pair is fixed at 545 only from xl up, where 1141px fits the
+              content column. It stays flush left so the first column lines up
+              with the headline and "Core Concept" above it, as on the board
+              (all three start at x157); the slack falls on the right, exactly
+              as it does there. Between lg and xl the columns share the row
+              instead, since two 545s would overflow at 1024. */}
           <div className="mt-5 flex flex-col gap-8 lg:flex-row lg:gap-[51px]">
-            <p className="text-justify text-[clamp(1rem,1.4vw,1.5rem)] leading-[1.5] text-black/60 lg:w-[545px] lg:shrink-0">
+            <p className="flex-1 text-justify text-[clamp(1rem,1.67vw,1.5rem)] leading-[1.5] text-black/60 xl:w-[545px] xl:flex-none">
               VEIL™ is designed for women in leadership and high-demand professional roles who
               are performing well externally - and already paying a silent cost for how they are
               leading. They are capable, trusted, and accomplished often the strongest person in
@@ -97,7 +119,7 @@ export default function VeilFrameworkSection() {
               are. VEIL is a strategic health framework grounded in validated science and designed
               specifically for
             </p>
-            <p className="text-justify text-[clamp(1rem,1.4vw,1.5rem)] leading-[1.5] text-black/60 lg:w-[545px] lg:shrink-0">
+            <p className="flex-1 text-justify text-[clamp(1rem,1.67vw,1.5rem)] leading-[1.5] text-black/60 xl:w-[545px] xl:flex-none">
               women carrying sustained leadership responsibility. The woman VEIL serves is not in
               crisis. She is still succeeding. What she needs is
               not another programme that teaches her how to perform. She needs a framework that
@@ -131,7 +153,10 @@ export default function VeilFrameworkSection() {
                 <p className="text-[clamp(1.125rem,1.8vw,1.5rem)] font-bold text-white">
                   {c.title}
                 </p>
-                <p className="relative z-10 mt-4 max-w-[85%] text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-white">
+                {/* 1638:2895 — the copy runs the full 314px of the padded card
+                    and sits over the artwork; capping it at 85% wrapped every
+                    line a word or two early. */}
+                <p className="relative z-10 mt-4 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-white">
                   {c.body}
                 </p>
                 <img
