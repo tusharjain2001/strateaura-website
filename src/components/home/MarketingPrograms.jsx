@@ -98,7 +98,7 @@ function CardArt({ src, kind, left }) {
 
 export default function MarketingPrograms() {
   return (
-    <section className="relative h-[390px] w-[1440px]">
+    <section className="relative h-[391px] w-[1440px]">
       {/* 1728:212 — 490x69.5 */}
       <h2 className="absolute top-0 left-[158px] w-[490px] text-[30px] leading-normal font-bold text-navy">
         Our Marketing &amp;
@@ -106,11 +106,11 @@ export default function MarketingPrograms() {
         Leadership Programs.
       </h2>
 
-      {/* 1728:213 — 416.3 wide, sitting 6.3 below the heading's cap line */}
-      <p className="absolute top-[6px] left-[865px] w-[430px] text-[14px] leading-[1.55] text-navy [&>span]:block [&>span]:whitespace-nowrap">
-        <span>StrateAura offers a suite of practical marketing and leadership</span>
-        <span>programs for professionals, teams, and institutions. All programs</span>
-        <span>carry KHDA Attested Attendance Certificate.</span>
+      {/* 1728:213 — 508 wide at x 773.3, sitting 6.3 below the heading's cap line */}
+      <p className="absolute top-[6.26px] left-[773.3px] w-[508px] text-[16px] leading-normal text-navy">
+        We offer a suite of practical marketing and leadership programs for
+        professionals, teams, and institutions. All programs carry KHDA Attested
+        Attendance Certificate.
       </p>
 
       {/* 1728:214 — card row, 1123.3x155.8 at y 114.8 */}

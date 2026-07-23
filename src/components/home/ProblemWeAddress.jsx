@@ -40,19 +40,10 @@ const CARDS = [
     solution: true,
     body: (
       <>
-        <span className="block whitespace-nowrap">
-          These <strong className="font-bold">aren&rsquo;t productivity</strong>
-        </span>
-        <span className="block whitespace-nowrap">
-          <strong className="font-bold">problems.</strong> They&rsquo;re
-        </span>
-        <span className="block whitespace-nowrap">misalignment patterns,</span>
-        <span className="block whitespace-nowrap">
-          and they <strong className="font-bold">don&rsquo;t fix</strong>
-        </span>
-        <span className="block whitespace-nowrap">
-          <strong className="font-bold">themselves</strong> with tactics.
-        </span>
+        These <strong className="font-bold">aren&rsquo;t productivity problems.</strong>{" "}
+        They&rsquo;re misalignment patterns, and they{" "}
+        <strong className="font-bold">don&rsquo;t fix themselves</strong> with
+        tactics.
       </>
     ),
     pattern: { src: waveC },
@@ -62,10 +53,10 @@ const CARDS = [
 function IconCircle({ className = "", style }) {
   return (
     <span
-      className={`flex size-[45px] items-center justify-center rounded-full bg-cream ${className}`}
+      className={`flex size-[44.88px] items-center justify-center rounded-full bg-cream ${className}`}
       style={style}
     >
-      <Sparkle className="size-[23px] text-gold" />
+      <Sparkle className="size-[32px] text-gold" />
     </span>
   );
 }
@@ -122,7 +113,7 @@ function CardBody({ card }) {
       <div className="relative h-full">
         <CardPattern {...card.pattern} />
         {/* Copy is left-aligned at x=64; only the icon is centred. */}
-        <p className="relative ml-[57.45px] w-[326px] pt-[77px] text-[25px] leading-[1.1] text-white">
+        <p className="relative ml-[57.45px] w-[325.85px] pt-[77.2px] text-[22px] leading-[1.1] text-white">
           {card.body}
         </p>
         <IconCircle
@@ -158,31 +149,31 @@ export default function ProblemWeAddress() {
   }
 
   return (
-    <section className="relative h-[932px] w-[1440px] overflow-hidden">
+    // The board hangs everything off the top card (1728:298), so the section
+    // starts flush with the deck and the copy column hangs below it.
+    <section className="relative h-[796px] w-[1440px] overflow-hidden">
       <img
         src={laurelLeft}
         alt=""
-        className="pointer-events-none absolute top-[154px] left-[-44px] h-[631px] w-[660px] opacity-90"
+        className="pointer-events-none absolute top-[17px] left-[-44px] h-[631px] w-[660px] opacity-90"
       />
 
-      <div className="absolute top-[201px] left-[195px] w-[364px] text-[28.7px] leading-normal font-bold text-navy">
+      <div className="absolute top-[64.63px] left-[195px] w-[364px] text-[30px] leading-normal font-bold text-navy">
         The Problem
         <br />
         We Address
       </div>
-      {/* Board's 340.2 box is Acumin Pro; Inter needs ~365 for the longest of
-          these three lines, so the box is widened rather than left to reflow. */}
-      <p className="absolute top-[295px] left-[195px] w-[375px] text-[21.5px] leading-normal font-light text-black [&>span]:block [&>span]:whitespace-nowrap">
-        <span>We live in a world of constant doing,</span>
-        <span>chasing visibility, metrics, and</span>
-        <span>motion. But too many leaders feel</span>
+      {/* 1728:296 — 16px light in Figma's 340.2 box */}
+      <p className="absolute top-[157.99px] left-[195px] w-[340.2px] text-[16px] leading-normal font-light text-black">
+        We live in a world of constant doing, chasing visibility, metrics, and
+        motion. But too many leaders feel
       </p>
 
       {/* Stacked accordion — click a card to bring it to full height. Clicking
           the open card is a no-op: closing it would leave no card expanded and
           a 336px hole in the stack. */}
       <div
-        className="absolute top-[137px] left-[655px]"
+        className="absolute top-0 left-[655.28px]"
         style={{ width: CARD_W, height: DECK_H }}
       >
         {/* Clips the deck to its constant height: when a card other than the
@@ -238,8 +229,9 @@ export default function ProblemWeAddress() {
         href="#solutions"
         variant="goldOutlineWhite"
         icon="sparkle"
-        size="sm"
-        className="absolute top-[426px] left-[195px]"
+        size="xs"
+        padLeft={22}
+        className="absolute top-[289.95px] left-[195px]"
       >
         Our Solutions
       </PillButton>

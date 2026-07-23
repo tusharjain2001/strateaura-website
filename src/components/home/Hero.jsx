@@ -1,68 +1,58 @@
 import PillButton from "../ui/PillButton";
 import heroPhoto from "../../assets/home2/hero-photo.jpg";
-import heroAura from "../../assets/home2/hero-aura.svg";
 
 /**
- * Hero — Figma node 1638:875, y 120-800 of the 1440 frame.
+ * Hero — "Alt/ Home" board, node 1728:252.
  *
- * The photo and its navy wash start at y 112, i.e. 8px behind the 120px navbar,
- * so both are drawn from -8px inside this section. Figma scales the square
- * source to 1580px and crops from the top, which `object-cover` can't reproduce
- * on a 1440x688 box — hence the explicit size/offset on the img.
+ * The board's frame carries the 74px navbar at y 0; SiteHeader renders that
+ * outside the zoomed canvas, so every offset here is the frame value less 74.
+ * That puts the photo band 26px above the canvas top — exactly the strip the
+ * navbar covers in Figma — and the section's overflow clip stands in for it.
  *
- * Line breaks in the copy are forced: the Inter fallback runs wider than the
- * design's Acumin Pro and would otherwise wrap at different words.
+ * Figma scales the square source to 1580px and crops from the top, which
+ * `object-cover` can't reproduce on a 1440x688 box, hence the explicit
+ * size/offset on the img.
  *
- * Updated to the "Alt/ Home" board (node 1728:252): the photo band is 688 tall
- * and the copy sits at 320 / 430 / 543, measured from the band's top (the
- * board places them at 393 / 503 / 616 with the band starting at y 73).
+ * The board dropped the aura motif the previous hero carried and reset the type
+ * to 32/20px, which pulls the whole page up by ~148px.
  */
 export default function Hero() {
   return (
-    <section className="relative h-[688px] w-[1440px] overflow-hidden bg-navy-2">
-      <div className="absolute top-0 left-0 h-[688px] w-[1440px] overflow-hidden">
+    <section className="relative h-[682px] w-[1440px] overflow-hidden">
+      {/* The photo (frame y 48..736) and its wash (73..761) both overrun the
+          636-tall board frame, which clips them — so the band stops at canvas
+          562 and the remaining 120px is the gap before the next section. */}
+      <div className="absolute top-0 left-0 h-[562px] w-[1440px] overflow-hidden bg-navy-2">
+        {/* 1728:254 — square source scaled to 1580 and cropped from the top */}
         <img
           src={heroPhoto}
           alt=""
-          className="absolute top-[-202px] left-0 h-[1580px] w-[1580px] max-w-none"
+          className="absolute top-[-228px] left-0 h-[1580px] w-[1580px] max-w-none"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(35,58,88,0.6)] to-navy-2" />
+        {/* 1728:255 — navy wash, 25px lower than the photo */}
+        <div className="absolute top-[-1px] left-0 h-[688px] w-[1440px] bg-gradient-to-b from-[rgba(35,58,88,0.6)] to-navy-2" />
       </div>
 
-      {/* 1638:898 — aura motif, mirrored and bleeding past the right edge */}
-      <img
-        src={heroAura}
-        alt=""
-        className="pointer-events-none absolute top-[223px] left-[930px] h-[468px] w-[540px] -scale-x-100"
-      />
-
-      {/* 1638:882 — 789x106 */}
-      <h1 className="absolute top-[320px] left-[80px] w-[789px] text-[44px] leading-[1.2] font-bold text-white [&>span]:block">
-        <span className="whitespace-nowrap">
-          Where Strategy Comes to Life. Where
-        </span>
-        <span>Leaders Find Their Edge.</span>
+      {/* 1728:259 — 32px bold, two lines inside a 632 box. Tops here are the
+          board's less the 4/3/2px Inter sits low in its line box. */}
+      <h1 className="absolute top-[251px] left-[80px] w-[632px] text-[32px] leading-[1.2] font-bold text-white">
+        Where Strategy Comes to Life. Where Leaders Find Their Edge.
       </h1>
-      {/* 1638:883 — 700x89 */}
-      <p className="absolute top-[430px] left-[80px] w-[700px] text-[20px] leading-[1.2] text-white [&>span]:block">
-        <span className="whitespace-nowrap">
-          At StrateAura™, we create spaces for elevated learning and aligned
-          action. This
-        </span>
-        <span className="whitespace-nowrap">
-          is where ambition meets self-awareness and where fragmented effort
-          becomes
-        </span>
-        <span>embodied leadership.</span>
+      {/* 1728:260 — 20px regular in a 700 box */}
+      <p className="absolute top-[332px] left-[80px] w-[700px] text-[20px] leading-[1.2] text-white">
+        At StrateAura™, we create spaces for elevated learning and aligned
+        action. This is where ambition meets self-awareness and where fragmented
+        effort becomes embodied leadership.
       </p>
 
-      {/* 1638:886 / 1638:892 — 272px and 335px pills on the y 655 baseline */}
+      {/* 1728:263 / 1728:269 — 215 and 257.5 wide, 43 tall, 16 apart */}
       <PillButton
         as="a"
         href="/veil"
         variant="creamFilled"
         icon="sparkle"
-        className="absolute top-[543px] left-[80px] min-w-[272px]"
+        size="xs"
+        className="absolute top-[446px] left-[80px] min-w-[215px]"
       >
         VEIL™ Program
       </PillButton>
@@ -71,7 +61,9 @@ export default function Hero() {
         href="/programs"
         variant="creamOutline"
         icon="sparkle"
-        className="absolute top-[543px] left-[391px] min-w-[335px]"
+        size="xs"
+        padLeft={16}
+        className="absolute top-[446px] left-[311px] min-w-[257.45px]"
       >
         Browse All Programs
       </PillButton>

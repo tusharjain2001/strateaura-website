@@ -46,7 +46,7 @@ export default function SiteHeader() {
           its 1061 cap and justify-between opens the board's 58px, but on a
           1280-1439 desktop the block grows to fill the row and "Home" would
           otherwise sit flush against the lockup. */}
-      <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between gap-4 px-5 py-[20px] sm:px-8 xl:gap-[40px] xl:px-[72px]">
+      <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between gap-4 px-5 py-[20px] sm:px-8 xl:h-[74px] xl:gap-[40px] xl:px-[72px]">
         <Link to="/" aria-label="StrateAura home" className="shrink-0">
           <img
             src={logo}

@@ -23,6 +23,7 @@ const CARDS = [
     panel: "from-[#1f3a58] to-[#437dbe]",
     title: "VEIL™ Framework",
     subtitle: "Energy, presence, legacy.",
+    breakLine: true,
     titleLeft: 34.76,
     titleWidth: 250.248,
     arrowLeft: 33.14,
@@ -36,8 +37,11 @@ const CARDS = [
     panel: "from-[#b3902f] to-[#ffdf85]",
     title: "ALA-Nexus™",
     subtitle: "Assess, Leverage, Actuate.",
+    breakLine: true,
     titleLeft: 35.56,
-    titleWidth: 209.348,
+    // Figma's 209.3 box is measured in Acumin; Inter needs ~240 to keep the
+    // subtitle on the board's two lines.
+    titleWidth: 240,
     arrowLeft: 40.41,
     // The two gold cards draw the arrow in gold (#b3902f), not white.
     arrow: "text-gold",
@@ -48,9 +52,11 @@ const CARDS = [
     left: 767.188,
     panel: "from-[#b3902f] to-[#ffdf85]",
     title: "The 5Cs of Brand Health",
+    // 1728:528 is the one card whose subtitle runs on from the title rather
+    // than starting a new line.
     subtitle: "from concept to advocacy.",
     titleLeft: 32.33,
-    titleWidth: 227.939,
+    titleWidth: 245,
     arrowLeft: 31.52,
     arrow: "text-gold",
     sparkle: sparkleThree,
@@ -88,21 +94,22 @@ export default function Frameworks() {
         href="#models"
         variant="goldOutline"
         icon="sparkle"
-        size="sm"
-        className="absolute top-0 right-[159px] min-w-[229.5px]"
+        size="xs"
+        padLeft={22}
+        className="absolute top-0 right-[158.7px]"
       >
         Discover Models
       </PillButton>
 
-      {/* 1728:512 — 601.4 wide, directly under the heading box */}
-      <p className="absolute top-[67px] left-[158px] w-[602px] text-[19px] leading-normal font-light text-black">
+      {/* 1728:512 — 601.4 wide, directly under the 53px heading box */}
+      <p className="absolute top-[53px] left-[158px] w-[601.37px] text-[16px] leading-normal font-light text-black">
         We teach models you won’t find in standard leadership courses. These are
         systems that make inner insight visible and sustainable.
       </p>
 
-      {/* 1728:513 — three 356x305 cards, 27.5 apart, at y 154.3 */}
+      {/* 1728:513 — three 356x305 cards, 27.5 apart, at y 132.2 */}
       <div
-        className="absolute top-[154px] left-[158px] w-[1123.3px]"
+        className="absolute top-[132.22px] left-[158px] w-[1123.3px]"
         style={{ height: CARD_H }}
       >
         {CARDS.map((card) => (
@@ -132,10 +139,10 @@ export default function Frameworks() {
               />
               <p
                 style={{ left: card.titleLeft, width: card.titleWidth }}
-                className="absolute top-[34.76px] text-[22.7px] leading-[1.24] text-white"
+                className="absolute top-[34.76px] text-[24px] leading-[1.24] text-white"
               >
                 <span className="font-bold">{card.title}</span>
-                <br />
+                {card.breakLine ? <br /> : " "}
                 <span className="font-medium">{card.subtitle}</span>
               </p>
               {/* 1728:518 etc — 38px arrow rule centred on y 265.9 */}
