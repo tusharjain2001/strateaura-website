@@ -45,11 +45,14 @@ export default function Hero() {
         effort becomes embodied leadership.
       </p>
 
-      {/* 1728:263 / 1728:269 — 215 and 257.5 wide, 43 tall, 16 apart */}
+      {/* 1728:263 / 1728:269 — 215 and 257.5 wide, 43 tall, 16 apart.
+          Both hero pills sit hollow at rest and fill with cream on hover, so
+          the VEIL pill reads the same as "Browse All Programs" until you
+          reach for it (client request, overrides Figma's filled treatment). */}
       <PillButton
         as="a"
         href="/veil"
-        variant="creamFilled"
+        variant="creamOutline"
         icon="sparkle"
         size="xs"
         className="absolute top-[446px] left-[80px]"
