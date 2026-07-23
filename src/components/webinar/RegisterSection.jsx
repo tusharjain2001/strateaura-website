@@ -97,9 +97,7 @@ export default function RegisterSection() {
                 </Field>
               </div>
 
-              <p className="mt-1.5 text-[12px] leading-normal text-[#c80000] sm:mt-3 sm:text-[15px] lg:text-[17px]">
-                Fields marked * are mandatory
-              </p>
+              
 
               <div className="mt-6 flex flex-col items-start gap-[10px] sm:mt-5 sm:gap-[18px]">
                 <CtaPill type="submit" variant="goldFilled" size="mdCompact">

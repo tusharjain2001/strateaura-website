@@ -116,9 +116,7 @@ export default function ContactFormSection() {
                 </Field>
               </div>
 
-              <p className="mt-3 text-[15px] leading-normal text-[#c80000] lg:text-[17px]">
-                Fields marked * are mandatory
-              </p>
+              
 
               {error && (
                 <p role="alert" className="mt-3 text-[16px] leading-normal text-[#c80000]">

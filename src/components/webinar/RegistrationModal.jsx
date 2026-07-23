@@ -283,9 +283,7 @@ export default function RegistrationModal({ open, onClose }) {
             </label>
           </div>
 
-          <p className="mt-3 text-[15px] leading-normal text-[#c80000] lg:text-[17px]">
-            Fields marked * are mandatory
-          </p>
+          
 
           <label className="mt-5 flex items-center gap-[14px]">
             <input
