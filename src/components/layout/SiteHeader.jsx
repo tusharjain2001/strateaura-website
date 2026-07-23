@@ -24,8 +24,12 @@ const LINKS = [
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
 
+  // Nav links darken on hover, matching the live site: its Elementor rule
+  // (`li:hover > a`) uses --e-global-color-f318d10 = #725300, which is this
+  // project's gold-dark token. The search button, Log In pill and logo keep
+  // their own treatments.
   const linkClass =
-    "flex items-center gap-[8px] whitespace-nowrap text-[17px] leading-[1.5] font-bold text-white transition-opacity hover:opacity-80";
+    "flex items-center gap-[8px] whitespace-nowrap text-[17px] leading-[1.5] font-bold text-white transition-colors duration-300 hover:text-gold-dark";
 
   const renderLink = (link) =>
     link.to ? (
