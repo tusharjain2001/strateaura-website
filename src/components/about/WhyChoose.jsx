@@ -2,6 +2,7 @@ import PillButton from "../ui/PillButton";
 import maskedImage from "../../assets/about/maskedwhypeoplechooseus.png";
 import chooseFrame from "../../assets/about/masked-vector.png";
 import chooseBand from "../../assets/about/choose-band.png";
+import chooseWatermark from "../../assets/about/choose-watermark.svg";
 import sparkleB from "../../assets/about/sparkle-b.svg";
 
 export default function WhyChoose() {
@@ -9,6 +10,13 @@ export default function WhyChoose() {
     <section className="relative h-[1003px] w-[1440px] overflow-hidden">
       {/* cream wash + aura band — light at top fading to cream at the bottom */}
       <div className="absolute top-0 left-1/2 h-[1003px] w-[1526px] -translate-x-1/2 bg-gradient-to-b from-white to-[#fee8a9] opacity-40" />
+      {/* Faint logo watermark, top-right (Figma node 1638:1381) — the design
+          stretches the 549px mark to 1040px and lets the section edge clip it */}
+      <img
+        src={chooseWatermark}
+        alt=""
+        className="pointer-events-none absolute top-[3px] left-[947px] h-[480px] w-[1040px] max-w-none"
+      />
       <img
         src={chooseBand}
         alt=""
