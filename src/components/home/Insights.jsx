@@ -1,7 +1,7 @@
 import PillButton from "../ui/PillButton";
 
 /**
- * Insights & Resources — Figma nodes 1638:1018-1061, y 4110-5177 of the frame.
+ * Insights & Resources — "Alt/ Home" board, node 1728:362 (canvas y 3565).
  *
  * The wash behind the section is Rectangle 35 (1638:919): #fffefa fading down
  * to #ffbb00 at 20%. The article thumbnails are drawn in Figma as a photo with
@@ -28,11 +28,11 @@ const ARTICLES = [
 
 export default function Insights() {
   return (
-    <section className="relative h-[1067px] w-[1440px] overflow-hidden">
+    <section className="relative h-[1218px] w-[1440px] overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-[#fffefa] to-[#ffbb00]/20" />
 
       {/* 1638:1020 / 1638:1021 — header row */}
-      <h2 className="absolute top-[147px] left-[95px] text-[35px] leading-[1.2] font-bold text-gold">
+      <h2 className="absolute top-[151px] left-[91px] text-[35px] leading-[1.2] font-bold text-gold">
         Insights &amp; Resources
       </h2>
       <PillButton
@@ -40,13 +40,13 @@ export default function Insights() {
         href="/insights"
         variant="goldOutline"
         icon="sparkle"
-        className="absolute top-[139px] left-[1063px] min-w-[282px]"
+        className="absolute top-[139px] left-[1059px] min-w-[282px]"
       >
         Browse Insights
       </PillButton>
 
       {/* 1638:1027 — featured piece, 534 wide */}
-      <div className="absolute top-[302px] left-[95px] w-[534px]">
+      <div className="absolute top-[302px] left-[91px] w-[534px]">
         <h3 className="w-[469px] text-[24px] leading-[1.2] font-bold text-gold">
           These Aren’t Productivity Problems. They’re Patterns of Misalignment.
         </h3>
@@ -82,7 +82,7 @@ export default function Insights() {
           at the row's top, 17px under the rule, and the text 22.5px below that
           — padding the whole row instead pushed the image to 176px, past the
           173px pitch, so it covered the next row's rule. */}
-      <ul className="absolute top-[281px] left-[720px] w-[728px]">
+      <ul className="absolute top-[281px] left-[716px] w-[728px]">
         {ARTICLES.map((article, i) => (
           <li
             key={article.title}

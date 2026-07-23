@@ -7,16 +7,15 @@ import waveB from "../../assets/problem-wave-b.svg";
 import waveC from "../../assets/problem-wave-c.svg";
 import cornerStar from "../../assets/homepageyellowstar.png";
 
-// Deck geometry from Figma node 1136:4736 (cards 1136:4937 / 4951 / 4964 /
-// 4977). Structurally identical to the VEIL deck on the Frameworks page — four
-// 480x501 cards stacked at an 84px step, all the SAME height, a collapsed card
-// simply overlapped by the one below it (which is what clips its headline
-// mid-line). Exactly one card is open, so the deck height is constant.
-const CARD_W = 480;
-const CARD_H = 501;
-const PEEK_STEP = 84;
+// Deck geometry from the "Alt/ Home" board (cards 1728:298 / 312 / 325 / 338):
+// four 430.9x449.7 cards stacked at a 75.4px step, all the SAME height, a
+// collapsed card simply overlapped by the one below it (which is what clips its
+// headline mid-line). Exactly one card is open, so the deck height is constant.
+const CARD_W = 430.881;
+const CARD_H = 449.732;
+const PEEK_STEP = 75.4;
 const DECK_H = PEEK_STEP * 3 + CARD_H;
-const STAR = 36; // corner star, straddles each card's top-right corner
+const STAR = 32; // corner star, straddles each card's top-right corner
 
 // Cards 1-3 are the problem statements (gold -> gold-dark); card 4 is the
 // answer (gold -> gold-light) and uses a different, left-aligned 31px layout.
@@ -55,10 +54,10 @@ const CARDS = [
 function IconCircle({ className = "", style }) {
   return (
     <span
-      className={`flex size-[50px] items-center justify-center rounded-full bg-cream ${className}`}
+      className={`flex size-[45px] items-center justify-center rounded-full bg-cream ${className}`}
       style={style}
     >
-      <Sparkle className="size-[26px] text-gold" />
+      <Sparkle className="size-[23px] text-gold" />
     </span>
   );
 }
@@ -75,15 +74,15 @@ function CardPattern({ src, rotated }) {
     return (
       <div
         className="pointer-events-none absolute"
-        style={{ left: 0, top: 325, width: 480, height: 176.372 }}
+        style={{ left: 0, top: 291.74, width: 430.881, height: 158.324 }}
       >
         <img
           src={src}
           alt=""
           className="absolute top-1/2 left-1/2 max-w-none"
           style={{
-            width: 176.372,
-            height: 480,
+            width: 158.324,
+            height: 430.881,
             transform: "translate(-50%, -50%) rotate(90deg)",
           }}
         />
@@ -93,15 +92,15 @@ function CardPattern({ src, rotated }) {
   return (
     <div
       className="pointer-events-none absolute"
-      style={{ left: 336, top: 185, width: 184.292, height: 316 }}
+      style={{ left: 301.62, top: 166.07, width: 165.433, height: 283.661 }}
     >
       <img
         src={src}
         alt=""
         className="absolute top-1/2 left-1/2 max-w-none"
         style={{
-          width: 316,
-          height: 184.292,
+          width: 283.661,
+          height: 165.433,
           transform: "translate(-50%, -50%) rotate(-90deg) scaleY(-1)",
         }}
       />
@@ -115,12 +114,12 @@ function CardBody({ card }) {
       <div className="relative h-full">
         <CardPattern {...card.pattern} />
         {/* Copy is left-aligned at x=64; only the icon is centred. */}
-        <p className="relative ml-[64px] w-[363px] pt-[83px] text-[29px] leading-[33px] text-white">
+        <p className="relative ml-[57.45px] w-[326px] pt-[77px] text-[25px] leading-[1.1] text-white">
           {card.body}
         </p>
         <IconCircle
           className="absolute left-1/2 -translate-x-1/2"
-          style={{ top: 374 }}
+          style={{ top: 336 }}
         />
       </div>
     );
@@ -128,11 +127,11 @@ function CardBody({ card }) {
   return (
     <div className="relative h-full">
       <CardPattern {...card.pattern} />
-      <div className="relative pt-[70px] pl-[72px]">
-        <p className="w-[298px] text-[40px] leading-[1.26] font-bold text-white">
+      <div className="relative pt-[63px] pl-[64.6px]">
+        <p className="w-[267px] text-[35.9px] leading-[1.26] font-bold text-white">
           {card.title}
         </p>
-        <IconCircle className="mt-[30px]" />
+        <IconCircle className="mt-[27px]" />
       </div>
     </div>
   );
@@ -151,29 +150,28 @@ export default function ProblemWeAddress() {
   }
 
   return (
-    <section className="relative h-[959px] w-[1440px] overflow-hidden">
+    <section className="relative h-[932px] w-[1440px] overflow-hidden">
       <img
         src={laurelLeft}
         alt=""
-        className="pointer-events-none absolute top-[160px] left-[-44px] h-[703px] w-[735px] opacity-90"
+        className="pointer-events-none absolute top-[154px] left-[-44px] h-[631px] w-[660px] opacity-90"
       />
 
-      <div className="absolute top-[206px] left-[222px] w-[405px] text-[35px] leading-[1.2] font-bold text-navy">
+      <div className="absolute top-[201px] left-[195px] w-[364px] text-[28.7px] leading-normal font-bold text-navy">
         The Problem
         <br />
         We Address
       </div>
-      <p className="absolute top-[313px] left-[222px] w-[470px] text-[24px] leading-[27px] font-light text-black [&>span]:block">
-        <span className="whitespace-nowrap">We live in a world of constant doing,</span>
-        <span className="whitespace-nowrap">chasing visibility, metrics, and</span>
-        <span>motion. But too many leaders feel</span>
+      <p className="absolute top-[295px] left-[195px] w-[341px] text-[21.5px] leading-normal font-light text-black">
+        We live in a world of constant doing, chasing visibility, metrics, and
+        motion. But too many leaders feel
       </p>
 
       {/* Stacked accordion — click a card to bring it to full height. Clicking
           the open card is a no-op: closing it would leave no card expanded and
           a 336px hole in the stack. */}
       <div
-        className="absolute top-[140px] left-[735px]"
+        className="absolute top-[137px] left-[655px]"
         style={{ width: CARD_W, height: DECK_H }}
       >
         {/* Clips the deck to its constant height: when a card other than the
@@ -229,7 +227,8 @@ export default function ProblemWeAddress() {
         href="#solutions"
         variant="goldOutlineWhite"
         icon="sparkle"
-        className="absolute top-[463px] left-[222px]"
+        size="sm"
+        className="absolute top-[426px] left-[195px]"
       >
         Our Solutions
       </PillButton>
