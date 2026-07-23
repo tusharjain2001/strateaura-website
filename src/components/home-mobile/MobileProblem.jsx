@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MobileContainer from "./MobileContainer";
 import MobilePill from "./MobilePill";
 import { Sparkle } from "../ui/Icons";
@@ -15,6 +15,17 @@ import wave4 from "../../assets/home-mobile/prob-wave-4.svg";
 const CARD_H = 386.593;
 const PEEK_STEP = 64.82;
 const DECK_H = PEEK_STEP * 3 + CARD_H;
+
+// Scroll choreography, mirroring the desktop section: the deck pins below the
+// sticky header while the page scrolls on for TRACK_EXTRA px; cards 2-4 ride
+// up from under the deck's clip one after another, scrubbed 1:1 with the
+// scroll, then the pin releases. At full progress the deck is exactly the
+// resting design and the tap-accordion takes over. The heading block above
+// stays in normal flow — only the deck pins.
+const HEADER_H = 64; // sticky SiteHeader height below lg
+const PIN_TOP = HEADER_H + 16; // where the deck pins, real px
+const CARD_SCROLL = 320; // px of scroll each arriving card consumes
+const TRACK_EXTRA = CARD_SCROLL * (4 - 1); // cards 2-4 arrive on scroll
 
 // The card column is 370.389px wide in the 402px frame, so every horizontal
 // measurement below is expressed as a share of that width and every type size
@@ -144,6 +155,53 @@ function CardBody({ card }) {
 export default function MobileProblem() {
   const [active, setActive] = useState(CARDS.length - 1);
 
+  const trackRef = useRef(null);
+  // 0..1 across TRACK_EXTRA; starts at 1 (deck fully assembled, never scrubs)
+  // when the user prefers reduced motion.
+  const [progress, setProgress] = useState(() =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 1 : 0,
+  );
+  const [vh, setVh] = useState(0); // viewport height, for the ride-in start
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    const measure = () => {
+      raf = 0;
+      const el = trackRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      if (!rect.width) return; // display:none — the desktop canvas is showing
+      setVh(window.innerHeight);
+      const p = (PIN_TOP - rect.top) / TRACK_EXTRA;
+      setProgress(Math.min(1, Math.max(0, p)));
+    };
+    const queue = () => {
+      if (!raf) raf = requestAnimationFrame(measure);
+    };
+    queue();
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", queue);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", queue);
+      window.removeEventListener("resize", queue);
+    };
+  }, []);
+
+  // Card 1 is on stage from the start; card i of 2-4 rises during its third of
+  // the track. arrival = 0 parked below the screen, 1 seated at its top.
+  const arrival = CARDS.map((_, i) =>
+    i === 0 ? 1 : Math.min(1, Math.max(0, progress * 3 - (i - 1))),
+  );
+
+  // Each card rides in from just below the viewport (like the reference site,
+  // where the cards are in normal flow and scroll in from off-screen) instead
+  // of materialising at the deck's clip edge. The old below-the-clip distance
+  // is the floor so the cards stay hidden before the first measure runs.
+  const parkDist = (i) =>
+    Math.max(vh - PIN_TOP - tops[i] + 40, DECK_H - tops[i] + 24);
+
   // A collapsed card advances the offset by PEEK_STEP, the open one by its
   // full height — so the deck's total height is constant.
   const tops = [];
@@ -174,28 +232,55 @@ export default function MobileProblem() {
           </MobilePill>
         </div>
 
-        {/* Deck. The wrapper clips it to a constant height: when a card other
-            than the last is open, the trailing card hangs past the bottom. */}
+        {/* Scroll track: taller than the deck by the distance the pin
+            consumes. The sticky wrapper pins the deck below the header while
+            cards 2-4 ride in, then releases. */}
         <div
-          className="relative w-full overflow-hidden"
-          style={{ height: DECK_H }}
+          ref={trackRef}
+          className="relative w-full"
+          style={{ height: DECK_H + TRACK_EXTRA }}
         >
-          {CARDS.map((card, i) => (
-            <button
-              key={card.key}
-              type="button"
-              aria-expanded={active === i}
-              onClick={() => setActive(i)}
-              style={{ top: tops[i], height: CARD_H, zIndex: i }}
-              className={`absolute left-0 w-full cursor-pointer overflow-hidden rounded-[5.999px] text-left shadow-[0_-6px_16px_rgba(0,0,0,0.12)] transition-[top] duration-500 ease-in-out ${
-                card.solution
-                  ? "bg-gradient-to-b from-gold to-gold-light"
-                  : "bg-gradient-to-b from-gold to-gold-dark"
-              }`}
+          <div className="sticky" style={{ top: PIN_TOP }}>
+            {/* Deck. At rest the wrapper clips it to a constant height (when a
+                card other than the last is open, the trailing card hangs past
+                the bottom). While the scroll scrub is running it stays
+                unclipped so the arriving cards are visible all the way up
+                from the bottom of the screen. */}
+            <div
+              className="relative w-full"
+              style={{
+                height: DECK_H,
+                overflow: progress < 1 ? "visible" : "hidden",
+              }}
             >
-              <CardBody card={card} />
-            </button>
-          ))}
+              {CARDS.map((card, i) => (
+                <button
+                  key={card.key}
+                  type="button"
+                  aria-expanded={active === i}
+                  onClick={() => setActive(i)}
+                  style={{
+                    top: tops[i],
+                    height: CARD_H,
+                    zIndex: i,
+                    // Scrubbed by the scroll, so no transition — top keeps
+                    // its 500ms ease.
+                    transform:
+                      arrival[i] < 1
+                        ? `translateY(${(1 - arrival[i]) * parkDist(i)}px)`
+                        : undefined,
+                  }}
+                  className={`absolute left-0 w-full cursor-pointer overflow-hidden rounded-[5.999px] text-left shadow-[0_-6px_16px_rgba(0,0,0,0.12)] transition-[top] duration-500 ease-in-out ${
+                    card.solution
+                      ? "bg-gradient-to-b from-gold to-gold-light"
+                      : "bg-gradient-to-b from-gold to-gold-dark"
+                  }`}
+                >
+                  <CardBody card={card} />
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </MobileContainer>
     </section>

@@ -1,30 +1,38 @@
 import MobileContainer from "./MobileContainer";
 import MobilePill from "./MobilePill";
+import artOne from "../../assets/insights2/art-1.jpg";
+import artTwo from "../../assets/insights2/art-2.jpg";
+import artThree from "../../assets/insights2/art-3.jpg";
+import artFour from "../../assets/insights2/art-4.jpg";
 
 // Figma nodes 1434:861 / 1434:868 / 1434:875 / 1434:882 — the four article rows
 // under the lead piece. Each row is a hairline rule, a gold title, a published
 // date and a full-width image plate (the frame ships them as flat #949494
-// placeholders, so they render as grey plates here too).
+// placeholders; the plates carry the same photos the desktop Insights uses).
 const ARTICLES = [
   {
     title: "Presence Is Not Charisma. It’s Strategic Alignment.",
     date: "Published December 28, 2025.",
     height: "h-[223px]",
+    photo: artOne,
   },
   {
     title: "Why High-Performing Women Are Quietly Exhausted",
     date: "Published January 09, 2026.",
     height: "h-[225px]",
+    photo: artTwo,
   },
   {
     title: "Self-Leadership Is Not Soft. It’s Foundational.",
     date: "Published January 22, 2026.",
     height: "h-[225px]",
+    photo: artThree,
   },
   {
     title: "Leadership Health Is the Next Competitive Advantage.",
     date: "Published January 30, 2026.",
     height: "h-[225px]",
+    photo: artFour,
   },
 ];
 
@@ -102,10 +110,10 @@ export default function MobileInsights() {
                   {article.date}
                 </p>
               </div>
-              <div
-                className={`w-full bg-ink-2 ${article.height}`}
-                role="img"
-                aria-label={article.title}
+              <img
+                src={article.photo}
+                alt=""
+                className={`w-full object-cover ${article.height}`}
               />
             </article>
           ))}

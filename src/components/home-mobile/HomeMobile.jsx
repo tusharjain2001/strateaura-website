@@ -9,7 +9,6 @@ import MobileFrameworks from "./MobileFrameworks";
 import MobileBelief from "./MobileBelief";
 import MobileProblem from "./MobileProblem";
 import MobileInsights from "./MobileInsights";
-import MobileEdge from "./MobileEdge";
 import MobileFooter from "./MobileFooter";
 
 /**
@@ -48,7 +47,6 @@ export default function HomeMobile() {
         <MobileBelief />
         <MobileProblem />
         <MobileInsights />
-        <MobileEdge />
       </main>
       <MobileFooter />
     </div>
