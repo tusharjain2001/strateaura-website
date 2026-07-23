@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import PillButton from "../ui/PillButton";
 import featurePhoto from "../../assets/insights2/feature.jpg";
 import artOne from "../../assets/insights2/art-1.jpg";
@@ -69,6 +70,11 @@ const ARTICLES = [
 // The closing rule under the last row; the board leaves 100px of wash below it.
 const LAST_RULE = 936.17;
 
+// Slug of the featured piece in src/data/blogPosts.jsx. The four list rows get
+// a `slug` of their own once their boards land; until then their headings stay
+// plain text rather than linking to a page that doesn't exist.
+const FEATURED_SLUG = "these-arent-productivity-problems";
+
 export default function Insights() {
   return (
     <section className="relative h-[1037px] w-[1440px] overflow-hidden">
@@ -102,7 +108,10 @@ export default function Insights() {
         </div>
         {/* 1755:4685 — 24px headline, 16px date 68px below it, body 110px below */}
         <h3 className="mt-[38px] w-[469px] text-[24px] leading-[1.2] font-bold text-gold">
-          These Aren’t Productivity Problems. They’re Patterns of Misalignment.
+          <Link to={`/insights/${FEATURED_SLUG}`} className="hover:underline">
+            These Aren’t Productivity Problems. They’re Patterns of
+            Misalignment.
+          </Link>
         </h3>
         <p className="mt-[9.4px] text-[16px] leading-[1.2] text-black/60">
           Published December 15, 2025
@@ -133,9 +142,12 @@ export default function Insights() {
             strategic indicators...
           </p>
           <p className="text-left">
-            <a href="/insights" className="font-semibold underline">
+            <Link
+              to={`/insights/${FEATURED_SLUG}`}
+              className="font-semibold underline"
+            >
               “Read the full perspective”
-            </a>
+            </Link>
           </p>
         </div>
       </div>
