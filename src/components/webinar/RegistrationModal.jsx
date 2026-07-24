@@ -191,6 +191,10 @@ export default function RegistrationModal({ open, onClose }) {
 
     const form = event.currentTarget;
     const fields = Object.fromEntries(new FormData(form));
+    // Browser autofill / password managers can populate the hidden honeypot for
+    // real people. Only non-browser bots (which never run this handler) should
+    // ever send it, so strip it here to avoid false-positive spam blocks.
+    delete fields.hpField;
 
     setSubmitting(true);
     setError("");
