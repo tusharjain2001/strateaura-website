@@ -78,7 +78,7 @@ export default function SiteFooter({ body, tagline, buttons, aside }) {
               </p>
             )}
             {buttons ?? (
-              <CtaPill as="a" href="#book" variant="goldOutline" className="mt-6 lg:mt-[20px]">
+              <CtaPill as="a" href="#book" variant="goldOutline" size="md" className="mt-6 lg:mt-[20px]">
                 Book a Strategic Conversation
               </CtaPill>
             )}

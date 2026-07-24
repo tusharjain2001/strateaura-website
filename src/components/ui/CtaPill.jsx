@@ -48,6 +48,13 @@ const SIZES = {
     circle: "size-[42px] lg:size-[50px]",
     glyph: "size-[18px] lg:size-[31px]",
   },
+  // Matches the Home canvas pills (PillButton `xs`, 43 tall) so the desktop
+  // footer CTA reads the same size as the buttons on the Home board.
+  xs: {
+    pill: "h-[43px] gap-[18px] pr-[8px] pl-[18px] text-[20px]",
+    circle: "size-[27px]",
+    glyph: "size-[19.3px]",
+  },
   md: {
     pill: "h-[46px] gap-3 pr-[6px] pl-6 text-[17px] sm:text-[20px] lg:h-[50px] lg:gap-[19px] lg:pl-[29px] lg:text-[24px]",
     circle: "size-[32px] lg:size-[31px]",
