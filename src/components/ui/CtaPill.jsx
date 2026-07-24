@@ -62,6 +62,21 @@ const SIZES = {
     circle: "size-[33px]",
     glyph: "size-[18px]",
   },
+  // Same mobile/tablet appearance as `lg` (so the responsive Insights page
+  // keeps its untouched mobile CTAs) but shrinks to the compact 44px pill at
+  // lg+, where the redesigned Insights desktop (Figma 1755:1061) needs it.
+  compactLg: {
+    pill: "h-[54px] gap-4 pr-2 pl-6 text-[17px] sm:text-[20px] lg:h-[44px] lg:gap-[13px] lg:pr-[5px] lg:pl-[21px] lg:text-[16px]",
+    circle: "size-[42px] lg:size-[33px]",
+    glyph: "size-[18px]",
+  },
+  // Like compactLg on mobile, but the small ~34px pill at lg+ — the Insights
+  // "Watch & Listen" button (Figma 1755:1251).
+  sm34Lg: {
+    pill: "h-[54px] gap-4 pr-2 pl-6 text-[17px] sm:text-[20px] lg:h-[34px] lg:gap-[9px] lg:pr-[4px] lg:pl-[14px] lg:text-[13px]",
+    circle: "size-[42px] lg:size-[26px]",
+    glyph: "size-[18px] lg:size-[15px]",
+  },
   md: {
     pill: "h-[46px] gap-3 pr-[6px] pl-6 text-[17px] sm:text-[20px] lg:h-[50px] lg:gap-[19px] lg:pl-[29px] lg:text-[24px]",
     circle: "size-[32px] lg:size-[31px]",
@@ -71,14 +86,14 @@ const SIZES = {
   // exactly, then return to the lg/md scales from sm up so tablet and desktop
   // render precisely as before.
   lgCompact: {
-    pill: "h-[35px] gap-3 pr-[5px] pl-[15px] text-[16px] sm:h-[54px] sm:gap-4 sm:pr-2 sm:pl-6 sm:text-[20px] lg:h-[65px] lg:gap-5 lg:pl-8 lg:text-[24px]",
-    circle: "size-[26px] sm:size-[42px] lg:size-[50px]",
-    glyph: "size-[12px] sm:size-[18px] lg:size-[31px]",
+    pill: "h-[35px] gap-3 pr-[5px] pl-[15px] text-[16px] sm:h-[46px] sm:gap-[12px] sm:pr-[8px] sm:pl-[19px] sm:text-[17px]",
+    circle: "size-[26px] sm:size-[36px]",
+    glyph: "size-[12px] sm:size-[25px]",
   },
   mdCompact: {
-    pill: "h-[29px] gap-[11px] pr-1 pl-[17px] text-[16px] sm:h-[46px] sm:gap-3 sm:pr-[6px] sm:pl-6 sm:text-[20px] lg:h-[50px] lg:gap-[19px] lg:pl-[29px] lg:text-[24px]",
-    circle: "size-[21px] sm:size-[32px] lg:size-[31px]",
-    glyph: "size-[10px] sm:size-[14px] lg:size-[22px]",
+    pill: "h-[29px] gap-[11px] pr-1 pl-[17px] text-[16px] sm:h-[43px] sm:gap-[16px] sm:pr-[6px] sm:pl-[25px] sm:text-[20px]",
+    circle: "size-[21px] sm:size-[31px]",
+    glyph: "size-[10px] sm:size-[18px]",
   },
   // Frameworks-page pills (Figma 1755:2975 / 1755:3055 / 1755:3100): three
   // small pills, all 16px text, 36/39/44px tall.

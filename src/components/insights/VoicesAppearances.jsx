@@ -6,7 +6,7 @@ import voicesPhotoMobile from "../../assets/insights/voices-photo-mobile.png";
 export default function VoicesAppearances() {
   return (
     <section className="relative overflow-hidden bg-white">
-      <div className="mx-auto w-full max-w-[1440px] lg:relative lg:h-[1002px]">
+      <div className="mx-auto w-full max-w-[1440px] lg:relative lg:h-[736px]">
         {/* Mobile photo — the Figma mobile design (node 1434:3833) uses a
             different mask than desktop: a scalloped frame with concave notches
             on both sides. Exported flat (mask + crop baked in) so the shape and
@@ -25,7 +25,7 @@ export default function VoicesAppearances() {
             above 1440. At exactly 1440 the box is the asset's native 1010x832
             and object-cover is a no-op; wider, it zooms with the curve pinned
             right. */}
-        <div className="hidden lg:absolute lg:top-[93px] lg:left-[calc(50%-50vw)] lg:right-[calc(100%-1010px)] lg:block lg:h-[832px]">
+        <div className="hidden lg:absolute lg:top-[93px] lg:left-[calc(50%-50vw)] lg:right-[calc(100%-648px)] lg:block lg:h-[558px]">
           <img
             src={voicesPhoto}
             alt="Dr. Suhair Hamouri speaking with attendees at a conference"
@@ -35,14 +35,14 @@ export default function VoicesAppearances() {
 
         {/* Card — sits below the photo on mobile (Figma node 1434:3839);
             overlaps the photo's bottom-right corner on desktop */}
-        <div className="relative z-10 mx-4 mt-3 mb-14 rounded-[4px] bg-gradient-to-b from-navy to-blue px-8 py-10 text-white sm:mx-auto sm:w-[calc(100%-64px)] sm:max-w-[700px] sm:px-10 lg:absolute lg:top-[338px] lg:left-[39.44%] lg:mx-0 lg:mt-0 lg:mb-0 lg:min-h-[523px] lg:w-[55.21%] lg:max-w-none lg:px-[70px] lg:pt-[76px] lg:pb-[62px]">
-          <h2 className="text-[clamp(1.75rem,3.5vw,3.125rem)] leading-[1.2] font-bold">
+        <div className="relative z-10 mx-4 mt-3 mb-14 rounded-[4px] bg-gradient-to-b from-navy to-blue px-8 py-10 text-white sm:mx-auto sm:w-[calc(100%-64px)] sm:max-w-[700px] sm:px-10 lg:absolute lg:top-[197px] lg:left-[37.3%] lg:mx-0 lg:mt-0 lg:mb-0 lg:min-h-[342px] lg:w-[630px] lg:max-w-none lg:px-[70px] lg:pt-[48px] lg:pb-[40px]">
+          <h2 className="text-[clamp(1.75rem,3.5vw,3.125rem)] leading-[1.2] font-bold lg:text-[30px]">
             Voices &amp; Appearances
           </h2>
           {/* Figma tops inside the card: heading 76, sub 167, bullets 218,
               CTA 396 — i.e. 31px, 24px and (after two blank lines) 52px/20px
               of clear space. */}
-          <p className="mt-4 text-[clamp(1.125rem,1.6vw,1.4375rem)] leading-normal lg:mt-[31px]">
+          <p className="mt-4 text-[clamp(1.125rem,1.6vw,1.4375rem)] leading-normal lg:mt-[15px] lg:text-[16px]">
             Explore live clips and curated reflections from:
           </p>
           {/* Figma marks each bullet with the site's 4-point sparkle glyph. */}
@@ -51,7 +51,7 @@ export default function VoicesAppearances() {
               the first bullet wraps to a second line in Inter, which alone
               pushed the card ~30px over its 523px height — so the list is held
               at 22px to keep all three on one line each. */}
-          <ul className="mt-4 space-y-1 text-[clamp(1.0625rem,1.5vw,1.375rem)] leading-normal font-light lg:mt-6 lg:space-y-0">
+          <ul className="mt-4 space-y-1 text-[clamp(1.0625rem,1.5vw,1.375rem)] leading-normal font-light lg:mt-[18px] lg:space-y-0 lg:text-[16px]">
             <li className="flex items-start gap-3">
               <Sparkle className="mt-[0.55em] size-[11px] shrink-0 text-white" />
               <span>
@@ -72,10 +72,10 @@ export default function VoicesAppearances() {
             </li>
           </ul>
           {/* Figma separates this from the list with two blank lines. */}
-          <p className="mt-4 text-[clamp(1.0625rem,1.5vw,1.375rem)] leading-normal font-light lg:mt-13">
+          <p className="mt-4 text-[clamp(1.0625rem,1.5vw,1.375rem)] leading-normal font-light lg:mt-[18px] lg:text-[16px]">
             When insight meets voice, transformation follows.
           </p>
-          <CtaPill as="a" href="#watch-listen" variant="whiteOutline" className="mt-6 lg:mt-5">
+          <CtaPill as="a" href="#watch-listen" variant="whiteOutline" size="sm34Lg" className="mt-6 lg:mt-[18px]">
             Watch &amp; Listen
           </CtaPill>
         </div>
