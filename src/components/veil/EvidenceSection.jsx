@@ -147,11 +147,13 @@ export default function EvidenceSection() {
           </CtaPill>
         </div>
 
-        {/* Free-floating gold sparkle above the card's top-right corner. */}
+        {/* Gold sparkle straddling the card's top-right corner. The card sits
+            at top:255 with its right edge at 74.42% (left 34.51% + width
+            39.91%), so the 38.6px sparkle is centred on that corner point. */}
         <img
           src={evidenceSparkle}
           alt=""
-          className="pointer-events-none absolute top-[23.49%] left-[73.08%] w-[38.6px]"
+          className="pointer-events-none absolute top-[236px] left-[73.08%] w-[38.6px]"
         />
       </div>
     </section>

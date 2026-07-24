@@ -36,7 +36,7 @@ export default function InsightsHero() {
           More Clarity.
         </h1>
 
-        <CtaPill as="a" href="/veil" variant="goldOutline" className="mt-8 lg:mt-6">
+        <CtaPill as="a" href="/veil" variant="goldOutline" size="xs" className="mt-8 lg:mt-6">
           Explore the VEIL™ Program
         </CtaPill>
       </div>
