@@ -103,14 +103,16 @@ export default function RequestBrochureModal({ onClose, program = "" }) {
             </div>
 
             <form onSubmit={handleSubmit} className="mt-8 lg:mt-[44px]">
-              {/* Honeypot — hidden from people, catches bots that fill every input */}
+              {/* Honeypot — display:none so browser autofill and password
+                  managers skip it (a real person never fills it); naive bots
+                  that POST every field in the raw HTML still trip it. */}
               <input
                 type="text"
                 name="hpField"
                 tabIndex={-1}
                 autoComplete="off"
                 aria-hidden="true"
-                className="absolute h-0 w-0 opacity-0"
+                className="hidden"
               />
 
               <div className="flex flex-col gap-6">
