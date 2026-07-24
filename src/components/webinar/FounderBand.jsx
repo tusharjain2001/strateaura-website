@@ -17,30 +17,29 @@ export default function FounderBand() {
           horizontal padding below lg and the text block carries Figma's 42px
           inset itself. On desktop both children are absolutely positioned, so
           the mobile-first DOM order (photo, then text) changes nothing. */}
-      <div className="relative mx-auto w-full max-w-[1440px] pt-10 lg:h-[459px] lg:px-[75px] lg:pt-0">
+      <div className="relative mx-auto w-full max-w-[1440px] pt-10 lg:h-[357px] lg:px-[75px] lg:pt-0">
         {/* Founder photo — overlaps the card on desktop, sits above the white
-            text block on mobile. Figma 1638:3980 masks the shot to 332x504 at
-            (81, 14); the export is already that crop, cut off by the 459px
-            band, so it is 333x445 and goes in at natural size — scaling or
-            object-cover only re-crops it. */}
+            text block on mobile. Figma 1755:1815 masks the shot ~274 wide, its
+            top 7px in and cut off by the 357px band, so it is scaled by height
+            (~350px) and left where it overlaps the card's left edge. */}
         <img
           src={founderCutout}
           alt="Dr. Suhair Hamouri"
-          className="relative mx-auto block w-[300px] sm:w-[320px] lg:absolute lg:top-[14px] lg:left-[81px] lg:mx-0 lg:h-[445px] lg:w-[333px]"
+          className="relative mx-auto block w-[300px] sm:w-[320px] lg:absolute lg:top-[7px] lg:left-[156px] lg:z-10 lg:mx-0 lg:h-[350px] lg:w-auto"
         />
 
         {/* Text block: white and full-width on mobile (Figma 1296:5736 sets
             the copy 42px from the left edge); the cream gradient card
-            geometry is desktop-only. */}
-        <div className="relative bg-white px-[42px] pt-7 pb-[75px] sm:px-12 lg:absolute lg:top-1/2 lg:right-[75px] lg:left-[326px] lg:h-[360px] lg:-translate-y-1/2 lg:rounded-[4px] lg:bg-[linear-gradient(153.5deg,#fffdf8_31.62%,#427bba_212.02%)] lg:p-0">
-          <div className="lg:absolute lg:top-[66px] lg:left-[223px] lg:w-[calc(100%-260px)] lg:max-w-[697px]">
-            <h2 className="text-[24px] leading-[1.3] font-bold text-navy-2 sm:text-[clamp(1.5rem,2.5vw,2.25rem)]">
+            geometry is desktop-only (Figma 1755:1812 — 1007x236 at left 270). */}
+        <div className="relative bg-white px-[42px] pt-7 pb-[75px] sm:px-12 lg:absolute lg:top-1/2 lg:right-[163px] lg:left-[270px] lg:min-h-[236px] lg:-translate-y-1/2 lg:rounded-[4px] lg:bg-[linear-gradient(161.36deg,#fffdf8_31.62%,#427bba_212.02%)] lg:py-[61px] lg:pr-[57px] lg:pl-[253px]">
+          <div className="lg:max-w-[697px]">
+            <h2 className="text-[24px] leading-[1.3] font-bold text-navy-2 sm:text-[20px] sm:leading-[21px]">
               Dr. Suhair Hamouri
             </h2>
-            <p className="text-[16px] leading-[23px] text-navy-2 sm:text-[clamp(1.125rem,2vw,1.75rem)] sm:leading-[1.3]">
+            <p className="text-[16px] leading-[23px] text-navy-2 sm:mt-[21px] sm:text-[16px] sm:leading-[21px]">
               A Founder and Host Who Leads From Within
             </p>
-            <p className="mt-[23px] text-[16px] leading-[23px] text-navy-2 sm:mt-5 sm:text-[clamp(1.125rem,2vw,1.75rem)] sm:leading-[1.3] lg:mt-9">
+            <p className="mt-[23px] text-[16px] leading-[23px] text-navy-2 sm:mt-[21px] sm:text-[16px] sm:leading-[21px]">
               Pharmacist · PhD · MBA · Certified Integrative Health Coach
               (IIN-NY) Adjunct Faculty · Non-Resident Fellow, MBRSG Dubai She
               built VEIL because no one built it when she needed it.
