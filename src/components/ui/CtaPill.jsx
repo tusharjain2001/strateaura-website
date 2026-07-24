@@ -62,6 +62,21 @@ const SIZES = {
     circle: "size-[33px]",
     glyph: "size-[18px]",
   },
+  // Same mobile/tablet appearance as `lg` (so the responsive Insights page
+  // keeps its untouched mobile CTAs) but shrinks to the compact 44px pill at
+  // lg+, where the redesigned Insights desktop (Figma 1755:1061) needs it.
+  compactLg: {
+    pill: "h-[54px] gap-4 pr-2 pl-6 text-[17px] sm:text-[20px] lg:h-[44px] lg:gap-[13px] lg:pr-[5px] lg:pl-[21px] lg:text-[16px]",
+    circle: "size-[42px] lg:size-[33px]",
+    glyph: "size-[18px]",
+  },
+  // Like compactLg on mobile, but the small ~34px pill at lg+ — the Insights
+  // "Watch & Listen" button (Figma 1755:1251).
+  sm34Lg: {
+    pill: "h-[54px] gap-4 pr-2 pl-6 text-[17px] sm:text-[20px] lg:h-[34px] lg:gap-[9px] lg:pr-[4px] lg:pl-[14px] lg:text-[13px]",
+    circle: "size-[42px] lg:size-[26px]",
+    glyph: "size-[18px] lg:size-[15px]",
+  },
   md: {
     pill: "h-[46px] gap-3 pr-[6px] pl-6 text-[17px] sm:text-[20px] lg:h-[50px] lg:gap-[19px] lg:pl-[29px] lg:text-[24px]",
     circle: "size-[32px] lg:size-[31px]",

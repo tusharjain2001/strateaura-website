@@ -18,25 +18,25 @@ export default function InsightsHero() {
 
       {/* Figma stacks the badge, heading and CTA 29px apart, starting 142px
           down, with 27px below the CTA — which adds up to the hero's 449px. */}
-      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col items-center px-5 py-16 text-center sm:px-8 lg:pt-[142px] lg:pb-[27px] xl:px-[95px]">
+      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col items-center px-5 py-16 text-center sm:px-8 lg:pt-[69px] lg:pb-[69px] xl:px-[95px]">
         <div className="relative inline-flex h-[30px] items-center justify-center sm:h-[34px] lg:h-[37px]">
           <img
             src={badgeRibbon}
             alt=""
             className="pointer-events-none absolute inset-0 h-full w-full"
           />
-          <span className="relative px-4 text-[15px] font-bold text-cream sm:text-[18px] lg:text-[24px]">
+          <span className="relative px-4 text-[15px] font-bold text-cream sm:text-[18px] lg:text-[16px]">
             Insights &amp; Resources
           </span>
         </div>
 
-        <h1 className="mt-6 text-[clamp(2rem,5vw,3.125rem)] leading-[1.2] font-bold text-navy lg:mt-[29px]">
+        <h1 className="mt-6 text-[clamp(2rem,5vw,3.125rem)] leading-[1.2] font-bold text-navy lg:mt-6 lg:text-[30px]">
           Less Content.
           <br />
           More Clarity.
         </h1>
 
-        <CtaPill as="a" href="/veil" variant="goldOutline" className="mt-8 lg:mt-[29px]">
+        <CtaPill as="a" href="/veil" variant="goldOutline" className="mt-8 lg:mt-6">
           Explore the VEIL™ Program
         </CtaPill>
       </div>
