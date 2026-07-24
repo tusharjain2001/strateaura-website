@@ -1,16 +1,10 @@
 import { Link } from "react-router-dom";
 import CtaPill from "../ui/CtaPill";
 import footerLogo from "../../assets/footer-logo.svg";
-import socialTw from "../../assets/social-tw.svg";
-import socialFb from "../../assets/social-fb.svg";
 import socialLi from "../../assets/social-li.svg";
-import socialIn from "../../assets/social-in.svg";
 
 const SOCIALS = [
-  { src: socialTw, label: "Twitter" },
-  { src: socialFb, label: "Facebook" },
-  { src: socialLi, label: "LinkedIn" },
-  { src: socialIn, label: "Instagram" },
+  { src: socialLi, label: "LinkedIn", href: "https://www.linkedin.com/in/drsuhairhamouri" },
 ];
 
 // "VEIL™" is set bold while "Program" stays regular (Figma node 1293:3834).
@@ -111,7 +105,9 @@ export default function MobileSiteFooter({ body, tagline, buttons, aside }) {
                 {SOCIALS.map((social) => (
                   <a
                     key={social.label}
-                    href="#"
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label={social.label}
                     className="transition-opacity hover:opacity-70"
                   >

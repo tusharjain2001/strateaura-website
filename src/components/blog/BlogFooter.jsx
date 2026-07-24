@@ -4,10 +4,7 @@ import ctaAura from "../../assets/cta-aura.png";
 import logoA from "../../assets/about/foot-logo-a.svg";
 import logoB from "../../assets/about/foot-logo-b.svg";
 import logoC from "../../assets/about/foot-logo-c.svg";
-import socialTw from "../../assets/about/social-tw.svg";
-import socialFb from "../../assets/about/social-fb.svg";
 import socialLi from "../../assets/about/social-li.svg";
-import socialIn from "../../assets/about/social-in.svg";
 
 const COMPANY = [
   { label: "Home", to: "/" },
@@ -22,13 +19,7 @@ const FRAMEWORKS = [
   { label: "The 5Cs of Brand Health", to: "/frameworks" },
   { label: "VEIL™ Leadership System", to: "/frameworks" },
 ];
-// Board order: Tw 1050, FB 1080, LinkedIn 1110, In 1140 — Tw is the only 18x14.
-const SOCIALS = [
-  { src: socialTw, label: "Twitter", left: 1050, top: 490, h: 14 },
-  { src: socialFb, label: "Facebook", left: 1080, top: 488, h: 18 },
-  { src: socialLi, label: "LinkedIn", left: 1110, top: 488, h: 18 },
-  { src: socialIn, label: "Instagram", left: 1140, top: 488, h: 18 },
-];
+const SOCIALS = [{ src: socialLi, label: "LinkedIn", href: "https://www.linkedin.com/in/drsuhairhamouri", left: 1050, top: 488, h: 18 }];
 
 /**
  * CTA + footer for the Blog Page board (node 1755:3767 "Group 88"), laid out at
@@ -122,7 +113,9 @@ export default function BlogFooter() {
       {SOCIALS.map((s) => (
         <a
           key={s.label}
-          href="#"
+          href={s.href}
+          target="_blank"
+          rel="noopener noreferrer"
           aria-label={s.label}
           className="absolute w-[18px]"
           style={{ left: `${s.left}px`, top: `${s.top}px` }}

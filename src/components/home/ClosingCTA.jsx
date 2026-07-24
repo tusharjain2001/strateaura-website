@@ -1,10 +1,7 @@
 import PillButton from "../ui/PillButton";
 import footerLogo from "../../assets/footer-logo.svg";
 import ctaAura from "../../assets/cta-aura.png";
-import socialTw from "../../assets/social-tw.svg";
-import socialFb from "../../assets/social-fb.svg";
 import socialLi from "../../assets/social-li.svg";
-import socialIn from "../../assets/social-in.svg";
 
 /**
  * Closing CTA + footer — Figma node 1638:1077, y 5177-6140 of the frame.
@@ -23,12 +20,7 @@ const FRAMEWORKS = [
   "The 5Cs of Brand Health",
   "VEIL™ Leadership System",
 ];
-const SOCIALS = [
-  { src: socialTw, label: "Twitter" },
-  { src: socialFb, label: "Facebook" },
-  { src: socialLi, label: "LinkedIn" },
-  { src: socialIn, label: "Instagram" },
-];
+const SOCIALS = [{ src: socialLi, label: "LinkedIn", href: "https://www.linkedin.com/in/drsuhairhamouri" }];
 
 function FooterList({ heading, items, left }) {
   return (
@@ -105,7 +97,7 @@ export default function ClosingCTA() {
         </p>
         <div className="mt-[14px] flex items-center gap-[12px]">
           {SOCIALS.map((social) => (
-            <a key={social.label} href="#" aria-label={social.label}>
+            <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" aria-label={social.label}>
               <img src={social.src} alt="" className="size-[18px]" />
             </a>
           ))}

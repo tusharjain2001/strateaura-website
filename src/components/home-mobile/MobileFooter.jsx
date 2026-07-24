@@ -1,17 +1,11 @@
 import { Link } from "react-router-dom";
 import MobilePill from "./MobilePill";
 import footerLogo from "../../assets/footer-logo.svg";
-import socialTw from "../../assets/social-tw.svg";
-import socialFb from "../../assets/social-fb.svg";
 import socialLi from "../../assets/social-li.svg";
-import socialIn from "../../assets/social-in.svg";
 
-// Node 1434:776 — Twitter, Facebook, LinkedIn, Instagram on a 30px pitch.
+// Node 1434:776 — LinkedIn only.
 const SOCIALS = [
-  { src: socialTw, label: "Twitter" },
-  { src: socialFb, label: "Facebook" },
-  { src: socialLi, label: "LinkedIn" },
-  { src: socialIn, label: "Instagram" },
+  { src: socialLi, label: "LinkedIn", href: "https://www.linkedin.com/in/drsuhairhamouri" },
 ];
 
 // Node 1434:788 — "VEIL™" is set bold while "Program" stays regular.
@@ -105,7 +99,9 @@ export default function MobileFooter() {
                 {SOCIALS.map((social) => (
                   <a
                     key={social.label}
-                    href="#"
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     aria-label={social.label}
                     className="transition-opacity hover:opacity-70"
                   >

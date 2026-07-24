@@ -5,10 +5,7 @@ import ctaAura from "../../assets/cta-aura.png";
 import logoA from "../../assets/about/foot-logo-a.svg";
 import logoB from "../../assets/about/foot-logo-b.svg";
 import logoC from "../../assets/about/foot-logo-c.svg";
-import socialTw from "../../assets/about/social-tw.svg";
-import socialFb from "../../assets/about/social-fb.svg";
 import socialLi from "../../assets/about/social-li.svg";
-import socialIn from "../../assets/about/social-in.svg";
 
 const COMPANY = [
   { label: "Home", to: "/" },
@@ -23,12 +20,7 @@ const FRAMEWORKS = [
   { label: "The 5Cs of Brand Health", to: "/frameworks" },
   { label: "VEIL™ Leadership System", to: "/frameworks" },
 ];
-const SOCIALS = [
-  { src: socialTw, label: "Twitter" },
-  { src: socialFb, label: "Facebook" },
-  { src: socialLi, label: "LinkedIn" },
-  { src: socialIn, label: "Instagram" },
-];
+const SOCIALS = [{ src: socialLi, label: "LinkedIn", href: "https://www.linkedin.com/in/drsuhairhamouri" }];
 
 /**
  * Responsive version of the site footer (CTA + link columns) for the fluid
@@ -136,7 +128,7 @@ export default function SiteFooter({ body, tagline, buttons, aside }) {
               <FooterColumn heading="CONNECT WITH US">
                 <div className="mt-[10px] flex items-center gap-[12px]">
                   {SOCIALS.map((s) => (
-                    <a key={s.label} href="#" aria-label={s.label}>
+                    <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
                       <img src={s.src} alt="" className="size-[18px]" />
                     </a>
                   ))}
