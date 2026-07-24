@@ -57,47 +57,50 @@ const CARDS = [
 function Card({ card }) {
   return (
     <div
-      className={`relative min-h-[240px] bg-gradient-to-b from-gold to-gold-light transition-[transform,box-shadow] duration-[400ms] hover:scale-90 hover:shadow-[0_0_10px_var(--color-gold)] lg:min-h-0 ${
+      className={`group relative min-h-[240px] transition-transform duration-[400ms] hover:scale-90 lg:min-h-0 ${
         card.wide ? "md:col-span-2" : ""
       } ${card.short ? "lg:h-[201px]" : "lg:h-[204px]"}`}
     >
-      {/* Clips the decorative pattern to the card box without clipping the
-          corner sparkle below, which must bleed outside. */}
-      {card.pattern && (
-        <div className="absolute inset-0 overflow-hidden">
-          <img
-            src={card.pattern}
-            alt=""
-            className={`pointer-events-none absolute ${card.patternClass}`}
-          />
-        </div>
-      )}
       {/* Gold star straddling the top-right corner: 33x35 per Figma, centred
-          on the corner point so half of it hangs outside the card. */}
+          on the corner point so half of it hangs outside the card. It sits on
+          the scaling wrapper, outside the clipped panel. */}
       <img
         src={cardStar}
         alt=""
         className="pointer-events-none absolute -top-[15px] -right-[14px] z-10 h-[30px] w-[28px] lg:-top-[18px] lg:-right-[16px] lg:h-[35px] lg:w-[33px]"
       />
-      {/* Figma pads 37px left / 36px top and parks the 39px arrow on the
-          168px line, identical on every card — mt-auto keeps the arrows on
-          one baseline instead of letting short copy float them up. */}
-      <div className="relative flex h-full flex-col p-6 lg:pt-[36px] lg:pr-[30px] lg:pb-[23px] lg:pl-[37px]">
-        <p className="text-[18px] leading-[1.24] font-bold text-white lg:text-[20px]">
-          {card.title}
-        </p>
-        <p
-          className={`mt-3 text-[15px] leading-[1.24] font-medium text-white lg:mt-[9px] lg:text-[16px] ${
-            card.wide ? "lg:max-w-[342px]" : "lg:max-w-[236px]"
-          }`}
-        >
-          {card.body}
-        </p>
-        <img
-          src={cardArrow}
-          alt=""
-          className="mt-8 h-auto w-[39px] lg:mt-auto"
-        />
+      {/* Like the Home cards, the hover splits across two elements: the
+          wrapper composites the scale while this panel transitions only its
+          glow shadow — one element doing both repaints every frame and
+          stutters. The panel also clips the pattern. */}
+      <div className="relative h-full w-full overflow-hidden bg-gradient-to-b from-gold to-gold-light transition-shadow duration-[400ms] group-hover:shadow-[0_0_10px_var(--color-gold)]">
+        {card.pattern && (
+          <img
+            src={card.pattern}
+            alt=""
+            className={`pointer-events-none absolute ${card.patternClass}`}
+          />
+        )}
+        {/* Figma pads 37px left / 36px top and parks the 39px arrow on the
+            168px line, identical on every card — mt-auto keeps the arrows on
+            one baseline instead of letting short copy float them up. */}
+        <div className="relative flex h-full flex-col p-6 lg:pt-[36px] lg:pr-[30px] lg:pb-[23px] lg:pl-[37px]">
+          <p className="text-[18px] leading-[1.24] font-bold text-white lg:text-[20px]">
+            {card.title}
+          </p>
+          <p
+            className={`mt-3 text-[15px] leading-[1.24] font-medium text-white lg:mt-[9px] lg:text-[16px] ${
+              card.wide ? "lg:max-w-[342px]" : "lg:max-w-[236px]"
+            }`}
+          >
+            {card.body}
+          </p>
+          <img
+            src={cardArrow}
+            alt=""
+            className="mt-8 h-auto w-[39px] lg:mt-auto"
+          />
+        </div>
       </div>
     </div>
   );

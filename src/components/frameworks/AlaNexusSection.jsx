@@ -83,33 +83,36 @@ export default function AlaNexusSection() {
           {CARDS.map((card) => (
             <div
               key={card.key}
-              className="relative min-h-[240px] bg-gradient-to-b from-navy to-blue transition-[transform,box-shadow] duration-[400ms] hover:scale-90 hover:shadow-[0_0_10px_var(--color-blue)] lg:h-[256px] lg:min-h-0"
+              className="group relative min-h-[240px] transition-transform duration-[400ms] hover:scale-90 lg:h-[256px] lg:min-h-0"
             >
-              {/* Clips the decorative pattern to the card box without clipping
-                  the corner sparkle below, which must bleed outside. */}
-              <div className="absolute inset-0 overflow-hidden">
-                <img
-                  src={card.pattern}
-                  alt=""
-                  className={`pointer-events-none absolute h-auto ${card.patternClass}`}
-                />
-              </div>
               {/* Straddles the top-right corner (centered on the corner point,
                   half outside the card) — 33px per Figma. The OUTLINED sparkle
-                  asset stays visible on both the navy card and the white page. */}
+                  asset stays visible on both the navy card and the white page.
+                  It sits on the scaling wrapper, outside the clipped panel. */}
               <img
                 src={seamSparkle}
                 alt=""
                 className="pointer-events-none absolute -top-[11px] -right-[11px] z-10 size-[22px] lg:-top-[16px] lg:-right-[16px] lg:size-[33px]"
               />
-              <div className="relative flex h-full flex-col p-6 lg:pt-[35px] lg:pr-[30px] lg:pb-[31px] lg:pl-[35px]">
-                <p className="text-[18px] font-bold text-white lg:text-[20px]">
-                  {card.title}
-                </p>
-                <p className="mt-3 max-w-[275px] text-[15px] leading-[1.17] text-white lg:mt-[15px] lg:text-[16px]">
-                  {card.body}
-                </p>
-                <ArrowRight className="mt-8 w-[37px] text-white lg:mt-auto" />
+              {/* Like the Home cards, the hover splits across two elements:
+                  the wrapper composites the scale while this panel transitions
+                  only its glow shadow — one element doing both repaints every
+                  frame and stutters. The panel also clips the pattern. */}
+              <div className="relative h-full w-full overflow-hidden bg-gradient-to-b from-navy to-blue transition-shadow duration-[400ms] group-hover:shadow-[0_0_10px_var(--color-blue)]">
+                <img
+                  src={card.pattern}
+                  alt=""
+                  className={`pointer-events-none absolute h-auto ${card.patternClass}`}
+                />
+                <div className="relative flex h-full flex-col p-6 lg:pt-[35px] lg:pr-[30px] lg:pb-[31px] lg:pl-[35px]">
+                  <p className="text-[18px] font-bold text-white lg:text-[20px]">
+                    {card.title}
+                  </p>
+                  <p className="mt-3 max-w-[275px] text-[15px] leading-[1.17] text-white lg:mt-[15px] lg:text-[16px]">
+                    {card.body}
+                  </p>
+                  <ArrowRight className="mt-8 w-[37px] text-white lg:mt-auto" />
+                </div>
               </div>
             </div>
           ))}
