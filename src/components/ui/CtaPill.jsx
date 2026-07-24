@@ -73,6 +73,23 @@ const SIZES = {
     circle: "size-[21px] sm:size-[32px] lg:size-[31px]",
     glyph: "size-[10px] sm:size-[14px] lg:size-[22px]",
   },
+  // Frameworks-page pills (Figma 1755:2975 / 1755:3055 / 1755:3100): three
+  // small pills, all 16px text, 36/39/44px tall.
+  sm36: {
+    pill: "h-[36px] gap-[9px] pr-[5px] pl-[14px] text-[16px]",
+    circle: "size-[26px]",
+    glyph: "size-[18px]",
+  },
+  sm39: {
+    pill: "h-[39px] gap-[11px] pr-[6px] pl-[15px] text-[16px]",
+    circle: "size-[27px]",
+    glyph: "size-[19.3px]",
+  },
+  sm44: {
+    pill: "h-[44px] gap-[6px] pr-[5px] pl-[16px] text-[16px]",
+    circle: "size-[34px]",
+    glyph: "size-[24px]",
+  },
 };
 
 export default function CtaPill({

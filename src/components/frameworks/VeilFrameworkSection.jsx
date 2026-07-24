@@ -1,162 +1,134 @@
 import { useState } from "react";
 import FrameworkTag from "./FrameworkTag";
 import CtaPill from "../ui/CtaPill";
-import { Sparkle } from "../ui/Icons";
-import energyPattern from "../../assets/frameworks/veil-energy-pattern.svg";
-import emotionalPattern from "../../assets/frameworks/veil-emotional-pattern.svg";
-import innerPattern from "../../assets/frameworks/veil-inner-pattern.svg";
-import legacyPattern from "../../assets/frameworks/veil-legacy-pattern.svg";
-import cornerStar from "../../assets/frameworks/framework3bluestar.png";
+import deckArcs from "../../assets/frameworks/veil-deck-arcs.svg";
+import legacyArcs from "../../assets/frameworks/veil-legacy-arcs.svg";
+import circleStar from "../../assets/frameworks/veil-circle-star.svg";
+import cornerStar from "../../assets/frameworks/veil-corner-star.svg";
 
-// All four cards share one layout (Figma 1136:6665 / 6712 / 6722 and
-// 1434:3074): a 31px/1.1 title, a blank line, then a mixed-weight paragraph —
-// all in a 363px column at x:64, y:86 — with the star icon centred at y:374.
-// Only the artwork differs. `pattern.box` is the on-card rectangle; `art` and
-// `rotate` are only needed where Figma rotates the asset, in which case `art`
-// is its pre-rotation size.
+// Deck copy + per-card geometry from Figma 1755:3106 / 3120 / 3133 / 3146.
+// Cards 1-3 are a single bold statement with the circle-star icon below it and
+// a stack of arc outlines bleeding off the bottom-right; card 4 (open in the
+// design) keeps the "Sustainable Legacy" title + mixed-weight line with the
+// icon centred and an arc band along the bottom.
 const CARDS = [
   {
-    key: "energy",
-    title: "Energy Alignment",
-    body: (
-      <>
-        What your <strong className="font-bold">body tells</strong> you before
-        your <strong className="font-bold">mind can process it.</strong>
-      </>
-    ),
-    pattern: {
-      src: energyPattern,
-      box: { left: 0, top: 325, width: 480, height: 176.372 },
-      art: { width: 176.372, height: 480 },
-      rotate: 90,
-    },
+    key: "misaligned",
+    statement: "Misaligned with the work they once loved.",
+    titleTop: 72,
+    iconTop: 231,
   },
   {
-    key: "emotional",
-    title: "Emotional Intelligence",
-    body: (
-      <>
-        The <strong className="font-bold">capacity</strong> to respond without{" "}
-        <strong className="font-bold">over-performing</strong>.
-      </>
-    ),
-    pattern: {
-      src: emotionalPattern,
-      box: { left: -42, top: 380.5, width: 565.045, height: 108 },
-    },
+    key: "noise",
+    statement: "Surrounded by noise, but unclear about direction.",
+    titleTop: 64,
+    iconTop: 263,
   },
   {
-    key: "inner",
-    title: "Inner Leadership",
-    body: (
-      <>
-        <strong className="font-bold">Quiet authority</strong> that comes from
-        within, <strong className="font-bold">not role.</strong>
-      </>
-    ),
-    pattern: {
-      src: innerPattern,
-      box: { left: -0.5, top: 354.5, width: 481, height: 161 },
-    },
+    key: "accomplished",
+    statement: "Accomplished on paper, but disconnected inside.",
+    titleTop: 64,
+    iconTop: 263,
   },
   {
     key: "legacy",
-    title: "Sustainable Legacy",
-    body: (
-      <>
-        <strong className="font-bold">A presence</strong> that outlasts titles
-        and <strong className="font-bold">keeps you whole</strong>
-      </>
-    ),
-    pattern: {
-      src: legacyPattern,
-      box: { left: -90, top: 340, width: 660, height: 165 },
-      art: { width: 165, height: 660 },
-      rotate: -90,
-    },
+    legacy: true,
   },
 ];
 
-// Deck geometry from Figma node 1434:3021. Four 480x501 cards stacked at
-// y = 126, 210, 294, 378 — an 84px step. Every card is the SAME full height;
-// a collapsed card is simply overlapped by the one below it, which is what
-// clips its headline mid-line in the design. Because exactly one card is open
-// at a time, the deck height is constant: 3 x 84 + 501.
+// Deck geometry from Figma: four 442x461.34 cards stacked at y = 97, 174.35,
+// 251.7, 329.05 in the section — a 77.35px step. Every card is the SAME full
+// height; a collapsed card is simply overlapped by the one below it, which is
+// what clips its statement mid-line in the design. Because exactly one card is
+// open at a time, the deck height is constant: 3 x 77.35 + 461.34.
 //
-// These are FIXED pixel values by design: the deck is a constant 480px column
+// These are FIXED pixel values by design: the deck is a constant 442px column
 // inside the max-w-[1440px] page container at every width from lg (1024px)
 // through 1920px+, so no viewport-relative math can make the geometry drift.
-const CARD_W = 480;
-const CARD_H = 501;
-const PEEK_STEP = 84;
+const CARD_W = 442;
+const CARD_H = 461.34;
+const PEEK_STEP = 77.35;
 const DECK_H = PEEK_STEP * (CARDS.length - 1) + CARD_H;
-// Corner star, exported from Figma at 36x39 (not square). It straddles each
-// card's top-right corner, so it must be navy — the half that hangs over the
-// white page would be invisible if it were white like the in-card icon.
-const STAR_W = 36;
-const STAR_H = 39;
-
-/** White disc with a navy star — Figma draws this at 50px on every card. */
-function CircleStar({ className = "", style }) {
-  return (
-    <span
-      className={`flex size-[50px] shrink-0 items-center justify-center rounded-full bg-white ${className}`}
-      style={style}
-    >
-      <Sparkle className="size-[28px] text-navy" />
-    </span>
-  );
-}
+// Corner star, exported from Figma at 32.8x35.3. It straddles each card's
+// top-right corner (white fill + navy stroke so it reads on both the navy
+// card and the white page).
+const STAR_W = 32.8;
+const STAR_H = 35.3;
 
 /**
- * Decorative pattern. Where Figma rotates the asset, it is authored at the
- * pre-rotation size (`art`) and spun about its own centre inside a box of the
- * post-rotation size (`box`). Safe to do in CSS here precisely because the deck
- * is fixed-px — nothing rescales underneath it.
+ * Decorative arc pattern. Figma authors each asset at its pre-rotation size
+ * (`art`) and spins it inside a box of the post-rotation size (`box`). Safe to
+ * do in CSS here precisely because the deck is fixed-px — nothing rescales
+ * underneath it.
  */
-function DeckPattern({ src, box, art, rotate }) {
-  if (!rotate) {
-    return (
-      <img
-        src={src}
-        alt=""
-        className="pointer-events-none absolute max-w-none"
-        style={box}
-      />
-    );
-  }
+function DeckArcs({ src, box, art, transform }) {
   return (
     <div className="pointer-events-none absolute" style={box}>
       <img
         src={src}
         alt=""
         className="absolute top-1/2 left-1/2 max-w-none"
-        style={{
-          ...art,
-          transform: `translate(-50%, -50%) rotate(${rotate}deg)`,
-        }}
+        style={{ ...art, transform }}
       />
     </div>
   );
 }
 
-/** Every card: copy left-aligned at x=64, only the star centred. */
-function DeckCardBody({ card }) {
+/** Card 1-3 face: bold statement at x:66 with the circle-star icon below. */
+function StatementCardBody({ card }) {
   return (
     <div className="relative h-full">
-      <DeckPattern {...card.pattern} />
-      <div className="relative pt-[86px] pr-[53px] pl-[64px]">
-        <p className="text-[31px] leading-[1.1] font-bold text-white">
-          {card.title}
+      {/* Arc stack: 169.7x291 box at x:309.4/y:170.4, art rotated -90 and
+          flipped, bleeding past the card's right edge. */}
+      <DeckArcs
+        src={deckArcs}
+        box={{ left: 309.4, top: 170.4, width: 169.7, height: 291 }}
+        art={{ width: 290.982, height: 169.701 }}
+        transform="translate(-50%, -50%) rotate(-90deg) scaleY(-1)"
+      />
+      <p
+        className="absolute left-[66px] w-[274px] text-[24px] leading-[1.26] font-bold text-white"
+        style={{ top: card.titleTop }}
+      >
+        {card.statement}
+      </p>
+      <img
+        src={circleStar}
+        alt=""
+        className="absolute left-[66px] size-[46px]"
+        style={{ top: card.iconTop }}
+      />
+    </div>
+  );
+}
+
+/** Card 4 face (open in the design): Sustainable Legacy. */
+function LegacyCardBody() {
+  return (
+    <div className="relative h-full">
+      {/* Arc band along the bottom: 607.75x151.9 box bleeding both sides,
+          art authored portrait and rotated -90. */}
+      <DeckArcs
+        src={legacyArcs}
+        box={{ left: -82.9, top: 313.1, width: 607.75, height: 151.94 }}
+        art={{ width: 151.938, height: 607.75 }}
+        transform="translate(-50%, -50%) rotate(-90deg)"
+      />
+      <div className="absolute top-[79px] left-[59px] w-[334px] text-white">
+        <p className="text-[24px] leading-[1.1] font-bold">
+          Sustainable Legacy
         </p>
-        {/* Figma separates these with an empty line, i.e. one 1.1 line-height. */}
-        <p className="mt-[34px] max-w-[363px] text-[31px] leading-[1.1] text-white">
-          {card.body}
+        {/* Figma separates these with an empty 1.1 line. */}
+        <p className="mt-[26px] text-[20px] leading-[1.1]">
+          <strong className="font-bold">A presence </strong>
+          that outlasts titles and{" "}
+          <strong className="font-bold">keeps you whole</strong>
         </p>
       </div>
-      <CircleStar
-        className="absolute left-1/2 -translate-x-1/2"
-        style={{ top: 374 }}
+      <img
+        src={circleStar}
+        alt=""
+        className="absolute top-[344px] left-1/2 size-[46px] -translate-x-1/2"
       />
     </div>
   );
@@ -167,7 +139,7 @@ function DeckCardBody({ card }) {
  * advances it by its full height, a collapsed one by PEEK_STEP. Later cards
  * paint over earlier ones (ascending z-index), which produces the overlap-clip
  * exactly as the design file shows it. Clicking the open card is a no-op —
- * closing it would leave the deck with no expanded card and a 336px hole.
+ * closing it would leave the deck with no expanded card and a hole.
  */
 function StackDeck() {
   const [active, setActive] = useState(CARDS.length - 1); // Legacy open by default
@@ -186,7 +158,7 @@ function StackDeck() {
     >
       {/* Clips the deck to its constant height: when a card other than the
           last one is open, the trailing card would otherwise hang past the
-          bottom at its full 501px. */}
+          bottom at its full height. */}
       <div className="absolute inset-0 overflow-hidden">
         {CARDS.map((card, i) => {
           const isOpen = active === i;
@@ -202,9 +174,13 @@ function StackDeck() {
                 height: `${CARD_H}px`,
                 zIndex: i,
               }}
-              className="absolute left-0 cursor-pointer overflow-hidden rounded-[8px] bg-gradient-to-b from-navy to-blue text-left shadow-[0_-6px_16px_rgba(0,0,0,0.18)] transition-[top] duration-500 ease-in-out"
+              className="absolute left-0 cursor-pointer overflow-hidden rounded-[7px] bg-gradient-to-b from-navy to-blue text-left shadow-[0_-6px_16px_rgba(0,0,0,0.18)] transition-[top] duration-500 ease-in-out"
             >
-              <DeckCardBody card={card} />
+              {card.legacy ? (
+                <LegacyCardBody />
+              ) : (
+                <StatementCardBody card={card} />
+              )}
             </button>
           );
         })}
@@ -233,93 +209,106 @@ function StackDeck() {
 /** Fluid, always-expanded card for the simple stacked list below lg. */
 function StaticCard({ card }) {
   return (
-    <div className="relative overflow-hidden rounded-[8px] bg-gradient-to-b from-navy to-blue px-7 py-8">
-      <p className="text-[26px] leading-[1.1] font-bold text-white">
-        {card.title}
-      </p>
-      <p className="mt-5 text-[26px] leading-[1.1] text-white">{card.body}</p>
-      <CircleStar className="mt-8" />
+    <div className="relative overflow-hidden rounded-[7px] bg-gradient-to-b from-navy to-blue px-7 py-8">
+      {card.legacy ? (
+        <>
+          <p className="text-[22px] leading-[1.1] font-bold text-white">
+            Sustainable Legacy
+          </p>
+          <p className="mt-4 text-[19px] leading-[1.2] text-white">
+            <strong className="font-bold">A presence </strong>
+            that outlasts titles and{" "}
+            <strong className="font-bold">keeps you whole</strong>
+          </p>
+        </>
+      ) : (
+        <p className="text-[22px] leading-[1.2] font-bold text-white">
+          {card.statement}
+        </p>
+      )}
+      <img src={circleStar} alt="" className="mt-8 size-[42px]" />
     </div>
   );
 }
 
+// Figma 1755:3092 ("Frame 68", 1440x887): copy column 553 wide at x:159 /
+// y:174.2, deck at x:825 / y:97 (77px above the copy top). The 159/173 side
+// gutters scale down as vw between lg and 1440 so both columns keep fitting.
 export default function VeilFrameworkSection() {
   return (
     <section className="bg-white">
-      <div className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:px-[116px] lg:py-[100px]">
-        <FrameworkTag>FRAMEWORK 3</FrameworkTag>
+      <div className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:flex lg:items-start lg:justify-between lg:pt-[97px] lg:pb-[97px] lg:pl-[clamp(2rem,11.04vw,159px)] lg:pr-[clamp(2rem,12.01vw,173px)]">
+        {/* Copy column — Figma caps it at 553px. */}
+        <div className="lg:mt-[77px] lg:w-[553px] lg:max-w-full lg:shrink lg:min-w-0">
+          <FrameworkTag>FRAMEWORK 3</FrameworkTag>
 
-        <div className="mt-10 lg:flex lg:items-start lg:gap-[64px]">
-          {/* Copy column — Figma caps the headline at 575px (so it breaks
-              after "Leadership") and the body at 645px. */}
-          <div className="lg:min-w-0 lg:flex-1">
-            <h2 className="text-[clamp(2rem,4vw,3.125rem)] leading-[1.2] font-bold text-navy-2 lg:max-w-[575px]">
-              VEIL™ Leadership System
-            </h2>
-            <p className="mt-3 text-[clamp(1.125rem,1.8vw,1.5rem)] leading-normal text-black/60 italic">
-              Lead Without Losing Yourself
-            </p>
-            <p className="mt-8 text-[20px] font-bold tracking-wide text-gold uppercase">
-              Core Concept
-            </p>
-            {/* Figma (node 1434:3027) separates the three blocks with an empty
-                line (~28px), but keeps the opening bold sentence and the line
-                under it tight together as one block. */}
-            <div className="mt-4 max-w-[645px] space-y-7 text-[17px] leading-normal text-black/60 lg:text-[23px]">
-              <div>
-                <p className="font-bold text-black/60">
-                  The VEIL Leadership System is not a mindset model.
-                </p>
-                <p>
-                  It is a strategic health architecture - a scientifically
-                  grounded framework that addresses what sustained professional
-                  pressure does to women&rsquo;s biological, cognitive, and
-                  identity systems, and builds the internal infrastructure that
-                  makes sustainable leadership possible.
-                </p>
-              </div>
-              <p>
-                VEIL operates through three interconnected constructs:{" "}
-                <strong className="font-bold text-black/60">
-                  Capacity Regulation, Identity Coherence, Authority Execution.
-                </strong>
+          <h2 className="mt-6 text-[26px] leading-[1.2] font-bold text-navy sm:text-[28px] lg:mt-[38px] lg:text-[30px]">
+            VEIL™ Leadership System
+          </h2>
+          <p className="mt-2 text-[15px] leading-[1.17] text-black/60 italic lg:mt-[17px] lg:text-[16px]">
+            Lead Without Losing Yourself
+          </p>
+          <p className="mt-6 text-[20px] font-bold tracking-wide text-gold uppercase lg:mt-[28px]">
+            Core Concept
+          </p>
+          {/* Figma (node 1755:3099) separates the three blocks with an empty
+              16px line (~19px), but keeps the opening bold sentence and the
+              line under it tight together as one block. */}
+          <div className="mt-3 space-y-[19px] text-[15px] leading-[1.17] text-black/60 lg:mt-[13px] lg:text-[16px]">
+            <div>
+              <p className="font-bold text-black/60">
+                The VEIL Leadership System is not a mindset model.
               </p>
               <p>
-                The VEIL framework is delivered through{" "}
-                <strong className="font-bold text-black/60">
-                  UNVEIL, a 12-week cohort program
-                </strong>{" "}
-                for institutions, and through{" "}
-                <strong className="font-bold text-black/60">
-                  the online pathway
-                </strong>{" "}
-                for individual women. All instruments used in VEIL are
-                internationally validated with Arabic-validated versions for
-                Gulf professional populations.
+                It is a strategic health architecture - a scientifically
+                grounded framework that addresses what sustained professional
+                pressure does to women&rsquo;s biological, cognitive, and
+                identity systems, and builds the internal infrastructure that
+                makes sustainable leadership possible.
               </p>
             </div>
-            <CtaPill
-              as="a"
-              href="#veil-program"
-              variant="navyOutline"
-              className="mt-8"
-            >
-              Explore VEIL™ — The Full Program
-            </CtaPill>
+            <p>
+              VEIL operates through three interconnected constructs:{" "}
+              <strong className="font-bold text-black/60">
+                Capacity Regulation, Identity Coherence, Authority Execution.
+              </strong>
+            </p>
+            <p>
+              The VEIL framework is delivered through{" "}
+              <strong className="font-bold text-black/60">
+                UNVEIL, a 12-week cohort program
+              </strong>{" "}
+              for institutions, and through{" "}
+              <strong className="font-bold text-black/60">
+                the online pathway
+              </strong>{" "}
+              for individual women. All instruments used in VEIL are
+              internationally validated with Arabic-validated versions for
+              Gulf professional populations.
+            </p>
           </div>
+          <CtaPill
+            as="a"
+            href="#veil-program"
+            variant="navyOutline"
+            size="sm44"
+            className="mt-6 lg:mt-[35px]"
+          >
+            Explore VEIL™ — The Full Program
+          </CtaPill>
+        </div>
 
-          {/* Plain stacked list below lg */}
-          <div className="mt-10 flex flex-col gap-5 lg:hidden">
-            {CARDS.map((card) => (
-              <StaticCard key={card.key} card={card} />
-            ))}
-          </div>
+        {/* Plain stacked list below lg */}
+        <div className="mt-10 flex flex-col gap-5 lg:hidden">
+          {CARDS.map((card) => (
+            <StaticCard key={card.key} card={card} />
+          ))}
+        </div>
 
-          {/* Interactive stack, desktop only — fixed 480px column, never
-              stretched or shrunk by the flex row. */}
-          <div className="hidden lg:block lg:shrink-0">
-            <StackDeck />
-          </div>
+        {/* Interactive stack, desktop only — fixed 442px column, never
+            stretched or shrunk by the flex row. */}
+        <div className="hidden lg:block lg:shrink-0">
+          <StackDeck />
         </div>
       </div>
     </section>

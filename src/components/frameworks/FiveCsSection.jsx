@@ -1,5 +1,6 @@
 import FrameworkTag from "./FrameworkTag";
 import CtaPill from "../ui/CtaPill";
+import { ArrowRight } from "../ui/Icons";
 import cardStar from "../../assets/frameworks/5cstar.png";
 import cardArrow from "../../assets/frameworks/5carrow.png";
 import conceptualisePattern from "../../assets/frameworks/fivecs-conceptualise-pattern.svg";
@@ -7,12 +8,10 @@ import curatePattern from "../../assets/frameworks/fivecs-curate-pattern.png";
 import convertPattern from "../../assets/frameworks/fivecs-convert-pattern.png";
 import cultivateLaurel from "../../assets/frameworks/fivecs-cultivate-laurel.png";
 
-// Pattern placement taken from Figma (node 1434:2953). Each box is expressed as
-// a share of its own card — 379x280 for the single-width cards, 794x280 for the
-// wide Cultivate card — so it scales with the card, and several bleed past a
-// card edge, which the wrapper clips to the rounded corners. Both width and
-// height are pinned because each asset is exported at its exact Figma box size
-// (312x312, 88x280, 373x310), so the box and the artwork agree at 1440.
+// Pattern placement taken from Figma (node 1755:3024). Each box is expressed
+// as a share of its own card — 346x204 for the single-width cards, 725x201 for
+// the wide Cultivate card — so it scales with the card; several bleed past a
+// card edge, which the wrapper clips.
 const CARDS = [
   {
     key: "conceptualise",
@@ -20,14 +19,14 @@ const CARDS = [
     body: "Understand your context, your customers, your core essence",
     pattern: conceptualisePattern,
     // Figma flips this one vertically (-scale-y-100) and lets it bleed right.
-    patternClass: "left-[46.7%] top-[54.6%] h-[44.6%] w-[73.6%] -scale-y-100",
+    patternClass: "left-[46.7%] top-[68.5%] h-[55.9%] w-[73.6%] -scale-y-100",
   },
   {
     key: "curate",
     title: "Curate",
     body: "Shape strategy that reflects your full identity",
     pattern: curatePattern,
-    patternClass: "left-[44.9%] top-[21.4%] h-[111.4%] w-[82.3%]",
+    patternClass: "left-[44.8%] top-[27%] h-[139.6%] w-[82.3%]",
   },
   {
     key: "communicate",
@@ -41,30 +40,31 @@ const CARDS = [
     title: "Convert",
     body: "Measure what truly matters: traction, trust, and resonance",
     pattern: convertPattern,
-    patternClass: "left-[76.8%] top-0 h-full w-[23.1%]",
-    wide: false,
+    patternClass: "left-[76.8%] top-0 h-[105.7%] w-[23.1%]",
+    short: true,
   },
   {
     key: "cultivate",
     title: "Cultivate",
     body: "Sustain loyalty, adapt with intention, and evolve without losing your essence",
     pattern: cultivateLaurel,
-    patternClass: "left-[53.8%] -top-[5.4%] h-[110.7%] w-[47%]",
+    patternClass: "left-[53.8%] top-0 h-[127.2%] w-[42.3%]",
     wide: true,
+    short: true,
   },
 ];
 
 function Card({ card }) {
   return (
     <div
-      className={`relative min-h-[240px] rounded-[4px] bg-gradient-to-b from-gold to-gold-light lg:min-h-[280px] ${
+      className={`relative min-h-[240px] bg-gradient-to-b from-gold to-gold-light lg:min-h-0 ${
         card.wide ? "md:col-span-2" : ""
-      }`}
+      } ${card.short ? "lg:h-[201px]" : "lg:h-[204px]"}`}
     >
-      {/* Clips the decorative pattern to the card's rounded corners without
-          clipping the corner sparkle below, which must bleed outside. */}
+      {/* Clips the decorative pattern to the card box without clipping the
+          corner sparkle below, which must bleed outside. */}
       {card.pattern && (
-        <div className="absolute inset-0 overflow-hidden rounded-[4px]">
+        <div className="absolute inset-0 overflow-hidden">
           <img
             src={card.pattern}
             alt=""
@@ -72,25 +72,23 @@ function Card({ card }) {
           />
         </div>
       )}
-      {/* Straddles the top-right corner (centered on the corner point, half
-          outside the card) — see LeaveWith.jsx. */}
-      {/* Exported from Figma at 36x39 (not square), centred on the corner point
-          so half of it hangs outside the card. */}
+      {/* Gold star straddling the top-right corner: 33x35 per Figma, centred
+          on the corner point so half of it hangs outside the card. */}
       <img
         src={cardStar}
         alt=""
-        className="pointer-events-none absolute -top-[15px] -right-[14px] z-10 h-[30px] w-[28px] lg:-top-[19px] lg:-right-[18px] lg:h-[39px] lg:w-[36px]"
+        className="pointer-events-none absolute -top-[15px] -right-[14px] z-10 h-[30px] w-[28px] lg:-top-[18px] lg:-right-[16px] lg:h-[35px] lg:w-[33px]"
       />
-      {/* Figma pads 41px left / 39px top and parks the arrow 36px off the card
-          bottom, identical on every card — mt-auto keeps them on one baseline
-          instead of letting short copy float the arrow up. */}
-      <div className="relative flex h-full flex-col p-6 lg:pt-[39px] lg:pr-[41px] lg:pb-[23px] lg:pl-[41px]">
-        <p className="text-[20px] leading-[1.24] font-bold text-white lg:text-[24px]">
+      {/* Figma pads 37px left / 36px top and parks the 39px arrow on the
+          168px line, identical on every card — mt-auto keeps the arrows on
+          one baseline instead of letting short copy float them up. */}
+      <div className="relative flex h-full flex-col p-6 lg:pt-[36px] lg:pr-[30px] lg:pb-[23px] lg:pl-[37px]">
+        <p className="text-[18px] leading-[1.24] font-bold text-white lg:text-[20px]">
           {card.title}
         </p>
         <p
-          className={`mt-[14px] text-[17px] leading-[1.24] font-medium text-white lg:text-[21px] ${
-            card.wide ? "lg:max-w-[374px]" : "lg:max-w-[258px]"
+          className={`mt-3 text-[15px] leading-[1.24] font-medium text-white lg:mt-[9px] lg:text-[16px] ${
+            card.wide ? "lg:max-w-[342px]" : "lg:max-w-[236px]"
           }`}
         >
           {card.body}
@@ -98,39 +96,51 @@ function Card({ card }) {
         <img
           src={cardArrow}
           alt=""
-          className="mt-8 h-[30px] w-[45px] lg:mt-auto"
+          className="mt-8 h-auto w-[39px] lg:mt-auto"
         />
       </div>
     </div>
   );
 }
 
+// Figma 1755:3024 ("Frame 65", 1440x973): content column 1120 wide at x:160,
+// y:89; the CTA pill is centred on the column between the copy and the cards.
 export default function FiveCsSection() {
   return (
-    <section className="bg-[linear-gradient(77deg,rgba(255,249,232,0)_6%,#edd8a1_94%)]">
-      <div className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:px-[116px] lg:py-[100px]">
+    <section className="relative bg-[linear-gradient(74deg,rgba(255,249,232,0)_6.2%,#edd8a1_93.8%)]">
+      {/* Two small decorative white arrows in the left gutter (1755:3026/27). */}
+      <div className="pointer-events-none absolute top-[424px] left-[8.06%] hidden w-[25px] text-white lg:block">
+        <ArrowRight className="w-full" />
+      </div>
+      <div className="pointer-events-none absolute top-[645px] left-[8.06%] hidden w-[25px] text-white lg:block">
+        <ArrowRight className="w-full" />
+      </div>
+
+      <div className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:px-[clamp(2rem,11.11vw,160px)] lg:pt-[89px] lg:pb-[110px]">
         <FrameworkTag>FRAMEWORK 2</FrameworkTag>
 
-        <div className="mt-4 lg:flex lg:items-start lg:justify-between lg:gap-10">
-          <div>
-            <h2 className="text-[clamp(2rem,4vw,3.125rem)] leading-[1.2] font-bold text-navy-2">
-              {/* Figma breaks this heading after "of" (node 1434:2992). */}
+        <div className="mt-4 lg:mt-[40px] lg:flex lg:items-start lg:justify-between lg:gap-10">
+          {/* Figma fixes this row at 151px via the left column and centres
+              the Core Concept column on it (19.5px down from the top). */}
+          <div className="lg:min-h-[151px] lg:flex-1">
+            <h2 className="text-[26px] leading-[1.2] font-bold text-navy sm:text-[28px] lg:text-[30px]">
+              {/* Figma breaks this heading after "of" (node 1755:3063). */}
               The 5Cs of <span className="lg:block">Brand Health</span>
             </h2>
-            <p className="mt-2 max-w-[366px] text-[clamp(1.125rem,1.8vw,1.5rem)] leading-normal text-black/60">
+            <p className="mt-2 max-w-[286px] text-[15px] leading-[1.17] font-light text-black/60 lg:mt-[14px] lg:text-[16px]">
               This is more than brand strategy. It&rsquo;s a rhythm. One that
               builds presence without burnout.
             </p>
           </div>
 
-          <div className="mt-8 max-w-[742px] lg:mt-0">
+          <div className="mt-8 lg:mt-[19px] lg:w-[700px] lg:max-w-full lg:shrink-0">
             <p className="text-[20px] font-bold tracking-wide text-gold uppercase">
               Core Concept
             </p>
-            {/* Figma (node 1434:2994) keeps these as one tight block: the bold
+            {/* Figma (node 1755:3065) keeps these as one tight block: the bold
                 sentence sits alone on line 1, the body starts on line 2 with no
                 paragraph gap between them. */}
-            <div className="mt-5 text-[clamp(1.0625rem,1.6vw,1.4375rem)] leading-normal text-black/60">
+            <div className="mt-3 max-w-[662px] text-[15px] leading-[1.17] font-medium text-black/60 lg:mt-[8px] lg:text-[16px]">
               <p className="font-bold text-black/60">
                 The 5Cs of Brand Health isn&rsquo;t just a marketing framework.
               </p>
@@ -142,19 +152,25 @@ export default function FiveCsSection() {
                 organisation distinct.
               </p>
             </div>
-            <CtaPill
-              as="a"
-              href="#brand-health-support"
-              variant="goldOutline"
-              className="mt-6"
-            >
-              Explore Brand Health Support
-            </CtaPill>
           </div>
         </div>
 
-        {/* Figma: 36px between columns, 42px between rows, 80px below the CTA. */}
-        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3 lg:mt-20 lg:gap-x-9 lg:gap-y-[42px]">
+        {/* CTA pill centred on the full column (Figma 1755:3055). */}
+        <div className="mt-6 flex lg:mt-[17px] lg:justify-center">
+          <CtaPill
+            as="a"
+            href="#brand-health-support"
+            variant="goldOutline"
+            size="sm39"
+          >
+            Explore Brand Health Support
+          </CtaPill>
+        </div>
+
+        {/* Cards: 346-wide columns, 33px column gap, 28px row gap. Figma puts
+            the card rects 57px under the pill (40px gap + the 17px the
+            sparkles stick up above the cards). */}
+        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3 lg:mt-[57px] lg:max-w-[1104px] lg:gap-x-[33px] lg:gap-y-[28px]">
           {CARDS.map((card) => (
             <Card key={card.key} card={card} />
           ))}

@@ -1,43 +1,42 @@
 import CtaPill from "../ui/CtaPill";
-import useCanvasScale from "../../hooks/useCanvasScale";
 import speakerPhoto from "../../assets/frameworks/mean-speaker-photo.png";
 
+// Figma 1755:2967 ("Frame 62", 1440x823). The arch photo sits inset at x:162
+// (551x675), the heading column at x:827.7/y:191, and the gold quote card
+// (592.6x184 at x:581.3/y:458) overlaps the photo's lower-right. Positions are
+// % of the 1440x823 frame so the composition scales between lg and the 1440
+// cap; above 1440 the container caps and centres (never zooms).
 export default function WhatFrameworksMean() {
-  // The section is designed at Figma's 1440px width. Up to 1440 it reflows
-  // responsively; beyond 1440 we zoom the whole 1440 layout up so it fills the
-  // viewport exactly like Figma (instead of sitting centred with side gaps).
-  const scale = Math.max(1, useCanvasScale());
-  const zoomed = scale > 1;
-
   return (
     <section className="relative overflow-hidden bg-[linear-gradient(180deg,rgba(247,244,238,0)_0%,#e8d9ae_100%)]">
-      <div
-        style={zoomed ? { zoom: scale } : undefined}
-        className={`relative flex flex-col lg:min-h-[776px] lg:flex-row ${
-          zoomed ? "w-[1440px]" : "mx-auto w-full max-w-[1440px]"
-        }`}
-      >
-        {/* Arch photo — sits flush to the container's left edge (which is the
-            screen edge, since the section fills the width at every size). */}
-        <div className="relative h-[280px] shrink-0 sm:h-[380px] lg:h-auto lg:w-[44.1%] lg:self-stretch">
-          {/* Gold panel behind the photo (Figma "Vector 15"): shows through the
-              arch's rounded top-left corner as a gold arc/crescent. */}
-          <div className="pointer-events-none absolute left-0 top-0 h-[45%] w-1/2 bg-gold" />
+      {/* Vertical rhythm lives on the container as PADDING (not margins on
+          the photo) so the absolute copy/card children resolve their % tops
+          against the full 823px frame — child margins would collapse through
+          the container and shrink its box. */}
+      <div className="relative mx-auto w-full max-w-[1440px] pt-10 lg:pt-[75px] lg:pb-[75px]">
+        {/* Arch photo — 551x675 at x:162/y:75 */}
+        <div className="relative mx-5 h-[280px] sm:mx-8 sm:h-[380px] lg:mx-0 lg:ml-[11.25%] lg:aspect-[551/673] lg:h-auto lg:w-[38.26%]">
+          {/* Gold panel behind the arch (Figma "Vector 15" is a plain 273x304
+              gold rectangle): shows through the rounded top-left corner as a
+              gold arc/crescent. */}
+          <div className="pointer-events-none absolute top-0 left-0 h-[45%] w-[49.6%] bg-gold" />
           <img
             src={speakerPhoto}
             alt="A StrateAura facilitator leading a live workshop session"
             className="absolute inset-0 h-full w-full rounded-t-[999px] object-cover"
           />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[54%] bg-gradient-to-t from-black/70 to-transparent" />
+          {/* Bottom scrim (Figma "Rectangle 99"): 365 of 675 = 54.1% tall. */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[54.1%] bg-gradient-to-t from-black/70 to-transparent" />
         </div>
 
-        {/* Copy column */}
-        <div className="flex flex-1 flex-col justify-center gap-6 px-5 py-10 sm:px-8 lg:gap-8 lg:px-[66px] lg:py-16 lg:pb-[260px] xl:pr-[95px]">
-          <h2 className="text-[clamp(1.75rem,3vw,2.1875rem)] leading-[1.2] font-bold">
-            <span className="text-gold">What Frameworks Mean at </span>
-            <span className="text-navy-2">StrateAura</span>
+        {/* Copy column — x:827.7 (57.48%), y:191 (23.2%), 451 wide (31.34%).
+            Figma breaks the heading before "StrateAura". */}
+        <div className="mx-5 mt-8 sm:mx-8 lg:absolute lg:top-[23.2%] lg:left-[57.48%] lg:m-0 lg:w-[31.34%]">
+          <h2 className="text-[26px] leading-[1.2] font-bold sm:text-[28px] lg:text-[30px]">
+            <span className="text-gold">What Frameworks Mean at</span>
+            <span className="block text-navy-2">StrateAura</span>
           </h2>
-          <p className="-mt-2 max-w-[580px] text-[clamp(1.0625rem,1.7vw,1.4375rem)] leading-normal text-black/60">
+          <p className="mt-[9px] max-w-[400px] text-[15px] leading-[1.17] text-black/60 lg:text-[16px]">
             At StrateAura™, frameworks aren&rsquo;t diagrams. They&rsquo;re
             deeper than that. They are mirrors. Maps. Systems of awareness.
             They help you see what&rsquo;s been running underneath your
@@ -46,23 +45,23 @@ export default function WhatFrameworksMean() {
           </p>
         </div>
 
-        {/* Gold quote card — Figma node 1434:2902 (x:554 w:757 within the
-            1440-wide/776-tall section): overlaps the photo column (right edge
-            x:635) and ends at 91% (x:1311). Below lg it stacks in normal flow. */}
-        <div className="mx-5 mb-10 rounded-[4px] bg-gold px-6 py-7 sm:mx-8 sm:px-8 sm:py-8 lg:absolute lg:top-[56.6%] lg:left-[38.47%] lg:z-10 lg:mx-0 lg:mb-0 lg:w-[52.57%] lg:px-[56px] lg:py-[52px]">
-          <p className="text-[clamp(1.0625rem,1.6vw,1.4375rem)] leading-normal text-white">
+        {/* Gold quote card — 592.6x184 at x:581.3 (40.36%) / y:458 (55.65%),
+            text inset 42/38 with the pill 16px below the paragraph. */}
+        <div className="mx-5 my-10 rounded-[4px] bg-gold px-6 py-7 sm:mx-8 lg:absolute lg:top-[55.65%] lg:left-[40.36%] lg:z-10 lg:m-0 lg:min-h-[184px] lg:w-[41.15%] lg:py-[38px] lg:pr-[40px] lg:pl-[42px]">
+          <p className="max-w-[511px] text-[15px] leading-[1.17] text-white lg:text-[16px]">
             These models weren&rsquo;t created to &ldquo;fix&rdquo; your
             leadership.{" "}
             <span className="font-medium">
-              They were built to reveal the inner logic that already exists
-              in you, and elevate it into lasting presence.
+              They were built to reveal the inner logic that already exists in
+              you, and elevate it into lasting presence.
             </span>
           </p>
           <CtaPill
             as="a"
             href="#signature-models"
             variant="whiteOutline"
-            className="mt-6 lg:mt-8"
+            size="sm36"
+            className="mt-[16px]"
           >
             Discover Our Signature Models
           </CtaPill>

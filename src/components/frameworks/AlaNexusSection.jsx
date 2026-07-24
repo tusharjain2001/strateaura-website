@@ -6,9 +6,9 @@ import assessPattern from "../../assets/frameworks/ala-assess-pattern.svg";
 import leveragePattern from "../../assets/frameworks/ala-leverage-pattern.svg";
 import actuatePattern from "../../assets/frameworks/ala-actuate-pattern.svg";
 
-// Pattern placement taken from Figma (node 1434:2913). Each is expressed as a
-// share of its 379x280 card so it scales with the card, and each bleeds past a
-// card edge — the wrapper clips it to the rounded corners.
+// Pattern placement taken from Figma (node 1755:2983). Each is expressed as a
+// share of its 346x256 card so it scales with the card, and each bleeds past a
+// card edge — the wrapper clips it to the card box.
 const CARDS = [
   {
     key: "assess",
@@ -34,30 +34,34 @@ const CARDS = [
   },
 ];
 
+// Figma 1755:2983 ("Frame 63", 1440x792): content column 1175 wide at x:164
+// (an asymmetric 101px right gutter — the CTA centres on the 1175 column, at
+// x:751.5 of the page), vertically centred (~96px top/bottom). The gutters
+// scale down as vw between lg and 1440 so the columns keep fitting.
 export default function AlaNexusSection() {
   return (
     <section className="bg-white">
-      <div className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:px-[116px] lg:py-[100px]">
+      <div className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:pl-[clamp(2rem,11.39vw,164px)] lg:pr-[clamp(2rem,7.01vw,101px)] lg:py-[96px]">
         <FrameworkTag>FRAMEWORK 1</FrameworkTag>
 
-        <div className="mt-4 lg:flex lg:items-start lg:justify-between lg:gap-10">
-          <div>
-            <h2 className="text-[clamp(2rem,4vw,3.125rem)] leading-[1.2] font-bold text-navy-2">
+        <div className="mt-4 lg:mt-[27px] lg:flex lg:max-w-[1114px] lg:items-start lg:justify-between lg:gap-10">
+          <div className="lg:w-[266px] lg:shrink-0">
+            <h2 className="text-[26px] leading-[1.2] font-bold text-navy sm:text-[28px] lg:text-[30px]">
               ALA-Nexus™
             </h2>
-            <p className="mt-2 max-w-[320px] text-[clamp(1.125rem,1.8vw,1.5rem)] leading-normal text-black/60">
+            <p className="mt-2 max-w-[320px] text-[15px] leading-[1.17] text-black/60 lg:mt-[9px] lg:text-[16px]">
               From Fragmented Effort to Aligned Momentum
             </p>
           </div>
 
-          <div className="mt-8 max-w-[722px] lg:mt-0">
+          <div className="mt-8 lg:mt-0 lg:max-w-[695px] lg:flex-1">
             <p className="text-[20px] font-bold tracking-wide text-gold uppercase">
               Core Concept
             </p>
-            {/* Figma (node 1434:2952) keeps these as two lines of one tight
+            {/* Figma (node 1755:3023) keeps these as two lines of one tight
                 block: the bold sentence sits alone on line 1, the recalibration
                 sentence starts on line 2 with no paragraph gap between them. */}
-            <div className="mt-5 text-[clamp(1.0625rem,1.6vw,1.4375rem)] leading-normal text-black/60">
+            <div className="mt-3 text-[15px] leading-[1.17] text-black/60 lg:mt-[7px] lg:text-[16px]">
               <p className="font-bold text-black/60">
                 ALA-Nexus™ isn&rsquo;t just a planning model.
               </p>
@@ -66,52 +70,53 @@ export default function AlaNexusSection() {
                 disjointed teams.
               </p>
             </div>
-            <p className="mt-7 text-[clamp(1.125rem,1.7vw,1.5rem)] leading-normal text-black/60">
+            <p className="mt-3 text-[15px] leading-[1.17] font-medium text-black/60 lg:mt-[7px] lg:text-[16px]">
               It unfolds in three deeply practical, deeply personal stages:
             </p>
           </div>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3 lg:mt-14 lg:gap-[21px]">
+        {/* Cards: 346x256, 33px gaps, sparkle straddling each top-right.
+            Figma puts the card rects 55px under the header row (39px gap +
+            the 16.5px the sparkles stick up above the cards). */}
+        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3 lg:mt-[55px] lg:max-w-[1105px] lg:gap-[33px]">
           {CARDS.map((card) => (
             <div
               key={card.key}
-              className="relative min-h-[240px] rounded-[4px] bg-gradient-to-b from-navy to-blue lg:min-h-[280px]"
+              className="relative min-h-[240px] bg-gradient-to-b from-navy to-blue lg:h-[256px] lg:min-h-0"
             >
-              {/* Clips the decorative pattern to the card's rounded corners
-                  without clipping the corner sparkle below, which must
-                  bleed outside the card. */}
-              <div className="absolute inset-0 overflow-hidden rounded-[4px]">
+              {/* Clips the decorative pattern to the card box without clipping
+                  the corner sparkle below, which must bleed outside. */}
+              <div className="absolute inset-0 overflow-hidden">
                 <img
                   src={card.pattern}
                   alt=""
                   className={`pointer-events-none absolute h-auto ${card.patternClass}`}
                 />
               </div>
-              {/* Straddles the top-right corner (centered on the corner
-                  point, half outside the card). The OUTLINED sparkle asset
-                  (white fill + navy stroke) stays visible on both the navy
-                  card and the white page — a solid white glyph vanishes on
-                  the half that hangs over the white background. */}
+              {/* Straddles the top-right corner (centered on the corner point,
+                  half outside the card) — 33px per Figma. The OUTLINED sparkle
+                  asset stays visible on both the navy card and the white page. */}
               <img
                 src={seamSparkle}
                 alt=""
-                className="pointer-events-none absolute -top-[11px] -right-[11px] z-10 size-[22px] lg:-top-[14px] lg:-right-[14px] lg:size-[28px]"
+                className="pointer-events-none absolute -top-[11px] -right-[11px] z-10 size-[22px] lg:-top-[16px] lg:-right-[16px] lg:size-[33px]"
               />
-              <div className="relative p-6 lg:p-[38px]">
-                <p className="text-[clamp(1.25rem,1.7vw,1.5rem)] font-bold text-white">
+              <div className="relative flex h-full flex-col p-6 lg:pt-[35px] lg:pr-[30px] lg:pb-[31px] lg:pl-[35px]">
+                <p className="text-[18px] font-bold text-white lg:text-[20px]">
                   {card.title}
                 </p>
-                <p className="mt-3 max-w-[258px] text-[clamp(1.0625rem,1.4vw,1.3125rem)] leading-normal text-white">
+                <p className="mt-3 max-w-[275px] text-[15px] leading-[1.17] text-white lg:mt-[15px] lg:text-[16px]">
                   {card.body}
                 </p>
-                <ArrowRight className="mt-8 w-[40px] text-white lg:mt-11" />
+                <ArrowRight className="mt-8 w-[37px] text-white lg:mt-auto" />
               </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-10 flex justify-center lg:mt-12">
+        {/* 61px from the card rect bottom to the pill (Figma 1755:3179). */}
+        <div className="mt-10 flex justify-center lg:mt-[61px]">
           <CtaPill as="a" href="#apply-ala-nexus" variant="navyOutline">
             Apply ALA-Nexus to Your Business
           </CtaPill>
