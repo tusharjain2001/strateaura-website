@@ -82,8 +82,8 @@ export default function BookPreviewModal({ onClose, book = "" }) {
           <div className="flex flex-col gap-3">
             <h2 className="text-[24px] leading-normal font-bold text-gold">Thank you!</h2>
             <p className="text-[16px] leading-normal font-light text-navy-2">
-              Your request has been received. We&apos;ve sent a confirmation to your email and our
-              team will share your preview chapter shortly.
+              Your request has been received. We&apos;ve emailed your preview chapter to you — it
+              should be in your inbox in a moment.
             </p>
             <div className="mt-4">
               <CtaPill as="button" type="button" variant="goldOutline" size="compact" onClick={onClose}>
