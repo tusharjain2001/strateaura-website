@@ -1,5 +1,7 @@
+import { useState } from "react";
 import TagRibbon from "./TagRibbon";
 import CtaPill from "../ui/CtaPill";
+import RequestBrochureModal from "./RequestBrochureModal";
 import { Sparkle, ArrowUpRight } from "../ui/Icons";
 import leafWatermark from "../../assets/programs/section-leaf-watermark.png";
 import constructDeco1 from "../../assets/programs/construct-card-deco-1.png";
@@ -53,7 +55,10 @@ function PathwaySubcard({ title, columns }) {
 }
 
 export default function VeilFrameworkSection() {
+  const [brochureOpen, setBrochureOpen] = useState(false);
+
   return (
+    <>
     <section
       id="veil"
       className="relative overflow-hidden bg-gradient-to-b from-white via-[#fdf3d9] to-[#eccf7e] scroll-mt-[80px] lg:scroll-mt-[120px]"
@@ -81,8 +86,9 @@ export default function VeilFrameworkSection() {
               VEIL™ - Strategic Health Framework for Women Leaders - The Flagship Program of Strateaura™
             </h2>
             <CtaPill
-              as="a"
-              href="#brochure"
+              as="button"
+              type="button"
+              onClick={() => setBrochureOpen(true)}
               variant="goldOutline"
               size="compact"
               className="shrink-0"
@@ -266,5 +272,12 @@ export default function VeilFrameworkSection() {
         </div>
       </div>
     </section>
+    {brochureOpen && (
+      <RequestBrochureModal
+        onClose={() => setBrochureOpen(false)}
+        program="VEIL™ - Strategic Health Framework for Women Leaders - The Flagship Program of Strateaura™"
+      />
+    )}
+    </>
   );
 }
