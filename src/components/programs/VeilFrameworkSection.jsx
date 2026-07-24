@@ -28,7 +28,7 @@ const CONSTRUCTS = [
 
 function ChecklistItem({ children }) {
   return (
-    <li className="flex items-center gap-[7px] text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-navy-2">
+    <li className="flex items-center gap-[7px] text-[16px] leading-normal text-navy-2">
       <img src={pathwayCheck} alt="" className="size-[17px] shrink-0" />
       <span>{children}</span>
     </li>
@@ -37,9 +37,9 @@ function ChecklistItem({ children }) {
 
 function PathwaySubcard({ title, columns }) {
   return (
-    <div className="flex flex-col gap-3 bg-cream px-4 py-5 sm:px-6 sm:py-6">
-      <p className="text-[clamp(1rem,1.4vw,1.25rem)] font-bold text-navy-2">{title}</p>
-      <div className="flex flex-col gap-2 sm:flex-row sm:gap-8">
+    <div className="flex flex-col gap-3 bg-cream p-6">
+      <p className="text-[20px] font-bold text-navy-2">{title}</p>
+      <div className="flex flex-col gap-2 sm:flex-row sm:gap-[43px]">
         {columns.map((col, i) => (
           <ul key={i} className="flex flex-1 flex-col gap-2">
             {col.map((item) => (
@@ -64,51 +64,38 @@ export default function VeilFrameworkSection() {
         className="pointer-events-none absolute inset-x-0 bottom-0 hidden w-full lg:block"
       />
 
-      {/* The board insets this section further than the rest of the page: the
-          headline starts at x157 and the two text columns span 157-1298, i.e.
-          the 1141px block is centred in the 1440. 149px of padding reproduces
-          that and leaves the left and right margins equal. */}
-      <div className="relative mx-auto w-full max-w-[1440px] px-5 sm:px-8 xl:px-[149px]">
+      {/* Figma insets this section to x157 (content 1118 wide, centred). */}
+      <div className="relative mx-auto w-full max-w-[1440px] px-5 sm:px-8 xl:px-[158px]">
         {/* Core Concept */}
         <div className="pt-14 lg:pt-[76px]">
           <span className="relative inline-flex items-center justify-center px-6 py-1.5 text-gold">
             <TagRibbon className="absolute inset-0 h-full w-full" />
-            <span className="relative text-[clamp(0.875rem,1.4vw,1.25rem)] font-light tracking-wide text-white uppercase">
+            <span className="relative text-[16px] font-light tracking-wide text-white uppercase">
               Featured
             </span>
           </span>
 
-          {/* 1638:2881 — two lines breaking after "Women". The board sets 50px
-              in a 1126 box, but Inter runs wider than its Acumin Pro, so those
-              words need ~1210px: the cap comes down to 46px and the box is left
-              at the full content column, or line one wraps a third time. The
-              break is forced rather than left to the box width, which is what
-              kept pulling "Leaders -" up. */}
-          <h2 className="mt-4 text-[clamp(1.75rem,3.2vw,2.875rem)] leading-[1.2] font-bold text-navy lg:mt-[30px]">
-            VEIL™ - Strategic Health Framework for Women{" "}
-            <br className="hidden lg:inline" />
-            Leaders - The Flagship Program of Strateaura™
-          </h2>
+          {/* Headline + Request Brochure button on one row (Figma 1810:145). */}
+          <div className="mt-4 flex flex-col items-start gap-5 lg:mt-[30px] lg:flex-row lg:items-center lg:justify-between lg:gap-[40px]">
+            <h2 className="text-[30px] leading-normal font-bold text-navy lg:flex-1">
+              VEIL™ - Strategic Health Framework for Women Leaders - The Flagship Program of Strateaura™
+            </h2>
+            <CtaPill
+              as="a"
+              href="#brochure"
+              variant="goldOutline"
+              size="compact"
+              className="shrink-0"
+            >
+              Request Brochure
+            </CtaPill>
+          </div>
 
-          {/* 1638:2880 — 24px medium, 48px under the headline */}
-          <p className="mt-8 text-[clamp(1.125rem,1.67vw,1.5rem)] font-medium text-navy lg:mt-[48px]">
-            Core Concept
-          </p>
+          <p className="mt-6 text-[20px] font-medium text-navy lg:mt-4">Core Concept</p>
 
-          {/* Figma 1638:3972 / 1638:2884 — two 545px justified columns, 51px
-              apart, set 24/36. Both the width and the size drive the line
-              breaks, so the type is pinned to 1.67vw (24px at the board's
-              1440) rather than the 1.4vw used elsewhere, which only reached
-              24px at ~1714 and packed extra words onto every line.
-
-              The pair is fixed at 545 only from xl up, where 1141px fits the
-              content column. It stays flush left so the first column lines up
-              with the headline and "Core Concept" above it, as on the board
-              (all three start at x157); the slack falls on the right, exactly
-              as it does there. Between lg and xl the columns share the row
-              instead, since two 545s would overflow at 1024. */}
-          <div className="mt-5 flex flex-col gap-8 lg:flex-row lg:gap-[51px]">
-            <p className="flex-1 text-justify text-[clamp(1rem,1.67vw,1.5rem)] leading-[1.5] text-black/60 xl:w-[545px] xl:flex-none">
+          {/* Two 545px justified columns, 28px apart, set at 16/24 (Figma 1805:3). */}
+          <div className="mt-2 flex flex-col gap-8 lg:flex-row lg:gap-[28px]">
+            <p className="flex-1 text-justify text-[16px] leading-[1.5] text-black/60 xl:w-[545px] xl:flex-none">
               VEIL™ is designed for women in leadership and high-demand professional roles who
               are performing well externally - and already paying a silent cost for how they are
               leading. They are capable, trusted, and accomplished often the strongest person in
@@ -119,7 +106,7 @@ export default function VeilFrameworkSection() {
               are. VEIL is a strategic health framework grounded in validated science and designed
               specifically for
             </p>
-            <p className="flex-1 text-justify text-[clamp(1rem,1.67vw,1.5rem)] leading-[1.5] text-black/60 xl:w-[545px] xl:flex-none">
+            <p className="flex-1 text-justify text-[16px] leading-[1.5] text-black/60 xl:w-[545px] xl:flex-none">
               women carrying sustained leadership responsibility. The woman VEIL serves is not in
               crisis. She is still succeeding. What she needs is
               not another programme that teaches her how to perform. She needs a framework that
@@ -135,34 +122,34 @@ export default function VeilFrameworkSection() {
 
         {/* The VEIL Framework addresses three constructs */}
         <div className="mt-14 lg:mt-[57px]">
-          <p className="text-[clamp(1.125rem,1.6vw,1.5rem)] text-black">
+          <p className="text-[20px] text-black">
             The <span className="font-bold">VEIL</span> Framework addresses three constructs:
           </p>
 
           <div className="mt-6 grid grid-cols-1 gap-5 md:grid-cols-3">
             {CONSTRUCTS.map((c) => (
+              // Wrapper is unclipped so the corner sparkle can overhang; it also
+              // carries the Home-board hover (squeeze to 90% + blue glow, 400ms).
               <div
                 key={c.title}
-                className="relative overflow-hidden rounded-[4px] bg-gradient-to-b from-navy to-blue p-6"
+                className="group relative h-full transition-[scale,box-shadow] duration-[400ms] motion-safe:hover:scale-90 motion-safe:hover:shadow-[0_0_10px_var(--color-blue)]"
               >
+                <div className="relative h-full overflow-hidden rounded-[4px] bg-gradient-to-b from-navy to-blue p-6">
+                  <p className="text-[20px] font-bold text-white">{c.title}</p>
+                  {/* Copy runs the full 314px of the padded card, over the artwork. */}
+                  <p className="relative z-10 mt-4 text-[16px] leading-normal text-white">
+                    {c.body}
+                  </p>
+                  <img
+                    src={c.deco}
+                    alt=""
+                    className="pointer-events-none absolute right-0 bottom-2 w-[62%]"
+                  />
+                </div>
                 <img
                   src={constructSparkle}
                   alt=""
                   className="pointer-events-none absolute -top-[14px] -right-[14px] size-[28px]"
-                />
-                <p className="text-[clamp(1.125rem,1.8vw,1.5rem)] font-bold text-white">
-                  {c.title}
-                </p>
-                {/* 1638:2895 — the copy runs the full 314px of the padded card
-                    and sits over the artwork; capping it at 85% wrapped every
-                    line a word or two early. */}
-                <p className="relative z-10 mt-4 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-white">
-                  {c.body}
-                </p>
-                <img
-                  src={c.deco}
-                  alt=""
-                  className="pointer-events-none absolute right-0 bottom-2 w-[62%]"
                 />
               </div>
             ))}
@@ -171,25 +158,25 @@ export default function VeilFrameworkSection() {
 
         {/* Two pathways */}
         <div className="mt-16 pb-14 lg:mt-[76px] lg:pb-[92px]">
-          <p className="text-center text-[clamp(1.5rem,2.4vw,2rem)] font-medium text-navy-2">
+          <p className="text-center text-[30px] font-medium text-navy-2">
             Two pathways are available:
           </p>
 
-          <div className="mt-8 grid grid-cols-1 items-start gap-6 lg:mt-[57px] lg:grid-cols-2 lg:gap-10">
+          <div className="mt-8 grid grid-cols-1 items-stretch gap-6 lg:mt-[57px] lg:grid-cols-2 lg:gap-10">
             {/* Online Pathway */}
-            <div className="rounded-xl border border-gold-light bg-white p-6 shadow-[0_0_27px_-11px_#b3902f] sm:p-8">
-              <h3 className="text-[clamp(1.5rem,2.4vw,2rem)] leading-[1.2] font-bold text-gold">
+            <div className="rounded-xl border border-gold-light bg-white p-8 shadow-[0_0_27px_-11px_#b3902f]">
+              <h3 className="text-[30px] leading-normal font-bold text-gold">
                 The Online Pathway -<br />
                 MAP, DECODE, and UNVEIL
               </h3>
-              <p className="mt-4 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-navy-2">
+              <p className="mt-[30px] text-[16px] leading-normal text-navy-2">
                 A self-funded, self-paced online journey for individual women who are ready to
                 start without waiting for an institution to sponsor them.
                 <br />
                 Free Live Webinar: Lead Without Losing Yourself.
               </p>
 
-              <div className="mt-6 flex flex-col gap-4">
+              <div className="mt-6 flex flex-col gap-3.5">
                 <PathwaySubcard
                   title="MAP: KNOW YOUR TERRAIN"
                   columns={[
@@ -225,23 +212,29 @@ export default function VeilFrameworkSection() {
                   href="#map-decode"
                   variant="navyOutline"
                   icon={ArrowUpRight}
-                  size="md"
+                  size="compact"
                 >
                   Learn More about MAP &amp; DECODE
                 </CtaPill>
-                <CtaPill as="a" href="/webinar" variant="navyOutline" icon={Sparkle} size="md">
+                <CtaPill
+                  as="a"
+                  href="/webinar"
+                  variant="navyOutline"
+                  icon={Sparkle}
+                  size="compact"
+                >
                   Register for the Free Webinar
                 </CtaPill>
               </div>
             </div>
 
             {/* UNVEIL Institutional */}
-            <div className="rounded-xl border border-gold-light bg-white p-6 shadow-[0_0_27px_-11px_#b3902f] sm:p-8">
-              <h3 className="text-[clamp(1.5rem,2.4vw,2rem)] leading-[1.2] font-bold text-gold">
+            <div className="rounded-xl border border-gold-light bg-white p-8 shadow-[0_0_27px_-11px_#b3902f]">
+              <h3 className="text-[30px] leading-normal font-bold text-gold">
                 UNVEIL -<br />
                 The Institutional Cohort Program
               </h3>
-              <p className="mt-4 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-navy-2">
+              <p className="mt-[30px] text-[16px] leading-normal text-navy-2">
                 A <span className="font-bold">12-week</span>, live, facilitator-led cohort for{" "}
                 <span className="font-bold">8–12 women.</span> Delivered in-person. Uses{" "}
                 <span className="font-bold">
@@ -252,8 +245,8 @@ export default function VeilFrameworkSection() {
               </p>
 
               <div className="mt-6">
-                <div className="flex flex-col gap-3 bg-cream px-4 py-5 sm:px-6 sm:py-6">
-                  <p className="text-[clamp(1rem,1.4vw,1.25rem)] font-bold text-navy-2">
+                <div className="flex flex-col gap-3 bg-cream p-6">
+                  <p className="text-[20px] font-bold text-navy-2">
                     KHDA Attested Certificate of Completion
                   </p>
                   <ul className="flex flex-col gap-2">
@@ -264,7 +257,7 @@ export default function VeilFrameworkSection() {
               </div>
 
               <div className="mt-6">
-                <CtaPill as="a" href="#contact" variant="navyOutline" icon={Sparkle} size="md">
+                <CtaPill as="a" href="#contact" variant="navyOutline" icon={Sparkle} size="compact">
                   Request a Cohort Proposal
                 </CtaPill>
               </div>

@@ -55,6 +55,13 @@ const SIZES = {
     circle: "size-[27px]",
     glyph: "size-[19.3px]",
   },
+  // The compact pill on the redesigned Programs page (Figma 1755:2156): ~44px
+  // tall, 16px label, 33px icon circle. Used by every CTA on that page.
+  compact: {
+    pill: "h-[44px] gap-[13px] pr-[5px] pl-[21px] text-[16px]",
+    circle: "size-[33px]",
+    glyph: "size-[18px]",
+  },
   md: {
     pill: "h-[46px] gap-3 pr-[6px] pl-6 text-[17px] sm:text-[20px] lg:h-[50px] lg:gap-[19px] lg:pl-[29px] lg:text-[24px]",
     circle: "size-[32px] lg:size-[31px]",

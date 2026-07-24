@@ -11,15 +11,15 @@ export default function ProgramsHero() {
         className="pointer-events-none absolute top-1/2 left-1/2 hidden h-[184px] w-[76%] max-w-[1097px] -translate-x-1/2 -translate-y-1/2 object-contain lg:block"
       />
 
-      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col items-center justify-center px-5 py-16 text-center sm:px-8 sm:py-20 lg:min-h-[492px] lg:py-24 xl:px-[95px]">
+      <div className="relative mx-auto flex w-full max-w-[1440px] flex-col items-center justify-center gap-6 px-5 py-16 text-center sm:px-8 sm:py-20 lg:min-h-[282px] lg:py-0 xl:px-[95px]">
         <span className="relative inline-flex items-center justify-center px-7 py-2 text-navy">
           <TagRibbon className="absolute inset-0 h-full w-full" />
-          <span className="relative text-[clamp(1rem,1.6vw,1.5rem)] font-bold text-cream">
+          <span className="relative text-[16px] font-bold text-cream">
             Our Programs
           </span>
         </span>
 
-        <h1 className="mt-3 text-[clamp(2rem,4.5vw,3.125rem)] leading-[1.2] font-bold">
+        <h1 className="text-[30px] leading-normal font-bold">
           <span className="block text-gold">Redefining Power,</span>
           <span className="block text-navy-2">Preserving You.</span>
         </h1>
