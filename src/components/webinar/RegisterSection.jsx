@@ -104,12 +104,6 @@ export default function RegisterSection() {
                 </Field>
               </div>
 
-              {/* Figma 1755:1842 — mandatory note under the fields. Desktop
-                  only, so the finished phone layout is untouched. */}
-              <p className="mt-[9px] hidden text-[#c80000] sm:block sm:text-[14px]">
-                Fields marked * are mandatory
-              </p>
-
               <div className="mt-6 flex flex-col items-start gap-[10px] sm:mt-[38px] sm:gap-[15px]">
                 <CtaPill type="submit" variant="goldFilled" size="mdCompact">
                   Reserve My Spot
