@@ -82,6 +82,14 @@ const SIZES = {
     circle: "size-[32px] lg:size-[31px]",
     glyph: "size-[14px] lg:size-[22px]",
   },
+  // Contact-page "Begin the Conversation" pill (Figma 1755:2738): keeps the md
+  // mobile/tablet appearance, then shrinks to the compact 43px / 20px pill at
+  // lg+ where the redesigned Contact desktop needs it.
+  mdContact: {
+    pill: "h-[46px] gap-3 pr-[6px] pl-6 text-[17px] sm:text-[20px] lg:h-[43px] lg:gap-[16px] lg:pr-[6px] lg:pl-[14px] lg:text-[20px]",
+    circle: "size-[32px] lg:size-[31px]",
+    glyph: "size-[14px] lg:size-[18px]",
+  },
   // Webinar-page mobile pills follow the phone Figma (1296:5703 / 1296:5763)
   // exactly, then return to the lg/md scales from sm up so tablet and desktop
   // render precisely as before.
