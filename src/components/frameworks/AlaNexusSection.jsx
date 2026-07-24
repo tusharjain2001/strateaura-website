@@ -120,7 +120,7 @@ export default function AlaNexusSection() {
 
         {/* 61px from the card rect bottom to the pill (Figma 1755:3179). */}
         <div className="mt-10 flex justify-center lg:mt-[61px]">
-          <CtaPill as="a" href="#apply-ala-nexus" variant="navyOutline">
+          <CtaPill as="a" href="#apply-ala-nexus" variant="navyOutline" size="xs">
             Apply ALA-Nexus to Your Business
           </CtaPill>
         </div>
