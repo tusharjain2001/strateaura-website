@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MobileContainer from "../home-mobile/MobileContainer";
 import MobilePill from "../home-mobile/MobilePill";
 import FwTag from "./FwTag";
@@ -79,6 +79,17 @@ const CARDS = [
 const CARD_H = 386.19;
 const PEEK_STEP = 64.75;
 const DECK_H = PEEK_STEP * (CARDS.length - 1) + CARD_H;
+
+// Scroll choreography, same recipe as the mobile home "Problems" deck
+// (MobileProblem.jsx): the deck pins below the sticky header while the page
+// scrolls on for TRACK_EXTRA px; cards 2-4 ride up from below the viewport one
+// after another, scrubbed 1:1 with the scroll, then the pin releases. At full
+// progress the deck is exactly the resting design and the tap-accordion takes
+// over. The copy block above stays in normal flow — only the deck pins.
+const HEADER_H = 64; // sticky SiteHeader height below lg
+const PIN_TOP = HEADER_H + 16; // where the deck pins, real px
+const CARD_SCROLL = 320; // px of scroll each arriving card consumes
+const TRACK_EXTRA = CARD_SCROLL * (CARDS.length - 1); // cards 2-4 arrive on scroll
 // Exported from Figma at 27.47x29.52 (not square) and centred on the card's
 // top-right corner, so half of it hangs over the white page — which is why the
 // asset is navy rather than the white of the in-card icon.
@@ -121,9 +132,54 @@ function DeckPattern({ src, box, art, rotate }) {
  * running offset, the open card advances it by its full height and a collapsed
  * one by PEEK_STEP, so later cards paint over earlier ones and clip their
  * headlines mid-line exactly as the design file shows.
+ *
+ * Wrapped in a scroll track (like MobileProblem's deck): the deck pins below
+ * the header and cards 2-4 ride in from below the viewport, scrubbed 1:1 with
+ * the scroll. At progress 1 every transform clears and the DOM is the plain
+ * tap-accordion again.
  */
 function Deck() {
   const [active, setActive] = useState(CARDS.length - 1); // Legacy open by default
+
+  const trackRef = useRef(null);
+  // 0..1 across TRACK_EXTRA; starts at 1 (deck fully assembled, never scrubs)
+  // when the user prefers reduced motion.
+  const [progress, setProgress] = useState(() =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 1 : 0,
+  );
+  const [vh, setVh] = useState(0); // viewport height, for the ride-in start
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    const measure = () => {
+      raf = 0;
+      const el = trackRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      if (!rect.width) return; // display:none — the desktop tree is showing
+      setVh(window.innerHeight);
+      const p = (PIN_TOP - rect.top) / TRACK_EXTRA;
+      setProgress(Math.min(1, Math.max(0, p)));
+    };
+    const queue = () => {
+      if (!raf) raf = requestAnimationFrame(measure);
+    };
+    queue();
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", queue);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", queue);
+      window.removeEventListener("resize", queue);
+    };
+  }, []);
+
+  // Card 1 is on stage from the start; card i of 2-4 rises during its third
+  // of the track. arrival = 0 parked below the screen, 1 seated at its top.
+  const arrival = CARDS.map((_, i) =>
+    i === 0 ? 1 : Math.min(1, Math.max(0, progress * 3 - (i - 1))),
+  );
 
   const tops = [];
   let y = 0;
@@ -132,66 +188,100 @@ function Deck() {
     y += i === active ? CARD_H : PEEK_STEP;
   }
 
-  return (
-    <div className="relative" style={{ height: `${DECK_H}px` }}>
-      {/* Keeps the deck at its constant height when a card other than the last
-          one is open. */}
-      <div className="absolute inset-0 overflow-hidden">
-        {CARDS.map((card, i) => (
-          <button
-            key={card.key}
-            type="button"
-            aria-expanded={active === i}
-            onClick={() => setActive(i)}
-            style={{ top: `${tops[i]}px`, height: `${CARD_H}px`, zIndex: i }}
-            className="absolute inset-x-0 cursor-pointer overflow-hidden rounded-[8px] bg-gradient-to-b from-navy to-blue text-left shadow-[0_-6px_16px_rgba(0,0,0,0.18)] transition-[top] duration-500 ease-in-out"
-          >
-            <div className="relative h-full">
-              <DeckPattern {...card.pattern} />
-              {/* The open card's copy sits at Figma's 66px. A collapsed card
-                  lifts its copy to 44px so the top of its headline peeks out of
-                  the 64.75px sliver and gets clipped by the card below it —
-                  which is what the design file shows at every fold. */}
-              <div
-                className={`relative pr-[40px] pl-[49px] transition-[padding] duration-500 ease-in-out ${
-                  active === i ? "pt-[66px]" : "pt-[54px]"
-                }`}
-              >
-                <p className="text-[22px] leading-[1.1] font-bold text-white">
-                  {card.title}
-                </p>
-                {/* Figma separates these with one empty line. */}
-                <p className="mt-[24px] max-w-[275px] text-[22px] leading-[1.1] text-white">
-                  {card.body}
-                </p>
-              </div>
-              <span
-                className="absolute left-1/2 flex size-[38.54px] -translate-x-1/2 items-center justify-center rounded-full bg-white"
-                style={{ top: 288.29 }}
-              >
-                <Sparkle className="size-[21px] text-navy" />
-              </span>
-            </div>
-          </button>
-        ))}
-      </div>
+  // Each card rides in from just below the viewport instead of materialising
+  // at the deck's clip edge. The below-the-clip distance is the floor so the
+  // cards stay hidden before the first measure runs.
+  const parkDist = (i) =>
+    Math.max(vh - PIN_TOP - tops[i] + 40, DECK_H - tops[i] + 24);
 
-      {/* Outside the clipping wrapper so each star can straddle its card's
-          top-right corner. */}
-      {CARDS.map((card, i) => (
-        <img
-          key={`${card.key}-star`}
-          src={cornerStar}
-          alt=""
-          className="pointer-events-none absolute z-20 max-w-none transition-[top] duration-500 ease-in-out"
-          style={{
-            top: `${tops[i] - STAR_H / 2}px`,
-            right: `${-STAR_W / 2}px`,
-            width: `${STAR_W}px`,
-            height: `${STAR_H}px`,
-          }}
-        />
-      ))}
+  return (
+    // Scroll track: taller than the deck by the distance the pin consumes.
+    <div
+      ref={trackRef}
+      className="relative w-full"
+      style={{ height: DECK_H + TRACK_EXTRA }}
+    >
+      <div className="sticky" style={{ top: PIN_TOP }}>
+        <div className="relative" style={{ height: `${DECK_H}px` }}>
+          {/* At rest this wrapper clips the deck to its constant height (when
+              a card other than the last is open, the trailing card hangs past
+              the bottom). While the scrub is running it stays unclipped so the
+              arriving cards are visible all the way up from the bottom of the
+              screen. */}
+          <div
+            className="absolute inset-0"
+            style={{ overflow: progress < 1 ? "visible" : "hidden" }}
+          >
+            {CARDS.map((card, i) => (
+              <button
+                key={card.key}
+                type="button"
+                aria-expanded={active === i}
+                onClick={() => setActive(i)}
+                style={{
+                  top: `${tops[i]}px`,
+                  height: `${CARD_H}px`,
+                  zIndex: i,
+                  // Scrubbed by the scroll, so no transition — top keeps its
+                  // 500ms ease.
+                  transform:
+                    arrival[i] < 1
+                      ? `translateY(${(1 - arrival[i]) * parkDist(i)}px)`
+                      : undefined,
+                }}
+                className="absolute inset-x-0 cursor-pointer overflow-hidden rounded-[8px] bg-gradient-to-b from-navy to-blue text-left shadow-[0_-6px_16px_rgba(0,0,0,0.18)] transition-[top] duration-500 ease-in-out"
+              >
+                <div className="relative h-full">
+                  <DeckPattern {...card.pattern} />
+                  {/* The open card's copy sits at Figma's 66px. A collapsed
+                      card lifts its copy to 44px so the top of its headline
+                      peeks out of the 64.75px sliver and gets clipped by the
+                      card below it — which is what the design file shows at
+                      every fold. */}
+                  <div
+                    className={`relative pr-[40px] pl-[49px] transition-[padding] duration-500 ease-in-out ${
+                      active === i ? "pt-[66px]" : "pt-[54px]"
+                    }`}
+                  >
+                    <p className="text-[22px] leading-[1.1] font-bold text-white">
+                      {card.title}
+                    </p>
+                    {/* Figma separates these with one empty line. */}
+                    <p className="mt-[24px] max-w-[275px] text-[22px] leading-[1.1] text-white">
+                      {card.body}
+                    </p>
+                  </div>
+                  <span
+                    className="absolute left-1/2 flex size-[38.54px] -translate-x-1/2 items-center justify-center rounded-full bg-white"
+                    style={{ top: 288.29 }}
+                  >
+                    <Sparkle className="size-[21px] text-navy" />
+                  </span>
+                </div>
+              </button>
+            ))}
+          </div>
+
+          {/* Outside the clipping wrapper so each star can straddle its card's
+              top-right corner. They can't ride in with their card, so they
+              fade in once it lands. */}
+          {CARDS.map((card, i) => (
+            <img
+              key={`${card.key}-star`}
+              src={cornerStar}
+              alt=""
+              className="pointer-events-none absolute z-20 max-w-none transition-[top,opacity] duration-500 ease-in-out"
+              style={{
+                top: `${tops[i] - STAR_H / 2}px`,
+                right: `${-STAR_W / 2}px`,
+                width: `${STAR_W}px`,
+                height: `${STAR_H}px`,
+                opacity: arrival[i] < 1 ? 0 : 1,
+              }}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
