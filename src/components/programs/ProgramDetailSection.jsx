@@ -10,19 +10,22 @@ const THEME = {
   },
   blue: {
     wash: "bg-gradient-to-b from-[#fffdf7] to-navy-2/20",
-    heading: "text-navy-2",
+    heading: "text-navy",
     overlay: "bg-gradient-to-b from-navy to-blue",
     cta: "navyOutline",
   },
 };
 
 /**
- * One "individual program" section: photo + overlapping highlight card on one
- * side, copy + CTA on the other. Reused for all five programs in the catalog
- * (Wellness-Centric Leadership, Strategic Marketing in Higher Education,
- * Integrated Marketing Strategy, Digital Marketing with Purpose, Marketing in
- * the Age of Digital Transformation) since they share one Figma layout that
- * simply mirrors left/right and swaps the gold/blue palette.
+ * One "individual program" section — Figma redesign 1755:2156.
+ *
+ * Layout (lg+ only; the desktop tree is `lg:block`): a copy column and a ~554px
+ * arched photo sit at opposite edges of the ~1124px content band. Each program
+ * ships its own corner-radius recipe (`imageRadius`), lifted verbatim from its
+ * Figma node, so no two arches match. The "In this program, you will:" panel is
+ * a solid gold/navy gradient box that overhangs the photo's inner edge toward
+ * the copy. Type is a flat 30px heading / 16px body (no fluid scaling) to match
+ * the board exactly.
  */
 export default function ProgramDetailSection({
   id,
@@ -31,12 +34,12 @@ export default function ProgramDetailSection({
   photo,
   photoAlt,
   photoPosition = "center",
+  imageRadius = "",
+  copyWidth = 457,
   eyebrow,
   paragraph,
   heading,
   bullets,
-  boxImage,
-  maskedPhoto,
   suitedFor,
   ctaLabel,
   ctaHref = "#contact",
@@ -44,55 +47,27 @@ export default function ProgramDetailSection({
   const t = THEME[theme] ?? THEME.gold;
   const imageOnRight = imageSide === "right";
 
-  // Figma 1638:3096 (image left) and 1638:3116 (image right), both on a 1440
-  // frame. The image is always 722 wide (50.14%) and flush with the frame edge.
-  // The copy blocks align to the frame's *outer* edge — 107px in when the copy
-  // sits on the left, ~136px when it sits on the right — with the heading 485
-  // wide and everything below it 407. Widths are explicit rather than max-w:
-  // inside a flex column an auto margin makes a block shrink to its text, which
-  // knocks short lines like "This program is suited for:" out of alignment.
-  const copyCol = imageOnRight
-    ? "lg:order-1 lg:items-start lg:pl-[107px] lg:pr-[40px]"
-    : "lg:order-2 lg:items-end lg:pr-[136px] lg:pl-[40px]";
-  const blockWidth = "lg:w-[407px] lg:max-w-full";
+  // The gradient panel hangs off the photo's inner edge (toward the copy) and
+  // sits in the lower third. Figma bleeds it ~20% past the left edge for
+  // image-right programs and ~27% past the right edge for image-left ones.
+  const overlayPos = imageOnRight
+    ? "left-[-18%] right-auto"
+    : "right-[-18%] left-auto";
 
-  // The photo touches the frame edge in Figma, so past 1440 it keeps bleeding
-  // out to the viewport edge rather than stopping at the centred content box.
-  // `min(50vw,720px)-50vw` is 0 up to 1440 and the negative overhang beyond it;
-  // the matching width bump keeps the inner edge on the 722px column line.
-  const bleed = imageOnRight
-    ? "lg:mr-[calc(min(50vw,720px)-50vw)] lg:ml-0 lg:w-[calc(100%+50vw-min(50vw,720px))]"
-    : "lg:ml-[calc(min(50vw,720px)-50vw)] lg:mr-0 lg:w-[calc(100%+50vw-min(50vw,720px))]";
-
-  // Overlapping "In this program, you will:" card. Each program exports its own
-  // SVG (653-673 wide, i.e. ~92% of the image), hung ~17% of the image width
-  // past its inner edge and ~12% up from its foot.
-  const boxPosition = `lg:absolute lg:bottom-[12%] lg:mt-0 lg:w-[92%] ${
-    imageOnRight ? "lg:left-[-17%] lg:right-auto" : "lg:right-[-17%] lg:left-auto"
-  }`;
-
-  const highlightBox = boxImage ? (
-    <div className={`relative mt-6 ${boxPosition}`}>
-      <img
-        src={boxImage}
-        alt={`In this program, you will: ${bullets.join("; ")}.`}
-        className="w-full"
-      />
-    </div>
-  ) : (
+  const overlay = (
     <div
-      className={`relative mt-6 rounded-[4px] p-6 sm:p-8 ${boxPosition} ${t.overlay}`}
+      className={`absolute bottom-[8%] z-10 w-[109%] rounded-[4px] px-[24px] py-[24px] ${overlayPos} ${t.overlay}`}
     >
-      <p className="text-[clamp(1.125rem,1.6vw,1.375rem)] font-bold text-white">
+      <p className="ml-[20px] text-[20px] leading-normal font-bold text-white">
         In this program, you will:
       </p>
-      <ul className="mt-4 flex flex-col gap-2">
+      <ul className="mt-[9px] flex flex-col gap-[2px]">
         {bullets.map((b) => (
           <li
             key={b}
-            className="flex items-start gap-2 text-[clamp(1rem,1.3vw,1.25rem)] leading-normal font-light text-white"
+            className="flex items-start gap-[6px] text-[16px] leading-normal font-light text-white"
           >
-            <Sparkle className="mt-1.5 size-3 shrink-0" />
+            <Sparkle className="mt-[3px] size-[14px] shrink-0" />
             <span>{b}</span>
           </li>
         ))}
@@ -100,99 +75,60 @@ export default function ProgramDetailSection({
     </div>
   );
 
+  const imageBlock = (
+    <div className="relative w-[49%] max-w-[554px] shrink-0">
+      <div className={`aspect-[554/623] w-full overflow-hidden ${imageRadius}`}>
+        <img
+          src={photo}
+          alt={photoAlt}
+          className="size-full object-cover"
+          style={{ objectPosition: photoPosition }}
+        />
+      </div>
+      {overlay}
+    </div>
+  );
+
+  const copyBlock = (
+    <div className="flex-1" style={{ maxWidth: copyWidth }}>
+      <h2 className={`text-[30px] leading-normal font-bold ${t.heading}`}>
+        {heading}
+      </h2>
+
+      <div className="mt-[25px] flex flex-col gap-[16px] text-[16px] leading-normal text-black/60">
+        <div>
+          <p className="font-bold">{eyebrow}</p>
+          <p className="mt-[16px]">{paragraph}</p>
+        </div>
+        <p className="font-bold">This program is suited for:</p>
+        <p className="font-light">{suitedFor}</p>
+      </div>
+
+      <div className="mt-[25px] w-fit">
+        <CtaPill as="a" href={ctaHref} variant={t.cta} size="compact">
+          {ctaLabel}
+        </CtaPill>
+      </div>
+    </div>
+  );
+
   return (
     <section
       id={id}
-      className={`relative overflow-hidden scroll-mt-[80px] lg:scroll-mt-[120px] ${t.wash}`}
+      className={`relative scroll-mt-[80px] lg:scroll-mt-[120px] ${t.wash}`}
     >
-      {/* The image sits 126-131px below the section top in both frames with a
-          ~14px foot. The copy is centred against the image and nudged 36px up
-          (a 72px bottom pad under justify-center), which lands the heading at
-          Figma's y=122 for the 884-tall image and y=176 for the 813-tall one. */}
-      <div
-        className={`relative mx-auto grid w-full max-w-[1440px] grid-cols-1 gap-12 px-5 py-14 sm:px-8 lg:gap-0 lg:px-0 lg:pt-[128px] lg:pb-[14px] ${
-          imageOnRight ? "lg:grid-cols-[1fr_50.14%]" : "lg:grid-cols-[50.14%_1fr]"
-        }`}
-      >
-        {/* Copy column */}
-        <div
-          className={`relative z-10 flex flex-col lg:justify-center lg:pb-[72px] ${copyCol}`}
-        >
-          <h2
-            className={`text-[clamp(1.5rem,2.6vw,2.1875rem)] leading-[1.2] font-bold lg:w-[485px] lg:max-w-full ${t.heading}`}
-          >
-            {Array.isArray(heading)
-              ? heading.map((line, i) => (
-                  <span key={i} className="block whitespace-nowrap">
-                    {line}
-                  </span>
-                ))
-              : heading}
-          </h2>
-
-          {/* Figma sets eyebrow and paragraph as one text block separated by a
-              blank line, i.e. a full 24px line of space. */}
-          <div
-            className={`mt-6 space-y-6 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-black/60 lg:mt-[44px] ${blockWidth}`}
-          >
-            <p className="font-bold">{eyebrow}</p>
-            <p>{paragraph}</p>
-          </div>
-
-          <p
-            className={`mt-8 text-[clamp(1.125rem,1.8vw,1.5625rem)] font-bold text-black/60 lg:mt-[40px] ${blockWidth}`}
-          >
-            This program is suited for:
-          </p>
-          <p
-            className={`mt-2 text-[clamp(1rem,1.4vw,1.25rem)] leading-normal font-light text-black/60 lg:mt-[15px] ${blockWidth}`}
-          >
-            {suitedFor}
-          </p>
-
-          <div className="mt-8 w-fit lg:mt-[40px]">
-            <CtaPill as="a" href={ctaHref} variant={t.cta} size="lg">
-              {ctaLabel}
-            </CtaPill>
-          </div>
-        </div>
-
-        {/* Photo + highlight card column. The image fills the 722px column, its
-            inner edge on the column line and its outer edge bled to the screen. */}
-        <div className={`relative ${imageOnRight ? "lg:order-2" : "lg:order-1"}`}>
-          {maskedPhoto ? (
-            /* Pre-masked photo exported from Figma (the arc silhouette is baked
-               into the transparent PNG), so it is placed at its natural aspect —
-               not CSS-clipped or cover-cropped. The highlight box is anchored to
-               this tight wrapper so it tracks the image at any width. */
-            <div
-              className={`relative mx-auto w-full max-w-[480px] sm:max-w-[560px] lg:max-w-none ${bleed}`}
-            >
-              <img src={maskedPhoto} alt={photoAlt} className="block w-full" />
-              {highlightBox}
-            </div>
-          ) : (
-            <div
-              className={`relative mx-auto w-full max-w-[480px] sm:max-w-[560px] lg:max-w-none ${bleed}`}
-            >
-              {/* Figma 1638:3098 — 722x884 with a 361px (half-width) arch on
-                  both top corners and a 4px foot on the inner side. */}
-              <div
-                className={`relative aspect-[722/884] w-full overflow-hidden rounded-[28px] lg:rounded-t-[361px] ${
-                  imageOnRight ? "lg:rounded-br-[4px] lg:rounded-bl-none" : "lg:rounded-bl-[4px] lg:rounded-br-none"
-                }`}
-              >
-                <img
-                  src={photo}
-                  alt={photoAlt}
-                  className="size-full object-cover"
-                  style={{ objectPosition: photoPosition }}
-                />
-              </div>
-              {highlightBox}
-            </div>
-          )}
-        </div>
+      <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between gap-[40px] px-8 py-[90px] xl:px-[158px]">
+        {imageOnRight ? (
+          <>
+            {copyBlock}
+            {imageBlock}
+          </>
+        ) : (
+          <>
+            {imageBlock}
+            {copyBlock}
+          </>
+        )}
       </div>
     </section>
   );

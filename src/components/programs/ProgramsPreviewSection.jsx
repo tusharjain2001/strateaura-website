@@ -70,21 +70,21 @@ const DECO_LAYOUT = {
 export default function ProgramsPreviewSection() {
   return (
     <section className="bg-white">
-      <div className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:py-[92px] xl:px-[95px]">
-        <h2 className="text-center text-[clamp(1.75rem,3.5vw,3.125rem)] leading-[1.2] font-bold text-navy">
+      <div className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:py-[70px] xl:px-[162px]">
+        <h2 className="text-center text-[30px] leading-normal font-bold text-navy">
           Our Marketing &amp; Leadership Programs.
         </h2>
 
-        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:mt-[57px] lg:grid-cols-5">
+        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:mt-6 lg:grid-cols-5">
           {PROGRAMS.map((p) => {
             const layout = DECO_LAYOUT[p.decoType];
             return (
               <a
                 key={p.label}
                 href={p.href}
-                className="group relative flex min-h-[193px] flex-col justify-between overflow-hidden rounded-[4px] bg-gradient-to-b from-navy to-blue p-5 transition-transform motion-safe:hover:-translate-y-1"
+                className="group relative flex min-h-[193px] flex-col justify-between overflow-hidden rounded-[4px] bg-gradient-to-b from-navy to-blue p-5 transition-[scale,box-shadow] duration-[400ms] motion-safe:hover:scale-90 motion-safe:hover:shadow-[0_0_10px_var(--color-blue)]"
               >
-                <p className="relative z-10 text-[clamp(0.9375rem,1.4vw,1.125rem)] leading-snug font-bold text-white">
+                <p className="relative z-10 text-[18px] leading-snug font-bold text-white">
                   {p.lines.map((line, i) => (
                     <span key={i} className="block">
                       {line}
