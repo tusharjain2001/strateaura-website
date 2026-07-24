@@ -63,14 +63,14 @@ export default function TwoPathways() {
           {/* UNVEIL Institutional — Figma 1755:1506: white 12px-radius card,
               188px tall; title+pill at x:48/y:44, summary column at x:574
               vertically centred. */}
-          <div className="group rounded-[12px] bg-white shadow-[0_0_27px_-11px_#b3902f] transition-[transform,box-shadow] duration-[400ms] hover:scale-[0.97] hover:shadow-[0_0_10px_var(--color-gold)] lg:relative lg:h-[188px] lg:overflow-hidden">
+          <div className="rounded-[12px] bg-white shadow-[0_0_27px_-11px_#b3902f] lg:relative lg:h-[188px] lg:overflow-hidden">
             <div className="grid grid-cols-1 gap-6 p-6 sm:p-8 lg:static lg:grid-cols-2 lg:gap-x-16 lg:p-0">
               <div className="lg:absolute lg:top-[44px] lg:left-[48px] lg:w-[368px]">
                 <h3 className="text-[clamp(1.5rem,2.083vw,1.875rem)] leading-[1.2] font-bold text-gold">
                   UNVEIL: Institutional
                 </h3>
                 <div className="mt-6 lg:mt-[19px]">
-                  <CtaPill as="a" href="/contact" variant="navyOutline" size="sm46">
+                  <CtaPill as="a" href="/contact" variant="navyOutline" size="xs">
                     Request a Cohort Proposal
                   </CtaPill>
                 </div>
@@ -90,7 +90,7 @@ export default function TwoPathways() {
 
           {/* Online Pathway — Figma 1755:1524: white card, gold-light hairline,
               489px tall; header row at x:47/y:50, phase cards at y:248. */}
-          <div className="group rounded-[11px] border border-gold-light bg-white shadow-[0_0_27px_-11px_#b3902f] transition-[transform,box-shadow] duration-[400ms] hover:scale-[0.97] hover:shadow-[0_0_10px_var(--color-gold)] lg:relative lg:h-[489px] lg:overflow-hidden">
+          <div className="rounded-[11px] border border-gold-light bg-white shadow-[0_0_27px_-11px_#b3902f] lg:relative lg:h-[489px] lg:overflow-hidden">
             <div className="p-6 sm:p-8 lg:static lg:p-0">
               <div className="grid grid-cols-1 gap-6 lg:static lg:grid-cols-2 lg:gap-x-16">
                 <div className="lg:absolute lg:top-[50px] lg:left-[47px] lg:w-[358px]">
@@ -98,7 +98,7 @@ export default function TwoPathways() {
                     UNVEIL: Online
                   </h3>
                   <div className="mt-6 lg:mt-[18px]">
-                    <CtaPill as="a" href="/webinar" variant="navyOutline" size="sm46">
+                    <CtaPill as="a" href="/webinar" variant="navyOutline" size="xs">
                       Join the Free Webinar
                     </CtaPill>
                   </div>

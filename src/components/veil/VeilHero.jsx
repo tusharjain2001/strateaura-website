@@ -32,10 +32,10 @@ export default function VeilHero() {
             <span>who are still performing well - and already paying a silent cost.</span>
           </p>
           <div className="mt-8 flex flex-col items-start gap-4 lg:mt-[50px] lg:gap-[20px]">
-            <CtaPill as="a" href="/contact" variant="creamFilled" size="sm56">
+            <CtaPill as="a" href="/contact" variant="creamFilled" size="xs">
               Request a Cohort Proposal
             </CtaPill>
-            <CtaPill as="a" href="/webinar" variant="creamOutline" size="sm56">
+            <CtaPill as="a" href="/webinar" variant="creamOutline" size="xs">
               Join the Free Webinar
             </CtaPill>
           </div>

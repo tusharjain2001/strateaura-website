@@ -90,7 +90,7 @@ function EvidenceCard({ className = "" }) {
       <div className="mt-3 text-[clamp(0.9375rem,1.25vw,1.123rem)] leading-normal font-medium text-white">
         {EVIDENCE_COPY}
       </div>
-      <CtaPill as="a" href="/webinar" variant="creamFilled" size="md" className="mt-6">
+      <CtaPill as="a" href="/webinar" variant="creamFilled" size="xs" className="mt-6">
         Join the Free Live Webinar
       </CtaPill>
     </div>
@@ -140,7 +140,7 @@ export default function EvidenceSection() {
             as="a"
             href="/webinar"
             variant="creamFilled"
-            size="sm49"
+            size="xs"
             className="mt-[7px]"
           >
             Join the Free Live Webinar

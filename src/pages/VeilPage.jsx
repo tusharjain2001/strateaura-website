@@ -33,10 +33,10 @@ export default function VeilPage() {
         tagline={null}
         buttons={
           <div className="mt-6 flex flex-col items-start gap-6 lg:mt-[20px]">
-            <CtaPill as="a" href="/contact" variant="goldOutline">
+            <CtaPill as="a" href="/contact" variant="goldOutline" size="xs">
               Request a Cohort Proposal
             </CtaPill>
-            <CtaPill as="a" href="/webinar" variant="goldOutline">
+            <CtaPill as="a" href="/webinar" variant="goldOutline" size="xs">
               Join the Free Live Webinar
             </CtaPill>
           </div>
