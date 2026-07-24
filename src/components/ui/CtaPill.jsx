@@ -97,6 +97,23 @@ const SIZES = {
     circle: "size-[34px]",
     glyph: "size-[24px]",
   },
+  // VEIL-page pills (Figma 1755:1447 / 1518 / 1588): 55.5/46/49px tall at lg;
+  // below lg they keep the lg/md bases so the mobile layout is untouched.
+  sm56: {
+    pill: "h-[54px] gap-4 pr-2 pl-6 text-[17px] sm:text-[20px] lg:h-[55.5px] lg:gap-[11px] lg:pr-[8px] lg:pl-[19px] lg:text-[20.5px]",
+    circle: "size-[42px] lg:size-[42.7px]",
+    glyph: "size-[18px] lg:size-[30px]",
+  },
+  sm46: {
+    pill: "h-[46px] gap-3 pr-[6px] pl-6 text-[17px] sm:text-[20px] lg:h-[46px] lg:gap-[14px] lg:pr-[6px] lg:pl-[23px] lg:text-[17.2px]",
+    circle: "size-[32px] lg:size-[35.5px]",
+    glyph: "size-[14px] lg:size-[25px]",
+  },
+  sm49: {
+    pill: "h-[46px] gap-3 pr-[6px] pl-6 text-[17px] sm:text-[20px] lg:h-[49px] lg:gap-[9px] lg:pr-[7px] lg:pl-[17px] lg:text-[19.3px]",
+    circle: "size-[32px] lg:size-[38px]",
+    glyph: "size-[14px] lg:size-[27px]",
+  },
 };
 
 export default function CtaPill({

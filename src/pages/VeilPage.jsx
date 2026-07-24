@@ -6,14 +6,20 @@ import TwoPathways from "../components/veil/TwoPathways";
 import EvidenceSection from "../components/veil/EvidenceSection";
 import SiteFooter from "../components/layout/SiteFooter";
 import CtaPill from "../components/ui/CtaPill";
+import useCanvasScale from "../hooks/useCanvasScale";
 
-// Responsive page (no fixed canvas): Figma's 1440px frame is the desktop
-// reference and the layout reflows below it. Above 1440px content stays at its
-// natural Figma size (each section centres a max-w-[1440px] container while
-// its background bleeds full-width) — never zoom-scaled.
+// Responsive page: Figma's 1440px frame is the desktop reference and the
+// layout reflows below it. ABOVE 1440 the whole tree zooms up to fill the
+// viewport, matching the Home/About boards (client wants wide screens filled,
+// same as the frameworks page).
 export default function VeilPage() {
+  const scale = Math.max(1, useCanvasScale());
+
   return (
-    <div className="bg-white text-black">
+    <div
+      className="bg-white text-black"
+      style={scale > 1 ? { zoom: scale } : undefined}
+    >
       <SiteHeader />
       <main>
         <VeilHero />
@@ -36,7 +42,7 @@ export default function VeilPage() {
           </div>
         }
         aside={
-          <div className="text-[clamp(1.125rem,1.6vw,1.875rem)] leading-normal font-medium">
+          <div className="text-[clamp(1.125rem,1.667vw,1.5rem)] leading-normal font-medium">
             <p className="text-navy-2">Contact Dr. Suhair Hamouri:</p>
             <a href="mailto:training@strateaura.com" className="text-gold underline">
               training@strateaura.com

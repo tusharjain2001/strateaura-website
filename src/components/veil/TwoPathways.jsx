@@ -1,22 +1,18 @@
 import CtaPill from "../ui/CtaPill";
-import bgSwirl from "../../assets/veil/pathways-bg-swirl.svg";
+import bgLaurel from "../../assets/veil/pathways-bg-v2.svg";
 import subcardDeco1 from "../../assets/programs/construct-card-deco-1.svg";
 import subcardDeco2 from "../../assets/programs/construct-card-deco-2.svg";
 import subcardDeco3 from "../../assets/programs/construct-card-deco-3.svg";
 import subcardSparkle from "../../assets/programs/construct-card-sparkle.svg";
 
-// Titles and bullets carry Figma's exact line breaks (node 1220:224): the
-// bold prefix sits alone on line 1, and the two long bullets break where the
-// design does. Inter wraps differently than the design font, so the breaks
-// are forced (block + whitespace-nowrap at lg) rather than left to reflow.
+// Figma 1755:1503 (1440x917): 1126px column at x:157, vertically centred
+// (73px top/bottom). The Institutional card is 188px tall, the Online card
+// 489px with three 322x203 phase cards at y:248. Body copy wraps naturally at
+// the new 16px sizes.
 const PHASES = [
   {
-    title: (
-      <>
-        <span className="block">MAP -</span>
-        <span className="block font-normal">Know Your Terrain:</span>
-      </>
-    ),
+    prefix: "MAP -",
+    title: "Know Your Terrain:",
     items: [
       "3 weeks",
       "Biological awareness",
@@ -26,159 +22,140 @@ const PHASES = [
     deco: subcardDeco1,
   },
   {
-    title: (
-      <>
-        <span className="block">DECODE -</span>
-        <span className="block font-normal">Design Your Architecture:</span>
-      </>
-    ),
+    prefix: "DECODE -",
+    title: "Design Your Architecture:",
     items: [
       "3 weeks",
       "The way your system responds",
-      [
-        "The gap between who you are",
-        "at your strongest and how you",
-        "have been showing up.",
-      ],
+      "The gap between who you are at your strongest and how you have been showing up.",
     ],
     deco: subcardDeco2,
   },
   {
-    title: (
-      <>
-        <span className="block">UNVEIL -</span>
-        <span className="block font-normal">Claim Your Ground:</span>
-      </>
-    ),
+    prefix: "UNVEIL -",
+    title: "Claim Your Ground:",
     items: [
       "6 weeks",
       "Live cohort from Phase 3",
-      ["Architecture, authority, the", "closing ceremony"],
+      "Architecture, authority, the closing ceremony",
     ],
     deco: subcardDeco3,
   },
 ];
 
-function SubcardList({ items }) {
-  return (
-    <ul className="relative z-10 mt-4 list-[square] space-y-1 pl-5 text-[clamp(1rem,1.28vw,1.125rem)] leading-normal text-white lg:[&_span]:block lg:[&_span]:whitespace-nowrap">
-      {items.map((item, i) => (
-        <li key={i}>
-          {Array.isArray(item) ? (
-            // Trailing space so the lines read as one sentence when they run
-            // inline on mobile; the spans only become forced line breaks at lg.
-            item.map((line, j) => <span key={j}>{line}{" "}</span>)
-          ) : (
-            <span>{item}</span>
-          )}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 export default function TwoPathways() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-white to-[#e6c464]">
+      {/* Background laurel (Figma 1755:1504): 1440x1181 centred, top at 27px,
+          the overflow clipped by the section. */}
       <img
-        src={bgSwirl}
+        src={bgLaurel}
         alt=""
-        className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-[82%] w-full object-cover object-bottom opacity-60 lg:block"
+        className="pointer-events-none absolute top-[27px] left-1/2 hidden h-[1181px] w-[1440px] max-w-none -translate-x-1/2 lg:block"
       />
 
-      <div className="relative mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:px-[120px] lg:py-[115px]">
-        <h2 className="text-center text-[clamp(1.875rem,3.5vw,3.125rem)] leading-[1.2] font-bold text-navy">
+      <div className="relative mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:px-[157px] lg:pt-[73px] lg:pb-[73px]">
+        <h2 className="text-center text-[30px] leading-[1.2] font-bold text-navy">
           The Two Pathways of VEIL™
         </h2>
 
-        <div className="mt-10 flex flex-col gap-8 lg:mt-14 lg:gap-10">
-          {/* UNVEIL Institutional */}
-          <div className="rounded-xl bg-white p-6 shadow-[0_0_27px_-11px_#b3902f] sm:p-8 lg:p-12">
-            {/* Title and CTA stack together on the left, the summary lines sit
-                on the right — the same order on mobile, where the grid
-                collapses to one column. */}
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-x-16">
-              <div>
-                <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold">
+        <div className="mt-10 flex flex-col gap-8 lg:mt-[28px] lg:gap-[28px]">
+          {/* UNVEIL Institutional — Figma 1755:1506: white 12px-radius card,
+              188px tall; title+pill at x:48/y:44, summary column at x:574
+              vertically centred. */}
+          <div className="group rounded-[12px] bg-white shadow-[0_0_27px_-11px_#b3902f] transition-[transform,box-shadow] duration-[400ms] hover:scale-[0.97] hover:shadow-[0_0_10px_var(--color-gold)] lg:relative lg:h-[188px] lg:overflow-hidden">
+            <div className="grid grid-cols-1 gap-6 p-6 sm:p-8 lg:static lg:grid-cols-2 lg:gap-x-16 lg:p-0">
+              <div className="lg:absolute lg:top-[44px] lg:left-[48px] lg:w-[368px]">
+                <h3 className="text-[clamp(1.5rem,2.083vw,1.875rem)] leading-[1.2] font-bold text-gold">
                   UNVEIL: Institutional
                 </h3>
-                <div className="mt-6">
-                  <CtaPill as="a" href="/contact" variant="navyOutline" size="md">
+                <div className="mt-6 lg:mt-[19px]">
+                  <CtaPill as="a" href="/contact" variant="navyOutline" size="sm46">
                     Request a Cohort Proposal
                   </CtaPill>
                 </div>
               </div>
-              <div className="text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-navy-2">
+              <div className="text-[16px] leading-normal text-navy-2 lg:absolute lg:top-[40px] lg:left-[574px] lg:w-[483px] lg:leading-[1.17]">
                 <p className="font-bold">
                   For institutions · 12 weeks · 8–12 women · In-person
                 </p>
-                <p className="mt-4">
+                <p className="mt-4 lg:mt-[17px]">
                   Internationally validated instruments · Pre/post measurement ·
                   KHDA Attested Certificate · Cohort reporting
                 </p>
-                <p className="mt-4">Led by Dr. Suhair Hamouri</p>
+                <p className="mt-4 lg:mt-[17px]">Led by Dr. Suhair Hamouri</p>
               </div>
             </div>
           </div>
 
-          {/* Online Pathway */}
-          <div className="rounded-xl border border-gold-light bg-white p-6 shadow-[0_0_27px_-11px_#b3902f] sm:p-8 lg:p-12">
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-x-16">
-              <div>
-                <h3 className="text-[clamp(1.5rem,2.4vw,2.25rem)] leading-[1.25] font-bold text-gold">
-                  UNVEIL: Online
-                </h3>
-                <div className="mt-6">
-                  <CtaPill as="a" href="/webinar" variant="navyOutline" size="md">
-                    Join the Free Webinar
-                  </CtaPill>
-                </div>
-              </div>
-              <div className="text-[clamp(1rem,1.4vw,1.25rem)] leading-normal text-navy-2">
-                <p className="font-bold">
-                  For individuals · Self-funded · Live virtual
-                </p>
-                <p className="mt-4">
-                  <strong className="font-bold">Part 1:</strong> 6 weeks ·
-                  Biological awareness + Identity work + Architecture ·
-                  Investment TBC
-                </p>
-                <p className="mt-4">
-                  <strong className="font-bold">Part 2:</strong> 6 weeks ·
-                  Authority + Integration + Closing Event in person
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3 lg:mt-10">
-              {PHASES.map((phase, i) => (
-                <div
-                  key={i}
-                  className="relative min-h-[190px] rounded-[4px] bg-gradient-to-b from-navy to-blue p-6"
-                >
-                  {/* Clip wrapper keeps the deco inside the rounded card
-                      without clipping the corner sparkle, which straddles
-                      the corner half-outside. */}
-                  <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[4px]">
-                    <img
-                      src={phase.deco}
-                      alt=""
-                      className="absolute right-0 bottom-2 w-[62%] opacity-80"
-                    />
+          {/* Online Pathway — Figma 1755:1524: white card, gold-light hairline,
+              489px tall; header row at x:47/y:50, phase cards at y:248. */}
+          <div className="group rounded-[11px] border border-gold-light bg-white shadow-[0_0_27px_-11px_#b3902f] transition-[transform,box-shadow] duration-[400ms] hover:scale-[0.97] hover:shadow-[0_0_10px_var(--color-gold)] lg:relative lg:h-[489px] lg:overflow-hidden">
+            <div className="p-6 sm:p-8 lg:static lg:p-0">
+              <div className="grid grid-cols-1 gap-6 lg:static lg:grid-cols-2 lg:gap-x-16">
+                <div className="lg:absolute lg:top-[50px] lg:left-[47px] lg:w-[358px]">
+                  <h3 className="text-[clamp(1.5rem,2.083vw,1.875rem)] leading-[1.2] font-bold text-gold">
+                    UNVEIL: Online
+                  </h3>
+                  <div className="mt-6 lg:mt-[18px]">
+                    <CtaPill as="a" href="/webinar" variant="navyOutline" size="sm46">
+                      Join the Free Webinar
+                    </CtaPill>
                   </div>
-                  {/* Corner sparkle is a desktop-only flourish; the Figma
-                      mobile subcards (nodes 1434:4055/4065/4075) have none. */}
-                  <img
-                    src={subcardSparkle}
-                    alt=""
-                    className="pointer-events-none absolute -top-[14px] -right-[14px] z-10 hidden size-[28px] lg:block"
-                  />
-                  <p className="relative z-10 text-[clamp(1.25rem,1.8vw,1.5rem)] font-bold text-white">
-                    {phase.title}
-                  </p>
-                  <SubcardList items={phase.items} />
                 </div>
-              ))}
+                <div className="text-[16px] leading-normal text-navy-2 lg:absolute lg:top-[50px] lg:left-[565px] lg:w-[450px] lg:leading-[1.17]">
+                  <p className="font-bold">
+                    For individuals · Self-funded · Live virtual
+                  </p>
+                  <p className="mt-4 lg:mt-[19px]">
+                    <strong className="font-bold">Part 1:</strong> 6 weeks ·
+                    Biological awareness + Identity work + Architecture ·
+                    Investment TBC
+                  </p>
+                  <p className="mt-4 lg:mt-[19px]">
+                    <strong className="font-bold">Part 2:</strong> 6 weeks ·
+                    Authority + Integration + Closing Event in person
+                  </p>
+                </div>
+              </div>
+
+              {/* Phase cards: 322x203 at x:51/y:248, 30px gaps. */}
+              <div className="mt-8 grid grid-cols-1 gap-5 md:grid-cols-3 lg:absolute lg:top-[248px] lg:left-[51px] lg:mt-0 lg:w-[1026px] lg:gap-[30px]">
+                {PHASES.map((phase, i) => (
+                  <div
+                    key={i}
+                    className="group/phase relative min-h-[190px] transition-transform duration-[400ms] hover:scale-90 lg:h-[203px] lg:min-h-0"
+                  >
+                    {/* Corner sparkle straddles the corner, outside the
+                        clipped panel; desktop-only like the Figma file. */}
+                    <img
+                      src={subcardSparkle}
+                      alt=""
+                      className="pointer-events-none absolute -top-[11px] -right-[11px] z-10 hidden size-[23px] lg:block"
+                    />
+                    <div className="relative h-full w-full overflow-hidden rounded-[3.3px] bg-gradient-to-b from-navy to-blue p-6 transition-shadow duration-[400ms] group-hover/phase:shadow-[0_0_10px_var(--color-blue)] lg:p-[20px]">
+                      <img
+                        src={phase.deco}
+                        alt=""
+                        className="pointer-events-none absolute right-0 bottom-2 w-[62%] opacity-80 lg:top-[39.4%] lg:left-[33.4%] lg:bottom-auto lg:right-auto lg:w-[58.6%]"
+                      />
+                      <p className="relative z-10 font-bold text-white">
+                        <span className="block text-[clamp(1.25rem,1.59vw,22.85px)] leading-[1.17]">
+                          {phase.prefix}
+                        </span>
+                        <span className="block text-[clamp(1.125rem,1.36vw,19.59px)] leading-[1.17] font-normal">
+                          {phase.title}
+                        </span>
+                      </p>
+                      <ul className="relative z-10 mt-4 list-[square] space-y-1 pl-5 text-[16px] leading-normal text-white lg:mt-[13px] lg:list-disc lg:space-y-0 lg:pl-[24px] lg:text-[16.3px] lg:leading-[1.17]">
+                        {phase.items.map((item, j) => (
+                          <li key={j}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
