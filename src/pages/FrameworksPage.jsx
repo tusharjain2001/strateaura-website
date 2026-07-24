@@ -7,22 +7,28 @@ import VeilFrameworkSection from "../components/frameworks/VeilFrameworkSection"
 import WhyStrateAura from "../components/frameworks/WhyStrateAura";
 import SiteFooter from "../components/layout/SiteFooter";
 import FrameworksMobile from "../components/frameworks-mobile/FrameworksMobile";
+import useCanvasScale from "../hooks/useCanvasScale";
 
-// Responsive page (no fixed canvas): Figma's 1440px frame is the desktop
-// reference and the layout reflows below it. Above 1440px content stays at its
-// natural Figma size (each section centres a max-w-[1440px] container while
-// its background bleeds full-width) — never zoom-scaled.
+// Between lg and 1440 the sections reflow fluidly; ABOVE 1440 the whole
+// desktop tree (header, sections, footer) zooms up to fill the viewport,
+// matching the Home/About boards — per the client, wide screens must never
+// show the design "shrunk" inside side margins.
 //
 // Below lg the separate mobile tree (Figma node 1296:4457) takes over instead,
 // so the desktop sections below are untouched by mobile work.
 export default function FrameworksPage() {
+  const scale = Math.max(1, useCanvasScale());
+
   return (
     <>
       <div className="lg:hidden">
         <FrameworksMobile />
       </div>
 
-      <div className="hidden bg-white text-black lg:block">
+      <div
+        className="hidden bg-white text-black lg:block"
+        style={scale > 1 ? { zoom: scale } : undefined}
+      >
         <SiteHeader />
         <main>
           <FrameworksHero />

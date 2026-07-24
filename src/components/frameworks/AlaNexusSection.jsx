@@ -83,7 +83,7 @@ export default function AlaNexusSection() {
           {CARDS.map((card) => (
             <div
               key={card.key}
-              className="relative min-h-[240px] bg-gradient-to-b from-navy to-blue lg:h-[256px] lg:min-h-0"
+              className="relative min-h-[240px] bg-gradient-to-b from-navy to-blue transition-[transform,box-shadow] duration-[400ms] hover:scale-90 hover:shadow-[0_0_10px_var(--color-blue)] lg:h-[256px] lg:min-h-0"
             >
               {/* Clips the decorative pattern to the card box without clipping
                   the corner sparkle below, which must bleed outside. */}

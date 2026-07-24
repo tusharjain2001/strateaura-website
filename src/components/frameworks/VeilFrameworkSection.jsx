@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import FrameworkTag from "./FrameworkTag";
 import CtaPill from "../ui/CtaPill";
 import deckArcs from "../../assets/frameworks/veil-deck-arcs.svg";
@@ -54,6 +54,19 @@ const DECK_H = PEEK_STEP * (CARDS.length - 1) + CARD_H;
 // card and the white page).
 const STAR_W = 32.8;
 const STAR_H = 35.3;
+
+// Scroll choreography (same recipe as the Home "Problems We Address" deck):
+// the section pins near the top of the viewport while the page scrolls on for
+// TRACK_EXTRA canvas-px; cards 2-4 ride up from under the deck's clip one
+// after another, scrubbed 1:1 with the scroll, then the pin releases. At full
+// progress every card sits at its designed position, so the resting layout is
+// untouched.
+const DESIGN_H = 887; // the section's designed height, unchanged
+// Pinned 18 canvas-px from the viewport top: the deck (97px into the section,
+// 693 tall) then sits bottom-flush at 1080 real px on a zoomed 1920 screen.
+const PIN_TOP = 18;
+const CARD_SCROLL = 400; // canvas px of scroll each arriving card consumes
+const TRACK_EXTRA = CARD_SCROLL * (CARDS.length - 1); // cards 2-4 arrive on scroll
 
 /**
  * Decorative arc pattern. Figma authors each asset at its pre-rotation size
@@ -140,9 +153,19 @@ function LegacyCardBody() {
  * paint over earlier ones (ascending z-index), which produces the overlap-clip
  * exactly as the design file shows it. Clicking the open card is a no-op —
  * closing it would leave the deck with no expanded card and a hole.
+ *
+ * `progress` (0..1 across the scroll track) scrubs cards 2-4 in from under
+ * the deck's clip; at 1 all transforms clear and the DOM is identical to the
+ * plain accordion, so clicks still work.
  */
-function StackDeck() {
+function StackDeck({ progress }) {
   const [active, setActive] = useState(CARDS.length - 1); // Legacy open by default
+
+  // Card 1 is on stage from the start; card i of 2-4 rises during its third
+  // of the track. arrival = 0 fully below the deck's clip, 1 seated on top.
+  const arrival = CARDS.map((_, i) =>
+    i === 0 ? 1 : Math.min(1, Math.max(0, progress * 3 - (i - 1))),
+  );
 
   const tops = [];
   let y = 0;
@@ -173,6 +196,13 @@ function StackDeck() {
                 width: `${CARD_W}px`,
                 height: `${CARD_H}px`,
                 zIndex: i,
+                // Ride in from just below the deck's clip (the extra 24px
+                // keeps the card's upward shadow clipped too); scrubbed by
+                // the scroll, so no transition — top keeps its 500ms ease.
+                transform:
+                  arrival[i] < 1
+                    ? `translateY(${(1 - arrival[i]) * (DECK_H - tops[i] + 24)}px)`
+                    : undefined,
               }}
               className="absolute left-0 cursor-pointer overflow-hidden rounded-[7px] bg-gradient-to-b from-navy to-blue text-left shadow-[0_-6px_16px_rgba(0,0,0,0.18)] transition-[top] duration-500 ease-in-out"
             >
@@ -187,18 +217,20 @@ function StackDeck() {
       </div>
 
       {/* Corner stars live outside the clipping wrapper so they can straddle
-          each card's top-right corner — centred on the corner, half outside. */}
+          each card's top-right corner — centred on the corner, half outside.
+          They can't ride in with their card, so they fade in once it lands. */}
       {CARDS.map((card, i) => (
         <img
           key={`${card.key}-star`}
           src={cornerStar}
           alt=""
-          className="pointer-events-none absolute z-20 max-w-none transition-[top] duration-500 ease-in-out"
+          className="pointer-events-none absolute z-20 max-w-none transition-[top,opacity] duration-500 ease-in-out"
           style={{
             top: `${tops[i] - STAR_H / 2}px`,
             left: `${CARD_W - STAR_W / 2}px`,
             width: `${STAR_W}px`,
             height: `${STAR_H}px`,
+            opacity: arrival[i] < 1 ? 0 : 1,
           }}
         />
       ))}
@@ -235,8 +267,51 @@ function StaticCard({ card }) {
 // y:174.2, deck at x:825 / y:97 (77px above the copy top). The 159/173 side
 // gutters scale down as vw between lg and 1440 so both columns keep fitting.
 export default function VeilFrameworkSection() {
+  const trackRef = useRef(null);
+  // 0..1 across TRACK_EXTRA; starts at 1 (deck fully assembled, never scrubs)
+  // when the user prefers reduced motion.
+  const [progress, setProgress] = useState(() =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 1 : 0,
+  );
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    const measure = () => {
+      raf = 0;
+      const el = trackRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect(); // real px, zoom applied
+      if (!rect.width) return; // display:none — the mobile tree is showing
+      // Page zoom factor: the section spans the full canvas (1440) when the
+      // page is zoomed above 1440; below the cap the layout is unzoomed.
+      const s = Math.max(1, rect.width / 1440);
+      const p = (PIN_TOP * s - rect.top) / (TRACK_EXTRA * s);
+      setProgress(Math.min(1, Math.max(0, p)));
+    };
+    const queue = () => {
+      if (!raf) raf = requestAnimationFrame(measure);
+    };
+    queue();
+    window.addEventListener("scroll", queue, { passive: true });
+    window.addEventListener("resize", queue);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", queue);
+      window.removeEventListener("resize", queue);
+    };
+  }, []);
+
   return (
-    <section className="bg-white">
+    // The scroll track: taller than the designed section by the distance the
+    // pin consumes. The sticky wrapper holds the designed 887px section, which
+    // pins near the viewport top while the cards arrive, then releases.
+    <section
+      ref={trackRef}
+      className="relative bg-white lg:h-[var(--veil-track-h)]"
+      style={{ "--veil-track-h": `${DESIGN_H + TRACK_EXTRA}px` }}
+    >
+      <div className="lg:sticky" style={{ top: PIN_TOP }}>
       <div className="mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:flex lg:items-start lg:justify-between lg:pt-[97px] lg:pb-[97px] lg:pl-[clamp(2rem,11.04vw,159px)] lg:pr-[clamp(2rem,12.01vw,173px)]">
         {/* Copy column — Figma caps it at 553px. */}
         <div className="lg:mt-[77px] lg:w-[553px] lg:max-w-full lg:shrink lg:min-w-0">
@@ -308,8 +383,9 @@ export default function VeilFrameworkSection() {
         {/* Interactive stack, desktop only — fixed 442px column, never
             stretched or shrunk by the flex row. */}
         <div className="hidden lg:block lg:shrink-0">
-          <StackDeck />
+          <StackDeck progress={progress} />
         </div>
+      </div>
       </div>
     </section>
   );

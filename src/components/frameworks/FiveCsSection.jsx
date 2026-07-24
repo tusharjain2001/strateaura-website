@@ -57,7 +57,7 @@ const CARDS = [
 function Card({ card }) {
   return (
     <div
-      className={`relative min-h-[240px] bg-gradient-to-b from-gold to-gold-light lg:min-h-0 ${
+      className={`relative min-h-[240px] bg-gradient-to-b from-gold to-gold-light transition-[transform,box-shadow] duration-[400ms] hover:scale-90 hover:shadow-[0_0_10px_var(--color-gold)] lg:min-h-0 ${
         card.wide ? "md:col-span-2" : ""
       } ${card.short ? "lg:h-[201px]" : "lg:h-[204px]"}`}
     >
