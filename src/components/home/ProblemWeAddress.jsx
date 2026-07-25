@@ -232,8 +232,7 @@ export default function ProblemWeAddress() {
           </div>
           {/* 1728:296 — 16px light in Figma's 340.2 box */}
           <p className="absolute top-[157.99px] left-[195px] w-[340.2px] text-[16px] leading-[1.2] font-light text-black">
-            We live in a world of constant doing, chasing visibility, metrics,
-            and motion. But too many leaders feel
+            We live in a world of constant doing, chasing visibility, metrics, and motion. Eventually, many leaders begin to recognize the signs:
           </p>
 
           {/* Stacked accordion — click a card to bring it to full height.

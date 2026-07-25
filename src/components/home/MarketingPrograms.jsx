@@ -103,12 +103,12 @@ export default function MarketingPrograms() {
       <h2 className="absolute top-0 left-[158px] w-[490px] text-[30px] leading-[1.2] font-bold text-navy">
         Our Marketing &amp;
         <br />
-        Leadership Programs.
+        Leadership Programs
       </h2>
 
       {/* 1728:213 — 508 wide at x 773.3, sitting 6.3 below the heading's cap line */}
       <p className="absolute top-[6.26px] left-[773.3px] w-[508px] text-[16px] leading-[1.2] text-navy">
-        We offer a suite of practical marketing and leadership programs for
+        StrateAura offers a suite of practical marketing and leadership programs for
         professionals, teams, and institutions. All programs carry KHDA Attested
         Attendance Certificate.
       </p>

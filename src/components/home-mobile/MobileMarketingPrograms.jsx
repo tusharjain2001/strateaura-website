@@ -113,7 +113,7 @@ export default function MobileMarketingPrograms() {
           <h2 className="text-[28px] leading-normal font-bold">
             Our Marketing &amp;
             <br />
-            Leadership Programs.
+            Leadership Programs
           </h2>
           <p className="text-[16px] leading-normal">
             StrateAura offers a suite of practical marketing and leadership programs

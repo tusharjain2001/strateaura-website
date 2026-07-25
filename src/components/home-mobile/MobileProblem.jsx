@@ -222,8 +222,7 @@ export default function MobileProblem() {
               We Address
             </h2>
             <p className="text-[16px] leading-normal text-black">
-              We live in a world of constant doing, chasing visibility, metrics,
-              and motion. But too many leaders feel
+              We live in a world of constant doing, chasing visibility, metrics, and motion. Eventually, many leaders begin to recognize the signs:
             </p>
           </div>
 
