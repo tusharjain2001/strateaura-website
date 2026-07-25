@@ -69,6 +69,19 @@ const PROGRAM_DETAILS = [
     photoAlt: "Dr. Suhair Hamouri presenting a certificate at the Integrated Marketing Strategy masterclass",
     photoPosition: "center 25%",
     imageRadius: "rounded-tr-[235px] rounded-bl-[235px]",
+    // This board (1755:2478) was re-cut with a wider mask than the other four:
+    // a 599x621 photo in a 1122 band, with the panel 567 wide, overhanging the
+    // photo's left edge by 46.77 and ending 80 above its bottom. The shared
+    // panel percentages don't survive the wider photo — 109% would overflow its
+    // right edge and -18% would leave only 4px of clearance to the copy.
+    geometry: {
+      photoPct: 53.3,
+      photoMaxW: 599,
+      photoAspect: "599 / 621",
+      panelPct: 94.7,
+      panelInsetPct: 7.8,
+      panelBottomPct: 12.9,
+    },
     copyWidth: 413,
     heading: "Integrated Marketing Strategy Masterclass: From Chaos to Clarity",
     eyebrow: "Turn scattered tactics into one powerful, cohesive strategy.",

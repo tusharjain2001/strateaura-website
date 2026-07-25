@@ -16,16 +16,32 @@ const THEME = {
   },
 };
 
+// Photo and panel geometry. The defaults are the ~554x623 arch that four of the
+// five boards share; a program whose board has been re-cut passes its own via
+// the `geometry` prop. photoPct is a share of the content band, the panel values
+// are shares of the photo box it hangs off.
+const DEFAULT_GEOMETRY = {
+  photoPct: 49,
+  photoMaxW: 554,
+  photoAspect: "554 / 623",
+  panelPct: 109,
+  panelInsetPct: 18,
+  panelBottomPct: 8,
+};
+
 /**
  * One "individual program" section — Figma redesign 1755:2156.
  *
- * Layout (lg+ only; the desktop tree is `lg:block`): a copy column and a ~554px
- * arched photo sit at opposite edges of the ~1124px content band. Each program
- * ships its own corner-radius recipe (`imageRadius`), lifted verbatim from its
- * Figma node, so no two arches match. The "In this program, you will:" panel is
- * a solid gold/navy gradient box that overhangs the photo's inner edge toward
- * the copy. Type is a flat 30px heading / 16px body (no fluid scaling) to match
- * the board exactly.
+ * Layout (lg+ only; the desktop tree is `lg:block`): a copy column and an arched
+ * photo sit at opposite edges of the ~1124px content band. Each program ships
+ * its own corner-radius recipe (`imageRadius`), lifted verbatim from its Figma
+ * node, so no two arches match. The "In this program, you will:" panel is a
+ * solid gold/navy gradient box that overhangs the photo's inner edge toward the
+ * copy. Type is a flat 30px heading / 16px body (no fluid scaling) to match the
+ * board exactly.
+ *
+ * Geometry is inline-styled rather than classed because it is per-program and
+ * Tailwind can only extract class names it can see statically.
  */
 export default function ProgramDetailSection({
   id,
@@ -35,6 +51,7 @@ export default function ProgramDetailSection({
   photoAlt,
   photoPosition = "center",
   imageRadius = "",
+  geometry,
   copyWidth = 457,
   eyebrow,
   paragraph,
@@ -46,17 +63,18 @@ export default function ProgramDetailSection({
 }) {
   const t = THEME[theme] ?? THEME.gold;
   const imageOnRight = imageSide === "right";
+  const g = { ...DEFAULT_GEOMETRY, ...geometry };
 
   // The gradient panel hangs off the photo's inner edge (toward the copy) and
-  // sits in the lower third. Figma bleeds it ~20% past the left edge for
-  // image-right programs and ~27% past the right edge for image-left ones.
-  const overlayPos = imageOnRight
-    ? "left-[-18%] right-auto"
-    : "right-[-18%] left-auto";
-
+  // sits in the lower third, bleeding past that edge by panelInsetPct.
   const overlay = (
     <div
-      className={`absolute bottom-[8%] z-10 w-[109%] rounded-[4px] px-[24px] py-[24px] ${overlayPos} ${t.overlay}`}
+      className={`absolute z-10 rounded-[4px] px-[24px] py-[24px] ${t.overlay}`}
+      style={{
+        width: `${g.panelPct}%`,
+        bottom: `${g.panelBottomPct}%`,
+        [imageOnRight ? "left" : "right"]: `${-g.panelInsetPct}%`,
+      }}
     >
       <p className="ml-[20px] text-[20px] leading-normal font-bold text-white">
         In this program, you will:
@@ -76,8 +94,14 @@ export default function ProgramDetailSection({
   );
 
   const imageBlock = (
-    <div className="relative w-[49%] max-w-[554px] shrink-0">
-      <div className={`aspect-[554/623] w-full overflow-hidden ${imageRadius}`}>
+    <div
+      className="relative shrink-0"
+      style={{ width: `${g.photoPct}%`, maxWidth: g.photoMaxW }}
+    >
+      <div
+        className={`w-full overflow-hidden ${imageRadius}`}
+        style={{ aspectRatio: g.photoAspect }}
+      >
         <img
           src={photo}
           alt={photoAlt}
