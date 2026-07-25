@@ -92,6 +92,12 @@ export default function FwFiveCs() {
         <h2 className="mt-[23px] text-[25px] leading-[30px] font-bold text-navy-2">
           The 5Cs of Brand Health
         </h2>
+        {/* Sits directly under the heading, as on desktop — it used to trail
+            the Core Concept block instead. */}
+        <p className="mt-[9px] text-[14px] leading-[18px] font-light text-black/60">
+          This is more than brand strategy. It&rsquo;s a rhythm. One that builds
+          presence without burnout.
+        </p>
 
         <p className="mt-[26px] text-[14px] leading-[18px] font-bold tracking-[0.5px] text-gold uppercase">
           Core Concept
@@ -108,11 +114,6 @@ export default function FwFiveCs() {
             distinct.
           </p>
         </div>
-        <p className="mt-[18px] text-[14px] leading-[19px] text-black/60">
-          This is more than brand strategy. It&rsquo;s a rhythm. One that builds
-          presence without burnout.
-        </p>
-
         <MobilePill
           as="a"
           href="#brand-health-support"

@@ -88,8 +88,16 @@ const DECK_H = PEEK_STEP * (CARDS.length - 1) + CARD_H;
 // over. The copy block above stays in normal flow — only the deck pins.
 const HEADER_H = 64; // sticky SiteHeader height below lg
 const PIN_TOP = HEADER_H + 16; // where the deck pins, real px
-const CARD_SCROLL = 320; // px of scroll each arriving card consumes
-const TRACK_EXTRA = CARD_SCROLL * (CARDS.length - 1); // cards 2-4 arrive on scroll
+const CARD_SCROLL = 200; // px of scroll each arriving card consumes
+// One card at a time: the next starts rising only once the previous has fully
+// seated (stagger 1). The short CARD_SCROLL is what keeps the run tight.
+const ARRIVAL_STAGGER = 1;
+// Where the scrub begins, as a fraction of the viewport height: the deck's top
+// only has to reach 80% down the screen for card 2 to start rising, so the run
+// is already underway when the deck pins.
+const SCRUB_START_VH = 0.8;
+const TRACK_EXTRA =
+  CARD_SCROLL * (1 + (CARDS.length - 2) * ARRIVAL_STAGGER);
 // Exported from Figma at 27.47x29.52 (not square) and centred on the card's
 // top-right corner, so half of it hangs over the white page — which is why the
 // asset is navy rather than the white of the in-card icon.
@@ -159,7 +167,13 @@ function Deck() {
       const rect = el.getBoundingClientRect();
       if (!rect.width) return; // display:none — the desktop tree is showing
       setVh(window.innerHeight);
-      const p = (PIN_TOP - rect.top) / TRACK_EXTRA;
+      // Scrubbing starts as soon as the deck's top crosses SCRUB_START_VH of
+      // the screen — well before the pin engages — so card 2 is already on its
+      // way up by the time the deck reaches the top. It still finishes at the
+      // end of the track, so the span covers the pre-pin approach plus
+      // TRACK_EXTRA.
+      const startTop = window.innerHeight * SCRUB_START_VH;
+      const p = (startTop - rect.top) / (startTop - PIN_TOP + TRACK_EXTRA);
       setProgress(Math.min(1, Math.max(0, p)));
     };
     const queue = () => {
@@ -175,11 +189,15 @@ function Deck() {
     };
   }, []);
 
-  // Card 1 is on stage from the start; card i of 2-4 rises during its third
-  // of the track. arrival = 0 parked below the screen, 1 seated at its top.
-  const arrival = CARDS.map((_, i) =>
-    i === 0 ? 1 : Math.min(1, Math.max(0, progress * 3 - (i - 1))),
-  );
+  // Card 1 is on stage from the start; cards 2-4 each rise over a CARD_SCROLL
+  // window, the next one starting when the previous is ARRIVAL_STAGGER of the
+  // way up. arrival = 0 parked below the screen, 1 seated at its top.
+  const WINDOW = CARD_SCROLL / TRACK_EXTRA;
+  const arrival = CARDS.map((_, i) => {
+    if (i === 0) return 1;
+    const start = (i - 1) * ARRIVAL_STAGGER * WINDOW;
+    return Math.min(1, Math.max(0, (progress - start) / WINDOW));
+  });
 
   const tops = [];
   let y = 0;

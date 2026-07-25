@@ -58,6 +58,10 @@ export default function FwAlaNexus() {
         <h2 className="mt-[23px] text-[25px] leading-[30px] font-bold text-navy-2">
           ALA-Nexus&trade;
         </h2>
+        {/* The tagline the desktop section carries under the same heading. */}
+        <p className="mt-[9px] text-[14px] leading-[18px] text-black/60">
+          From Fragmented Effort to Aligned Momentum
+        </p>
 
         <p className="mt-[26px] text-[14px] leading-[18px] font-bold tracking-[0.5px] text-gold uppercase">
           Core Concept
