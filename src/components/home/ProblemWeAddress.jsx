@@ -29,6 +29,20 @@ const PIN_GAP = 56; // breathing room between the navbar and the pinned deck
 const PIN_TOP = HEADER_H + PIN_GAP; // where the section pins, real px
 const CARD_SCROLL = 400; // canvas px of scroll each arriving card consumes
 const TRACK_EXTRA = CARD_SCROLL * (4 - 1); // cards 2-4 arrive on scroll
+// The deck used to start assembling only once the section pinned, which meant
+// waiting for the whole section to be on screen before anything moved. The
+// client wants the stacking already under way while the top card is still
+// half off the bottom of the screen, so the scrub gets a lead-in: it starts as
+// soon as CARD_REVEAL of the first card is on screen, and still finishes
+// exactly as the pin releases, leaving the Figma resting layout untouched.
+//
+// Keyed to the card, not to the section: the canvas is full-bleed, so the
+// section's real height is 796 * (viewportWidth / 1440) and on a >=1536px-wide
+// screen it is TALLER than the viewport. A "% of the section revealed" trigger
+// therefore lands within ~50px of the pin (measured: -2px at 1518x768, 54px at
+// 1902x984) — visually no change at all. The card scales the same way, so
+// measuring against it keeps the trigger consistent at every zoom.
+const CARD_REVEAL = 0.5;
 
 // Cards 1-3 are the problem statements (gold -> gold-dark); card 4 is the
 // answer (gold -> gold-light) and uses a different, left-aligned 31px layout.
@@ -171,7 +185,13 @@ export default function ProblemWeAddress() {
       if (!rect.width) return; // display:none — the mobile tree is showing
       const s = rect.width / 1440;
       setScale(s);
-      const p = (PIN_TOP - rect.top) / (TRACK_EXTRA * s);
+      // Scroll the scrub starts ahead of the pin: the gap between the pin and
+      // the deck's top sitting CARD_REVEAL of a card above the viewport's
+      // bottom edge. Added to the denominator too, so progress still reaches 1
+      // at exactly the same scroll position as before — only the start moves.
+      const startTop = window.innerHeight - CARD_REVEAL * CARD_H * s;
+      const lead = Math.max(0, startTop - PIN_TOP);
+      const p = (PIN_TOP + lead - rect.top) / (TRACK_EXTRA * s + lead);
       setProgress(Math.min(1, Math.max(0, p)));
     };
     const queue = () => {
