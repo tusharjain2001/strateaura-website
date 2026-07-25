@@ -49,6 +49,22 @@ export default function VeilPage() {
             </a>
           </div>
         }
+        // The phone Figma keeps the shared mobile CTA (default copy, tagline
+        // and single pill) and only adds the contact block underneath, so the
+        // desktop overrides above are dropped below lg.
+        mobile={{
+          aside: (
+            <div className="text-[16px] leading-normal font-medium">
+              <p className="text-navy-2">Contact Dr. Suhair Hamouri:</p>
+              <a
+                href="mailto:training@strateaura.com"
+                className="text-gold underline"
+              >
+                training@strateaura.com
+              </a>
+            </div>
+          ),
+        }}
       />
     </div>
   );

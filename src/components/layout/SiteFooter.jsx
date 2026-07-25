@@ -28,18 +28,17 @@ const SOCIALS = [{ src: socialLi, label: "LinkedIn", href: "https://www.linkedin
  *
  * The CTA block accepts per-page overrides (the Figma VEIL page ships its own
  * footer copy/buttons); defaults reproduce the shared design.
+ *
+ * `mobile` replaces those overrides below lg for pages whose phone Figma
+ * differs from the desktop one (the VEIL page keeps the shared mobile CTA and
+ * only adds the contact block). Omit it and mobile mirrors desktop.
  */
-export default function SiteFooter({ body, tagline, buttons, aside }) {
+export default function SiteFooter({ body, tagline, buttons, aside, mobile }) {
   return (
     <>
       {/* Below lg every fluid page shows the Home-style mobile footer so the
           footer matches across the site; the layout below is desktop-only. */}
-      <MobileSiteFooter
-        body={body}
-        tagline={tagline}
-        buttons={buttons}
-        aside={aside}
-      />
+      <MobileSiteFooter {...(mobile ?? { body, tagline, buttons, aside })} />
       <footer className="relative hidden overflow-hidden bg-white lg:block">
       {/* CTA */}
       <div className="relative mx-auto w-full max-w-[1440px] px-5 pt-14 sm:px-8 lg:pt-[153px] xl:px-[116px]">
