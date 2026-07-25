@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.svg";
-import { ChevronDown, CloseIcon, MenuIcon } from "../ui/Icons";
+import { CloseIcon, MenuIcon } from "../ui/Icons";
 
 const NAV_LINKS = [
   { label: "Home", to: "/" },
   { label: "About Us", to: "/about" },
   { label: "VEIL™", to: "/veil" },
-  { label: "Our Programs", to: "/programs", caret: true },
+  { label: "Our Programs", to: "/programs" },
   { label: "Insights & Resources", to: "/insights" },
 ];
 
@@ -40,24 +40,16 @@ export default function SiteHeader() {
   const linkClass =
     "flex items-center whitespace-nowrap text-[17px] leading-[1.5] font-bold text-white transition-colors duration-300 hover:text-gold-dark";
 
-  // `carets` is off for the mobile panel: its vertical list predates this board
-  // and shows bare labels, so only the desktop row draws "Our Programs"' caret.
-  const renderLink = (link, { carets = false } = {}) => {
-    const caret = carets && link.caret;
-    return (
-      <Link
-        key={link.label}
-        to={link.to}
-        className={`${linkClass}${caret ? " gap-[8px]" : ""}`}
-        onClick={() => setOpen(false)}
-      >
-        {link.label}
-        {/* The board's caret is a 12x6 vector whose 2px stroke overhangs it to
-            a 14x8 painted box, which is what we size the glyph to. */}
-        {caret && <ChevronDown className="h-[8px] w-[14px] shrink-0" />}
-      </Link>
-    );
-  };
+  const renderLink = (link) => (
+    <Link
+      key={link.label}
+      to={link.to}
+      className={linkClass}
+      onClick={() => setOpen(false)}
+    >
+      {link.label}
+    </Link>
+  );
 
   return (
     <header className="sticky top-0 z-50 w-full bg-gold select-none">
@@ -72,7 +64,7 @@ export default function SiteHeader() {
 
         {/* Desktop nav block — the board's 752px frame with its links centred */}
         <nav className="hidden shrink-0 items-center justify-center gap-[50px] xl:flex xl:w-[752px]">
-          {NAV_LINKS.map((link) => renderLink(link, { carets: true }))}
+          {NAV_LINKS.map(renderLink)}
         </nav>
 
         {/* Contact pill — 95x34, ending flush with the bar's 72px right inset */}
