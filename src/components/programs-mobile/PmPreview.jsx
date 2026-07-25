@@ -12,12 +12,11 @@ import arrow from "../../assets/home-mobile/mkt-arrow.svg";
  */
 export default function PmPreview() {
   return (
-    <section className="pt-[52px] pb-[60px]">
+    <section className="py-[60px]">
       <MobileContainer>
-        <h2 className="text-[28px] leading-normal font-bold text-navy">
-          Our Marketing &amp;
-          <br />
-          Leadership Programs.
+        {/* 1878:5925 — centred in a 350px box, wrapping on its own. */}
+        <h2 className="mx-auto max-w-[350px] text-center text-[28px] leading-normal font-bold text-navy">
+          Our Marketing &amp; Leadership Programs.
         </h2>
 
         {/* --tile-col is one column's width. Figma sets the titles at 16.483px
@@ -26,7 +25,7 @@ export default function PmPreview() {
             early. Scaling by tile width (16.483/(178.67*1.10) = 0.084) holds
             Figma's breaks. The titles themselves stay untouched because CARDS
             is shared with the Home page. */}
-        <div className="mt-[16px] grid grid-cols-2 gap-x-[18px] gap-y-[13px] [--tile-col:calc((min(100vw,430px)-50px)/2)]">
+        <div className="mt-[16px] grid grid-cols-2 gap-[12.814px] [--tile-col:calc((min(100vw,430px)-44.814px)/2)]">
           {CARDS.map((card) => (
             <a
               key={card.id}

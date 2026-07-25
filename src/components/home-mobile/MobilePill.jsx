@@ -82,6 +82,16 @@ const SIZES = {
     circle: "size-[32.87px]",
     glyph: "size-[17px]",
   },
+  // Pathway-card CTAs on the mobile Programs page (Figma nodes 1878:5814 /
+  // 5820 / 5903): a 14px label in a 36px capsule with a 28px glyph circle.
+  // Same fluid treatment as `veil` — 66.8px is this size's chrome (21.37 pad +
+  // 13.36 gap + 28.05 circle + 5.34 pad + border) and 0.0505 is 14/277, the
+  // width of the longest label ("Learn More about MAP & DECODE") in Inter.
+  pathway: {
+    pill: "gap-[13.36px] py-[4.67px] pr-[5.34px] pl-[21.37px] text-[min(14px,calc((var(--pill-col)-66.8px)*0.0505))]",
+    circle: "size-[28.05px]",
+    glyph: "size-[15px]",
+  },
   // Closing CTA band pill (Figma node 1434:566). Figma draws it 290px wide with
   // a 226px label, but "Book a Strategic Conversation" needs ~237px in Inter,
   // which pushes the glyph circle out past the capsule. The pill is left to size

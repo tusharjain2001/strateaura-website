@@ -3,24 +3,30 @@ import MobilePill from "../home-mobile/MobilePill";
 import check from "../../assets/programs/pathway-bullet-check.svg";
 import pathwaysBg from "../../assets/programs/pathways-bg-mobile.svg";
 
-// Figma nodes 1433:36 / 1433:61 / 1433:86 — cream phase cards inside the online
-// pathway card, each a title over a two-column checklist.
+// Figma nodes 1878:5829 / 5854 / 5879 — cream phase cards inside the online
+// pathway card, each a title over two checklist columns. The columns are
+// explicit because Figma reads down each one (3 weeks / Biological Awareness,
+// then Energy Mapping / Group Calls), not across the rows.
 const PHASES = [
   {
-    title: "MAP: KNOW YOUR TERRAIN",
-    points: ["3 weeks", "Biological Awareness", "Energy Mapping", "Group Calls"],
+    title: ["MAP: KNOW YOUR TERRAIN"],
+    left: ["3 weeks", "Biological Awareness"],
+    right: ["Energy Mapping", "Group Calls"],
   },
   {
-    title: "DECODE: DESIGN YOUR ARCHITECTURE",
-    points: ["3 weeks", "Identity Gap", "Inner-outer Self", "Reflection"],
+    title: ["DECODE: DESIGN YOUR ARCHITECTURE"],
+    left: ["3 weeks", "Identity Gap"],
+    right: ["Inner-outer Self", "Reflection"],
   },
   {
-    title: "UNVEIL: LIVE COHORT (For Online Graduates)",
-    points: ["6 weeks", "Architecture + Authority", "Enters at Phase 3"],
+    // 1878:5880 breaks the title after "LIVE COHORT".
+    title: ["UNVEIL: LIVE COHORT", "(For Online Graduates)"],
+    left: ["6 weeks", "Architecture + Authority"],
+    right: ["Enters at Phase 3"],
   },
 ];
 
-// Figma node 1433:117 — the institutional card's single cream panel.
+// Figma node 1878:5910 — the institutional card's single cream panel.
 const INSTITUTIONAL = {
   title: "KHDA Attested Certificate of Completion",
   points: [
@@ -29,27 +35,47 @@ const INSTITUTIONAL = {
   ],
 };
 
-function PhaseCard({ title, points }) {
+// One checklist row: an 11.35px tick and the 14px label Figma sets in Acumin.
+function Point({ children }) {
+  return (
+    <li className="flex items-start gap-[4.68px]">
+      <img
+        src={check}
+        alt=""
+        aria-hidden
+        className="mt-[3px] size-[11.35px] shrink-0"
+      />
+      <span className="text-[min(14px,calc(var(--phase-col)*0.047))] leading-[1.3] text-navy-2">
+        {children}
+      </span>
+    </li>
+  );
+}
+
+// Figma splits the panel's 283px into a 141.6 column, a 28.7 gutter and a
+// 112.9 column — 50% / 10.1% / 39.9% — so the shares hold as the card narrows.
+function PhaseCard({ title, left, right }) {
   return (
     <div className="rounded-[4px] bg-cream px-[16px] py-[17px]">
-      <p className="text-[min(16px,calc(var(--phase-col)*0.0538))] leading-normal font-bold text-navy-2">
-        {title}
-      </p>
-      <ul className="mt-[10px] grid grid-cols-2 gap-x-[12px] gap-y-[5px]">
-        {points.map((point) => (
-          <li key={point} className="flex items-start gap-[5px]">
-            <img
-              src={check}
-              alt=""
-              aria-hidden
-              className="mt-[3px] size-[11.35px] shrink-0"
-            />
-            <span className="text-[min(13px,calc(var(--phase-col)*0.0437))] leading-[1.3] text-navy-2">
-              {point}
-            </span>
-          </li>
+      <p className="text-[min(16px,calc(var(--phase-col)*0.0538))] leading-[1.09] font-bold text-navy-2">
+        {title.map((line) => (
+          <span key={line} className="block">
+            {line}
+          </span>
         ))}
-      </ul>
+      </p>
+      <div className="mt-[8px] flex gap-[10.1%]">
+        <ul className="flex w-[50%] flex-col gap-[5.34px]">
+          {left.map((point) => (
+            <Point key={point}>{point}</Point>
+          ))}
+        </ul>
+        <ul className="flex w-[39.9%] flex-col gap-[5.34px]">
+          {right.map((point) => (
+            <Point key={point}>{point}</Point>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
@@ -108,12 +134,12 @@ export default function PmPathways() {
               ))}
             </div>
 
-            <div className="mt-[23px] flex flex-col items-start gap-[9px]">
+            <div className="mt-[23px] flex flex-col items-start gap-[9.35px]">
               <MobilePill
                 as="a"
                 href="/veil"
                 variant="navyOutline"
-                size="veil"
+                size="pathway"
                 icon="arrowUp"
               >
                 Learn More about MAP &amp; DECODE
@@ -122,7 +148,7 @@ export default function PmPathways() {
                 as="a"
                 href="/webinar"
                 variant="navyOutline"
-                size="veil"
+                size="pathway"
               >
                 Register for the Free Webinar
               </MobilePill>
@@ -155,19 +181,9 @@ export default function PmPathways() {
                 <p className="text-[16px] leading-normal font-bold text-navy-2">
                   {INSTITUTIONAL.title}
                 </p>
-                <ul className="mt-[10px] flex flex-col gap-[5px]">
+                <ul className="mt-[10.7px] flex flex-col gap-[5.34px]">
                   {INSTITUTIONAL.points.map((point) => (
-                    <li key={point} className="flex items-start gap-[5px]">
-                      <img
-                        src={check}
-                        alt=""
-                        aria-hidden
-                        className="mt-[3px] size-[11.35px] shrink-0"
-                      />
-                      <span className="text-[13px] leading-[1.3] text-navy-2">
-                        {point}
-                      </span>
-                    </li>
+                    <Point key={point}>{point}</Point>
                   ))}
                 </ul>
               </div>
@@ -178,7 +194,7 @@ export default function PmPathways() {
                 as="a"
                 href="/contact"
                 variant="navyOutline"
-                size="veil"
+                size="pathway"
               >
                 Request a Cohort Proposal
               </MobilePill>

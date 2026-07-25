@@ -64,7 +64,9 @@ export default function PmDetail({
           {heading}
         </h2>
 
-        <div className="mt-[16px] text-[16px] leading-normal text-black/60">
+        {/* Figma sets 24-25px under the heading in four of the five blocks
+            (nodes 1878:5995 / 6019 / 6158 / 6043). */}
+        <div className="mt-[24px] text-[16px] leading-normal text-black/60">
           <p className="font-bold">{eyebrow}</p>
           {/* Figma separates these with a blank line, not a paragraph gap. */}
           <p className="mt-[1em]">{paragraph}</p>
