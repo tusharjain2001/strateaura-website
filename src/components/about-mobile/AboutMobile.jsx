@@ -4,7 +4,7 @@ import MobileStance from "./MobileStance";
 import MobileCoreValues from "./MobileCoreValues";
 import MobileWhyChoose from "./MobileWhyChoose";
 import MobileFounder from "./MobileFounder";
-import MobileAboutFooter from "./MobileAboutFooter";
+import MobileSiteFooter from "../layout/MobileSiteFooter";
 
 /**
  * Mobile About Us page — Figma node 1293:3543 (402px frame).
@@ -26,7 +26,7 @@ export default function AboutMobile() {
         <MobileWhyChoose />
         <MobileFounder />
       </main>
-      <MobileAboutFooter />
+      <MobileSiteFooter />
     </div>
   );
 }

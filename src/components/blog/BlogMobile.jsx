@@ -14,7 +14,7 @@ const WEIGHT = { bold: "font-bold", semi: "font-semibold" };
  */
 export default function BlogMobile({ post }) {
   return (
-    // No bottom padding: MobileSiteFooter opens with its own pt-14.
+    // No bottom padding: MobileSiteFooter opens with its own 97px of head room.
     <article className="relative overflow-hidden bg-white">
       {/* Same #fee8a9 → white wash as the desktop board, sized to the header
           of the article rather than a fixed 1320px band. */}

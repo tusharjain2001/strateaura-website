@@ -1,5 +1,5 @@
 import SiteHeader from "../layout/SiteHeader";
-import MobileAboutFooter from "../about-mobile/MobileAboutFooter";
+import MobileSiteFooter from "../layout/MobileSiteFooter";
 import PmHero from "./PmHero";
 import PmFeatured from "./PmFeatured";
 import PmPathways from "./PmPathways";
@@ -166,7 +166,7 @@ export default function ProgramsMobile() {
           <PmDetail key={program.id} {...program} />
         ))}
       </main>
-      <MobileAboutFooter />
+      <MobileSiteFooter />
     </div>
   );
 }

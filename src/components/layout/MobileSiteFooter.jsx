@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
-import CtaPill from "../ui/CtaPill";
+import MobilePill from "../home-mobile/MobilePill";
 import footerLogo from "../../assets/footer-logo.svg";
 import socialLi from "../../assets/social-li.svg";
 
+// Node 1878:11653 — LinkedIn only, an 18px glyph.
 const SOCIALS = [
   { src: socialLi, label: "LinkedIn", href: "https://www.linkedin.com/in/drsuhairhamouri" },
 ];
 
-// "VEIL™" is set bold while "Program" stays regular (Figma node 1293:3834).
+// Node 1878:11659 — "VEIL™" is set bold while "Program" stays regular.
 const COMPANY = [
   { label: "Home", to: "/" },
   { label: "VEIL™ Program", to: "/veil", strong: "VEIL™ " },
@@ -17,6 +18,7 @@ const COMPANY = [
   { label: "Insights & Resources", to: "/insights" },
 ];
 
+// Node 1878:11662
 const FRAMEWORKS = [
   { label: "ALA-Nexus™", to: "/frameworks" },
   { label: "The 5Cs of Brand Health", to: "/frameworks" },
@@ -50,46 +52,61 @@ function FooterLinks({ heading, items }) {
 }
 
 /**
- * Mobile footer for the fluid pages — the same composition as the Home mobile
- * footer (Figma node 1293:3754): CTA, a logo + socials row, side-by-side
- * COMPANY/FRAMEWORKS columns and the copyright line, on plain white with the
- * two hairlines. Rendered below lg by SiteFooter (which keeps its own desktop
- * footer at lg and up), so the mobile footer matches Home across every page.
+ * The mobile footer — Figma node 1878:11583, and the only one the site has
+ * below lg: every mobile page tree renders this, so Home, About, Programs,
+ * Frameworks and the fluid pages share one composition.
  *
- * Accepts the same CTA overrides SiteFooter takes, so per-page copy, buttons
- * (e.g. VEIL's two pills) and the optional contact aside carry through.
+ * White panel, 97px of head room and 30px under the copyright, holding a 370px
+ * column (16px gutters): the CTA block, the logo + "CONNECT WITH US" row, the
+ * COMPANY / FRAMEWORKS columns 38px apart, then the copyright 41px below.
+ *
+ * The right-hand blocks in both middle rows start at x:195 of the column in
+ * Figma, so they are pinned to the column's right edge at their designed
+ * widths — that lands them on the same line at the 402px frame and simply
+ * closes the gap on narrower phones. COMPANY gets 160px rather than Figma's
+ * 136 because "Insights & Resources" needs ~148px in Inter (the file is set in
+ * Acumin Pro, which runs narrower); FRAMEWORKS still starts at 195.
+ *
+ * Accepts the CTA overrides SiteFooter passes, so per-page copy, buttons (e.g.
+ * VEIL's two pills) and the optional contact aside carry through.
  */
 export default function MobileSiteFooter({ body, tagline, buttons, aside }) {
   return (
-    <footer className="bg-white pt-14 pb-[31px] lg:hidden">
-      <div className="mx-auto w-full max-w-[430px] px-4">
-        {/* Closing CTA */}
-        <div className="flex flex-col items-start">
-          <h2 className="text-[28px] leading-normal font-bold text-navy">
-            Ready to Work Together?
-          </h2>
-          <p className="mt-2 text-[16px] leading-normal font-light text-black">
-            {body ??
-              "We work with those ready to think deeper, move cleaner, and lead with presence, not pressure."}
-          </p>
-          {tagline !== null && (
-            <p className="mt-[23px] text-[20px] leading-normal font-medium text-gold">
-              {tagline ?? "Apply to work with us!"}
-            </p>
-          )}
-          {buttons ?? (
-            <CtaPill as="a" href="/contact" variant="goldOutline" className="mt-[23px]">
-              Book a Strategic Conversation
-            </CtaPill>
-          )}
-          {aside && <div className="mt-6">{aside}</div>}
-        </div>
+    <footer className="bg-white pt-[97px] pb-[30px] lg:hidden">
+      <div className="mx-auto w-full max-w-[430px] px-4 [--pill-col:calc(min(100vw,430px)-32px)]">
+        <div className="flex flex-col gap-[38px]">
+          {/* Closing CTA — node 1878:11588 */}
+          <div className="flex flex-col items-start gap-[23px]">
+            <div className="flex flex-col gap-[8px]">
+              <h2 className="text-[28px] leading-normal font-bold text-navy">
+                Ready to Work Together?
+              </h2>
+              <p className="text-[16px] leading-normal font-light text-black">
+                {body ??
+                  "We work with those ready to think deeper, move cleaner, and lead with presence, not pressure."}
+              </p>
+            </div>
+            {tagline !== null && (
+              <p className="text-[20px] leading-normal font-medium text-gold">
+                {tagline ?? "Apply to work with us!"}
+              </p>
+            )}
+            {buttons ?? (
+              <MobilePill
+                as="a"
+                href="/contact"
+                variant="goldOutline"
+                size="ctaBand"
+                className="max-w-full"
+              >
+                Book a Strategic Conversation
+              </MobilePill>
+            )}
+            {aside && <div>{aside}</div>}
+          </div>
 
-        <hr className="mt-[27px] border-t border-[#cccccc]" />
-
-        <div className="mt-[17px] flex flex-col gap-[37px]">
-          {/* Logo + socials */}
-          <div className="flex w-[357px] max-w-full items-center justify-between">
+          {/* Logo + socials — node 1878:11599 */}
+          <div className="flex items-center justify-between">
             <Link to="/" aria-label="StrateAura home">
               <img
                 src={footerLogo}
@@ -97,8 +114,8 @@ export default function MobileSiteFooter({ body, tagline, buttons, aside }) {
                 className="h-[54px] w-[80px]"
               />
             </Link>
-            <div className="shrink-0">
-              <p className="text-[12px] leading-[24px] font-bold text-gold">
+            <div className="w-[175px] shrink-0">
+              <p className="text-[12px] leading-[24px] font-bold whitespace-nowrap text-gold">
                 CONNECT WITH US
               </p>
               <div className="flex items-center gap-[12px]">
@@ -118,16 +135,20 @@ export default function MobileSiteFooter({ body, tagline, buttons, aside }) {
             </div>
           </div>
 
-          {/* Link columns */}
-          <div className="flex items-start justify-between gap-[16px]">
-            <FooterLinks heading="COMPANY" items={COMPANY} />
-            <FooterLinks heading="FRAMEWORKS" items={FRAMEWORKS} />
+          {/* Link columns — node 1878:11656 */}
+          <div className="flex items-start justify-between whitespace-nowrap">
+            <div className="w-[160px] shrink-0">
+              <FooterLinks heading="COMPANY" items={COMPANY} />
+            </div>
+            <div className="w-[175px] shrink-0">
+              <FooterLinks heading="FRAMEWORKS" items={FRAMEWORKS} />
+            </div>
           </div>
         </div>
 
-        <hr className="mt-[17px] border-t border-[#cccccc]" />
-
-        <div className="mt-[20px] max-w-full text-[14px] leading-[24px] tracking-[0.2px] text-ink">
+        {/* Node 1878:11663 — Figma's 294px box fits the copyright in Acumin;
+            Inter needs ~317px, so the block just takes the column. */}
+        <div className="mt-[41px] text-[14px] leading-[24px] tracking-[0.2px] text-ink">
           <p className="font-medium">
             StrateAura © 2024-2026 / All Rights Reserved
           </p>

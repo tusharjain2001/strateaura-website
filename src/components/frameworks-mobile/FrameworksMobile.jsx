@@ -4,7 +4,7 @@ import FwAlaNexus from "./FwAlaNexus";
 import FwFiveCs from "./FwFiveCs";
 import FwVeil from "./FwVeil";
 import FwWhy from "./FwWhy";
-import FwFooter from "./FwFooter";
+import MobileSiteFooter from "../layout/MobileSiteFooter";
 
 /**
  * Mobile Frameworks page — Figma node 1296:4457 (402px frame).
@@ -26,7 +26,7 @@ export default function FrameworksMobile() {
         <FwVeil />
         <FwWhy />
       </main>
-      <FwFooter />
+      <MobileSiteFooter />
     </div>
   );
 }

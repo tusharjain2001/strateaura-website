@@ -7,7 +7,7 @@ import MobileFrameworks from "./MobileFrameworks";
 import MobileBelief from "./MobileBelief";
 import MobileProblem from "./MobileProblem";
 import MobileInsights from "./MobileInsights";
-import MobileFooter from "./MobileFooter";
+import MobileSiteFooter from "../layout/MobileSiteFooter";
 
 /**
  * Mobile Home page — Figma node 1434:405 (402px frame).
@@ -44,7 +44,7 @@ export default function HomeMobile() {
         <MobileProblem />
         <MobileInsights />
       </main>
-      <MobileFooter />
+      <MobileSiteFooter />
     </div>
   );
 }
