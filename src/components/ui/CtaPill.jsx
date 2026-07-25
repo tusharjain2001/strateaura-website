@@ -78,12 +78,13 @@ const SIZES = {
     circle: "size-[28px] lg:size-[33px]",
     glyph: "size-[20px] lg:size-[18px]",
   },
-  // Like compactLg on mobile, but the small ~34px pill at lg+ — the Insights
-  // "Watch & Listen" button (Figma 1755:1251).
+  // Insights "Watch & Listen" button: mobile follows the phone Figma
+  // (1878:8761 — 30px tall, 11px label, 23px circle), lg+ keeps the ~34px
+  // pill from the desktop board (Figma 1755:1251).
   sm34Lg: {
-    pill: "h-[54px] gap-4 pr-2 pl-6 text-[17px] sm:text-[20px] lg:h-[34px] lg:gap-[9px] lg:pr-[4px] lg:pl-[14px] lg:text-[13px]",
-    circle: "size-[42px] lg:size-[26px]",
-    glyph: "size-[18px] lg:size-[15px]",
+    pill: "h-[30px] gap-[4px] pr-[5px] pl-[12px] text-[11px] lg:h-[34px] lg:gap-[9px] lg:pr-[4px] lg:pl-[14px] lg:text-[13px]",
+    circle: "size-[23px] lg:size-[26px]",
+    glyph: "size-[16px] lg:size-[15px]",
   },
   md: {
     pill: "h-[46px] gap-3 pr-[6px] pl-6 text-[17px] sm:text-[20px] lg:h-[50px] lg:gap-[19px] lg:pl-[29px] lg:text-[24px]",

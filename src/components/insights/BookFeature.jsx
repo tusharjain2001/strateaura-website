@@ -18,12 +18,19 @@ export default function BookFeature() {
   return (
     <>
     <section className="relative overflow-hidden bg-gradient-to-r from-cream/0 to-[#ecd79e]">
-      <div className="relative mx-auto w-full max-w-[1440px] px-5 py-16 sm:px-8 lg:min-h-[458px] lg:px-[161px] lg:py-[75px]">
+      {/* Mobile metrics from Figma 1878:9169 (403x742): content from y60,
+          book cover 239x310 centered 26px below the CTAs, 45px to the section
+          end; the leaf sits behind the book at y365 (438x358, bleeding 18px
+          left). */}
+      <div className="relative mx-auto w-full max-w-[1440px] px-5 pt-[60px] pb-[45px] lg:min-h-[458px] lg:px-[161px] lg:py-[75px]">
         {/* Leaf mark (Figma node 1755:1224) — 559x458 sitting behind the book,
             its 0.45 opacity baked into the svg. Anchored by its right edge so it
             tracks the book on viewports between lg and 1440. Desktop only. */}
         <span className="pointer-events-none absolute inset-y-0 right-[184px] z-0 hidden w-[559px] lg:block">
           <img src={bookLeaf} alt="" className="size-full" />
+        </span>
+        <span className="pointer-events-none absolute bottom-[19px] -left-[18px] z-0 w-[438px] max-w-none lg:hidden">
+          <img src={bookLeaf} alt="" className="w-full" />
         </span>
         {/* Book cover (Figma node 1816:695) — desktop only so mobile is
             untouched; drop-shadow matches the design's floating book. */}
@@ -37,26 +44,31 @@ export default function BookFeature() {
             so the copy always reads clearly over it, matching Figma's paint
             order (the laurel sits behind the text there too). */}
         <div className="relative z-10">
-          <h2 className="text-[clamp(2rem,4vw,3.125rem)] leading-[1.2] font-bold text-gold lg:text-[30px]">
+          {/* Mobile type from Figma 1878:8730/8731/8732: h2 26/31, title 20
+              13px below it, body 16px Acumin at a 19.6px pitch (14px in Inter
+              to keep the 5-line wrap) 8px under the title. */}
+          <h2 className="text-[26px] leading-[31px] font-bold text-gold lg:text-[30px] lg:leading-[1.2]">
             Book Feature
           </h2>
-          <p className="mt-2 text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-black/65 lg:mt-[15px] lg:text-[20px]">
+          <p className="mt-[13px] text-[20px] font-bold text-black/65 lg:mt-[15px]">
             Clicks, Leads, and Strategy Feeds
           </p>
-          <p className="mt-6 max-w-[616px] text-[clamp(1.125rem,1.8vw,1.5rem)] leading-normal font-light text-black/60 lg:mt-[40px] lg:max-w-[453px] lg:text-[16px]">
+          <p className="mt-2 max-w-[616px] text-[14px] leading-[19.6px] font-light text-black/60 lg:mt-[40px] lg:max-w-[453px] lg:text-[16px] lg:leading-normal">
             Your Guide to Cutting Through the Noise and Building Marketing
             That Matters. This isn’t a textbook. It’s a field guide. Built
             for decision-makers who want more than metrics, and are ready to
             stop outsourcing strategic thinking.
           </p>
-          {/* Figma stacks the two CTAs vertically, left-aligned. */}
-          <div className="mt-8 flex flex-col items-start gap-6 lg:mt-[30px] lg:gap-[18px]">
+          {/* Figma stacks the two CTAs vertically, left-aligned. Mobile pills
+              are the same 44px/16px/33px metrics as the lg tier (1878:8734),
+              so `compact` fits both. */}
+          <div className="mt-6 flex flex-col items-start gap-3 lg:mt-[30px] lg:gap-[18px]">
             <CtaPill
               as="button"
               type="button"
               onClick={() => setPreviewOpen(true)}
               variant="goldOutline"
-              size="compactLg"
+              size="compact"
             >
               Download a Preview Chapter
             </CtaPill>
@@ -66,11 +78,18 @@ export default function BookFeature() {
               target="_blank"
               rel="noopener noreferrer"
               variant="goldFilled"
-              size="compactLg"
+              size="compact"
             >
               Order Now
             </CtaPill>
           </div>
+          {/* Mobile book cover (Figma 1878:9255): 239x310 centered, 26px
+              below the CTAs. */}
+          <img
+            src={bookCover}
+            alt="Clicks, Leads, and Strategy Feeds — book by Dr. Suhair Hamouri"
+            className="pointer-events-none mx-auto mt-[26px] block w-[239px] drop-shadow-[-4px_2px_8px_rgba(0,0,0,0.25)] lg:hidden"
+          />
         </div>
       </div>
     </section>
