@@ -70,6 +70,14 @@ const SIZES = {
     circle: "size-[42px] lg:size-[33px]",
     glyph: "size-[18px]",
   },
+  // Insights VEIL-card webinar pill: mobile follows the phone Figma
+  // (1878:8827 — 37px tall, 13px label, 28px circle), lg+ is compactLg's
+  // 44px pill so the desktop card is unchanged.
+  compact37Lg: {
+    pill: "h-[37px] gap-[10px] pr-[5px] pl-[18px] text-[13px] lg:h-[44px] lg:gap-[13px] lg:pr-[5px] lg:pl-[21px] lg:text-[16px]",
+    circle: "size-[28px] lg:size-[33px]",
+    glyph: "size-[20px] lg:size-[18px]",
+  },
   // Like compactLg on mobile, but the small ~34px pill at lg+ — the Insights
   // "Watch & Listen" button (Figma 1755:1251).
   sm34Lg: {

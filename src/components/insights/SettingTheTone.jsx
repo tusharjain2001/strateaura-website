@@ -5,7 +5,9 @@ import toneTailMobile from "../../assets/insights/setting-tone-tail-mobile.svg";
 export default function SettingTheTone() {
   return (
     <section id="setting-the-tone" className="scroll-mt-[80px] bg-white lg:scroll-mt-[120px]">
-      <div className="relative mx-auto w-full max-w-[1440px] px-5 py-14 sm:px-8 lg:h-[621px] lg:px-0 lg:py-0">
+      {/* Figma mobile: the VEIL card sits only ~20px below this card (942 vs
+          922) — that gap lives in ThinkingBehindVeil's pt-5, so no pb here. */}
+      <div className="relative mx-auto w-full max-w-[1440px] px-5 pt-14 pb-0 lg:h-[621px] lg:px-0 lg:py-0">
         {/* Photo — bleeds to the right edge of the container on desktop */}
         {/* Percentage geometry (466/1440, 921/1440) — fixed px overflowed the
             page at container widths under 1387px (e.g. 1366 viewports). */}
@@ -13,7 +15,7 @@ export default function SettingTheTone() {
           <img
             src={settingTonePhoto}
             alt="Dr. Suhair Hamouri presenting on stage"
-            className="aspect-[921/660] w-full object-cover lg:aspect-auto lg:h-full"
+            className="aspect-[370/289] w-full object-cover lg:aspect-auto lg:h-full"
           />
           {/* Figma (node 1136:5689): the scrim is 372.41 of the photo's 660px,
               i.e. 56.4%, not 40%. */}
@@ -39,8 +41,13 @@ export default function SettingTheTone() {
             alt=""
             className="pointer-events-none -mb-px block w-full lg:hidden"
           />
-          <div className="relative rounded-b-[4px] bg-gold px-6 pt-8 pb-8 text-cream sm:px-10 sm:pt-10 sm:pb-10 lg:rounded-none lg:bg-transparent lg:px-0 lg:pt-[43px] lg:pb-[40px] lg:pl-[47px]">
-            <h2 className="max-w-[666px] text-[clamp(1.5rem,3vw,2.1875rem)] leading-[1.2] font-bold lg:text-[30px]">
+          {/* Mobile metrics from Figma 1878:8675: content 97.2px below the
+              shape's top (tail svg is 77.2 → pt-5), left inset 28, body block
+              338 of 370 wide (right gap ~5px), h2 20/24, 8px gap, body 16px
+              Acumin on a 19px pitch (15px in Inter to keep the line breaks),
+              one blank line between paragraphs, 40px bottom. */}
+          <div className="relative rounded-b-[4px] bg-gold pt-5 pb-10 pl-[28px] pr-[6px] text-cream lg:rounded-none lg:bg-transparent lg:px-0 lg:pt-[43px] lg:pb-[40px] lg:pl-[47px]">
+            <h2 className="max-w-[666px] text-[20px] leading-[24px] font-bold lg:text-[30px] lg:leading-[1.2]">
               Setting the Tone
             </h2>
             {/* Figma's measure is 616px (node 1136:5692). Held at 22px rather
@@ -49,7 +56,7 @@ export default function SettingTheTone() {
                 stretches the blob image out of shape. 22px in the full 616px
                 keeps it at Figma's 10 lines, so the bubble sits at its drawn
                 height. */}
-            <p className="mt-4 max-w-[600px] pr-6 text-[clamp(1.0625rem,1.7vw,1.375rem)] leading-[1.4] lg:mt-4 lg:max-w-[435px] lg:pr-0 lg:text-[16px]">
+            <p className="mt-2 text-[14px] leading-[19px] lg:mt-4 lg:max-w-[435px] lg:text-[16px] lg:leading-[1.4]">
               This is not a content dump. This is a space for thoughtful
               professionals, evolving leaders, and high-performing individuals
               to pause, reframe, and rise. We believe insight should be
