@@ -82,6 +82,14 @@ const SIZES = {
     circle: "size-[32.87px]",
     glyph: "size-[17px]",
   },
+  // "Explore Our Programs" inside the About page's gold panel (Figma node
+  // 1878:5326): a 212x33 capsule, so the label sits much closer to both ends
+  // than the `sm` pill and the glyph circle is 25.3px.
+  choose: {
+    pill: "gap-[11px] py-[3.83px] pr-[4.49px] pl-[10.76px] text-[16px]",
+    circle: "size-[25.334px]",
+    glyph: "size-[14px]",
+  },
   // Pathway-card CTAs on the mobile Programs page (Figma nodes 1878:5814 /
   // 5820 / 5903): a 14px label in a 36px capsule with a 28px glyph circle.
   // Same fluid treatment as `veil` — 66.8px is this size's chrome (21.37 pad +

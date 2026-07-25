@@ -94,7 +94,8 @@ export default function MobileCoreValues() {
               <p className="relative text-[13.799px] leading-[1.24] font-bold text-white">
                 {card.title}
               </p>
-              <p className="relative mt-[8px] text-[12.075px] leading-[1.24] font-normal text-white">
+              {/* 1878:5451 — Medium, not Regular. */}
+              <p className="relative mt-[8px] text-[12.075px] leading-[1.24] font-medium text-white">
                 {card.body}
               </p>
               <img

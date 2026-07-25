@@ -36,7 +36,9 @@ export default function MobileFounder() {
             A Founder Who Leads From Within
           </h2>
 
-          <div className="mt-[12px] space-y-[25px] text-[16px] leading-[25px] font-light text-white">
+          {/* 1878:5496 — 16px Light on a 21px line, paragraphs separated by one
+              blank line box (also 21px). */}
+          <div className="mt-[12px] space-y-[21px] text-[16px] leading-[21px] font-light text-white">
             <p>
               <span className="font-bold">Dr. Suhair Hamouri</span> is the
               founder of <span className="font-bold">VEIL</span> — a flagship

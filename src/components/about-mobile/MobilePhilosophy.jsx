@@ -2,7 +2,7 @@ import MobileContainer from "../home-mobile/MobileContainer";
 import philBadge from "../../assets/about-mobile/phil-badge.svg";
 import philSwirl from "../../assets/about-mobile/phil-swirl.svg";
 import philArch from "../../assets/about-mobile/phil-arch.svg";
-import philPhoto from "../../assets/about-mobile/phil-photo.jpg";
+import philPhoto from "../../assets/about-mobile/phil-portrait.png";
 
 /**
  * Mobile "Our Philosophy" hero — Figma node 1293:3544.
@@ -53,35 +53,45 @@ export default function MobilePhilosophy() {
               --phil-col is the panel's inner width. The body copy scales off it
               so Inter reproduces Figma's line breaks: the column is 307px of
               16px Acumin Pro, and Inter runs ~5% wider, hence 16/(307*1.05). */}
-          <div className="rounded-t-[8px] bg-gold px-[31px] pt-[37px] pb-[28px] [--phil-col:calc(min(100vw,430px)-94px)]">
-            <p className="text-[24px] leading-normal font-bold text-cream">
-              The Why Behind StrateAura™
-            </p>
-            <p className="mt-[16px] text-[min(16px,calc(var(--phil-col)*0.0496))] leading-normal font-light text-white">
-              StrateAura™ was born from a deeper truth: That leadership isn’t
-              just about making decisions, it’s about how you carry them. That
-              growth isn’t about more, it’s about what aligns. And that
-              strategy, when done right, starts far before the boardroom. We
-              don’t separate the human from the leader. We believe the most
-              transformative shifts begin with the internal, not the external.
-              Our work invites you to meet yourself before you move the world.
-            </p>
-          </div>
-
-          {/* Photo, with the panel's centre scallop overlaid on its top edge. */}
-          <div className="relative">
-            <img
-              src={philPhoto}
-              alt="Aura Al Ramahi, founder of StrateAura™"
-              className="block aspect-[369/407] w-full rounded-b-[8px] object-cover"
-            />
+          {/* Vector 12 is one shape in Figma — the flat panel plus the scallop
+              that hangs off its foot — so it is drawn as one gold layer here
+              too: the padded block, then the 369x82.0258 notch butted straight
+              onto it (1px of overlap kills the seam). z-10 keeps the whole
+              layer above the photo, which is what tucks the photo's top edge
+              behind the panel. */}
+          <div className="relative z-10">
+            <div className="rounded-t-[8px] bg-gold px-[31px] pt-[37px] pb-[28px] [--phil-col:calc(min(100vw,430px)-94px)]">
+              <p className="text-[24px] leading-normal font-bold text-cream">
+                The Why Behind StrateAura™
+              </p>
+              <p className="mt-[16px] text-[min(16px,calc(var(--phil-col)*0.0496))] leading-normal font-light text-white">
+                StrateAura™ was born from a deeper truth: That leadership isn’t
+                just about making decisions, it’s about how you carry them. That
+                growth isn’t about more, it’s about what aligns. And that
+                strategy, when done right, starts far before the boardroom. We
+                don’t separate the human from the leader. We believe the most
+                transformative shifts begin with the internal, not the external.
+                Our work invites you to meet yourself before you move the world.
+              </p>
+            </div>
             <img
               src={philArch}
               alt=""
               aria-hidden
-              className="pointer-events-none absolute inset-x-0 top-0 block aspect-[369/82] w-full"
+              className="pointer-events-none -mt-px block aspect-[369/82] w-full"
             />
           </div>
+
+          {/* 1878:5350 — the portrait exported straight from the node at 3x
+              (1107x1219 for its 369x406.2 box), so Figma's own crop and the 8px
+              corners are baked in and nothing is re-cropped at runtime. Figma
+              starts it 10.6px above the panel's foot, i.e. 92.6px above the
+              bottom of the scallop. */}
+          <img
+            src={philPhoto}
+            alt="Dr. Suhair Hamouri, founder of StrateAura™"
+            className="relative -mt-[92.6px] block w-full"
+          />
         </div>
       </MobileContainer>
     </section>

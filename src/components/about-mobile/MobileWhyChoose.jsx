@@ -37,9 +37,10 @@ export default function MobileWhyChoose() {
           className="block w-full"
         />
 
-        {/* 1293:3706 — gold panel */}
+        {/* 1878:5320 — gold panel. Figma insets the 312px text column by 29px
+            with 31px above it and the same below the CTA. */}
         <div
-          className="mt-[28px] rounded-[2.056px] px-[39px] pt-[37px] pb-[37px]"
+          className="mt-[28px] rounded-[2.056px] px-[29px] py-[31px]"
           style={{
             backgroundImage:
               "linear-gradient(180deg, rgba(255,223,133,0.7) 0%, #b3902f 100%), linear-gradient(90deg, #fff, #fff)",
@@ -48,7 +49,7 @@ export default function MobileWhyChoose() {
           <h2 className="text-[20px] leading-normal font-bold text-[#95741a]">
             Why People Choose Us{" "}
           </h2>
-          <div className="mt-[9px] text-[16px] leading-normal text-[#a78526]">
+          <div className="mt-[9px] text-[16px] leading-[19px] text-[#8d7021]">
             <p>
               StrateAura™ brings together academic rigor, industry expertise, and
               regional relevance. With a deep understanding of both global trends
@@ -64,9 +65,10 @@ export default function MobileWhyChoose() {
           </div>
           <MobilePill
             as="a"
-            href="#programs"
+            href="/programs"
             variant="creamFilled"
-            className="mt-[18px]"
+            size="choose"
+            className="mt-[18px] border-0"
           >
             Explore Our Programs
           </MobilePill>
