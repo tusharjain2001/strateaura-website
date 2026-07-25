@@ -55,6 +55,14 @@ const SIZES = {
     circle: "size-[27px]",
     glyph: "size-[19.3px]",
   },
+  // VEIL "Two Pathways" cards: the xs pill's 20px label ("Request a Cohort
+  // Proposal") is wider than the card on phones, so shrink it below sm. From
+  // sm up this is byte-identical to `xs`, leaving tablet/desktop untouched.
+  xsPhone: {
+    pill: "h-[35px] gap-[10px] pr-[5px] pl-[14px] text-[13px] sm:h-[43px] sm:gap-[18px] sm:pr-[8px] sm:pl-[18px] sm:text-[20px]",
+    circle: "size-[25px] sm:size-[27px]",
+    glyph: "size-[17px] sm:size-[19.3px]",
+  },
   // The compact pill on the redesigned Programs page (Figma 1755:2156): ~44px
   // tall, 16px label, 33px icon circle. Used by every CTA on that page.
   compact: {

@@ -69,7 +69,9 @@ export default function TwoPathways() {
                 <h3 className="text-[clamp(1.5rem,2.083vw,1.875rem)] leading-[1.2] font-bold text-gold">
                   UNVEIL: Institutional
                 </h3>
-                <div className="mt-6 lg:mt-[19px]">
+                {/* Desktop keeps the pill directly under the title (Figma);
+                    on phones it moves below the summary copy instead. */}
+                <div className="mt-6 hidden lg:mt-[19px] lg:block">
                   <CtaPill as="a" href="/contact" variant="navyOutline" size="xs">
                     Request a Cohort Proposal
                   </CtaPill>
@@ -85,6 +87,16 @@ export default function TwoPathways() {
                 </p>
                 <p className="mt-4 lg:mt-[17px]">Led by Dr. Suhair Hamouri</p>
               </div>
+              <div className="lg:hidden">
+                <CtaPill
+                  as="a"
+                  href="/contact"
+                  variant="navyOutline"
+                  size="xsPhone"
+                >
+                  Request a Cohort Proposal
+                </CtaPill>
+              </div>
             </div>
           </div>
 
@@ -97,8 +109,15 @@ export default function TwoPathways() {
                   <h3 className="text-[clamp(1.5rem,2.083vw,1.875rem)] leading-[1.2] font-bold text-gold">
                     UNVEIL: Online
                   </h3>
-                  <div className="mt-6 lg:mt-[18px]">
-                    <CtaPill as="a" href="/webinar" variant="navyOutline" size="xs">
+                  {/* As on the Institutional card: desktop keeps the pill under
+                      the title, phones move it below the Part 2 copy. */}
+                  <div className="mt-6 hidden lg:mt-[18px] lg:block">
+                    <CtaPill
+                      as="a"
+                      href="/webinar"
+                      variant="navyOutline"
+                      size="xs"
+                    >
                       Join the Free Webinar
                     </CtaPill>
                   </div>
@@ -116,6 +135,16 @@ export default function TwoPathways() {
                     <strong className="font-bold">Part 2:</strong> 6 weeks ·
                     Authority + Integration + Closing Event in person
                   </p>
+                </div>
+                <div className="lg:hidden">
+                  <CtaPill
+                    as="a"
+                    href="/webinar"
+                    variant="navyOutline"
+                    size="xsPhone"
+                  >
+                    Join the Free Webinar
+                  </CtaPill>
                 </div>
               </div>
 

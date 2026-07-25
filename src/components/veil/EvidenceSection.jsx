@@ -58,6 +58,8 @@ function ScallopPhoto({ id, viewBox = "0 0 828 800", className = "" }) {
 
 const EVIDENCE_COPY = (
   <>
+    {/* Both breakpoints follow the Figma: the first three lines sit tight, the
+        gaps fall before the curriculum and "measures change across" lines. */}
     <p>The science behind VEIL.</p>
     <p>
       Internationally validated psychometric instruments · All with
@@ -87,10 +89,22 @@ function EvidenceCard({ className = "" }) {
       <h2 className="text-[clamp(1.5rem,2.63vw,2.3643rem)] leading-[1.2] font-bold text-white">
         The Evidence
       </h2>
-      <div className="mt-3 text-[clamp(0.9375rem,1.25vw,1.123rem)] leading-normal font-medium text-white">
+      {/* The phone Figma is a 390px frame where "…for Gulf professional
+          populations" fits on one line. Scaling the body with the viewport
+          (3.59vw ≈ 14px at 390) keeps those line breaks on every phone width;
+          sm+ returns to the previous 15px/1.25vw ramp. */}
+      <div className="mt-3 text-[clamp(0.75rem,3.59vw,0.875rem)] leading-normal font-medium text-white sm:text-[clamp(0.9375rem,1.25vw,1.123rem)]">
         {EVIDENCE_COPY}
       </div>
-      <CtaPill as="a" href="/webinar" variant="creamFilled" size="xs" className="mt-6">
+      {/* xsPhone so the long label stays inside the card on phones; from sm up
+          it is the same pill as before. */}
+      <CtaPill
+        as="a"
+        href="/webinar"
+        variant="creamFilled"
+        size="xsPhone"
+        className="mt-6"
+      >
         Join the Free Live Webinar
       </CtaPill>
     </div>
