@@ -7,8 +7,8 @@ import SiteFooter from "../components/layout/SiteFooter";
 import ProgramsMobile from "../components/programs-mobile/ProgramsMobile";
 
 import wellnessPhoto from "../assets/programs/wellness-photo.jpg";
-import higheredPhoto from "../assets/programs/highered-photo.jpg";
-import integratedMarketingPhoto from "../assets/programs/integrated-marketing-photo.png";
+import higheredPhoto from "../assets/programs/highered-photo-new.png";
+import integratedMarketingPhoto from "../assets/programs/integrated-marketing-photo-new.png";
 import digitalMarketingPhoto from "../assets/programs/digital-marketing-photo.png";
 import digitalTransformationPhoto from "../assets/programs/digital-transformation-photo-v2.jpg";
 
