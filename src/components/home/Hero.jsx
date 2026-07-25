@@ -49,13 +49,13 @@ export default function Hero() {
       </p>
 
       {/* 1728:263 / 1728:269 — 215 and 257.5 wide, 43 tall, 16 apart.
-          Both hero pills sit hollow at rest and fill with cream on hover, so
-          the VEIL pill reads the same as "Browse All Programs" until you
-          reach for it (client request, overrides Figma's filled treatment). */}
+          VEIL is the primary CTA and sits filled at rest, per Figma; it hollows
+          out on hover into the outline treatment. "Browse All Programs" stays
+          hollow at rest as the secondary, so the two read as a pair. */}
       <PillButton
         as="a"
         href="/veil"
-        variant="creamOutline"
+        variant="creamFilled"
         icon="sparkle"
         size="xs"
         className="absolute top-[446px] left-[80px]"
