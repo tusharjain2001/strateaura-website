@@ -30,8 +30,10 @@ export default function InsightsHero() {
           </span>
         </div>
 
+        {/* The board sets the first line in the brand gold and the second in
+            navy, so the two lines carry their own colours. */}
         <h1 className="mt-6 text-[clamp(2rem,5vw,3.125rem)] leading-[1.2] font-bold text-navy lg:mt-6 lg:text-[30px]">
-          Less Content.
+          <span className="text-gold">Less Content.</span>
           <br />
           More Clarity.
         </h1>
