@@ -3,8 +3,6 @@ import MobileHero from "./MobileHero";
 import MobileSignaturePrograms from "./MobileSignaturePrograms";
 import MobileVeil from "./MobileVeil";
 import MobileMarketingPrograms from "./MobileMarketingPrograms";
-import MobileCtaBand from "./MobileCtaBand";
-import MobileWhatWeOffer from "./MobileWhatWeOffer";
 import MobileFrameworks from "./MobileFrameworks";
 import MobileBelief from "./MobileBelief";
 import MobileProblem from "./MobileProblem";
@@ -41,8 +39,6 @@ export default function HomeMobile() {
           </div>
         </div>
         <MobileMarketingPrograms />
-        <MobileCtaBand />
-        <MobileWhatWeOffer />
         <MobileFrameworks />
         <MobileBelief />
         <MobileProblem />

@@ -1,6 +1,5 @@
 import MobileContainer from "./MobileContainer";
 import MobilePill from "./MobilePill";
-import heroAura from "../../assets/home-mobile/hero-aura.png";
 import heroPhoto from "../../assets/home-mobile/hero-photo.jpg";
 
 /**
@@ -15,14 +14,6 @@ import heroPhoto from "../../assets/home-mobile/hero-photo.jpg";
 export default function MobileHero() {
   return (
     <section className="relative overflow-hidden bg-navy-2">
-      {/* Aura watermark: 337x351 box hugging the top-left of the navy panel. */}
-      <img
-        src={heroAura}
-        alt=""
-        aria-hidden
-        className="pointer-events-none absolute top-0 left-0 w-[83.8%] max-w-[337px] -scale-x-100 rotate-180"
-      />
-
       {/* Copy — line breaks are forced to the Figma composition, and the type
           scales with the column so they hold. Figma's 370px column is set in
           Acumin Pro; the site renders in Inter, which runs ~5% wider, so a line
@@ -36,16 +27,17 @@ export default function MobileHero() {
           <span>to Life. Where Leaders</span>
           <span>Find Their Edge.</span>
         </h1>
-        <p className="mt-[19px] text-[min(16px,calc(var(--hero-col)*0.0412))] leading-normal text-white [&>span]:block">
-          <span>At StrateAura™, we create spaces for elevated</span>
-          <span>learning and aligned action. This is where ambition</span>
-          <span>meets self-awareness and where fragmented effort</span>
-          <span>becomes embodied leadership.</span>
+        {/* Flows naturally: the forced Figma breaks assumed Acumin's metrics, and
+            in Inter the third line overran the column and dropped "effort" onto a
+            line of its own. */}
+        <p className="mt-[19px] text-[min(16px,calc(var(--hero-col)*0.0412))] leading-normal text-pretty text-white">
+          At StrateAura™, we create spaces for elevated learning and aligned
+          action. This is where ambition meets self-awareness and where
+          fragmented effort becomes embodied leadership.
         </p>
 
         <div className="mt-[40px] flex flex-col items-start gap-[12.87px]">
-          {/* Hollow like "Browse All Programs", matching the desktop hero. */}
-          <MobilePill as="a" href="/veil" variant="creamOutline" size="hero">
+          <MobilePill as="a" href="/veil" variant="creamFilled" size="hero">
             VEIL<sup className="text-[10.32px]">TM</sup> Program
           </MobilePill>
           <MobilePill

@@ -50,7 +50,10 @@ export default function MobileFrameworks() {
   return (
     <section className="bg-white pt-[66px]">
       <MobileContainer>
-        <h2 className="text-[28px] leading-normal font-bold text-navy">
+        {/* Held on one line: at 28px the title needs ~360px in Inter bold, which
+            overflows the 370px column on anything narrower than the 402px Figma
+            frame. 0.074 is 28/370 pulled back a touch so it clears the column. */}
+        <h2 className="text-[min(28px,calc((min(100vw,430px)-32px)*0.074))] leading-normal font-bold whitespace-nowrap text-navy">
           Our Signature Frameworks
         </h2>
         <p className="mt-[16px] text-[16px] leading-normal font-light text-black">
