@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import PillButton from "../ui/PillButton";
 import ctaAura from "../../assets/cta-aura.png";
 import logoA from "../../assets/about/foot-logo-a.svg";
@@ -29,8 +30,8 @@ export default function AboutFooter() {
         Apply to work with us!
       </p>
       <PillButton
-        as="a"
-        href="#book"
+        as={Link}
+        to="/contact"
         variant="goldOutline"
         icon="sparkle"
         className="absolute top-[397px] left-[116px]"

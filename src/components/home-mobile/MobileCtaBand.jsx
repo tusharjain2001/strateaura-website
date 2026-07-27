@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import MobileContainer from "./MobileContainer";
 import MobilePill from "./MobilePill";
 import ctaSwoosh from "../../assets/home-mobile/cta-swoosh.svg";
@@ -48,8 +49,8 @@ export default function MobileCtaBand() {
               rise from within.
             </p>
             <MobilePill
-              as="a"
-              href="/contact"
+              as={Link}
+              to="/contact"
               variant="creamOutline"
               size="ctaBand"
               className="max-w-full text-cream [&>span:last-child]:bg-cream"

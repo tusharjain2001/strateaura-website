@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import PillButton from "../ui/PillButton";
 import { Sparkle } from "../ui/Icons";
 import laurelLeft from "../../assets/belief-laurel-left.svg";
@@ -323,8 +324,8 @@ export default function ProblemWeAddress() {
           </div>
 
           <PillButton
-            as="a"
-            href="#solutions"
+            as={Link}
+            to="/programs"
             variant="goldOutlineWhite"
             icon="sparkle"
             size="xs"

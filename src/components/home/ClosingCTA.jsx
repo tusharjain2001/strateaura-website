@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import PillButton from "../ui/PillButton";
 import footerLogo from "../../assets/footer-logo.svg";
 import ctaAura from "../../assets/cta-aura.png";
@@ -63,8 +64,8 @@ export default function ClosingCTA() {
         Apply to work with us!
       </p>
       <PillButton
-        as="a"
-        href="/contact"
+        as={Link}
+        to="/contact"
         variant="goldOutline"
         icon="sparkle"
         className="absolute top-[374px] left-[76px] min-w-[439px]"

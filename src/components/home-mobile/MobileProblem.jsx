@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import MobileContainer from "./MobileContainer";
 import MobilePill from "./MobilePill";
 import { Sparkle } from "../ui/Icons";
@@ -244,7 +245,7 @@ export default function MobileProblem() {
             </p>
           </div>
 
-          <MobilePill as="a" href="#solutions" variant="goldOutline" className="bg-white">
+          <MobilePill as={Link} to="/programs" variant="goldOutline" className="bg-white">
             Our Solutions
           </MobilePill>
         </div>

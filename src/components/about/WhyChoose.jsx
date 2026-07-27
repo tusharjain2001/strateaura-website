@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import PillButton from "../ui/PillButton";
 import choosePhoto from "../../assets/about/choose.png";
 import chooseMask from "../../assets/about/choose-mask.svg";
@@ -91,8 +92,8 @@ export default function WhyChoose() {
             </p>
           </div>
           <PillButton
-            as="a"
-            href="#programs"
+            as={Link}
+            to="/programs"
             variant="creamFilled"
             icon="sparkle"
             size="xxs"

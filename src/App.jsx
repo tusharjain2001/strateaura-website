@@ -12,6 +12,7 @@ import InsightsPage from "./pages/InsightsPage";
 import BlogPage from "./pages/BlogPage";
 import SamplePage from "./pages/SamplePage";
 import NewPage from "./pages/NewPage";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   return (
@@ -33,6 +34,9 @@ function App() {
         <Route path="/insights/:slug" element={<BlogPage />} />
         <Route path="/sample" element={<SamplePage />} />
         <Route path="/new" element={<NewPage />} />
+        {/* Catch-all — anything the routes above don't match renders the 404
+            page instead of a blank screen. Keep this last. */}
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );

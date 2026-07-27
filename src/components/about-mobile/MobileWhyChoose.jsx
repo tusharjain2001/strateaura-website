@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import MobileContainer from "../home-mobile/MobileContainer";
 import MobilePill from "../home-mobile/MobilePill";
 import photo from "../../assets/about-mobile/belowcorevalues.png";
@@ -64,8 +65,8 @@ export default function MobileWhyChoose() {
             </p>
           </div>
           <MobilePill
-            as="a"
-            href="/programs"
+            as={Link}
+            to="/programs"
             variant="creamFilled"
             size="choose"
             className="mt-[18px] border-0"

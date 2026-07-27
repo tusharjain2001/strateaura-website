@@ -93,8 +93,8 @@ export default function MobileSiteFooter({ body, tagline, buttons, aside }) {
             )}
             {buttons ?? (
               <MobilePill
-                as="a"
-                href="/contact"
+                as={Link}
+                to="/contact"
                 variant="goldOutline"
                 size="ctaBand"
                 className="max-w-full"

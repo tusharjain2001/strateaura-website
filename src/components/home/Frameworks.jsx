@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import PillButton from "../ui/PillButton";
 import CardArrow from "../ui/CardArrow";
 import frameworkBg from "../../assets/signature-framework-bg.png";
@@ -94,8 +95,8 @@ export default function Frameworks() {
         Our Signature Frameworks
       </h2>
       <PillButton
-        as="a"
-        href="#models"
+        as={Link}
+        to="/frameworks"
         variant="goldOutline"
         icon="sparkle"
         size="xs"

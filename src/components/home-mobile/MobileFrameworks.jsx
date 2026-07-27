@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import MobileContainer from "./MobileContainer";
 import MobilePill from "./MobilePill";
 import { ArrowRight } from "../ui/Icons";
@@ -62,7 +63,7 @@ export default function MobileFrameworks() {
         </p>
 
         <div className="mt-[16px]">
-          <MobilePill as="a" href="/frameworks" variant="goldOutline">
+          <MobilePill as={Link} to="/frameworks" variant="goldOutline">
             Discover Models
           </MobilePill>
         </div>

@@ -54,8 +54,8 @@ export default function BlogFooter() {
 
       {/* 1755:3843 — the pill is a fixed 439x65 box: label 28 in from the left,
           50px circle 10 in from the right. */}
-      <a
-        href="#book"
+      <Link
+        to="/contact"
         className="group absolute top-[253px] left-[76px] block h-[65px] w-[439px] rounded-full border border-gold"
       >
         {/* 22.3px, not the board's 24: the pill is a fixed 439 box and Inter
@@ -67,7 +67,7 @@ export default function BlogFooter() {
         <span className="absolute top-[8px] left-[379px] flex size-[50px] items-center justify-center rounded-full bg-gold text-cream transition-transform motion-safe:group-hover:scale-105">
           <Sparkle className="size-[35.65px]" />
         </span>
-      </a>
+      </Link>
 
       {/* 1755:3771 — footer block. Both rules run x40..1317. */}
       <div className="absolute top-[388px] left-[40px] h-px w-[1277px] bg-black/10" />
