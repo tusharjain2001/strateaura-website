@@ -6,7 +6,7 @@ import { ChevronDown, CloseIcon } from "../ui/Icons";
 
 const WEBINAR_OPTIONS = [
   "Learn about the topic",
-  "Explore the Avail Program",
+  "Explore the VEIL™ Program",
   "Professional Development",
   "Personal Growth",
   "Networking",
