@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import MobileContainer from "../home-mobile/MobileContainer";
 import MobilePill from "../home-mobile/MobilePill";
 import FwTag from "./FwTag";
@@ -357,8 +358,8 @@ export default function FwVeil() {
         </div>
 
         <MobilePill
-          as="a"
-          href="/veil"
+          as={Link}
+          to="/veil"
           variant="navyOutline"
           size="smFluid"
           className="mt-[16px] max-w-full"

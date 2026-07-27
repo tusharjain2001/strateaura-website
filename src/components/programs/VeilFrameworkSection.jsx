@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import TagRibbon from "./TagRibbon";
 import CtaPill from "../ui/CtaPill";
 import RequestBrochureModal from "./RequestBrochureModal";
@@ -214,8 +215,8 @@ export default function VeilFrameworkSection() {
 
               <div className="mt-6 flex flex-col items-start gap-3.5">
                 <CtaPill
-                  as="a"
-                  href="#map-decode"
+                  as={Link}
+                  to="/veil#two-pathways"
                   variant="navyOutline"
                   icon={ArrowUpRight}
                   size="compact"
@@ -263,7 +264,7 @@ export default function VeilFrameworkSection() {
               </div>
 
               <div className="mt-6">
-                <CtaPill as="a" href="#contact" variant="navyOutline" icon={Sparkle} size="compact">
+                <CtaPill as={Link} to="/contact" variant="navyOutline" icon={Sparkle} size="compact">
                   Request a Cohort Proposal
                 </CtaPill>
               </div>

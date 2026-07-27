@@ -77,19 +77,6 @@ export default function FwHero() {
             leadership. They were built to reveal the inner logic that already
             exists in you, and elevate it into lasting presence.
           </p>
-          <a
-            href="#signature-models"
-            // Figma's 301px is its Acumin measurement; the label needs ~248px
-            // in Inter and the chrome (18 + 33.6 circle + 5 + 2 border) another
-            // 59, so a fixed width pushed the sparkle outside the capsule. Sized
-            // to content, with the label scaling once the column can't hold it.
-            className="group mt-[14px] flex h-[43.67px] max-w-full items-center justify-between gap-[8px] rounded-full border border-cream pr-[5px] pl-[18px] text-[min(15px,calc((var(--pill-col)-59px)*0.0605))] leading-none font-bold whitespace-nowrap text-white"
-          >
-            <span>Discover Our Signature Models</span>
-            <span className="flex size-[33.6px] shrink-0 items-center justify-center rounded-full bg-white transition-transform motion-safe:group-hover:scale-105">
-              <Sparkle className="size-[18px] text-gold" />
-            </span>
-          </a>
         </div>
       </MobileContainer>
     </section>

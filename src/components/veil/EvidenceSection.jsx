@@ -99,8 +99,8 @@ function EvidenceCard({ className = "" }) {
       {/* xsPhone so the long label stays inside the card on phones; from sm up
           it is the same pill as before. */}
       <CtaPill
-        as="a"
-        href="/webinar"
+        as={Link}
+        to="/webinar"
         variant="creamFilled"
         size="xsPhone"
         className="mt-6"
@@ -151,8 +151,8 @@ export default function EvidenceSection() {
             {EVIDENCE_COPY}
           </div>
           <CtaPill
-            as="a"
-            href="/webinar"
+            as={Link}
+            to="/webinar"
             variant="creamFilled"
             size="xs"
             className="mt-[7px]"

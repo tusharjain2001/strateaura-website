@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CtaPill from "../ui/CtaPill";
 import heroPhoto from "../../assets/veil/hero-photo-v2.jpg";
 
@@ -32,7 +33,7 @@ export default function VeilHero() {
             <span>who are still performing well - and already paying a silent cost.</span>
           </p>
           <div className="mt-8 flex flex-col items-start gap-4 lg:mt-[50px] lg:gap-[20px]">
-            <CtaPill as="a" href="/contact" variant="creamFilled" size="xs">
+            <CtaPill as={Link} to="/contact" variant="creamFilled" size="xs">
               Request a Cohort Proposal
             </CtaPill>
             <CtaPill as="a" href="/webinar" variant="creamOutline" size="xs">

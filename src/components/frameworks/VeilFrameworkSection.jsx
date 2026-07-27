@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import FrameworkTag from "./FrameworkTag";
 import CtaPill from "../ui/CtaPill";
 import deckArcs from "../../assets/frameworks/veil-deck-arcs.svg";
@@ -363,8 +364,8 @@ export default function VeilFrameworkSection() {
             </p>
           </div>
           <CtaPill
-            as="a"
-            href="#veil-program"
+            as={Link}
+            to="/veil"
             variant="navyOutline"
             size="sm44"
             className="mt-6 lg:mt-[35px]"

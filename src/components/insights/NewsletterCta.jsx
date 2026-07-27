@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CtaPill from "../ui/CtaPill";
 import newsletterBg from "../../assets/insights/newsletter-bg.png";
 
@@ -39,7 +40,7 @@ export default function NewsletterCta() {
             flooding. No fluff. Just one message that makes you stop,
             breathe, and move with purpose.
           </p>
-          <CtaPill as="a" href="#join-inner-circle" variant="whiteOutline" size="compactLg" className="mt-8 lg:mt-6">
+          <CtaPill as={Link} to="/contact" variant="whiteOutline" size="compactLg" className="mt-8 lg:mt-6">
             Join the Inner Circle
           </CtaPill>
         </div>

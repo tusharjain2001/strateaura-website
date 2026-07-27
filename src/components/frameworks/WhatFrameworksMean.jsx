@@ -1,4 +1,3 @@
-import CtaPill from "../ui/CtaPill";
 import speakerPhoto from "../../assets/frameworks/mean-speaker-photo.png";
 
 // Figma 1755:2967 ("Frame 62", 1440x823). The arch photo sits inset at x:162
@@ -46,8 +45,10 @@ export default function WhatFrameworksMean() {
         </div>
 
         {/* Gold quote card — 592.6x184 at x:581.3 (40.36%) / y:458 (55.65%),
-            text inset 42/38 with the pill 16px below the paragraph. */}
-        <div className="mx-5 my-10 rounded-[4px] bg-gold px-6 py-7 sm:mx-8 lg:absolute lg:top-[55.65%] lg:left-[40.36%] lg:z-10 lg:m-0 lg:min-h-[184px] lg:w-[41.15%] lg:py-[38px] lg:pr-[40px] lg:pl-[42px]">
+            text inset 42/38. Figma's 184px allowed for a CTA pill under the
+            paragraph; that pill is gone but the card keeps its height, so the
+            copy is centred in the box rather than sitting at the top. */}
+        <div className="mx-5 my-10 flex items-center rounded-[4px] bg-gold px-6 py-7 sm:mx-8 lg:absolute lg:top-[55.65%] lg:left-[40.36%] lg:z-10 lg:m-0 lg:h-[184px] lg:w-[41.15%] lg:py-[38px] lg:pr-[40px] lg:pl-[42px]">
           <p className="max-w-[511px] text-[15px] leading-[1.17] text-white lg:text-[16px]">
             These models weren&rsquo;t created to &ldquo;fix&rdquo; your
             leadership.{" "}
@@ -56,15 +57,6 @@ export default function WhatFrameworksMean() {
               you, and elevate it into lasting presence.
             </span>
           </p>
-          <CtaPill
-            as="a"
-            href="#signature-models"
-            variant="whiteOutline"
-            size="sm36"
-            className="mt-[16px]"
-          >
-            Discover Our Signature Models
-          </CtaPill>
         </div>
       </div>
     </section>

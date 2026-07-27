@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import FrameworkTag from "./FrameworkTag";
 import CtaPill from "../ui/CtaPill";
 import { ArrowRight } from "../ui/Icons";
@@ -120,7 +121,7 @@ export default function AlaNexusSection() {
 
         {/* 61px from the card rect bottom to the pill (Figma 1755:3179). */}
         <div className="mt-10 flex justify-center lg:mt-[61px]">
-          <CtaPill as="a" href="#apply-ala-nexus" variant="navyOutline" size="xs">
+          <CtaPill as={Link} to="/contact" variant="navyOutline" size="xs">
             Apply ALA-Nexus to Your Business
           </CtaPill>
         </div>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import MobileContainer from "../home-mobile/MobileContainer";
 import MobilePill from "../home-mobile/MobilePill";
 import FwTag from "./FwTag";
@@ -115,8 +116,8 @@ export default function FwAlaNexus() {
         </div>
 
         <MobilePill
-          as="a"
-          href="#apply-ala-nexus"
+          as={Link}
+          to="/contact"
           variant="navyOutline"
           size="smFluid"
           className="mt-[24px] max-w-full"

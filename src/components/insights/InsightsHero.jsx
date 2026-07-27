@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CtaPill from "../ui/CtaPill";
 import auraTrail from "../../assets/insights/hero-aura-trail.png";
 import badgeRibbon from "../../assets/insights/hero-badge-ribbon.png";
@@ -38,7 +39,7 @@ export default function InsightsHero() {
           More Clarity.
         </h1>
 
-        <CtaPill as="a" href="/veil" variant="goldOutline" size="xs" className="mt-8 lg:mt-6">
+        <CtaPill as={Link} to="/veil" variant="goldOutline" size="xs" className="mt-8 lg:mt-6">
           Explore the VEIL™ Program
         </CtaPill>
       </div>

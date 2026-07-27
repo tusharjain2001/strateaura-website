@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import MobileContainer from "../home-mobile/MobileContainer";
 import MobilePill from "../home-mobile/MobilePill";
 import FwTag from "./FwTag";
@@ -115,8 +116,8 @@ export default function FwFiveCs() {
           </p>
         </div>
         <MobilePill
-          as="a"
-          href="#brand-health-support"
+          as={Link}
+          to="/contact"
           variant="goldOutline"
           size="smFluid"
           className="mt-[24px] max-w-full"

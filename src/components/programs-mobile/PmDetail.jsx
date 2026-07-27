@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import MobileContainer from "../home-mobile/MobileContainer";
 import MobilePill from "../home-mobile/MobilePill";
 import bulletStar from "../../assets/programs/yellowcardpointer.png";
@@ -42,7 +43,7 @@ export default function PmDetail({
   paragraph,
   suitedFor,
   ctaLabel,
-  ctaHref = "/contact",
+  ctaTo = "/contact",
   photo,
   photoAlt,
   bullets,
@@ -82,8 +83,8 @@ export default function PmDetail({
         {/* The CTA takes the section's tone, like the heading above it. */}
         <div className="mt-[32px] [--pill-col:calc(min(100vw,430px)-32px)]">
           <MobilePill
-            as="a"
-            href={ctaHref}
+            as={Link}
+            to={ctaTo}
             variant={t.pill}
             size="veil"
           >

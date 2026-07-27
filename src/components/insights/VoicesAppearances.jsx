@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CtaPill from "../ui/CtaPill";
 import { Sparkle } from "../ui/Icons";
 import voicesPhoto from "../../assets/insights/voices-photo.png";
@@ -82,7 +83,7 @@ export default function VoicesAppearances() {
           <p className="mt-[19px] text-[13px] leading-[19px] font-light lg:mt-[18px] lg:text-[16px] lg:leading-normal">
             When insight meets voice, transformation follows.
           </p>
-          <CtaPill as="a" href="#watch-listen" variant="whiteOutline" size="sm34Lg" className="mt-[15px] lg:mt-[18px]">
+          <CtaPill as={Link} to="/webinar" variant="whiteOutline" size="sm34Lg" className="mt-[15px] lg:mt-[18px]">
             Watch &amp; Listen
           </CtaPill>
         </div>

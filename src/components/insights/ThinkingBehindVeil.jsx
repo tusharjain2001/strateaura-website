@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CtaPill from "../ui/CtaPill";
 import veilLaurel from "../../assets/insights/veil-card-laurel.svg";
 
@@ -42,7 +43,7 @@ export default function ThinkingBehindVeil() {
           </p>
 
           {/* Body ends at 299.78, CTA sits at 327 — a 27px gap, not 44. */}
-          <CtaPill as="a" href="/webinar" variant="whiteOutline" size="compact37Lg" className="relative mt-[26px] lg:mt-6">
+          <CtaPill as={Link} to="/webinar" variant="whiteOutline" size="compact37Lg" className="relative mt-[26px] lg:mt-6">
             Join the Free Live Webinar
           </CtaPill>
         </div>

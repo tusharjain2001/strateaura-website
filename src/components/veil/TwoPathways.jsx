@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CtaPill from "../ui/CtaPill";
 import bgLaurel from "../../assets/veil/pathways-bg-v2.svg";
 import subcardDeco1 from "../../assets/programs/construct-card-deco-1.svg";
@@ -45,7 +46,12 @@ const PHASES = [
 
 export default function TwoPathways() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white to-[#e6c464]">
+    // `two-pathways` is the deep-link target for the Programs page's "Learn
+    // More about MAP & DECODE" pills; scroll-mt clears the sticky header.
+    <section
+      id="two-pathways"
+      className="relative scroll-mt-[80px] overflow-hidden bg-gradient-to-b from-white to-[#e6c464]"
+    >
       {/* Background laurel (Figma 1755:1504): 1440x1181 centred, top at 27px,
           the overflow clipped by the section. */}
       <img
@@ -72,7 +78,7 @@ export default function TwoPathways() {
                 {/* Desktop keeps the pill directly under the title (Figma);
                     on phones it moves below the summary copy instead. */}
                 <div className="mt-6 hidden lg:mt-[19px] lg:block">
-                  <CtaPill as="a" href="/contact" variant="navyOutline" size="xs">
+                  <CtaPill as={Link} to="/contact" variant="navyOutline" size="xs">
                     Request a Cohort Proposal
                   </CtaPill>
                 </div>
@@ -89,8 +95,8 @@ export default function TwoPathways() {
               </div>
               <div className="lg:hidden">
                 <CtaPill
-                  as="a"
-                  href="/contact"
+                  as={Link}
+                  to="/contact"
                   variant="navyOutline"
                   size="xsPhone"
                 >

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CtaPill from "../ui/CtaPill";
 import { Sparkle } from "../ui/Icons";
 
@@ -59,7 +60,8 @@ export default function ProgramDetailSection({
   bullets,
   suitedFor,
   ctaLabel,
-  ctaHref = "#contact",
+  // Every program CTA books a conversation; a card can override the target.
+  ctaTo = "/contact",
 }) {
   const t = THEME[theme] ?? THEME.gold;
   const imageOnRight = imageSide === "right";
@@ -129,7 +131,7 @@ export default function ProgramDetailSection({
       </div>
 
       <div className="mt-[25px] w-fit">
-        <CtaPill as="a" href={ctaHref} variant={t.cta} size="compact">
+        <CtaPill as={Link} to={ctaTo} variant={t.cta} size="compact">
           {ctaLabel}
         </CtaPill>
       </div>

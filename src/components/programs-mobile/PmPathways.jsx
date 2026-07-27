@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import MobileContainer from "../home-mobile/MobileContainer";
 import MobilePill from "../home-mobile/MobilePill";
 import check from "../../assets/programs/pathway-bullet-check.svg";
@@ -136,8 +137,8 @@ export default function PmPathways() {
 
             <div className="mt-[23px] flex flex-col items-start gap-[9.35px]">
               <MobilePill
-                as="a"
-                href="/veil"
+                as={Link}
+                to="/veil#two-pathways"
                 variant="navyOutline"
                 size="pathway"
                 icon="arrowUp"
@@ -191,8 +192,8 @@ export default function PmPathways() {
 
             <div className="mt-[23px]">
               <MobilePill
-                as="a"
-                href="/contact"
+                as={Link}
+                to="/contact"
                 variant="navyOutline"
                 size="pathway"
               >

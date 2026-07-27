@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import FrameworkTag from "./FrameworkTag";
 import CtaPill from "../ui/CtaPill";
 import { ArrowRight } from "../ui/Icons";
@@ -161,8 +162,8 @@ export default function FiveCsSection() {
         {/* CTA pill centred on the full column (Figma 1755:3055). */}
         <div className="mt-6 flex lg:mt-[17px] lg:justify-center">
           <CtaPill
-            as="a"
-            href="#brand-health-support"
+            as={Link}
+            to="/contact"
             variant="goldOutline"
             size="sm39"
           >
