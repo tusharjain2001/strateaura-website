@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CtaPill from "../ui/CtaPill";
 import evidencePhoto from "../../assets/veil/evidence-photo.jpg";
 import evidenceMasked from "../../assets/veil/evidence-photo-masked.png";
