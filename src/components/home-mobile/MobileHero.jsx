@@ -1,6 +1,6 @@
 import MobileContainer from "./MobileContainer";
 import MobilePill from "./MobilePill";
-import heroPhoto from "../../assets/home-mobile/hero-photo.jpg";
+import heroPhoto from "../../assets/home-mobile/hero-photo-v2.jpg";
 
 /**
  * Mobile hero — Figma node 1434:462.
@@ -51,14 +51,17 @@ export default function MobileHero() {
         </div>
       </MobileContainer>
 
-      {/* Full-bleed photo strip with the navy wash from Figma (rgba 35,58,88,.68). */}
+      {/* Full-bleed photo strip — node 1878:4576: the CLEAN 1960x1348 raw
+          (saved at 2x, 804x662) cover-cropped by the browser, with the node's
+          0.7 navy overlay as a separate layer. Never bake the tint into the
+          asset — stacking it with this wash double-darkens the photo. */}
       <div className="relative h-[333px] w-full">
         <img
           src={heroPhoto}
           alt="StrateAura participants together at a leadership gathering"
           className="absolute inset-0 size-full object-cover"
         />
-        <div className="absolute inset-0 bg-[rgba(35,58,88,0.68)]" />
+        <div className="absolute inset-0 bg-[rgba(35,58,88,0.7)]" />
         {/* Figma node 1434:887 — a 402x98 rect rotated 180 over the photo's top
             edge, so its `180deg, transparent -> #233A58` fill renders navy at
             the top. Fades the photo out of the navy panel above it. */}
