@@ -1,5 +1,5 @@
 import PillButton from "../ui/PillButton";
-import heroPhoto from "../../assets/home2/hero-photo.jpg";
+import heroPhoto from "../../assets/home2/hero-photo-v2.jpg";
 
 /**
  * Hero — "Alt/ Home" board, node 1728:252.
@@ -19,18 +19,17 @@ import heroPhoto from "../../assets/home2/hero-photo.jpg";
 export default function Hero() {
   return (
     <section className="relative h-[682px] w-[1440px] overflow-hidden">
-      {/* The photo (frame y 48..736) and its wash (73..761) both overrun the
-          636-tall board frame, which clips them — so the band stops at canvas
-          562 and the remaining 120px is the gap before the next section. */}
-      <div className="absolute top-0 left-0 h-[562px] w-[1440px] overflow-hidden bg-navy-2">
-        {/* 1728:254 — square source scaled to 1580 and cropped from the top */}
+      {/* Background re-cut to "Hero Option- 01" (1954:1536, 1440x555): the
+          band is 555 tall; the 2730x1536 group photo is drawn width-fit
+          (1440x810.2) and shifted up 3.71% (20.6px), with the wash running
+          from 60% navy at the top to solid navy-2 exactly at the band edge. */}
+      <div className="absolute top-0 left-0 h-[555px] w-[1440px] overflow-hidden bg-navy-2">
         <img
           src={heroPhoto}
           alt=""
-          className="absolute top-[-228px] left-0 h-[1580px] w-[1580px] max-w-none"
+          className="absolute top-[-20.6px] left-0 h-[810.2px] w-[1440px] max-w-none"
         />
-        {/* 1728:255 — navy wash, 25px lower than the photo */}
-        <div className="absolute top-[-1px] left-0 h-[688px] w-[1440px] bg-gradient-to-b from-[rgba(35,58,88,0.6)] to-navy-2" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(35,58,88,0.6)] to-navy-2" />
       </div>
 
       {/* 1728:259 — 32px bold, two lines inside a 632 box. Tops here are the
