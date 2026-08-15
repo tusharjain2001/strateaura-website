@@ -1,49 +1,41 @@
 import { Link } from "react-router-dom";
 import MobileContainer from "./MobileContainer";
 import MobilePill from "./MobilePill";
-import leadPhoto from "../../assets/insights-mobile/lead.jpg";
-import artOne from "../../assets/insights-mobile/art-1.jpg";
-import artTwo from "../../assets/insights-mobile/art-2.jpg";
-import artThree from "../../assets/insights-mobile/art-3.jpg";
-import artFour from "../../assets/insights-mobile/art-4.jpg";
+import leadPhoto from "../../assets/blog/not-a-wellness-program.jpg";
+import artOne from "../../assets/blog/gcc-missing-conversation.jpg";
+import artTwo from "../../assets/blog/three-things-in-exact-order.jpg";
+import artThree from "../../assets/blog/what-unveil-cannot-yet-prove.jpg";
 
-// Figma nodes 1878:4962 / 4969 / 4976 / 4983 — the four article rows under the
-// lead piece. Each is a 1px rule, 23px of space, then a 22px gold title, its
-// published date 7px below and a full-width image plate 16px under that. The
-// first plate is 223px tall; the rest are 225px. Slugs match the desktop
+// Figma nodes 1878:4962 / 4969 / 4976 — the article rows under the lead piece.
+// Each is a 1px rule, 23px of space, then a 22px gold title, its published date
+// 7px below and a full-width image plate 16px under that. The board carried four
+// rows at a fixed 223/225px; there are three now and the covers are 16:9, so the
+// plates take their height from that ratio instead. Slugs match the desktop
 // Insights section, i.e. the posts in src/data/blogPosts.jsx.
 const ARTICLES = [
   {
-    title: "Presence Is Not Charisma. It’s Strategic Alignment.",
-    date: "Published December 28, 2025.",
-    height: "h-[223px]",
-    slug: "presence-is-not-charisma",
+    title:
+      "Why the GCC Leadership Development Market Is Missing the Most Important Conversation",
+    date: "Published May 6, 2026.",
+    slug: "gcc-missing-conversation",
     photo: artOne,
   },
   {
-    title: "Why High-Performing Women Are Quietly Exhausted",
-    date: "Published January 09, 2026.",
-    height: "h-[225px]",
-    slug: "why-high-performing-women-are-quietly-exhausted",
+    title: "The Three Things That Have to Change — In This Exact Order",
+    date: "Published June 23, 2026.",
+    slug: "three-things-in-exact-order",
     photo: artTwo,
   },
   {
-    title: "Self-Leadership Is Not Soft. It’s Foundational.",
-    date: "Published January 22, 2026.",
-    height: "h-[225px]",
-    slug: "self-leadership-is-not-soft",
+    title:
+      "Why the Most Credible Thing I Can Say About UNVEIL Is What It Cannot Yet Prove",
+    date: "Published July 9, 2026.",
+    slug: "what-unveil-cannot-yet-prove",
     photo: artThree,
-  },
-  {
-    title: "Leadership Health Is the Next Competitive Advantage.",
-    date: "Published January 30, 2026.",
-    height: "h-[225px]",
-    slug: "leadership-health-is-the-next-competitive-advantage",
-    photo: artFour,
   },
 ];
 
-const FEATURED_SLUG = "these-arent-productivity-problems";
+const FEATURED_SLUG = "not-a-wellness-program";
 
 /**
  * Insights & Resources — Figma node 1878:4998 (mobile frame, 372px column
@@ -76,47 +68,44 @@ export default function MobileInsights() {
               <img
                 src={leadPhoto}
                 alt=""
-                className="h-[223px] w-full object-cover"
+                className="aspect-[16/9] w-full object-cover"
               />
             </Link>
             <div className="flex flex-col gap-[16px]">
               <div className="flex flex-col gap-[10px]">
                 <h3 className="text-[24px] leading-normal font-bold text-gold">
                   <Link to={`/insights/${FEATURED_SLUG}`}>
-                    These Aren’t Productivity Problems. They’re Patterns of
-                    Misalignment.
+                    This Is Not a Wellness Program. Here Is How to Tell the
+                    Difference.
                   </Link>
                 </h3>
                 <p className="text-[16px] leading-normal text-black/60">
-                  Published December 15, 2025
+                  Published April 14, 2026
                 </p>
               </div>
               {/* Node 1878:4961 — the blank lines between paragraphs are real
                   empty line boxes in Figma, so the rhythm is one full line. */}
               <div className="space-y-[1em] text-[16px] leading-normal font-bold text-black/60">
                 <p>
-                  We live in a world obsessed with productivity — more tools,
-                  more systems, more ways to do more. Yet many high-performing
-                  leaders feel increasingly fatigued, mentally crowded, and
-                  disconnected from work they are objectively good at. This is
-                  often labeled as burnout or a motivation problem. In reality,
-                  it is something deeper. Most leadership strain today is not
-                  caused by workload alone. Decades of organizational and
-                  psychological research show that chronic exhaustion is
-                  strongly linked to misalignment — between role and values,
-                  responsibility and capacity, ambition and energy.
+                  I have heard the same response from HR directors and senior
+                  women leaders across the GCC, often in the same conversation.
+                  The HR director says: “We already have a wellness program.”
+                  The senior woman, in a separate conversation, says: “I have
+                  tried everything. Nothing actually helps.” Both are telling
+                  the truth. And the gap between them is exactly where VEIL was
+                  built.
                 </p>
                 <p>
-                  This is why capable leaders can feel depleted even when
-                  performing well. Why productivity tools stop working. And why
-                  effort no longer translates into clarity. Misalignment does
-                  not announce itself loudly. It shows up as decision fatigue,
-                  emotional detachment, and constant internal noise — all while
-                  performance remains intact.
+                  What most organisations call wellness and what most women in
+                  leadership actually need are not the same thing. Wellness
+                  programs address symptoms — a gym subsidy, a mindfulness app,
+                  a confidential line when something becomes a crisis. They
+                  respond to depletion after it surfaces. They are, by design,
+                  reactive.
                 </p>
                 <p>
-                  At StrateAura™, we see these signals not as personal failure,
-                  but as strategic indicators...
+                  VEIL is not designed to help her manage better. It is designed
+                  to change the conditions she is managing...
                 </p>
                 <p className="font-semibold">
                   <Link to={`/insights/${FEATURED_SLUG}`} className="underline">
@@ -146,7 +135,7 @@ export default function MobileInsights() {
               <img
                 src={article.photo}
                 alt=""
-                className={`w-full object-cover ${article.height}`}
+                className="aspect-[16/9] w-full object-cover"
               />
             </Link>
           </article>

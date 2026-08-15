@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { renderLines } from "../../data/blogPosts";
+import { BlogTable, BlogCallout, BlogCta } from "./BlogBlocks";
 
 const WEIGHT = { bold: "font-bold", semi: "font-semibold" };
 
@@ -34,6 +35,18 @@ export default function BlogMobile({ post }) {
         <h1 className="mt-2 text-[24px] leading-[1.25] font-bold text-navy">
           {post.title}
         </h1>
+        <p className="mt-3 text-[13px] leading-[1.45] text-black/60">
+          {post.byline}
+          <br />
+          Published {post.date}
+        </p>
+
+        {/* Same 16:9 window the desktop hero uses. */}
+        <img
+          src={post.cover}
+          alt=""
+          className="pointer-events-none mt-5 aspect-[16/9] w-full rounded-[4px] object-cover"
+        />
 
         <div className="mt-7 text-[15px] leading-[1.6] text-[#1f3a58]">
           {post.blocks.map((block, i) => {
@@ -56,6 +69,20 @@ export default function BlogMobile({ post }) {
                   ))}
                 </ul>
               );
+            if (block.t === "table")
+              return <BlogTable key={i} head={block.head} rows={block.rows} />;
+            if (block.t === "callout")
+              return (
+                <BlogCallout
+                  key={i}
+                  value={block.value}
+                  title={block.title}
+                  source={block.source}
+                  blocks={block.blocks}
+                />
+              );
+            if (block.t === "cta")
+              return <BlogCta key={i} items={block.items} />;
             return (
               <p key={i} className={`mb-3 ${WEIGHT[block.w] ?? ""}`}>
                 {renderLines(block.lines)}

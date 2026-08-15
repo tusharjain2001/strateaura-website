@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import PillButton from "../ui/PillButton";
-import featurePhoto from "../../assets/insights2/feature.jpg";
-import artOne from "../../assets/insights2/art-1.jpg";
-import artTwo from "../../assets/insights2/art-2.jpg";
-import artThree from "../../assets/insights2/art-3.jpg";
-import artFour from "../../assets/insights2/art-4.jpg";
+import featurePhoto from "../../assets/blog/not-a-wellness-program.jpg";
+import artOne from "../../assets/blog/gcc-missing-conversation.jpg";
+import artTwo from "../../assets/blog/three-things-in-exact-order.jpg";
+import artThree from "../../assets/blog/what-unveil-cannot-yet-prove.jpg";
 
 /**
  * Insights & Resources — node 1755:4644.
@@ -18,65 +17,51 @@ import artFour from "../../assets/insights2/art-4.jpg";
  * 248), the article rows pitch every 183.06 (was 173) and the featured excerpt
  * now ends after the shortened third paragraph.
  */
+// Three rows now rather than the board's four, so the 183.06 pitch is re-spaced
+// to 243.98 — the rules still open at 204.23 and close on LAST_RULE, keeping the
+// right column the same height as the featured piece beside it. Each row's
+// 148.143-tall box stays centred in its band, i.e. 47.92 below its rule.
 const ARTICLES = [
   {
-    // rule / content tops are absolute so the 183.06 pitch stays exact; the
-    // first row sits 0.3px tighter than the rest in the board.
     rule: 204.23,
-    top: 221.91,
+    top: 252.15,
     textWidth: 372,
     gap: 27,
-    title: "Presence Is Not Charisma. It’s Strategic Alignment.",
-    date: "Published December 28, 2025.",
-    textHeight: 95,
-    dateTop: 58,
-    slug: "presence-is-not-charisma",
+    title:
+      "Why the GCC Leadership Development Market Is Missing the Most Important Conversation",
+    date: "Published May 6, 2026.",
+    slug: "gcc-missing-conversation",
     photo: artOne,
   },
   {
-    rule: 386.99,
-    top: 404.98,
+    rule: 448.21,
+    top: 496.13,
     textWidth: 372,
     gap: 27,
-    title: "Why High-Performing Women Are Quietly Exhausted",
-    date: "Published January 09, 2026.",
-    textHeight: 96,
-    dateTop: 59,
-    slug: "why-high-performing-women-are-quietly-exhausted",
+    title: "The Three Things That Have to Change — In This Exact Order",
+    date: "Published June 23, 2026.",
+    slug: "three-things-in-exact-order",
     photo: artTwo,
   },
   {
-    rule: 570.05,
-    top: 588.04,
-    textWidth: 340,
-    gap: 59,
-    title: "Self-Leadership Is Not Soft. It’s Foundational.",
-    date: "Published January 22, 2026.",
-    textHeight: 102,
-    dateTop: 65,
-    slug: "self-leadership-is-not-soft",
+    rule: 692.19,
+    top: 740.11,
+    textWidth: 372,
+    gap: 27,
+    title:
+      "Why the Most Credible Thing I Can Say About UNVEIL Is What It Cannot Yet Prove",
+    date: "Published July 9, 2026.",
+    slug: "what-unveil-cannot-yet-prove",
     photo: artThree,
-  },
-  {
-    rule: 753.11,
-    top: 771.1,
-    textWidth: 340,
-    gap: 59,
-    title: "Leadership Health Is the Next Competitive Advantage.",
-    date: "Published January 30, 2026.",
-    textHeight: 102,
-    dateTop: 65,
-    slug: "leadership-health-is-the-next-competitive-advantage",
-    photo: artFour,
   },
 ];
 
 // The closing rule under the last row; the board leaves 100px of wash below it.
 const LAST_RULE = 936.17;
 
-// Slug of the featured piece in src/data/blogPosts.jsx; the four list rows
+// Slug of the featured piece in src/data/blogPosts.jsx; the three list rows
 // carry their own `slug`. Every heading here links to /insights/<slug>.
-const FEATURED_SLUG = "these-arent-productivity-problems";
+const FEATURED_SLUG = "not-a-wellness-program";
 
 export default function Insights() {
   return (
@@ -102,47 +87,45 @@ export default function Insights() {
           the excerpt. Figma renders the photo at 159.79% height, pulled up
           22.75%, inside the 202px window. */}
       <div className="absolute top-[202.11px] left-[91px] w-[563px]">
+        {/* The cover exports are 16:9, so they fill this 563x202 window with a
+            plain object-cover crop rather than the old asset's tall offset. */}
         <div className="relative h-[202px] w-[563px] overflow-hidden rounded-[4px]">
           <img
             src={featurePhoto}
             alt=""
-            className="absolute top-[-22.75%] left-0 h-[159.79%] w-full max-w-none"
+            className="h-full w-full object-cover"
           />
         </div>
         {/* 1755:4685 — 24px headline, 16px date 68px below it, body 110px below */}
         <h3 className="mt-[38px] w-[469px] text-[24px] leading-[1.2] font-bold text-gold">
           <Link to={`/insights/${FEATURED_SLUG}`} className="hover:underline">
-            These Aren’t Productivity Problems. They’re Patterns of
-            Misalignment.
+            This Is Not a Wellness Program. Here Is How to Tell the Difference.
           </Link>
         </h3>
         <p className="mt-[9.4px] text-[16px] leading-[1.2] text-black/60">
-          Published December 15, 2025
+          Published April 14, 2026
         </p>
         {/* 1755:4690 — 16px justified on a 19px pitch (Acumin's "normal" here).
             Paragraphs are separated by one blank line, i.e. one 19px line box. */}
         <div className="mt-[22.8px] space-y-[19px] text-justify text-[16px] leading-[19px] text-black/60">
           <p>
-            We live in a world obsessed with productivity — more tools, more
-            systems, more ways to do more. Yet many high-performing leaders feel
-            increasingly fatigued, mentally crowded, and disconnected from work
-            they are objectively good at. This is often labeled as burnout or a
-            motivation problem. In reality, it is something deeper. Most
-            leadership strain today is not caused by workload alone. Decades of
-            organizational and psychological research show that chronic
-            exhaustion is strongly linked to misalignment — between role and
-            values, responsibility and capacity, ambition and energy.
+            I have heard the same response from HR directors and senior women
+            leaders across the GCC, often in the same conversation. The HR
+            director says: “We already have a wellness program.” The senior
+            woman, in a separate conversation, says: “I have tried everything.
+            Nothing actually helps.” Both are telling the truth. And the gap
+            between them is exactly where VEIL was built.
           </p>
           <p>
-            This is why capable leaders can feel depleted even when performing
-            well. Why productivity tools stop working. And why effort no longer
-            translates into clarity. Misalignment does not announce itself
-            loudly. It shows up as decision fatigue, emotional detachment, and
-            constant internal noise — all while performance remains intact.
+            What most organisations call wellness and what most women in
+            leadership actually need are not the same thing. Wellness programs
+            address symptoms — a gym subsidy, a mindfulness app, a confidential
+            line when something becomes a crisis. They respond to depletion
+            after it surfaces. They are, by design, reactive.
           </p>
           <p>
-            At StrateAura™, we see these signals not as personal failure, but as
-            strategic indicators...
+            VEIL is not designed to help her manage better. It is designed to
+            change the conditions she is managing...
           </p>
           <p className="text-left">
             <Link
@@ -168,17 +151,14 @@ export default function Insights() {
             className="absolute left-[716px] flex h-[148.143px] items-center"
             style={{ top: `${article.top}px`, gap: `${article.gap}px` }}
           >
-            {/* The block carries Figma's own box height so `items-center`
-                lands the text where the board has it — the title/date pair on
-                its own is 16px shorter in Inter and would centre too low. */}
+            {/* Title and date flow rather than sitting at fixed offsets: these
+                headlines run to three lines where the board's ran to two, and
+                a hardcoded date offset would let the title overlap it. */}
             <div
-              className="relative shrink-0"
-              style={{
-                width: `${article.textWidth}px`,
-                height: `${article.textHeight}px`,
-              }}
+              className="shrink-0"
+              style={{ width: `${article.textWidth}px` }}
             >
-              <h4 className="absolute top-0 left-0 w-full text-[22px] leading-[1.2] font-bold text-gold">
+              <h4 className="text-[22px] leading-[1.2] font-bold text-gold">
                 <Link
                   to={`/insights/${article.slug}`}
                   className="hover:underline"
@@ -186,10 +166,7 @@ export default function Insights() {
                   {article.title}
                 </Link>
               </h4>
-              <p
-                className="absolute left-0 w-full text-[16px] leading-[1.2] text-black/60"
-                style={{ top: `${article.dateTop}px` }}
-              >
+              <p className="mt-[7px] text-[16px] leading-[1.2] text-black/60">
                 {article.date}
               </p>
             </div>
