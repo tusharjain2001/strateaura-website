@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import MobileContainer from "./MobileContainer";
 import MobilePill from "./MobilePill";
-import leadPhoto from "../../assets/blog/not-a-wellness-program.jpg";
-import artOne from "../../assets/blog/gcc-missing-conversation.jpg";
-import artTwo from "../../assets/blog/three-things-in-exact-order.jpg";
-import artThree from "../../assets/blog/what-unveil-cannot-yet-prove.jpg";
+import leadPhoto from "../../assets/blog/what-unveil-cannot-yet-prove.jpg";
+import artOne from "../../assets/blog/three-things-in-exact-order.jpg";
+import artTwo from "../../assets/blog/gcc-missing-conversation.jpg";
+import artThree from "../../assets/blog/not-a-wellness-program.jpg";
 
 // Figma nodes 1878:4962 / 4969 / 4976 — the article rows under the lead piece.
 // Each is a 1px rule, 23px of space, then a 22px gold title, its published date
@@ -12,30 +12,31 @@ import artThree from "../../assets/blog/what-unveil-cannot-yet-prove.jpg";
 // rows at a fixed 223/225px; there are three now and the covers are 16:9, so the
 // plates take their height from that ratio instead. Slugs match the desktop
 // Insights section, i.e. the posts in src/data/blogPosts.jsx.
+// Newest first, matching the desktop section: the lead piece is the most recent
+// post and the rows count back from there.
 const ARTICLES = [
+  {
+    title: "The Three Things That Have to Change — In This Exact Order",
+    date: "Published June 23, 2026.",
+    slug: "three-things-in-exact-order",
+    photo: artOne,
+  },
   {
     title:
       "Why the GCC Leadership Development Market Is Missing the Most Important Conversation",
     date: "Published May 6, 2026.",
     slug: "gcc-missing-conversation",
-    photo: artOne,
-  },
-  {
-    title: "The Three Things That Have to Change — In This Exact Order",
-    date: "Published June 23, 2026.",
-    slug: "three-things-in-exact-order",
     photo: artTwo,
   },
   {
-    title:
-      "Why the Most Credible Thing I Can Say About UNVEIL Is What It Cannot Yet Prove",
-    date: "Published July 9, 2026.",
-    slug: "what-unveil-cannot-yet-prove",
+    title: "This Is Not a Wellness Program. Here Is How to Tell the Difference.",
+    date: "Published April 14, 2026.",
+    slug: "not-a-wellness-program",
     photo: artThree,
   },
 ];
 
-const FEATURED_SLUG = "not-a-wellness-program";
+const FEATURED_SLUG = "what-unveil-cannot-yet-prove";
 
 /**
  * Insights & Resources — Figma node 1878:4998 (mobile frame, 372px column
@@ -75,37 +76,36 @@ export default function MobileInsights() {
               <div className="flex flex-col gap-[10px]">
                 <h3 className="text-[24px] leading-normal font-bold text-gold">
                   <Link to={`/insights/${FEATURED_SLUG}`}>
-                    This Is Not a Wellness Program. Here Is How to Tell the
-                    Difference.
+                    Why the Most Credible Thing I Can Say About UNVEIL Is What
+                    It Cannot Yet Prove
                   </Link>
                 </h3>
                 <p className="text-[16px] leading-normal text-black/60">
-                  Published April 14, 2026
+                  Published July 9, 2026
                 </p>
               </div>
               {/* Node 1878:4961 — the blank lines between paragraphs are real
                   empty line boxes in Figma, so the rhythm is one full line. */}
               <div className="space-y-[1em] text-[16px] leading-normal font-bold text-black/60">
                 <p>
-                  I have heard the same response from HR directors and senior
-                  women leaders across the GCC, often in the same conversation.
-                  The HR director says: “We already have a wellness program.”
-                  The senior woman, in a separate conversation, says: “I have
-                  tried everything. Nothing actually helps.” Both are telling
-                  the truth. And the gap between them is exactly where VEIL was
-                  built.
+                  I want to tell you something that most program founders do not
+                  say in their marketing materials. UNVEIL cannot yet prove
+                  everything it claims. I know what that sounds like. It sounds
+                  like a qualification. A hedge. A legal disclaimer tucked into
+                  the fine print of a sales pitch. It is not. It is, I believe,
+                  the most important thing I can say about UNVEIL’s credibility.
                 </p>
                 <p>
-                  What most organisations call wellness and what most women in
-                  leadership actually need are not the same thing. Wellness
-                  programs address symptoms — a gym subsidy, a mindfulness app,
-                  a confidential line when something becomes a crisis. They
-                  respond to depletion after it surfaces. They are, by design,
-                  reactive.
+                  The leadership development market — particularly the portion
+                  of it directed at women — is full of claims that cannot be
+                  substantiated. Testimonials presented as evidence.
+                  Transformation stories offered as proof. A program that tells
+                  you it can prove everything is telling you it does not
+                  understand the difference between confidence and evidence.
                 </p>
                 <p>
-                  VEIL is not designed to help her manage better. It is designed
-                  to change the conditions she is managing...
+                  The most credible position a new program can take is not to
+                  claim more than the evidence supports...
                 </p>
                 <p className="font-semibold">
                   <Link to={`/insights/${FEATURED_SLUG}`} className="underline">

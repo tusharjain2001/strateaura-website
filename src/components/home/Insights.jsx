@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import PillButton from "../ui/PillButton";
-import featurePhoto from "../../assets/blog/not-a-wellness-program.jpg";
-import artOne from "../../assets/blog/gcc-missing-conversation.jpg";
-import artTwo from "../../assets/blog/three-things-in-exact-order.jpg";
-import artThree from "../../assets/blog/what-unveil-cannot-yet-prove.jpg";
+import featurePhoto from "../../assets/blog/what-unveil-cannot-yet-prove.jpg";
+import artOne from "../../assets/blog/three-things-in-exact-order.jpg";
+import artTwo from "../../assets/blog/gcc-missing-conversation.jpg";
+import artThree from "../../assets/blog/not-a-wellness-program.jpg";
 
 /**
  * Insights & Resources — node 1755:4644.
@@ -21,16 +21,17 @@ import artThree from "../../assets/blog/what-unveil-cannot-yet-prove.jpg";
 // to 243.98 — the rules still open at 204.23 and close on LAST_RULE, keeping the
 // right column the same height as the featured piece beside it. Each row's
 // 148.143-tall box stays centred in its band, i.e. 47.92 below its rule.
+// Newest first: the featured piece is the most recent post and the rows count
+// back from there.
 const ARTICLES = [
   {
     rule: 204.23,
     top: 252.15,
     textWidth: 372,
     gap: 27,
-    title:
-      "Why the GCC Leadership Development Market Is Missing the Most Important Conversation",
-    date: "Published May 6, 2026.",
-    slug: "gcc-missing-conversation",
+    title: "The Three Things That Have to Change — In This Exact Order",
+    date: "Published June 23, 2026.",
+    slug: "three-things-in-exact-order",
     photo: artOne,
   },
   {
@@ -38,9 +39,10 @@ const ARTICLES = [
     top: 496.13,
     textWidth: 372,
     gap: 27,
-    title: "The Three Things That Have to Change — In This Exact Order",
-    date: "Published June 23, 2026.",
-    slug: "three-things-in-exact-order",
+    title:
+      "Why the GCC Leadership Development Market Is Missing the Most Important Conversation",
+    date: "Published May 6, 2026.",
+    slug: "gcc-missing-conversation",
     photo: artTwo,
   },
   {
@@ -48,10 +50,9 @@ const ARTICLES = [
     top: 740.11,
     textWidth: 372,
     gap: 27,
-    title:
-      "Why the Most Credible Thing I Can Say About UNVEIL Is What It Cannot Yet Prove",
-    date: "Published July 9, 2026.",
-    slug: "what-unveil-cannot-yet-prove",
+    title: "This Is Not a Wellness Program. Here Is How to Tell the Difference.",
+    date: "Published April 14, 2026.",
+    slug: "not-a-wellness-program",
     photo: artThree,
   },
 ];
@@ -61,7 +62,7 @@ const LAST_RULE = 936.17;
 
 // Slug of the featured piece in src/data/blogPosts.jsx; the three list rows
 // carry their own `slug`. Every heading here links to /insights/<slug>.
-const FEATURED_SLUG = "not-a-wellness-program";
+const FEATURED_SLUG = "what-unveil-cannot-yet-prove";
 
 export default function Insights() {
   return (
@@ -99,33 +100,35 @@ export default function Insights() {
         {/* 1755:4685 — 24px headline, 16px date 68px below it, body 110px below */}
         <h3 className="mt-[38px] w-[469px] text-[24px] leading-[1.2] font-bold text-gold">
           <Link to={`/insights/${FEATURED_SLUG}`} className="hover:underline">
-            This Is Not a Wellness Program. Here Is How to Tell the Difference.
+            Why the Most Credible Thing I Can Say About UNVEIL Is What It Cannot
+            Yet Prove
           </Link>
         </h3>
         <p className="mt-[9.4px] text-[16px] leading-[1.2] text-black/60">
-          Published April 14, 2026
+          Published July 9, 2026
         </p>
         {/* 1755:4690 — 16px justified on a 19px pitch (Acumin's "normal" here).
             Paragraphs are separated by one blank line, i.e. one 19px line box. */}
         <div className="mt-[22.8px] space-y-[19px] text-justify text-[16px] leading-[19px] text-black/60">
           <p>
-            I have heard the same response from HR directors and senior women
-            leaders across the GCC, often in the same conversation. The HR
-            director says: “We already have a wellness program.” The senior
-            woman, in a separate conversation, says: “I have tried everything.
-            Nothing actually helps.” Both are telling the truth. And the gap
-            between them is exactly where VEIL was built.
+            I want to tell you something that most program founders do not say
+            in their marketing materials. UNVEIL cannot yet prove everything it
+            claims. I know what that sounds like. It sounds like a
+            qualification. A hedge. A legal disclaimer tucked into the fine
+            print of a sales pitch. It is not. It is, I believe, the most
+            important thing I can say about UNVEIL’s credibility.
           </p>
           <p>
-            What most organisations call wellness and what most women in
-            leadership actually need are not the same thing. Wellness programs
-            address symptoms — a gym subsidy, a mindfulness app, a confidential
-            line when something becomes a crisis. They respond to depletion
-            after it surfaces. They are, by design, reactive.
+            The leadership development market — particularly the portion of it
+            directed at women — is full of claims that cannot be substantiated.
+            Testimonials presented as evidence. Transformation stories offered
+            as proof. A program that tells you it can prove everything is
+            telling you it does not understand the difference between confidence
+            and evidence.
           </p>
           <p>
-            VEIL is not designed to help her manage better. It is designed to
-            change the conditions she is managing...
+            The most credible position a new program can take is not to claim
+            more than the evidence supports...
           </p>
           <p className="text-left">
             <Link
