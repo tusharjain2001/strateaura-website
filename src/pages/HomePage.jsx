@@ -9,6 +9,7 @@ import ProblemWeAddress from "../components/home/ProblemWeAddress";
 import Insights from "../components/home/Insights";
 import SiteFooter from "../components/layout/SiteFooter";
 import HomeMobile from "../components/home-mobile/HomeMobile";
+import useSeo from "../lib/seo";
 
 /**
  * The desktop Home is a fixed 1440px canvas (sections laid out at exact Figma
@@ -25,6 +26,15 @@ import HomeMobile from "../components/home-mobile/HomeMobile";
  * with the canvas.
  */
 export default function HomePage() {
+  useSeo({
+    title: "StrateAura — Strategic Health & Leadership Development, Dubai",
+    description:
+      "KHDA-attested leadership development for women leaders in the GCC. Evidence-based " +
+      "programs built on the VEIL™ strategic health framework — not wellness, not resilience " +
+      "training.",
+    path: "/",
+  });
+
   const scale = useCanvasScale();
 
   return (

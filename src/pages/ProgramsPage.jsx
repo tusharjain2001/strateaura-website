@@ -11,6 +11,7 @@ import higheredPhoto from "../assets/programs/highered-photo-new.png";
 import integratedMarketingPhoto from "../assets/programs/integrated-marketing-photo-new.png";
 import digitalMarketingPhoto from "../assets/programs/digital-marketing-photo.png";
 import digitalTransformationPhoto from "../assets/programs/digital-transformation-photo-v2.jpg";
+import useSeo from "../lib/seo";
 
 const PROGRAM_DETAILS = [
   {
@@ -155,6 +156,15 @@ const PROGRAM_DETAILS = [
 // narrow version of this one, so it is its own tree rendered below lg. The
 // desktop markup below is unchanged and takes over at lg.
 export default function ProgramsPage() {
+  useSeo({
+    title: "Our Programs — UNVEIL Institutional & Online | StrateAura",
+    description:
+      "UNVEIL Institutional is a 12-week in-person cohort for 8–12 women carrying a KHDA " +
+      "certificate; UNVEIL Online is self-paced. Plus marketing and leadership programs for " +
+      "institutions and teams.",
+    path: "/programs",
+  });
+
   return (
     <>
       <div className="lg:hidden">

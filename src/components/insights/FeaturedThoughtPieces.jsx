@@ -70,9 +70,17 @@ export default function FeaturedThoughtPieces() {
               className="group relative h-full transition-[scale,box-shadow] duration-[400ms] motion-safe:hover:scale-90 motion-safe:hover:shadow-[0_0_10px_var(--color-blue)]"
             >
               {/* overflow-hidden clips the decor to the rounded corners, so the
-                  sparkle has to be its sibling to hang outside the card. */}
-              <a
-                href="#"
+                  sparkle has to be its sibling to hang outside the card.
+
+                  A <div>, not an <a>: these four titles are placeholders from
+                  the Figma board and the articles behind them have not been
+                  written, so the card linked to href="#" — which pushed a bare
+                  "#" onto the URL, moved focus nowhere, and was announced to
+                  screen readers as a link with no destination. Until the posts
+                  exist the card is presentational. Restore the <a> (and drop
+                  the arrow back in as a link affordance) once each title maps
+                  to a real /insights/<slug>. */}
+              <div
                 className="relative flex h-full min-h-[185px] flex-col overflow-hidden rounded-[4px] bg-gradient-to-b from-navy to-blue p-4 sm:min-h-[260px] sm:p-7 lg:min-h-[238px] lg:p-[33px]"
               >
                 <img
@@ -87,7 +95,7 @@ export default function FeaturedThoughtPieces() {
                   {card.desc}
                 </p>
                 <ArrowRight className="relative z-10 mt-auto w-7 pt-4 text-white sm:w-9 sm:pt-6" />
-              </a>
+              </div>
               <img
                 src={seamSparkle}
                 alt=""

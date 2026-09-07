@@ -7,12 +7,22 @@ import BookFeature from "../components/insights/BookFeature";
 import VoicesAppearances from "../components/insights/VoicesAppearances";
 import NewsletterCta from "../components/insights/NewsletterCta";
 import SiteFooter from "../components/layout/SiteFooter";
+import useSeo from "../lib/seo";
 
 // Responsive page (no fixed canvas): Figma's 1440px frame is the desktop
 // reference and the layout reflows below it. Above 1440px content stays at its
 // natural Figma size (each section centres a max-w-[1440px] container while
 // its background bleeds full-width) — never zoom-scaled.
 export default function InsightsPage() {
+  useSeo({
+    title: "Insights & Resources | StrateAura",
+    description:
+      "Articles, frameworks and appearances from Dr. Suhair Hamouri on strategic health, " +
+      "women's leadership in the GCC, and why strategy — not wellness — is what makes " +
+      "leadership development hold.",
+    path: "/insights",
+  });
+
   return (
     <div className="bg-white text-black">
       <SiteHeader />

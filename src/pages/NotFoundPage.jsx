@@ -3,6 +3,7 @@ import SiteHeader from "../components/layout/SiteHeader";
 import SiteFooter from "../components/layout/SiteFooter";
 import CtaPill from "../components/ui/CtaPill";
 import { ArrowRight } from "../components/ui/Icons";
+import useSeo from "../lib/seo";
 
 // The handful of places someone landing here most likely meant to go.
 const SUGGESTIONS = [
@@ -20,6 +21,15 @@ const SUGGESTIONS = [
  * separate mobile tree.
  */
 export default function NotFoundPage() {
+  useSeo({
+    title: "Page Not Found | StrateAura",
+    description:
+      "The page you were looking for doesn't exist. Explore StrateAura's programs, frameworks " +
+      "and insights instead.",
+    path: "/404",
+    noIndex: true,
+  });
+
   const { pathname } = useLocation();
 
   return (

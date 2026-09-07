@@ -4,6 +4,7 @@ import SignaturePrograms from "../components/sample/SignaturePrograms";
 import MarketingPrograms from "../components/sample/MarketingPrograms";
 import SignatureFrameworks from "../components/sample/SignatureFrameworks";
 import Belief from "../components/sample/Belief";
+import useSeo from "../lib/seo";
 
 // Client "sample" page: a faithful, genuinely-responsive build of the 1920px
 // Figma homepage (node 1638:486). Unlike the legacy fixed-canvas Home/About,
@@ -11,6 +12,13 @@ import Belief from "../components/sample/Belief";
 // to tablet/mobile. One responsive tree (no separate mobile tree, since the
 // client only supplied the 1920 desktop design).
 export default function SamplePage() {
+  useSeo({
+    title: "Sample Layout | StrateAura",
+    description: "Internal design reference page.",
+    path: "/sample",
+    noIndex: true,
+  });
+
   return (
     <div className="bg-white text-black">
       <SampleNavbar />

@@ -5,6 +5,7 @@ import NewSignaturePrograms from "../components/new/NewSignaturePrograms";
 import NewMarketingPrograms from "../components/new/NewMarketingPrograms";
 import NewFrameworks from "../components/new/NewFrameworks";
 import NewBelief from "../components/new/NewBelief";
+import useSeo from "../lib/seo";
 
 /**
  * Client trial of the 1920px homepage — Figma node 1638:486.
@@ -21,6 +22,13 @@ import NewBelief from "../components/new/NewBelief";
  * pixel-for-pixel the Figma frame.
  */
 export default function NewPage() {
+  useSeo({
+    title: "New Layout | StrateAura",
+    description: "Internal design reference page.",
+    path: "/new",
+    noIndex: true,
+  });
+
   const scale = useCanvasScale(1920, { maxScale: 1 });
 
   return (

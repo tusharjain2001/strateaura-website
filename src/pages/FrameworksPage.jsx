@@ -8,6 +8,7 @@ import WhyStrateAura from "../components/frameworks/WhyStrateAura";
 import SiteFooter from "../components/layout/SiteFooter";
 import FrameworksMobile from "../components/frameworks-mobile/FrameworksMobile";
 import useCanvasScale from "../hooks/useCanvasScale";
+import useSeo from "../lib/seo";
 
 // Between lg and 1440 the sections reflow fluidly; ABOVE 1440 the sections
 // zoom up to fill the viewport, matching the Home board — per the client,
@@ -18,6 +19,14 @@ import useCanvasScale from "../hooks/useCanvasScale";
 // Below lg the separate mobile tree (Figma node 1296:4457) takes over instead,
 // so the desktop sections below are untouched by mobile work.
 export default function FrameworksPage() {
+  useSeo({
+    title: "Our Frameworks — VEIL™, ALA Nexus & the 5Cs | StrateAura",
+    description:
+      "The models behind StrateAura's work: the VEIL™ strategic health framework, the ALA " +
+      "Nexus, and the 5Cs. Built to give leaders structure, not to fix them.",
+    path: "/frameworks",
+  });
+
   const scale = Math.max(1, useCanvasScale());
 
   return (

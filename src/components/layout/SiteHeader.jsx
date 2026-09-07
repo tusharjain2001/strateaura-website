@@ -4,6 +4,7 @@ import logoIcon from "../../assets/nav-logo-icon.svg";
 import logoWord from "../../assets/nav-logo-word.svg";
 import logoTag from "../../assets/nav-logo-tag.svg";
 import { CloseIcon, MenuIcon } from "../ui/Icons";
+import SkipLink from "./SkipLink";
 
 const NAV_LINKS = [
   { label: "Home", to: "/" },
@@ -88,6 +89,8 @@ export default function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white select-none">
+      {/* First focusable element on the page — see SkipLink. */}
+      <SkipLink />
       <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between gap-4 px-5 py-[20px] sm:px-8 xl:h-[76.66px] xl:px-[72px]">
         <Link to="/" aria-label="StrateAura home" className="shrink-0">
           <NavLogo />

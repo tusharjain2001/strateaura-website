@@ -1,0 +1,11 @@
+# https://www.strateaura.com
+User-agent: *
+Allow: /
+
+# Internal design/staging routes — not part of the public site.
+Disallow: /sample
+Disallow: /new
+# Post-registration thank-you page; no value in search results.
+Disallow: /webinar/confirmation
+
+Sitemap: https://www.strateaura.com/sitemap.xml

@@ -8,6 +8,7 @@ import EvidenceSection from "../components/veil/EvidenceSection";
 import SiteFooter from "../components/layout/SiteFooter";
 import CtaPill from "../components/ui/CtaPill";
 import useCanvasScale from "../hooks/useCanvasScale";
+import useSeo from "../lib/seo";
 
 // Responsive page: Figma's 1440px frame is the desktop reference and the
 // layout reflows below it. ABOVE 1440 the sections zoom up to fill the
@@ -15,6 +16,15 @@ import useCanvasScale from "../hooks/useCanvasScale";
 // SiteFooter sit OUTSIDE the zoomed wrapper so the navbar and footer render
 // at their true size on wide screens.
 export default function VeilPage() {
+  useSeo({
+    title: "VEIL™ — The Strategic Health Framework for Women Leaders | StrateAura",
+    description:
+      "VEIL™ is a measured framework built on three constructs: Capacity Regulation, Identity " +
+      "Coherence and Authority Execution. Nine internationally validated psychometric " +
+      "instruments, measured pre and post.",
+    path: "/veil",
+  });
+
   const scale = Math.max(1, useCanvasScale());
 
   return (

@@ -11,7 +11,65 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <title>StrateAura — Where Strategy Comes to Life</title>
+    <!--
+      Defaults for the initial HTML, before React mounts. Every route then
+      overwrites these in place via src/lib/seo.js — the tags are mutated
+      rather than re-rendered, so the document always holds exactly one of
+      each. Keep this block in sync with HomePage's useSeo call.
+    -->
+    <title>StrateAura — Strategic Health &amp; Leadership Development, Dubai</title>
+    <meta
+      name="description"
+      content="KHDA-attested leadership development for women leaders in the GCC. Evidence-based programs built on the VEIL™ strategic health framework — not wellness, not resilience training."
+    />
+    <link rel="canonical" href="https://www.strateaura.com/" />
+
+    <meta property="og:site_name" content="StrateAura" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.strateaura.com/" />
+    <meta property="og:title" content="StrateAura — Strategic Health &amp; Leadership Development, Dubai" />
+    <meta
+      property="og:description"
+      content="KHDA-attested leadership development for women leaders in the GCC. Evidence-based programs built on the VEIL™ strategic health framework — not wellness, not resilience training."
+    />
+    <meta property="og:image" content="https://www.strateaura.com/favicon.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="StrateAura — Strategic Health &amp; Leadership Development, Dubai" />
+    <meta
+      name="twitter:description"
+      content="KHDA-attested leadership development for women leaders in the GCC. Evidence-based programs built on the VEIL™ strategic health framework — not wellness, not resilience training."
+    />
+    <meta name="twitter:image" content="https://www.strateaura.com/favicon.png" />
+
+    <!--
+      Organization schema, so search engines can attribute the site to the
+      legal entity rather than inferring it. Every value here is already
+      published on the site (footer address, founder, LinkedIn) — nothing is
+      asserted that the pages do not already say.
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "StrateAura",
+        "legalName": "StrateAura Management Development Training LLC",
+        "url": "https://www.strateaura.com/",
+        "logo": "https://www.strateaura.com/favicon.png",
+        "email": "training@strateaura.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Iris Bay - 2205 - D90, Business Bay",
+          "addressLocality": "Dubai",
+          "addressCountry": "AE"
+        },
+        "founder": {
+          "@type": "Person",
+          "name": "Dr. Suhair Hamouri",
+          "sameAs": "https://www.linkedin.com/in/drsuhairhamouri"
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

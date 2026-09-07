@@ -1,5 +1,6 @@
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { useLocation, useNavigationType } from "react-router-dom";
+import { focusMain } from "../../lib/visibleMain";
 
 /**
  * A client-side route change swaps the page without moving the scroll position,
@@ -13,10 +14,20 @@ import { useLocation, useNavigationType } from "react-router-dom";
  *   client-side route change;
  * - POP navigation (browser back/forward), where the previous scroll position
  *   is the expected behaviour and jumping to the top loses the reader's place.
+ *
+ * It also takes over what a full page load would otherwise do for assistive
+ * tech: a real navigation resets focus to the top of the document and the
+ * screen reader announces the new page. A client-side route change does
+ * neither — focus stays on <body> and nothing is announced — so focus is moved
+ * to the new page's <main> and its title is pushed through a live region.
  */
 export default function ScrollToTop() {
   const { pathname, hash } = useLocation();
   const navigationType = useNavigationType();
+  const announcerRef = useRef(null);
+  // The first render is a real document load: the browser has already set
+  // focus and announced the page, so only later navigations should do this.
+  const isFirstRender = useRef(true);
 
   useLayoutEffect(() => {
     if (navigationType === "POP") return;
@@ -40,5 +51,33 @@ export default function ScrollToTop() {
     window.scrollTo(0, 0);
   }, [pathname, hash, navigationType]);
 
-  return null;
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    // An in-page hash link is a jump within the current page, not a new page:
+    // moving focus to <main> would undo the jump the reader just asked for.
+    if (hash) return;
+
+    // useSeo runs in a layout effect, so document.title is already the new
+    // page's by the time this passive effect fires.
+    const raf = requestAnimationFrame(() => {
+      focusMain();
+      if (announcerRef.current) announcerRef.current.textContent = document.title;
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [pathname, hash]);
+
+  return (
+    // aria-live announces the new page title after navigation. It is visually
+    // hidden rather than display:none, which assistive tech ignores entirely.
+    <div
+      ref={announcerRef}
+      aria-live="polite"
+      aria-atomic="true"
+      className="sr-only"
+    />
+  );
 }

@@ -36,11 +36,13 @@ export default function ContactHero() {
           </span>
         </div>
 
-        {/* Figma 1816:724 — two stacked centred lines, 30px at desktop. */}
-        <h2 className="mt-4 max-w-[900px] text-[clamp(2rem,4.2vw,3.125rem)] leading-[1.3] font-bold lg:mt-6 lg:text-[30px] lg:leading-normal [&>span]:block">
+        {/* Figma 1816:724 — two stacked centred lines, 30px at desktop.
+            An <h1>, not an <h2>: this is the page's primary heading and the
+            route previously had no <h1> at all. Styling is unchanged. */}
+        <h1 className="mt-4 max-w-[900px] text-[clamp(2rem,4.2vw,3.125rem)] leading-[1.3] font-bold lg:mt-6 lg:text-[30px] lg:leading-normal [&>span]:block">
           <span className="text-gold">Let’s Build</span>
           <span className="text-navy-2">What Lasts. Together.</span>
-        </h2>
+        </h1>
       </div>
     </section>
   );

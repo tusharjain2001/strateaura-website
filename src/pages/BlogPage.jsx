@@ -6,6 +6,7 @@ import BlogArticle from "../components/blog/BlogArticle";
 import BlogFooter from "../components/blog/BlogFooter";
 import BlogMobile from "../components/blog/BlogMobile";
 import { BLOG_POSTS } from "../data/blogPosts";
+import useSeo from "../lib/seo";
 
 /**
  * Blog Page — Figma node 1755:3693 (1440x2402).
@@ -15,10 +16,34 @@ import { BLOG_POSTS } from "../data/blogPosts";
  * reflow, so below lg the page switches to its own tree (BlogMobile + the
  * shared responsive footer), exactly as Home and About do.
  */
+/**
+ * Meta description for a post: its opening prose, trimmed to a length search
+ * engines will actually show. Taken from the article itself rather than
+ * written separately so the two cannot drift apart.
+ */
+function excerpt(post, limit = 155) {
+  const first = post?.blocks?.find((b) => b.t === "p" && b.lines?.length);
+  const text = first?.lines.join(" ").replace(/\s+/g, " ").trim() ?? "";
+  if (text.length <= limit) return text;
+  // Cut on a word boundary so the snippet does not end mid-word.
+  return `${text.slice(0, text.lastIndexOf(" ", limit)).replace(/[,;:—-]$/, "")}…`;
+}
+
 export default function BlogPage() {
   const { slug } = useParams();
   const scale = useCanvasScale();
   const post = BLOG_POSTS[slug];
+
+  // Called before the redirect below because hooks cannot run conditionally.
+  // An unknown slug never renders, so its metadata is never read.
+  useSeo({
+    title: post ? `${post.title} | StrateAura` : "Insights & Resources | StrateAura",
+    description: post ? excerpt(post) : "",
+    path: `/insights/${slug}`,
+    // Bundled asset URLs are root-relative; og:image has to be absolute.
+    image: post?.cover ? new URL(post.cover, window.location.origin).href : undefined,
+    type: "article",
+  });
 
   if (!post) return <Navigate to="/insights" replace />;
 

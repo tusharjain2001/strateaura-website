@@ -7,6 +7,7 @@ import WhyChoose from "../components/about/WhyChoose";
 import Founder from "../components/about/Founder";
 import SiteFooter from "../components/layout/SiteFooter";
 import AboutMobile from "../components/about-mobile/AboutMobile";
+import useSeo from "../lib/seo";
 
 /**
  * The desktop About is a fixed 1440px canvas (sections laid out at exact Figma
@@ -19,6 +20,15 @@ import AboutMobile from "../components/about-mobile/AboutMobile";
  * with the canvas on screens wider than 1440.
  */
 export default function AboutPage() {
+  useSeo({
+    title: "About StrateAura — Dr. Suhair Hamouri | StrateAura",
+    description:
+      "Why StrateAura exists, the philosophy behind it, and the founder: Dr. Suhair Hamouri — " +
+      "PhD, MBA, BSc Pharmacy and Certified Integrative Health Coach. Built in the GCC, for the " +
+      "GCC.",
+    path: "/about",
+  });
+
   const scale = useCanvasScale();
 
   return (
